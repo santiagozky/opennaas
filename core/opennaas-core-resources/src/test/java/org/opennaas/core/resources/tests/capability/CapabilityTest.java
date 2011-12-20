@@ -13,10 +13,12 @@ import org.opennaas.core.resources.action.ActionSet;
 import org.opennaas.core.resources.descriptor.CapabilityDescriptor;
 import org.opennaas.core.resources.descriptor.Information;
 import org.opennaas.core.resources.profile.IProfile;
-import org.opennaas.core.resources.tests.capability.mocks.MockAction;
-import org.opennaas.core.resources.tests.capability.mocks.MockActionTwo;
-import org.opennaas.core.resources.tests.capability.mocks.MockCapAction;
-import org.opennaas.core.resources.tests.capability.mocks.MockCapActionTwo;
+import org.opennaas.core.tests.helpers.mocks.actions.MockAction;
+import org.opennaas.core.tests.helpers.mocks.actions.MockActionSet;
+import org.opennaas.core.tests.helpers.mocks.actions.MockActionTwo;
+import org.opennaas.core.tests.helpers.mocks.actions.MockCapAction;
+import org.opennaas.core.tests.helpers.mocks.actions.MockCapActionTwo;
+import org.opennaas.core.tests.helpers.mocks.capability.MockCapability;
 
 public class CapabilityTest {
 	private static Log				log						= LogFactory.getLog(CapabilityTest.class);

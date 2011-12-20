@@ -12,7 +12,6 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.opennaas.core.resources.IResource;
@@ -22,6 +21,7 @@ import org.opennaas.core.resources.capability.ICapabilityFactory;
 import org.opennaas.core.resources.descriptor.CapabilityDescriptor;
 import org.opennaas.core.resources.descriptor.Information;
 import org.opennaas.core.resources.descriptor.ResourceDescriptor;
+import org.opennaas.core.tests.helpers.mocks.descriptor.MockResourceDescriptorRepository;
 
 /**
  * Test class for the ResourceRepository class

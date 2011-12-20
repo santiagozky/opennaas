@@ -13,7 +13,7 @@ import org.opennaas.core.resources.capability.ICapability;
 import org.opennaas.core.resources.descriptor.CapabilityDescriptor;
 import org.opennaas.core.resources.descriptor.Information;
 import org.opennaas.core.resources.validation.CapabilityDescriptorValidator;
-
+import org.opennaas.core.tests.helpers.mocks.capability.MockCapabilityFactory;
 
 /**
  * Test class for the AbstractCapabilityFactory
@@ -24,19 +24,19 @@ import org.opennaas.core.resources.validation.CapabilityDescriptorValidator;
 public class AbstractCapabilityFactoryTest
 {
 	// The class under test
-	MockCapabilityFactory capabilityFactory = null;
-	private CapabilityDescriptor capabilityDescriptor = null;
-	private String resourceId = null;
+	MockCapabilityFactory			capabilityFactory		= null;
+	private CapabilityDescriptor	capabilityDescriptor	= null;
+	private String					resourceId				= null;
 
 	@Before
 	public void setup() {
-		//initialize the capability factory that is under test
+		// initialize the capability factory that is under test
 		Information information = new Information("TestCapability", "CapabilityName", "1.0.0");
 		List<Information> typeList = new ArrayList<Information>();
 		typeList.add(information);
 		CapabilityDescriptorValidator validator = new CapabilityDescriptorValidator();
 		resourceId = "resource123";
-		
+
 		capabilityFactory = new MockCapabilityFactory();
 		capabilityFactory.setCapabilityDescriptorValidator(validator);
 	}
@@ -49,8 +49,8 @@ public class AbstractCapabilityFactoryTest
 		capability = capabilityFactory.create(capabilityDescriptor, resourceId);
 		assertNotNull(capability);
 	}
-	
-	@Test (expected=CapabilityException.class)
+
+	@Test(expected = CapabilityException.class)
 	public void testCapabilityDescriptorValidationFails() throws ResourceException {
 		// Create the module descriptor
 		capabilityDescriptor = new CapabilityDescriptor();

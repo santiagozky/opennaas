@@ -1,6 +1,5 @@
 package org.opennaas.core.resources.tests.network.ndl;
 
-
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,64 +12,55 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 import org.opennaas.core.resources.ResourceException;
 import org.opennaas.core.resources.descriptor.network.NetworkTopology;
-import org.opennaas.core.resources.helpers.MockNetworkDescriptor;
+import org.opennaas.core.tests.helpers.mocks.descriptor.MockNetworkDescriptor;
 import org.xml.sax.SAXException;
 
 public class DummyParserTest {
-	Log								log					= LogFactory.getLog(DummyParserTest.class);
-	
-	
+	Log	log	= LogFactory.getLog(DummyParserTest.class);
+
 	@Test
-	public void NDLToJavaTest ()  {
+	public void NDLToJavaTest() {
 		String filePath = "network/network_example1.xml";
 		try {
 			NetworkTopology exampleDescriptor = getNetworkDescriptor(filePath);
 			log.info(exampleDescriptor.toString());
 		} catch (Exception e) {
 			log.error(e.getMessage());
-			log.error(e.getMessage(),e.getCause());
+			log.error(e.getMessage(), e.getCause());
 		}
 	}
-	
-	
+
 	@Test
 	public void javaToNDLTest() {
 		try {
-		String filePath = "target/test1.xml";
-		NetworkTopology mockRDF = MockNetworkDescriptor.newSimpleNDLNetworkDescriptor();		
-			addNetworkDescriptor(mockRDF,filePath);
+			String filePath = "target/test1.xml";
+			NetworkTopology mockRDF = MockNetworkDescriptor.newSimpleNDLNetworkDescriptor();
+			addNetworkDescriptor(mockRDF, filePath);
 		} catch (IOException e) {
 			log.error(e.getMessage());
-			log.error(e.getMessage(),e.getCause());
+			log.error(e.getMessage(), e.getCause());
 		}
-		
-		
+
 	}
-	
-	
+
 	@Test
-	public void NDLToJavaTestWithDiffLayers ()  {
+	public void NDLToJavaTestWithDiffLayers() {
 		String filePath = "network/network_diffs_layer.xml";
-		
+
 		try {
 			NetworkTopology exampleDescriptor = getNetworkDescriptor(filePath);
 			log.info(exampleDescriptor.toString());
 		} catch (Exception e) {
 			log.error(e.getMessage());
-			log.error(e.getMessage(),e.getCause());
+			log.error(e.getMessage(), e.getCause());
 		}
 	}
 
-	
-	
-	
-	
 	/**
 	 * Helper methods to test these functionality...
 	 * 
@@ -90,16 +80,16 @@ public class DummyParserTest {
 			stream = url.openStream();
 		} catch (MalformedURLException ignore) {
 			// Then try a file
-			//Added class loader to read files
+			// Added class loader to read files
 			stream = this.getClass().getClassLoader().getResourceAsStream(filename);
 			log.error("file: " + filename);
-//			stream = new FileInputStream(filename);
+			// stream = new FileInputStream(filename);
 		}
 
 		NetworkTopology rd = loadNetworkDescriptor(stream);
 		return rd;
 	}
-	
+
 	private NetworkTopology loadNetworkDescriptor(InputStream stream) throws JAXBException, SAXException {
 
 		NetworkTopology descriptor = null;
@@ -125,32 +115,27 @@ public class DummyParserTest {
 			}
 		}
 		return descriptor;
-		
-	}
-	
-	private void addNetworkDescriptor (NetworkTopology networkDescriptor, String filename) throws IOException {
-		
-		OutputStream stream = new FileOutputStream(filename);
-		saveNetworkDescriptor(networkDescriptor,stream);
-		
-		
-	}
-	
-	
-	
-	
 
-	public OutputStream saveNetworkDescriptor  (NetworkTopology networkDescriptor, OutputStream stream) {
+	}
+
+	private void addNetworkDescriptor(NetworkTopology networkDescriptor, String filename) throws IOException {
+
+		OutputStream stream = new FileOutputStream(filename);
+		saveNetworkDescriptor(networkDescriptor, stream);
+
+	}
+
+	public OutputStream saveNetworkDescriptor(NetworkTopology networkDescriptor, OutputStream stream) {
 
 		try {
 			JAXBContext context = JAXBContext.newInstance(NetworkTopology.class);
 			Marshaller marshaller = context.createMarshaller();
-			marshaller.marshal(networkDescriptor,stream);
+			marshaller.marshal(networkDescriptor, stream);
 		} catch (JAXBException e) {
-			log.error(e.getMessage(),e.getCause());
+			log.error(e.getMessage(), e.getCause());
 		}
 		return stream;
-		
+
 	}
 
 }
