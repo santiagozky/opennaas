@@ -113,6 +113,7 @@ public class ProfileManagerTest {
 		}
 	}
 
+	// FIXME Move IProfile class?
 	private IProfile createProfile(String profileName) {
 
 		ActionSet actionSet = new MockActionSet();

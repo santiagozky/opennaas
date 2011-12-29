@@ -12,21 +12,16 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 import org.opennaas.core.resources.CorruptStateException;
+import org.opennaas.core.resources.ILifecycle.State;
 import org.opennaas.core.resources.IResourceBootstrapper;
 import org.opennaas.core.resources.IncorrectLifecycleStateException;
 import org.opennaas.core.resources.Resource;
 import org.opennaas.core.resources.ResourceException;
-import org.opennaas.core.resources.ILifecycle.State;
 import org.opennaas.core.resources.capability.ICapability;
 
 public class ResourceLifeCycleTest {
 	Resource	resource;
 
-	// methods
-	// resource.initialize();
-	// resource.activate();
-	// resource.shutdown();
-	// resource.deactivate();
 	@Test
 	public void expectedLifeCycleTest() {
 		resource = new Resource();// STATE INSTANTIATED

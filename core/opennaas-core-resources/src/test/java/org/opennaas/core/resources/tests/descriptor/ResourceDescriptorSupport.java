@@ -13,6 +13,7 @@ import org.opennaas.core.resources.descriptor.Information;
 import org.opennaas.core.resources.descriptor.ResourceDescriptor;
 import org.opennaas.core.tests.helpers.mocks.descriptor.MockNetworkDescriptor;
 
+//FIXME MOVE DESCRIPTOR BUILDER 
 public class ResourceDescriptorSupport extends TestCase
 {
 

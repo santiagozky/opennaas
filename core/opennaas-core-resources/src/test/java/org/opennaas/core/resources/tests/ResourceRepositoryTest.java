@@ -7,9 +7,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.List;
 import java.util.Map;
 
 import org.junit.BeforeClass;
@@ -18,10 +16,9 @@ import org.opennaas.core.resources.IResource;
 import org.opennaas.core.resources.ResourceException;
 import org.opennaas.core.resources.ResourceRepository;
 import org.opennaas.core.resources.capability.ICapabilityFactory;
-import org.opennaas.core.resources.descriptor.CapabilityDescriptor;
-import org.opennaas.core.resources.descriptor.Information;
 import org.opennaas.core.resources.descriptor.ResourceDescriptor;
 import org.opennaas.core.tests.helpers.mocks.descriptor.MockResourceDescriptorRepository;
+import org.opennaas.core.tests.helpers.mocks.descriptor.ResourceDescriptorFactory;
 
 /**
  * Test class for the ResourceRepository class
@@ -37,6 +34,9 @@ public class ResourceRepositoryTest {
 	/* Use a mock module factory */
 	private static ICapabilityFactory	mockCapabilityFactory	= null;
 
+	/* Descriptor factory */
+	ResourceDescriptorFactory			descriptorFactory		= new ResourceDescriptorFactory();
+
 	@BeforeClass
 	public static void setup() {
 		mockCapabilityFactory = createMock(ICapabilityFactory.class);
@@ -51,7 +51,7 @@ public class ResourceRepositoryTest {
 		try {
 			replay(mockCapabilityFactory);
 			// Run the test
-			ResourceDescriptor descriptor = newResourceDescriptor("Resource Mock Create");
+			ResourceDescriptor descriptor = descriptorFactory.newMockResourceDescriptor("Resource Mock Create");
 			resourceRepository.createResource(descriptor);
 
 			verify(mockCapabilityFactory);
@@ -73,10 +73,10 @@ public class ResourceRepositoryTest {
 	public void testModifyResource() {
 
 		try {
-			ResourceDescriptor descriptor = newResourceDescriptor("Resource Mock Modify");
+			ResourceDescriptor descriptor = descriptorFactory.newMockResourceDescriptor("Resource Mock Modify");
 			resourceRepository.createResource(descriptor);
 
-			ResourceDescriptor descriptor2 = newResourceDescriptor("Mock Resource WORKS");
+			ResourceDescriptor descriptor2 = descriptorFactory.newMockResourceDescriptor("Mock Resource WORKS");
 
 			assertNotNull(descriptor.getId());
 
@@ -98,7 +98,7 @@ public class ResourceRepositoryTest {
 
 			int previousSize = resourceRepository.listResources().size();
 
-			ResourceDescriptor descriptor = newResourceDescriptor("Resource Mock CreateRemove");
+			ResourceDescriptor descriptor = descriptorFactory.newMockResourceDescriptor("Resource Mock CreateRemove");
 			resourceRepository.createResource(descriptor);
 			resourceRepository.removeResource(descriptor.getId());
 
@@ -111,19 +111,9 @@ public class ResourceRepositoryTest {
 
 	@Test(expected = ResourceException.class)
 	public void testEngineTypeNotInConfig() throws ResourceException {
-		ResourceDescriptor descriptor = newResourceDescriptor("Resource Mock Modify");
+		ResourceDescriptor descriptor = descriptorFactory.newMockResourceDescriptor("Resource Mock Modify");
 		descriptor.getInformation().setType("WrongEngine");
 		resourceRepository.createResource(descriptor);
 	}
 
-	public ResourceDescriptor newResourceDescriptor(String name) {
-		ResourceDescriptor descriptor = new ResourceDescriptor();
-		Information info = new Information("Mock", name, "1.0.0");
-		descriptor.setInformation(info);
-		CapabilityDescriptor capabilityDescriptor = new CapabilityDescriptor();
-		capabilityDescriptor.setCapabilityInformation(new Information("MockCapability", "mock cpability factory", "1.0.0"));
-		List<CapabilityDescriptor> capabilityDescriptors = new ArrayList<CapabilityDescriptor>();
-		descriptor.setCapabilityDescriptors(capabilityDescriptors);
-		return descriptor;
-	}
 }

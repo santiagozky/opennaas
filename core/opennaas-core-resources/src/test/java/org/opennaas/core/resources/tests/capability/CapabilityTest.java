@@ -9,16 +9,20 @@ import org.junit.Test;
 import org.opennaas.core.resources.ILifecycle;
 import org.opennaas.core.resources.Resource;
 import org.opennaas.core.resources.ResourceException;
+import org.opennaas.core.resources.action.Action;
+import org.opennaas.core.resources.action.ActionException;
 import org.opennaas.core.resources.action.ActionSet;
 import org.opennaas.core.resources.descriptor.CapabilityDescriptor;
 import org.opennaas.core.resources.descriptor.Information;
 import org.opennaas.core.resources.profile.IProfile;
+import org.opennaas.core.resources.protocol.IProtocolSessionManager;
 import org.opennaas.core.tests.helpers.mocks.actions.MockAction;
 import org.opennaas.core.tests.helpers.mocks.actions.MockActionSet;
 import org.opennaas.core.tests.helpers.mocks.actions.MockActionTwo;
 import org.opennaas.core.tests.helpers.mocks.actions.MockCapAction;
 import org.opennaas.core.tests.helpers.mocks.actions.MockCapActionTwo;
 import org.opennaas.core.tests.helpers.mocks.capability.MockCapability;
+import org.opennaas.core.tests.helpers.mocks.protocol.MockProtocolSessionManager;
 
 public class CapabilityTest {
 	private static Log				log						= LogFactory.getLog(CapabilityTest.class);
@@ -92,34 +96,34 @@ public class CapabilityTest {
 		Assert.assertEquals(mockCapability.getInternalCall(), "activate");
 	}
 
-	// @Test FIXME need to test with well formed ->IProtocolSessionManager psm
-	// public void testCreateAction() throws ResourceException {
-	//
-	// Action action;
-	// IProtocolSessionManager psm = new ProtocolSessionManager("deviceID");
-	// try {
-	// log.info("INFO: Checking action Capability");
-	// action = capability.createAction(actionIdCapability);
-	// action.execute(psm);
-	//
-	// Assert.assertTrue(action instanceof MockCapAction);
-	//
-	// log.info("INFO: Checking action actionID");
-	// action = capability.createAction(actionIdMock);
-	// action.execute(psm);
-	// Assert.assertTrue(action instanceof MockAction);
-	//
-	// log.info("INFO: Checking action capability two, it must use mock action two, because of Profile");
-	// action = capability.createAction(actionIdCapabilityTwo);
-	// action.execute(psm);
-	//
-	// Assert.assertTrue(action instanceof MockActionTwo);
-	//
-	// } catch (ActionException e) {
-	// Assert.fail(e.getLocalizedMessage());
-	// }
-	//
-	// }
+	@Test
+	public void testCreateAction() throws ResourceException {
+
+		Action action;
+		IProtocolSessionManager psm = new MockProtocolSessionManager();
+		try {
+			log.info("INFO: Checking action Capability");
+			action = capability.createAction(actionIdCapability);
+			action.execute(psm);
+
+			Assert.assertTrue(action instanceof MockCapAction);
+
+			log.info("INFO: Checking action actionID");
+			action = capability.createAction(actionIdMock);
+			action.execute(psm);
+			Assert.assertTrue(action instanceof MockAction);
+
+			log.info("INFO: Checking action capability two, it must use mock action two, because of Profile");
+			action = capability.createAction(actionIdCapabilityTwo);
+			action.execute(psm);
+
+			Assert.assertTrue(action instanceof MockCapActionTwo);
+
+		} catch (ActionException e) {
+			Assert.fail(e.getLocalizedMessage());
+		}
+
+	}
 
 	@Test
 	public void testDeactivate() throws ResourceException {

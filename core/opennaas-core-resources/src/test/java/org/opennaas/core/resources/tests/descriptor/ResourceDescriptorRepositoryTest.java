@@ -203,6 +203,7 @@ public class ResourceDescriptorRepositoryTest extends ResourceDescriptorSupport 
 
 	}
 
+	// FIXME REFACTOR move asserts, we have to move asserts in different tests
 	@Test
 	public void testResourceNetworkTopology() {
 		em.getTransaction().begin();
