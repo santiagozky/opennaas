@@ -1,0 +1,130 @@
+<project>
+	<parent>
+		<groupId>org.opennaas</groupId>
+		<artifactId>opennaas-poms</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+
+	<groupId>org.opennaas</groupId>
+	<artifactId>org.opennaas.poms.paxexam2</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<modelVersion>4.0.0</modelVersion>
+	<packaging>pom</packaging>
+	
+	<properties>
+		<pax.version>1.2.4</pax.version>
+		<karaf.version>2.2.2-fuse-00-08</karaf.version>
+		<osgi.version>4.2.0</osgi.version>
+		<paxlogging.version>1.5.3</paxlogging.version>
+		<slf4j.version>1.6.1</slf4j.version>
+		<junit.version>4.5</junit.version>	
+		<easymock.version>3.0</easymock.version>
+		<opennaas.version>1.0.0-SNAPSHOT</opennaas.version>
+		<paxexamversion>2.3.0</paxexamversion>
+	</properties>
+	
+
+	<dependencies>
+
+        <!-- Pax Exam Dependencies -->
+        
+        <dependency>
+			<groupId>org.ops4j.pax.exam</groupId>
+			<artifactId>pax-exam</artifactId>
+			<version>${paxexamversion}</version>
+			<scope>test</scope>
+		</dependency>
+		
+        <dependency>
+            <groupId>org.ops4j.pax.exam</groupId>
+            <artifactId>pax-exam-junit4</artifactId>
+            <version>${paxexamversion}</version>
+            <scope>test</scope>
+        </dependency>
+
+
+<!-- 
+        <dependency>
+            <groupId>org.ops4j.pax.exam</groupId>
+            <artifactId>pax-exam-container-paxrunner</artifactId>
+            <version>${paxexamversion}</version>
+            <scope>test</scope>
+        </dependency> -->
+
+        <dependency>
+            <groupId>org.ops4j.pax.exam</groupId>
+            <artifactId>pax-exam-link-assembly</artifactId>
+            <version>${paxexamversion}</version>
+            <scope>test</scope>
+        </dependency>
+        
+         <dependency>
+            <groupId>org.ops4j.pax.exam</groupId>
+            <artifactId>pax-exam-testforge</artifactId>
+            <version>${paxexamversion}</version>
+            <scope>test</scope>
+        </dependency>
+
+
+	  	 <!--  
+		<dependency>
+		    <groupId>org.ops4j.pax.runner</groupId>
+		    <artifactId>pax-runner-no-jcl</artifactId>
+		    <version>2.3.0</version>
+		    <scope>test</scope>
+		</dependency>
+		 
+		 -->
+		<dependency>
+		    <groupId>org.ops4j.pax.exam</groupId>
+		    <artifactId>pax-exam-link-mvn</artifactId>
+		    <version>2.3.0</version>
+		    <scope>test</scope>
+		</dependency>
+
+
+		<dependency>
+		  <groupId>org.openengsb.labs.paxexam.karaf</groupId>
+		  <artifactId>paxexam-karaf-container</artifactId>
+		  <version>0.5.0</version>
+		  <scope>test</scope>
+		</dependency>
+
+		
+
+		<dependency>
+			<groupId>org.opennaas</groupId>
+			<artifactId>opennaas-core-resources</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<!--<dependency>
+			<groupId>net.i2cat.mantychore</groupId>
+			<artifactId>assembly</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>-->
+	
+
+
+		<!-- Integration tests -->
+		<!-- OSGI API -->
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.core</artifactId>
+			<version>${osgi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.compendium</artifactId>
+			<version>${osgi.version}</version>
+		</dependency>
+
+
+		<!-- testing helpers -->
+		<dependency>
+			<artifactId>opennaas-core-tests-helpers</artifactId>
+			<groupId>org.opennaas</groupId>
+			<version>${opennaas.version}</version>
+		</dependency>
+	</dependencies>
+
+</project>

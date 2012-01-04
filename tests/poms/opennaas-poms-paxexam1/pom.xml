@@ -1,0 +1,115 @@
+<project>
+	<parent>
+		<groupId>org.opennaas</groupId>
+		<artifactId>opennaas-poms</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+
+	<groupId>org.opennaas</groupId>
+	<artifactId>org.opennaas.poms.paxexam1</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<modelVersion>4.0.0</modelVersion>
+	<packaging>pom</packaging>
+	
+	<properties>
+		<pax.version>1.2.4</pax.version>
+		<karaf.version>2.2.2-fuse-00-08</karaf.version>
+		<osgi.version>4.2.0</osgi.version>
+		<paxlogging.version>1.5.3</paxlogging.version>
+		<slf4j.version>1.6.1</slf4j.version>
+		<junit.version>4.5</junit.version>	
+		<easymock.version>3.0</easymock.version>
+		<opennaas.version>1.0.0-SNAPSHOT</opennaas.version>
+	</properties>
+	
+
+	<dependencies>
+		<dependency>
+			<groupId>org.ops4j.pax.exam</groupId>
+			<artifactId>pax-exam</artifactId>
+			<version>${pax.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.ops4j.pax.exam</groupId>
+			<artifactId>pax-exam-container-default</artifactId>
+			<version>${pax.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.ops4j.pax.exam</groupId>
+			<artifactId>pax-exam-junit</artifactId>
+			<version>${pax.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.ops4j.pax.exam</groupId>
+			<artifactId>pax-exam-junit-extender-impl</artifactId>
+			<version>${pax.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.karaf.tooling</groupId>
+			<artifactId>org.apache.karaf.tooling.testing</artifactId>
+			<version>${karaf.version}</version>
+		</dependency>
+
+
+		<!-- Integration tests -->
+		<!-- OSGI API -->
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.core</artifactId>
+			<version>${osgi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.compendium</artifactId>
+			<version>${osgi.version}</version>
+		</dependency>
+		<!-- Unit tests -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.easymock</groupId>
+			<artifactId>easymock</artifactId>
+			<version>${easymock.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- Logging -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>log4j-over-slf4j</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.ops4j.pax.logging</groupId>
+			<artifactId>pax-logging-api</artifactId>
+			<version>${paxlogging.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.ops4j.pax.logging</groupId>
+			<artifactId>pax-logging-service</artifactId>
+			<version>${paxlogging.version}</version>
+		</dependency>
+
+		<!-- testing helpers -->
+		<dependency>
+			<artifactId>opennaas-core-tests-helpers</artifactId>
+			<groupId>org.opennaas</groupId>
+			<version>${opennaas.version}</version>
+		</dependency>
+	</dependencies>
+
+</project>
