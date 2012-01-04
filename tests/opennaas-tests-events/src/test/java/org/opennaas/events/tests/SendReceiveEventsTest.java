@@ -13,6 +13,7 @@ import java.util.Hashtable;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.karaf.testing.AbstractIntegrationTest;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.opennaas.core.events.EventFilter;
@@ -27,7 +28,6 @@ import org.ops4j.pax.swissbox.tinybundles.core.TinyBundles;
 import org.ops4j.pax.swissbox.tinybundles.dp.Constants;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.event.Event;
-import org.osgi.service.event.EventAdmin;
 import org.osgi.service.event.EventHandler;
 
 @RunWith(JUnit4TestRunner.class)
@@ -66,10 +66,26 @@ public class SendReceiveEventsTest extends AbstractIntegrationTest {
 		});
 	}
 
+	@Before
+	public void loadBundles() {
+		/* Wait for the activation of all the bundles */
+		IntegrationTestsHelper.waitForAllBundlesActive(bundleContext);
+	}
+
+	/**
+	 * Test to check if load osgi services correctly
+	 */
+	@Test
+	public void loadEventManagerTest() {
+		IEventManager eventManager = getOsgiService(IEventManager.class, 20000);
+		assertNotNull(eventManager);
+	}
+
+	/**
+	 * Test to check if it registers events
+	 */
 	@Test
 	public void registerHandlerAndPublishEventTest() {
-
-		loadBundles();
 
 		EventFilter filter1 = new EventFilter(
 				new String[] { eventTopic });
@@ -81,7 +97,6 @@ public class SendReceiveEventsTest extends AbstractIntegrationTest {
 		EventHandler handler2 = createHandler2();
 
 		IEventManager eventManager = getOsgiService(IEventManager.class, 20000);
-		assertNotNull(eventManager);
 
 		log.info("Registering Handlers...");
 		int handler1Id = eventManager.registerEventHandler(handler1, filter1);
@@ -167,18 +182,4 @@ public class SendReceiveEventsTest extends AbstractIntegrationTest {
 		return handler;
 	}
 
-	public void loadBundles() {
-
-		assertNotNull(bundleContext);
-
-		/* Wait for the activation of all the bundles */
-		IntegrationTestsHelper.waitForAllBundlesActive(bundleContext);
-
-		EventAdmin eventAdmin = getOsgiService(EventAdmin.class, 20000);
-		assertNotNull(eventAdmin);
-
-		IEventManager eventManager = getOsgiService(IEventManager.class, 20000);
-		assertNotNull(eventManager);
-
-	}
 }
