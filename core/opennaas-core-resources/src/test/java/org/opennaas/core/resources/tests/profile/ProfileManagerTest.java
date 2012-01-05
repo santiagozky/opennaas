@@ -16,9 +16,9 @@ import org.opennaas.core.resources.profile.IProfile;
 import org.opennaas.core.resources.profile.IProfileManager;
 import org.opennaas.core.resources.profile.ProfileDescriptor;
 import org.opennaas.core.resources.profile.ProfileManager;
-import org.opennaas.core.tests.helpers.mocks.actions.MockAction;
-import org.opennaas.core.tests.helpers.mocks.actions.MockActionSet;
-import org.opennaas.core.tests.helpers.mocks.profile.MockProfile;
+import org.opennaas.core.resources.tests.helpers.mocks.actions.MockAction;
+import org.opennaas.core.resources.tests.helpers.mocks.actions.MockActionSet;
+import org.opennaas.core.resources.tests.helpers.mocks.profile.MockProfile;
 
 public class ProfileManagerTest {
 

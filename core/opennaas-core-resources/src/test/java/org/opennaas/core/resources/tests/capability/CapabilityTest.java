@@ -16,13 +16,13 @@ import org.opennaas.core.resources.descriptor.CapabilityDescriptor;
 import org.opennaas.core.resources.descriptor.Information;
 import org.opennaas.core.resources.profile.IProfile;
 import org.opennaas.core.resources.protocol.IProtocolSessionManager;
-import org.opennaas.core.tests.helpers.mocks.actions.MockAction;
-import org.opennaas.core.tests.helpers.mocks.actions.MockActionSet;
-import org.opennaas.core.tests.helpers.mocks.actions.MockActionTwo;
-import org.opennaas.core.tests.helpers.mocks.actions.MockCapAction;
-import org.opennaas.core.tests.helpers.mocks.actions.MockCapActionTwo;
-import org.opennaas.core.tests.helpers.mocks.capability.MockCapability;
-import org.opennaas.core.tests.helpers.mocks.protocol.MockProtocolSessionManager;
+import org.opennaas.core.resources.tests.helpers.mocks.actions.MockAction;
+import org.opennaas.core.resources.tests.helpers.mocks.actions.MockActionSet;
+import org.opennaas.core.resources.tests.helpers.mocks.actions.MockActionTwo;
+import org.opennaas.core.resources.tests.helpers.mocks.actions.MockCapAction;
+import org.opennaas.core.resources.tests.helpers.mocks.actions.MockCapActionTwo;
+import org.opennaas.core.resources.tests.helpers.mocks.capability.MockCapability;
+import org.opennaas.core.resources.tests.helpers.mocks.protocol.MockProtocolSessionManager;
 
 public class CapabilityTest {
 	private static Log				log						= LogFactory.getLog(CapabilityTest.class);

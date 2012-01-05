@@ -12,8 +12,8 @@ import org.opennaas.core.resources.capability.CapabilityException;
 import org.opennaas.core.resources.capability.ICapability;
 import org.opennaas.core.resources.descriptor.CapabilityDescriptor;
 import org.opennaas.core.resources.descriptor.Information;
+import org.opennaas.core.resources.tests.helpers.mocks.capability.MockCapabilityFactory;
 import org.opennaas.core.resources.validation.CapabilityDescriptorValidator;
-import org.opennaas.core.tests.helpers.mocks.capability.MockCapabilityFactory;
 
 /**
  * Test class for the AbstractCapabilityFactory

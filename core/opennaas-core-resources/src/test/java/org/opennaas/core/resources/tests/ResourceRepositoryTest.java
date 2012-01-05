@@ -17,8 +17,8 @@ import org.opennaas.core.resources.ResourceException;
 import org.opennaas.core.resources.ResourceRepository;
 import org.opennaas.core.resources.capability.ICapabilityFactory;
 import org.opennaas.core.resources.descriptor.ResourceDescriptor;
-import org.opennaas.core.tests.helpers.mocks.descriptor.MockResourceDescriptorRepository;
-import org.opennaas.core.tests.helpers.mocks.descriptor.ResourceDescriptorFactory;
+import org.opennaas.core.resources.tests.helpers.mocks.descriptor.MockResourceDescriptorRepository;
+import org.opennaas.core.resources.tests.helpers.mocks.descriptor.ResourceDescriptorFactory;
 
 /**
  * Test class for the ResourceRepository class

@@ -2,9 +2,7 @@ package org.opennaas.events.tests;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
 import static org.ops4j.pax.exam.OptionUtils.combine;
-import static org.ops4j.pax.exam.container.def.PaxRunnerOptions.vmOption;
 
 import java.io.InputStream;
 import java.util.Dictionary;
@@ -18,7 +16,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.opennaas.core.events.EventFilter;
 import org.opennaas.core.events.IEventManager;
-import org.opennaas.core.tests.helpers.IntegrationTestsHelper;
+import org.opennaas.core.resources.tests.helpers.IntegrationTestsHelper;
 import org.ops4j.pax.exam.Customizer;
 import org.ops4j.pax.exam.Inject;
 import org.ops4j.pax.exam.Option;
@@ -47,12 +45,11 @@ public class SendReceiveEventsTest extends AbstractIntegrationTest {
 	String					filterPropertyValue	= "aPropertyValue";
 
 	public static Option[] configure() {
-		return combine(
-				IntegrationTestsHelper.getNexusTestOptions(),
-				mavenBundle().groupId("net.i2cat.nexus").artifactId("net.i2cat.nexus.tests.helper")
-				// // Tell pax platform to include ORGi/Minimum-1.1 exec environment (required for org.eclipse.equinox.event)
-				, vmOption("-Dorg.osgi.framework.executionenvironment=J2SE-1.2,J2SE-1.3,J2SE-1.4,J2SE-1.5,OSGi/Minimum-1.1,"
-						+ "-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5006"));
+		return combine(IntegrationTestsHelper.getNexusTestOptions()
+		// // Tell pax platform to include ORGi/Minimum-1.1 exec environment (required for org.eclipse.equinox.event)
+		// , vmOption("-Dorg.osgi.framework.executionenvironment=J2SE-1.2,J2SE-1.3,J2SE-1.4,J2SE-1.5,OSGi/Minimum-1.1,"
+		// + "-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5006")
+		);
 	}
 
 	@Configuration

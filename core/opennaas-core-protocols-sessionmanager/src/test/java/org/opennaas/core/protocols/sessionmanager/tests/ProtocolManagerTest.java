@@ -12,8 +12,8 @@ import org.opennaas.core.resources.protocol.IProtocolSession;
 import org.opennaas.core.resources.protocol.IProtocolSessionManager;
 import org.opennaas.core.resources.protocol.ProtocolException;
 import org.opennaas.core.resources.protocol.ProtocolSessionContext;
-import org.opennaas.core.tests.helpers.MockEventManager;
-import org.opennaas.core.tests.helpers.mocks.protocol.MockProtocolSessionFactory;
+import org.opennaas.core.resources.tests.helpers.MockEventManager;
+import org.opennaas.core.resources.tests.helpers.mocks.protocol.MockProtocolSessionFactory;
 
 public class ProtocolManagerTest {
 

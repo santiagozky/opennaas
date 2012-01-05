@@ -5,6 +5,7 @@
 		<groupId>org.opennaas</groupId>
 		<artifactId>org.opennaas.poms.paxexam2</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../poms/opennaas-poms-paxexam1/pom.xml</relativePath>
 	</parent>
 	<!--  POM id -->
 	<groupId>net.i2cat.nexus</groupId>

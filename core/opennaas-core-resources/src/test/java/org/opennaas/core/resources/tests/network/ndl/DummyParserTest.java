@@ -17,7 +17,7 @@ import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 import org.opennaas.core.resources.ResourceException;
 import org.opennaas.core.resources.descriptor.network.NetworkTopology;
-import org.opennaas.core.tests.helpers.mocks.descriptor.MockNetworkDescriptor;
+import org.opennaas.core.resources.tests.helpers.mocks.descriptor.MockNetworkDescriptor;
 import org.xml.sax.SAXException;
 
 public class DummyParserTest {
