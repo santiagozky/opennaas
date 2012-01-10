@@ -64,6 +64,7 @@
 		
 	<!--  integration tests -->
 
+<!-- 
 		<dependency>
 			<groupId>org.ops4j.pax.exam</groupId>
 			<artifactId>pax-exam</artifactId>
@@ -88,8 +89,7 @@
 			<groupId>org.apache.karaf.tooling</groupId>
 			<artifactId>org.apache.karaf.tooling.testing</artifactId>
 			<version>2.2.2-fuse-00-08</version>
-		</dependency>
-		
+		</dependency>	-->
 	</dependencies>
 	<build>
 		<resources>

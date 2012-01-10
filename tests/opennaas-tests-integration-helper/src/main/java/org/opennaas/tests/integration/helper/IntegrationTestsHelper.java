@@ -1,4 +1,4 @@
-package org.opennaas.core.resources.tests.helpers;
+package org.opennaas.tests.integration.helper;
 
 import static org.ops4j.pax.exam.CoreOptions.equinox;
 import static org.ops4j.pax.exam.CoreOptions.felix;
