@@ -52,7 +52,7 @@
 			<bundle>mvn:net.i2cat.nexus/net.i2cat.nexus.resourcemanager.soapendpoint/1.0.0-SNAPSHOT</bundle>
 		-->
 		<bundle>mvn:org.opennaas/opennaas-core-protocols-sessionmanager/1.0.0-SNAPSHOT</bundle>
-		<bundle>mvn:org.opennaas/opennaas-core-tests-helpers/1.0.0-SNAPSHOT</bundle>
+		<!-- <bundle>mvn:org.opennaas/opennaas-core-tests-helpers/1.0.0-SNAPSHOT</bundle>  -->
 	</feature>
 	<!--
 	<feature name="i2cat-nexus-testprofile" version="1.0.0-SNAPSHOT">
