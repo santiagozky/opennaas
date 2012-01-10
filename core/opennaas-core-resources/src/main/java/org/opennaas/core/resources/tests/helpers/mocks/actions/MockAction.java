@@ -9,14 +9,9 @@ import org.opennaas.core.resources.protocol.IProtocolSessionManager;
 
 public class MockAction extends Action {
 	private Log				log				= LogFactory.getLog(MockAction.class);
-	private String			actionID;
+
 	ActionResponse			actionResponse;
 	private static String	actionIdMock	= "actionMock";
-
-	@Override
-	public void setActionID(String actionID) {
-		this.actionID = actionID;
-	}
 
 	public ActionResponse execute(IProtocolSessionManager protocolSessionManager) throws ActionException {
 		log.info("----> Executing action: MOCK ACTION");
