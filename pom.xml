@@ -192,6 +192,7 @@
     <module>provision</module>-->
 		<module>core</module>
 		<module>platform</module>
+		<module>assembly</module>
 		<module>tests</module>
 	</modules>
 	<build>
