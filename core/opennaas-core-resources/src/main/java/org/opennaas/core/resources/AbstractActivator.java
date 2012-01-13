@@ -43,8 +43,6 @@ public abstract class AbstractActivator {
 	 * Fetch a service from OSGI Registry
 	 * 
 	 * @return Object service instance
-	 * @throws InterruptedException
-	 * @throws InterruptedException
 	 * @throws ActivatorException
 	 */
 	protected static Object getServiceFromRegistry(BundleContext bundleContext, Filter filter)

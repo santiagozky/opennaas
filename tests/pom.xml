@@ -18,9 +18,9 @@
 	<!--  integration tests -->
 	<modules>
 		<module>poms</module>
-	<module>opennaas-tests-integration-helper</module>
-	<!-- <module>opennaas-tests-events</module> 
-	<module>opennaas-tests-resources</module> -->
+		<module>opennaas-tests-integration-helper</module>
+		<!-- <module>opennaas-tests-events</module> -->
+		<!-- <module>opennaas-tests-resources</module> -->
 	</modules>
 	<!--  dependencies for integration tests -->
 
