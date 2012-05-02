@@ -2041,3 +2041,1365 @@ INFO  2012-04-30 18:32:09,781 [idb_RequestHandler_fff10067_completeJob] - durati
 INFO  2012-04-30 18:32:09,782 [idb_RequestHandler_fff10067_completeJob] - duration_reply_settype 1ms
 INFO  2012-04-30 18:32:09,785 [idb_RequestHandler_fff10067_completeJob] - duration_serializer_2 3ms
 INFO  2012-04-30 18:32:09,785 [idb_RequestHandler_fff10067_completeJob] - duration_requestHandler 17ms
+DEBUG 2012-04-30 22:06:11,846 [idb_RequestHandler_3e850000_addOrEditDomain] - start_requestHandler
+INFO  2012-04-30 22:06:11,877 [idb_RequestHandler_3e850000_addOrEditDomain] - duration_serializer_1 31ms
+INFO  2012-04-30 22:06:11,879 [idb_RequestHandler_3e850000_addOrEditDomain] - duration_validator 2ms
+INFO  2012-04-30 22:06:11,983 [idb_RequestHandler_3e850000_addOrEditDomain] - duration_processing 104ms
+INFO  2012-04-30 22:06:11,983 [idb_RequestHandler_3e850000_addOrEditDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:11,989 [idb_RequestHandler_3e850000_addOrEditDomain] - duration_serializer_2 6ms
+INFO  2012-04-30 22:06:11,989 [idb_RequestHandler_3e850000_addOrEditDomain] - duration_requestHandler 143ms
+DEBUG 2012-04-30 22:06:11,995 [idb_RequestHandler_3e850001_deleteDomain] - start_requestHandler
+INFO  2012-04-30 22:06:11,996 [idb_RequestHandler_3e850001_deleteDomain] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:11,996 [idb_RequestHandler_3e850001_deleteDomain] - duration_validator 0ms
+INFO  2012-04-30 22:06:12,065 [idb_RequestHandler_3e850001_deleteDomain] - duration_processing 69ms
+INFO  2012-04-30 22:06:12,065 [idb_RequestHandler_3e850001_deleteDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:12,068 [idb_RequestHandler_3e850001_deleteDomain] - duration_serializer_2 3ms
+INFO  2012-04-30 22:06:12,068 [idb_RequestHandler_3e850001_deleteDomain] - duration_requestHandler 73ms
+DEBUG 2012-04-30 22:06:12,100 [idb_RequestHandler_3e850002_addDomain] - start_requestHandler
+INFO  2012-04-30 22:06:12,105 [idb_RequestHandler_3e850002_addDomain] - duration_serializer_1 5ms
+INFO  2012-04-30 22:06:12,105 [idb_RequestHandler_3e850002_addDomain] - duration_validator 0ms
+INFO  2012-04-30 22:06:12,379 [idb_RequestHandler_3e850002_addDomain] - duration_processing 274ms
+INFO  2012-04-30 22:06:12,379 [idb_RequestHandler_3e850002_addDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:12,382 [idb_RequestHandler_3e850002_addDomain] - duration_serializer_2 3ms
+INFO  2012-04-30 22:06:12,382 [idb_RequestHandler_3e850002_addDomain] - duration_requestHandler 282ms
+DEBUG 2012-04-30 22:06:12,387 [idb_RequestHandler_3e850003_deleteDomain] - start_requestHandler
+INFO  2012-04-30 22:06:12,389 [idb_RequestHandler_3e850003_deleteDomain] - duration_serializer_1 2ms
+INFO  2012-04-30 22:06:12,389 [idb_RequestHandler_3e850003_deleteDomain] - duration_validator 0ms
+INFO  2012-04-30 22:06:12,569 [idb_RequestHandler_3e850003_deleteDomain] - duration_processing 179ms
+INFO  2012-04-30 22:06:12,569 [idb_RequestHandler_3e850003_deleteDomain] - duration_reply_settype 1ms
+INFO  2012-04-30 22:06:12,573 [idb_RequestHandler_3e850003_deleteDomain] - duration_serializer_2 4ms
+INFO  2012-04-30 22:06:12,573 [idb_RequestHandler_3e850003_deleteDomain] - duration_requestHandler 186ms
+DEBUG 2012-04-30 22:06:12,581 [idb_RequestHandler_3e850004_deleteDomain] - start_requestHandler
+INFO  2012-04-30 22:06:12,583 [idb_RequestHandler_3e850004_deleteDomain] - duration_serializer_1 2ms
+INFO  2012-04-30 22:06:12,583 [idb_RequestHandler_3e850004_deleteDomain] - duration_validator 0ms
+DEBUG 2012-04-30 22:06:12,626 [idb_RequestHandler_3e850005_addDomain] - start_requestHandler
+INFO  2012-04-30 22:06:12,628 [idb_RequestHandler_3e850005_addDomain] - duration_serializer_1 2ms
+INFO  2012-04-30 22:06:12,628 [idb_RequestHandler_3e850005_addDomain] - duration_validator 0ms
+INFO  2012-04-30 22:06:12,891 [idb_RequestHandler_3e850005_addDomain] - duration_processing 263ms
+INFO  2012-04-30 22:06:12,891 [idb_RequestHandler_3e850005_addDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:12,895 [idb_RequestHandler_3e850005_addDomain] - duration_serializer_2 4ms
+INFO  2012-04-30 22:06:12,895 [idb_RequestHandler_3e850005_addDomain] - duration_requestHandler 269ms
+DEBUG 2012-04-30 22:06:12,902 [idb_RequestHandler_3e850006_addEndpoint] - start_requestHandler
+INFO  2012-04-30 22:06:12,905 [idb_RequestHandler_3e850006_addEndpoint] - duration_serializer_1 3ms
+INFO  2012-04-30 22:06:12,905 [idb_RequestHandler_3e850006_addEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:06:12,974 [idb_RequestHandler_3e850006_addEndpoint] - duration_processing 69ms
+INFO  2012-04-30 22:06:12,974 [idb_RequestHandler_3e850006_addEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:12,978 [idb_RequestHandler_3e850006_addEndpoint] - duration_serializer_2 4ms
+INFO  2012-04-30 22:06:12,978 [idb_RequestHandler_3e850006_addEndpoint] - duration_requestHandler 76ms
+DEBUG 2012-04-30 22:06:12,984 [idb_RequestHandler_3e850007_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:06:12,986 [idb_RequestHandler_3e850007_deleteEndpoint] - duration_serializer_1 2ms
+INFO  2012-04-30 22:06:12,986 [idb_RequestHandler_3e850007_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:06:13,038 [idb_RequestHandler_3e850007_deleteEndpoint] - duration_processing 52ms
+INFO  2012-04-30 22:06:13,039 [idb_RequestHandler_3e850007_deleteEndpoint] - duration_reply_settype 1ms
+INFO  2012-04-30 22:06:13,042 [idb_RequestHandler_3e850007_deleteEndpoint] - duration_serializer_2 3ms
+INFO  2012-04-30 22:06:13,042 [idb_RequestHandler_3e850007_deleteEndpoint] - duration_requestHandler 58ms
+DEBUG 2012-04-30 22:06:13,049 [idb_RequestHandler_3e850008_deleteDomain] - start_requestHandler
+INFO  2012-04-30 22:06:13,051 [idb_RequestHandler_3e850008_deleteDomain] - duration_serializer_1 2ms
+INFO  2012-04-30 22:06:13,051 [idb_RequestHandler_3e850008_deleteDomain] - duration_validator 0ms
+INFO  2012-04-30 22:06:13,213 [idb_RequestHandler_3e850008_deleteDomain] - duration_processing 162ms
+INFO  2012-04-30 22:06:13,213 [idb_RequestHandler_3e850008_deleteDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:13,216 [idb_RequestHandler_3e850008_deleteDomain] - duration_serializer_2 3ms
+INFO  2012-04-30 22:06:13,216 [idb_RequestHandler_3e850008_deleteDomain] - duration_requestHandler 167ms
+DEBUG 2012-04-30 22:06:13,221 [idb_RequestHandler_3e850009_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:06:13,223 [idb_RequestHandler_3e850009_deleteEndpoint] - duration_serializer_1 2ms
+INFO  2012-04-30 22:06:13,223 [idb_RequestHandler_3e850009_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:06:13,239 [idb_RequestHandler_3e850009_deleteEndpoint] - duration_processing 16ms
+INFO  2012-04-30 22:06:13,239 [idb_RequestHandler_3e850009_deleteEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:13,242 [idb_RequestHandler_3e850009_deleteEndpoint] - duration_serializer_2 3ms
+INFO  2012-04-30 22:06:13,243 [idb_RequestHandler_3e850009_deleteEndpoint] - duration_requestHandler 21ms
+DEBUG 2012-04-30 22:06:13,249 [idb_RequestHandler_3e85000a_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:06:13,250 [idb_RequestHandler_3e85000a_deleteEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:13,251 [idb_RequestHandler_3e85000a_deleteEndpoint] - duration_validator 1ms
+INFO  2012-04-30 22:06:13,264 [idb_RequestHandler_3e85000a_deleteEndpoint] - duration_processing 13ms
+INFO  2012-04-30 22:06:13,265 [idb_RequestHandler_3e85000a_deleteEndpoint] - duration_reply_settype 1ms
+INFO  2012-04-30 22:06:13,267 [idb_RequestHandler_3e85000a_deleteEndpoint] - duration_serializer_2 2ms
+INFO  2012-04-30 22:06:13,267 [idb_RequestHandler_3e85000a_deleteEndpoint] - duration_requestHandler 18ms
+DEBUG 2012-04-30 22:06:13,275 [idb_RequestHandler_3e85000b_addDomain] - start_requestHandler
+INFO  2012-04-30 22:06:13,277 [idb_RequestHandler_3e85000b_addDomain] - duration_serializer_1 2ms
+INFO  2012-04-30 22:06:13,277 [idb_RequestHandler_3e85000b_addDomain] - duration_validator 0ms
+INFO  2012-04-30 22:06:13,552 [idb_RequestHandler_3e85000b_addDomain] - duration_processing 275ms
+INFO  2012-04-30 22:06:13,553 [idb_RequestHandler_3e85000b_addDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:13,556 [idb_RequestHandler_3e85000b_addDomain] - duration_serializer_2 4ms
+INFO  2012-04-30 22:06:13,556 [idb_RequestHandler_3e85000b_addDomain] - duration_requestHandler 281ms
+DEBUG 2012-04-30 22:06:13,563 [idb_RequestHandler_3e85000c_addDomain] - start_requestHandler
+INFO  2012-04-30 22:06:13,565 [idb_RequestHandler_3e85000c_addDomain] - duration_serializer_1 2ms
+INFO  2012-04-30 22:06:13,565 [idb_RequestHandler_3e85000c_addDomain] - duration_validator 0ms
+DEBUG 2012-04-30 22:06:13,575 [idb_RequestHandler_3e85000d_deleteDomain] - start_requestHandler
+INFO  2012-04-30 22:06:13,577 [idb_RequestHandler_3e85000d_deleteDomain] - duration_serializer_1 2ms
+INFO  2012-04-30 22:06:13,577 [idb_RequestHandler_3e85000d_deleteDomain] - duration_validator 0ms
+INFO  2012-04-30 22:06:13,725 [idb_RequestHandler_3e85000d_deleteDomain] - duration_processing 148ms
+INFO  2012-04-30 22:06:13,725 [idb_RequestHandler_3e85000d_deleteDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:13,728 [idb_RequestHandler_3e85000d_deleteDomain] - duration_serializer_2 3ms
+INFO  2012-04-30 22:06:13,728 [idb_RequestHandler_3e85000d_deleteDomain] - duration_requestHandler 153ms
+DEBUG 2012-04-30 22:06:13,734 [idb_RequestHandler_3e85000e_deleteDomain] - start_requestHandler
+INFO  2012-04-30 22:06:13,737 [idb_RequestHandler_3e85000e_deleteDomain] - duration_serializer_1 3ms
+INFO  2012-04-30 22:06:13,737 [idb_RequestHandler_3e85000e_deleteDomain] - duration_validator 0ms
+DEBUG 2012-04-30 22:06:13,777 [idb_RequestHandler_3e85000f_addDomain] - start_requestHandler
+INFO  2012-04-30 22:06:13,780 [idb_RequestHandler_3e85000f_addDomain] - duration_serializer_1 3ms
+INFO  2012-04-30 22:06:13,780 [idb_RequestHandler_3e85000f_addDomain] - duration_validator 0ms
+INFO  2012-04-30 22:06:14,006 [idb_RequestHandler_3e85000f_addDomain] - duration_processing 226ms
+INFO  2012-04-30 22:06:14,007 [idb_RequestHandler_3e85000f_addDomain] - duration_reply_settype 1ms
+INFO  2012-04-30 22:06:14,010 [idb_RequestHandler_3e85000f_addDomain] - duration_serializer_2 3ms
+INFO  2012-04-30 22:06:14,010 [idb_RequestHandler_3e85000f_addDomain] - duration_requestHandler 233ms
+DEBUG 2012-04-30 22:06:14,016 [idb_RequestHandler_3e850010_addEndpoint] - start_requestHandler
+INFO  2012-04-30 22:06:14,018 [idb_RequestHandler_3e850010_addEndpoint] - duration_serializer_1 2ms
+INFO  2012-04-30 22:06:14,018 [idb_RequestHandler_3e850010_addEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:06:14,088 [idb_RequestHandler_3e850010_addEndpoint] - duration_processing 70ms
+INFO  2012-04-30 22:06:14,088 [idb_RequestHandler_3e850010_addEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:14,090 [idb_RequestHandler_3e850010_addEndpoint] - duration_serializer_2 2ms
+INFO  2012-04-30 22:06:14,090 [idb_RequestHandler_3e850010_addEndpoint] - duration_requestHandler 74ms
+DEBUG 2012-04-30 22:06:14,094 [idb_RequestHandler_3e850011_addEndpoint] - start_requestHandler
+INFO  2012-04-30 22:06:14,095 [idb_RequestHandler_3e850011_addEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:14,095 [idb_RequestHandler_3e850011_addEndpoint] - duration_validator 0ms
+DEBUG 2012-04-30 22:06:14,106 [idb_RequestHandler_3e850012_deleteDomain] - start_requestHandler
+INFO  2012-04-30 22:06:14,108 [idb_RequestHandler_3e850012_deleteDomain] - duration_serializer_1 2ms
+INFO  2012-04-30 22:06:14,108 [idb_RequestHandler_3e850012_deleteDomain] - duration_validator 0ms
+INFO  2012-04-30 22:06:14,262 [idb_RequestHandler_3e850012_deleteDomain] - duration_processing 154ms
+INFO  2012-04-30 22:06:14,262 [idb_RequestHandler_3e850012_deleteDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:14,266 [idb_RequestHandler_3e850012_deleteDomain] - duration_serializer_2 4ms
+INFO  2012-04-30 22:06:14,266 [idb_RequestHandler_3e850012_deleteDomain] - duration_requestHandler 160ms
+DEBUG 2012-04-30 22:06:14,271 [idb_RequestHandler_3e850013_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:06:14,272 [idb_RequestHandler_3e850013_deleteEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:14,272 [idb_RequestHandler_3e850013_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:06:14,282 [idb_RequestHandler_3e850013_deleteEndpoint] - duration_processing 10ms
+INFO  2012-04-30 22:06:14,283 [idb_RequestHandler_3e850013_deleteEndpoint] - duration_reply_settype 1ms
+INFO  2012-04-30 22:06:14,284 [idb_RequestHandler_3e850013_deleteEndpoint] - duration_serializer_2 1ms
+INFO  2012-04-30 22:06:14,285 [idb_RequestHandler_3e850013_deleteEndpoint] - duration_requestHandler 13ms
+DEBUG 2012-04-30 22:06:14,287 [idb_RequestHandler_3e850014_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:06:14,288 [idb_RequestHandler_3e850014_deleteEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:14,288 [idb_RequestHandler_3e850014_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:06:14,300 [idb_RequestHandler_3e850014_deleteEndpoint] - duration_processing 11ms
+INFO  2012-04-30 22:06:14,300 [idb_RequestHandler_3e850014_deleteEndpoint] - duration_reply_settype 1ms
+INFO  2012-04-30 22:06:14,303 [idb_RequestHandler_3e850014_deleteEndpoint] - duration_serializer_2 3ms
+INFO  2012-04-30 22:06:14,303 [idb_RequestHandler_3e850014_deleteEndpoint] - duration_requestHandler 16ms
+DEBUG 2012-04-30 22:06:14,313 [idb_RequestHandler_3e850015_addDomain] - start_requestHandler
+INFO  2012-04-30 22:06:14,320 [idb_RequestHandler_3e850015_addDomain] - duration_serializer_1 7ms
+INFO  2012-04-30 22:06:14,320 [idb_RequestHandler_3e850015_addDomain] - duration_validator 0ms
+INFO  2012-04-30 22:06:14,525 [idb_RequestHandler_3e850015_addDomain] - duration_processing 205ms
+INFO  2012-04-30 22:06:14,526 [idb_RequestHandler_3e850015_addDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:14,529 [idb_RequestHandler_3e850015_addDomain] - duration_serializer_2 4ms
+INFO  2012-04-30 22:06:14,529 [idb_RequestHandler_3e850015_addDomain] - duration_requestHandler 216ms
+DEBUG 2012-04-30 22:06:14,535 [idb_RequestHandler_3e850016_getDomains] - start_requestHandler
+INFO  2012-04-30 22:06:14,536 [idb_RequestHandler_3e850016_getDomains] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:14,537 [idb_RequestHandler_3e850016_getDomains] - duration_validator 1ms
+INFO  2012-04-30 22:06:14,682 [idb_RequestHandler_3e850016_getDomains] - duration_processing 145ms
+INFO  2012-04-30 22:06:14,683 [idb_RequestHandler_3e850016_getDomains] - duration_reply_settype 1ms
+DEBUG 2012-04-30 22:06:14,764 [idb_RequestHandler_3e850017_deleteDomain] - start_requestHandler
+INFO  2012-04-30 22:06:14,765 [idb_RequestHandler_3e850017_deleteDomain] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:14,765 [idb_RequestHandler_3e850017_deleteDomain] - duration_validator 0ms
+INFO  2012-04-30 22:06:14,906 [idb_RequestHandler_3e850017_deleteDomain] - duration_processing 141ms
+INFO  2012-04-30 22:06:14,906 [idb_RequestHandler_3e850017_deleteDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:14,908 [idb_RequestHandler_3e850017_deleteDomain] - duration_serializer_2 2ms
+INFO  2012-04-30 22:06:14,908 [idb_RequestHandler_3e850017_deleteDomain] - duration_requestHandler 144ms
+DEBUG 2012-04-30 22:06:14,911 [idb_RequestHandler_3e850018_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:06:14,912 [idb_RequestHandler_3e850018_deleteEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:14,912 [idb_RequestHandler_3e850018_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:06:14,924 [idb_RequestHandler_3e850018_deleteEndpoint] - duration_processing 12ms
+INFO  2012-04-30 22:06:14,924 [idb_RequestHandler_3e850018_deleteEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:14,926 [idb_RequestHandler_3e850018_deleteEndpoint] - duration_serializer_2 2ms
+INFO  2012-04-30 22:06:14,926 [idb_RequestHandler_3e850018_deleteEndpoint] - duration_requestHandler 15ms
+DEBUG 2012-04-30 22:06:14,929 [idb_RequestHandler_3e850019_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:06:14,930 [idb_RequestHandler_3e850019_deleteEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:14,930 [idb_RequestHandler_3e850019_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:06:14,941 [idb_RequestHandler_3e850019_deleteEndpoint] - duration_processing 11ms
+INFO  2012-04-30 22:06:14,941 [idb_RequestHandler_3e850019_deleteEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:14,943 [idb_RequestHandler_3e850019_deleteEndpoint] - duration_serializer_2 2ms
+INFO  2012-04-30 22:06:14,943 [idb_RequestHandler_3e850019_deleteEndpoint] - duration_requestHandler 14ms
+DEBUG 2012-04-30 22:06:14,949 [idb_RequestHandler_3e85001a_addDomain] - start_requestHandler
+INFO  2012-04-30 22:06:14,951 [idb_RequestHandler_3e85001a_addDomain] - duration_serializer_1 2ms
+INFO  2012-04-30 22:06:14,951 [idb_RequestHandler_3e85001a_addDomain] - duration_validator 0ms
+INFO  2012-04-30 22:06:15,118 [idb_RequestHandler_3e85001a_addDomain] - duration_processing 167ms
+INFO  2012-04-30 22:06:15,118 [idb_RequestHandler_3e85001a_addDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:15,120 [idb_RequestHandler_3e85001a_addDomain] - duration_serializer_2 2ms
+INFO  2012-04-30 22:06:15,120 [idb_RequestHandler_3e85001a_addDomain] - duration_requestHandler 171ms
+DEBUG 2012-04-30 22:06:15,124 [idb_RequestHandler_3e85001b_addEndpoint] - start_requestHandler
+INFO  2012-04-30 22:06:15,125 [idb_RequestHandler_3e85001b_addEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:15,125 [idb_RequestHandler_3e85001b_addEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:06:15,188 [idb_RequestHandler_3e85001b_addEndpoint] - duration_processing 62ms
+INFO  2012-04-30 22:06:15,188 [idb_RequestHandler_3e85001b_addEndpoint] - duration_reply_settype 1ms
+INFO  2012-04-30 22:06:15,191 [idb_RequestHandler_3e85001b_addEndpoint] - duration_serializer_2 3ms
+INFO  2012-04-30 22:06:15,191 [idb_RequestHandler_3e85001b_addEndpoint] - duration_requestHandler 67ms
+DEBUG 2012-04-30 22:06:15,237 [idb_RequestHandler_3e85001c_editEndpoint] - start_requestHandler
+INFO  2012-04-30 22:06:15,239 [idb_RequestHandler_3e85001c_editEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:15,239 [idb_RequestHandler_3e85001c_editEndpoint] - duration_validator 1ms
+INFO  2012-04-30 22:06:15,312 [idb_RequestHandler_3e85001c_editEndpoint] - duration_processing 73ms
+INFO  2012-04-30 22:06:15,313 [idb_RequestHandler_3e85001c_editEndpoint] - duration_reply_settype 1ms
+INFO  2012-04-30 22:06:15,316 [idb_RequestHandler_3e85001c_editEndpoint] - duration_serializer_2 3ms
+INFO  2012-04-30 22:06:15,316 [idb_RequestHandler_3e85001c_editEndpoint] - duration_requestHandler 79ms
+DEBUG 2012-04-30 22:06:15,321 [idb_RequestHandler_3e85001d_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:06:15,323 [idb_RequestHandler_3e85001d_deleteEndpoint] - duration_serializer_1 2ms
+INFO  2012-04-30 22:06:15,323 [idb_RequestHandler_3e85001d_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:06:15,379 [idb_RequestHandler_3e85001d_deleteEndpoint] - duration_processing 56ms
+INFO  2012-04-30 22:06:15,379 [idb_RequestHandler_3e85001d_deleteEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:15,383 [idb_RequestHandler_3e85001d_deleteEndpoint] - duration_serializer_2 4ms
+INFO  2012-04-30 22:06:15,383 [idb_RequestHandler_3e85001d_deleteEndpoint] - duration_requestHandler 62ms
+DEBUG 2012-04-30 22:06:15,389 [idb_RequestHandler_3e85001e_deleteDomain] - start_requestHandler
+INFO  2012-04-30 22:06:15,390 [idb_RequestHandler_3e85001e_deleteDomain] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:15,391 [idb_RequestHandler_3e85001e_deleteDomain] - duration_validator 1ms
+INFO  2012-04-30 22:06:15,492 [idb_RequestHandler_3e85001e_deleteDomain] - duration_processing 101ms
+INFO  2012-04-30 22:06:15,492 [idb_RequestHandler_3e85001e_deleteDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:15,494 [idb_RequestHandler_3e85001e_deleteDomain] - duration_serializer_2 2ms
+INFO  2012-04-30 22:06:15,494 [idb_RequestHandler_3e85001e_deleteDomain] - duration_requestHandler 105ms
+DEBUG 2012-04-30 22:06:15,497 [idb_RequestHandler_3e85001f_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:06:15,498 [idb_RequestHandler_3e85001f_deleteEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:15,498 [idb_RequestHandler_3e85001f_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:06:15,507 [idb_RequestHandler_3e85001f_deleteEndpoint] - duration_processing 9ms
+INFO  2012-04-30 22:06:15,507 [idb_RequestHandler_3e85001f_deleteEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:15,509 [idb_RequestHandler_3e85001f_deleteEndpoint] - duration_serializer_2 2ms
+INFO  2012-04-30 22:06:15,509 [idb_RequestHandler_3e85001f_deleteEndpoint] - duration_requestHandler 12ms
+DEBUG 2012-04-30 22:06:15,512 [idb_RequestHandler_3e850020_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:06:15,513 [idb_RequestHandler_3e850020_deleteEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:15,513 [idb_RequestHandler_3e850020_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:06:15,522 [idb_RequestHandler_3e850020_deleteEndpoint] - duration_processing 9ms
+INFO  2012-04-30 22:06:15,522 [idb_RequestHandler_3e850020_deleteEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:15,524 [idb_RequestHandler_3e850020_deleteEndpoint] - duration_serializer_2 2ms
+INFO  2012-04-30 22:06:15,524 [idb_RequestHandler_3e850020_deleteEndpoint] - duration_requestHandler 12ms
+DEBUG 2012-04-30 22:06:15,532 [idb_RequestHandler_3e850021_addDomain] - start_requestHandler
+INFO  2012-04-30 22:06:15,535 [idb_RequestHandler_3e850021_addDomain] - duration_serializer_1 3ms
+INFO  2012-04-30 22:06:15,535 [idb_RequestHandler_3e850021_addDomain] - duration_validator 0ms
+INFO  2012-04-30 22:06:15,712 [idb_RequestHandler_3e850021_addDomain] - duration_processing 177ms
+INFO  2012-04-30 22:06:15,712 [idb_RequestHandler_3e850021_addDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:15,714 [idb_RequestHandler_3e850021_addDomain] - duration_serializer_2 2ms
+INFO  2012-04-30 22:06:15,714 [idb_RequestHandler_3e850021_addDomain] - duration_requestHandler 182ms
+DEBUG 2012-04-30 22:06:15,718 [idb_RequestHandler_3e850022_editDomain] - start_requestHandler
+INFO  2012-04-30 22:06:15,721 [idb_RequestHandler_3e850022_editDomain] - duration_serializer_1 3ms
+INFO  2012-04-30 22:06:15,721 [idb_RequestHandler_3e850022_editDomain] - duration_validator 0ms
+INFO  2012-04-30 22:06:15,939 [idb_RequestHandler_3e850022_editDomain] - duration_processing 218ms
+INFO  2012-04-30 22:06:15,939 [idb_RequestHandler_3e850022_editDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:15,941 [idb_RequestHandler_3e850022_editDomain] - duration_serializer_2 2ms
+INFO  2012-04-30 22:06:15,941 [idb_RequestHandler_3e850022_editDomain] - duration_requestHandler 223ms
+DEBUG 2012-04-30 22:06:15,944 [idb_RequestHandler_3e850023_getDomains] - start_requestHandler
+INFO  2012-04-30 22:06:15,945 [idb_RequestHandler_3e850023_getDomains] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:15,945 [idb_RequestHandler_3e850023_getDomains] - duration_validator 0ms
+INFO  2012-04-30 22:06:16,121 [idb_RequestHandler_3e850023_getDomains] - duration_processing 176ms
+INFO  2012-04-30 22:06:16,121 [idb_RequestHandler_3e850023_getDomains] - duration_reply_settype 0ms
+DEBUG 2012-04-30 22:06:16,159 [idb_RequestHandler_3e850024_deleteDomain] - start_requestHandler
+INFO  2012-04-30 22:06:16,160 [idb_RequestHandler_3e850024_deleteDomain] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:16,160 [idb_RequestHandler_3e850024_deleteDomain] - duration_validator 0ms
+INFO  2012-04-30 22:06:16,360 [idb_RequestHandler_3e850024_deleteDomain] - duration_processing 200ms
+INFO  2012-04-30 22:06:16,360 [idb_RequestHandler_3e850024_deleteDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:16,362 [idb_RequestHandler_3e850024_deleteDomain] - duration_serializer_2 2ms
+INFO  2012-04-30 22:06:16,362 [idb_RequestHandler_3e850024_deleteDomain] - duration_requestHandler 203ms
+DEBUG 2012-04-30 22:06:16,367 [idb_RequestHandler_3e850025_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:06:16,368 [idb_RequestHandler_3e850025_deleteEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:16,368 [idb_RequestHandler_3e850025_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:06:16,385 [idb_RequestHandler_3e850025_deleteEndpoint] - duration_processing 17ms
+INFO  2012-04-30 22:06:16,386 [idb_RequestHandler_3e850025_deleteEndpoint] - duration_reply_settype 1ms
+INFO  2012-04-30 22:06:16,389 [idb_RequestHandler_3e850025_deleteEndpoint] - duration_serializer_2 3ms
+INFO  2012-04-30 22:06:16,389 [idb_RequestHandler_3e850025_deleteEndpoint] - duration_requestHandler 22ms
+DEBUG 2012-04-30 22:06:16,393 [idb_RequestHandler_3e850026_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:06:16,395 [idb_RequestHandler_3e850026_deleteEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:16,395 [idb_RequestHandler_3e850026_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:06:16,412 [idb_RequestHandler_3e850026_deleteEndpoint] - duration_processing 17ms
+INFO  2012-04-30 22:06:16,412 [idb_RequestHandler_3e850026_deleteEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:16,415 [idb_RequestHandler_3e850026_deleteEndpoint] - duration_serializer_2 3ms
+INFO  2012-04-30 22:06:16,416 [idb_RequestHandler_3e850026_deleteEndpoint] - duration_requestHandler 21ms
+DEBUG 2012-04-30 22:06:16,426 [idb_RequestHandler_3e850027_addDomain] - start_requestHandler
+INFO  2012-04-30 22:06:16,430 [idb_RequestHandler_3e850027_addDomain] - duration_serializer_1 4ms
+INFO  2012-04-30 22:06:16,430 [idb_RequestHandler_3e850027_addDomain] - duration_validator 0ms
+INFO  2012-04-30 22:06:16,632 [idb_RequestHandler_3e850027_addDomain] - duration_processing 202ms
+INFO  2012-04-30 22:06:16,633 [idb_RequestHandler_3e850027_addDomain] - duration_reply_settype 1ms
+INFO  2012-04-30 22:06:16,636 [idb_RequestHandler_3e850027_addDomain] - duration_serializer_2 3ms
+INFO  2012-04-30 22:06:16,636 [idb_RequestHandler_3e850027_addDomain] - duration_requestHandler 210ms
+DEBUG 2012-04-30 22:06:16,642 [idb_RequestHandler_3e850028_addEndpoint] - start_requestHandler
+INFO  2012-04-30 22:06:16,644 [idb_RequestHandler_3e850028_addEndpoint] - duration_serializer_1 2ms
+INFO  2012-04-30 22:06:16,644 [idb_RequestHandler_3e850028_addEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:06:16,708 [idb_RequestHandler_3e850028_addEndpoint] - duration_processing 64ms
+INFO  2012-04-30 22:06:16,708 [idb_RequestHandler_3e850028_addEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:16,712 [idb_RequestHandler_3e850028_addEndpoint] - duration_serializer_2 4ms
+INFO  2012-04-30 22:06:16,712 [idb_RequestHandler_3e850028_addEndpoint] - duration_requestHandler 70ms
+DEBUG 2012-04-30 22:06:16,718 [idb_RequestHandler_3e850029_editEndpoint] - start_requestHandler
+INFO  2012-04-30 22:06:16,721 [idb_RequestHandler_3e850029_editEndpoint] - duration_serializer_1 3ms
+INFO  2012-04-30 22:06:16,721 [idb_RequestHandler_3e850029_editEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:06:16,771 [idb_RequestHandler_3e850029_editEndpoint] - duration_processing 50ms
+INFO  2012-04-30 22:06:16,771 [idb_RequestHandler_3e850029_editEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:16,775 [idb_RequestHandler_3e850029_editEndpoint] - duration_serializer_2 4ms
+INFO  2012-04-30 22:06:16,775 [idb_RequestHandler_3e850029_editEndpoint] - duration_requestHandler 57ms
+DEBUG 2012-04-30 22:06:16,780 [idb_RequestHandler_3e85002a_getEndpoints] - start_requestHandler
+INFO  2012-04-30 22:06:16,781 [idb_RequestHandler_3e85002a_getEndpoints] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:16,782 [idb_RequestHandler_3e85002a_getEndpoints] - duration_validator 1ms
+INFO  2012-04-30 22:06:16,789 [idb_RequestHandler_3e85002a_getEndpoints] - duration_processing 7ms
+INFO  2012-04-30 22:06:16,789 [idb_RequestHandler_3e85002a_getEndpoints] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:16,791 [idb_RequestHandler_3e85002a_getEndpoints] - duration_serializer_2 2ms
+INFO  2012-04-30 22:06:16,791 [idb_RequestHandler_3e85002a_getEndpoints] - duration_requestHandler 11ms
+DEBUG 2012-04-30 22:06:16,797 [idb_RequestHandler_3e85002b_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:06:16,799 [idb_RequestHandler_3e85002b_deleteEndpoint] - duration_serializer_1 2ms
+INFO  2012-04-30 22:06:16,799 [idb_RequestHandler_3e85002b_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:06:16,848 [idb_RequestHandler_3e85002b_deleteEndpoint] - duration_processing 49ms
+INFO  2012-04-30 22:06:16,848 [idb_RequestHandler_3e85002b_deleteEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:16,851 [idb_RequestHandler_3e85002b_deleteEndpoint] - duration_serializer_2 3ms
+INFO  2012-04-30 22:06:16,851 [idb_RequestHandler_3e85002b_deleteEndpoint] - duration_requestHandler 54ms
+DEBUG 2012-04-30 22:06:16,858 [idb_RequestHandler_3e85002c_deleteDomain] - start_requestHandler
+INFO  2012-04-30 22:06:16,860 [idb_RequestHandler_3e85002c_deleteDomain] - duration_serializer_1 2ms
+INFO  2012-04-30 22:06:16,860 [idb_RequestHandler_3e85002c_deleteDomain] - duration_validator 0ms
+INFO  2012-04-30 22:06:17,004 [idb_RequestHandler_3e85002c_deleteDomain] - duration_processing 144ms
+INFO  2012-04-30 22:06:17,004 [idb_RequestHandler_3e85002c_deleteDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:17,007 [idb_RequestHandler_3e85002c_deleteDomain] - duration_serializer_2 3ms
+INFO  2012-04-30 22:06:17,007 [idb_RequestHandler_3e85002c_deleteDomain] - duration_requestHandler 149ms
+DEBUG 2012-04-30 22:06:17,012 [idb_RequestHandler_3e85002d_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:06:17,013 [idb_RequestHandler_3e85002d_deleteEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:17,013 [idb_RequestHandler_3e85002d_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:06:17,022 [idb_RequestHandler_3e85002d_deleteEndpoint] - duration_processing 9ms
+INFO  2012-04-30 22:06:17,022 [idb_RequestHandler_3e85002d_deleteEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:17,024 [idb_RequestHandler_3e85002d_deleteEndpoint] - duration_serializer_2 2ms
+INFO  2012-04-30 22:06:17,024 [idb_RequestHandler_3e85002d_deleteEndpoint] - duration_requestHandler 12ms
+DEBUG 2012-04-30 22:06:17,027 [idb_RequestHandler_3e85002e_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:06:17,028 [idb_RequestHandler_3e85002e_deleteEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:17,028 [idb_RequestHandler_3e85002e_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:06:17,042 [idb_RequestHandler_3e85002e_deleteEndpoint] - duration_processing 14ms
+INFO  2012-04-30 22:06:17,042 [idb_RequestHandler_3e85002e_deleteEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:17,046 [idb_RequestHandler_3e85002e_deleteEndpoint] - duration_serializer_2 4ms
+INFO  2012-04-30 22:06:17,046 [idb_RequestHandler_3e85002e_deleteEndpoint] - duration_requestHandler 19ms
+DEBUG 2012-04-30 22:06:17,056 [idb_RequestHandler_3e85002f_addDomain] - start_requestHandler
+INFO  2012-04-30 22:06:17,060 [idb_RequestHandler_3e85002f_addDomain] - duration_serializer_1 4ms
+INFO  2012-04-30 22:06:17,060 [idb_RequestHandler_3e85002f_addDomain] - duration_validator 0ms
+INFO  2012-04-30 22:06:17,337 [idb_RequestHandler_3e85002f_addDomain] - duration_processing 277ms
+INFO  2012-04-30 22:06:17,338 [idb_RequestHandler_3e85002f_addDomain] - duration_reply_settype 1ms
+INFO  2012-04-30 22:06:17,341 [idb_RequestHandler_3e85002f_addDomain] - duration_serializer_2 3ms
+INFO  2012-04-30 22:06:17,341 [idb_RequestHandler_3e85002f_addDomain] - duration_requestHandler 285ms
+DEBUG 2012-04-30 22:06:17,346 [idb_RequestHandler_3e850030_addEndpoint] - start_requestHandler
+INFO  2012-04-30 22:06:17,348 [idb_RequestHandler_3e850030_addEndpoint] - duration_serializer_1 2ms
+INFO  2012-04-30 22:06:17,348 [idb_RequestHandler_3e850030_addEndpoint] - duration_validator 0ms
+DEBUG 2012-04-30 22:06:17,376 [idb_RequestHandler_3e850031_deleteDomain] - start_requestHandler
+INFO  2012-04-30 22:06:17,377 [idb_RequestHandler_3e850031_deleteDomain] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:17,377 [idb_RequestHandler_3e850031_deleteDomain] - duration_validator 0ms
+INFO  2012-04-30 22:06:17,631 [idb_RequestHandler_3e850031_deleteDomain] - duration_processing 254ms
+INFO  2012-04-30 22:06:17,632 [idb_RequestHandler_3e850031_deleteDomain] - duration_reply_settype 1ms
+INFO  2012-04-30 22:06:17,633 [idb_RequestHandler_3e850031_deleteDomain] - duration_serializer_2 1ms
+INFO  2012-04-30 22:06:17,633 [idb_RequestHandler_3e850031_deleteDomain] - duration_requestHandler 257ms
+DEBUG 2012-04-30 22:06:17,636 [idb_RequestHandler_3e850032_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:06:17,638 [idb_RequestHandler_3e850032_deleteEndpoint] - duration_serializer_1 2ms
+INFO  2012-04-30 22:06:17,638 [idb_RequestHandler_3e850032_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:06:17,651 [idb_RequestHandler_3e850032_deleteEndpoint] - duration_processing 13ms
+INFO  2012-04-30 22:06:17,651 [idb_RequestHandler_3e850032_deleteEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:17,654 [idb_RequestHandler_3e850032_deleteEndpoint] - duration_serializer_2 3ms
+INFO  2012-04-30 22:06:17,654 [idb_RequestHandler_3e850032_deleteEndpoint] - duration_requestHandler 18ms
+DEBUG 2012-04-30 22:06:17,660 [idb_RequestHandler_3e850033_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:06:17,661 [idb_RequestHandler_3e850033_deleteEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:17,661 [idb_RequestHandler_3e850033_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:06:17,673 [idb_RequestHandler_3e850033_deleteEndpoint] - duration_processing 12ms
+INFO  2012-04-30 22:06:17,673 [idb_RequestHandler_3e850033_deleteEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:17,675 [idb_RequestHandler_3e850033_deleteEndpoint] - duration_serializer_2 2ms
+INFO  2012-04-30 22:06:17,675 [idb_RequestHandler_3e850033_deleteEndpoint] - duration_requestHandler 15ms
+DEBUG 2012-04-30 22:06:17,680 [idb_RequestHandler_3e850034_addDomain] - start_requestHandler
+INFO  2012-04-30 22:06:17,682 [idb_RequestHandler_3e850034_addDomain] - duration_serializer_1 2ms
+INFO  2012-04-30 22:06:17,682 [idb_RequestHandler_3e850034_addDomain] - duration_validator 0ms
+INFO  2012-04-30 22:06:17,886 [idb_RequestHandler_3e850034_addDomain] - duration_processing 204ms
+INFO  2012-04-30 22:06:17,886 [idb_RequestHandler_3e850034_addDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:17,889 [idb_RequestHandler_3e850034_addDomain] - duration_serializer_2 3ms
+INFO  2012-04-30 22:06:17,889 [idb_RequestHandler_3e850034_addDomain] - duration_requestHandler 209ms
+DEBUG 2012-04-30 22:06:17,893 [idb_RequestHandler_3e850035_addEndpoint] - start_requestHandler
+INFO  2012-04-30 22:06:17,894 [idb_RequestHandler_3e850035_addEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:17,894 [idb_RequestHandler_3e850035_addEndpoint] - duration_validator 0ms
+DEBUG 2012-04-30 22:06:17,916 [idb_RequestHandler_3e850036_deleteDomain] - start_requestHandler
+INFO  2012-04-30 22:06:17,918 [idb_RequestHandler_3e850036_deleteDomain] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:17,918 [idb_RequestHandler_3e850036_deleteDomain] - duration_validator 0ms
+INFO  2012-04-30 22:06:18,047 [idb_RequestHandler_3e850036_deleteDomain] - duration_processing 129ms
+INFO  2012-04-30 22:06:18,048 [idb_RequestHandler_3e850036_deleteDomain] - duration_reply_settype 1ms
+INFO  2012-04-30 22:06:18,049 [idb_RequestHandler_3e850036_deleteDomain] - duration_serializer_2 1ms
+INFO  2012-04-30 22:06:18,049 [idb_RequestHandler_3e850036_deleteDomain] - duration_requestHandler 132ms
+DEBUG 2012-04-30 22:06:18,052 [idb_RequestHandler_3e850037_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:06:18,052 [idb_RequestHandler_3e850037_deleteEndpoint] - duration_serializer_1 0ms
+INFO  2012-04-30 22:06:18,052 [idb_RequestHandler_3e850037_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:06:18,062 [idb_RequestHandler_3e850037_deleteEndpoint] - duration_processing 10ms
+INFO  2012-04-30 22:06:18,062 [idb_RequestHandler_3e850037_deleteEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:18,064 [idb_RequestHandler_3e850037_deleteEndpoint] - duration_serializer_2 2ms
+INFO  2012-04-30 22:06:18,064 [idb_RequestHandler_3e850037_deleteEndpoint] - duration_requestHandler 12ms
+DEBUG 2012-04-30 22:06:18,068 [idb_RequestHandler_3e850038_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:06:18,069 [idb_RequestHandler_3e850038_deleteEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:18,069 [idb_RequestHandler_3e850038_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:06:18,080 [idb_RequestHandler_3e850038_deleteEndpoint] - duration_processing 11ms
+INFO  2012-04-30 22:06:18,081 [idb_RequestHandler_3e850038_deleteEndpoint] - duration_reply_settype 1ms
+INFO  2012-04-30 22:06:18,082 [idb_RequestHandler_3e850038_deleteEndpoint] - duration_serializer_2 1ms
+INFO  2012-04-30 22:06:18,083 [idb_RequestHandler_3e850038_deleteEndpoint] - duration_requestHandler 14ms
+DEBUG 2012-04-30 22:06:18,091 [idb_RequestHandler_3e850039_addDomain] - start_requestHandler
+INFO  2012-04-30 22:06:18,095 [idb_RequestHandler_3e850039_addDomain] - duration_serializer_1 3ms
+INFO  2012-04-30 22:06:18,096 [idb_RequestHandler_3e850039_addDomain] - duration_validator 1ms
+INFO  2012-04-30 22:06:18,285 [idb_RequestHandler_3e850039_addDomain] - duration_processing 189ms
+INFO  2012-04-30 22:06:18,286 [idb_RequestHandler_3e850039_addDomain] - duration_reply_settype 1ms
+INFO  2012-04-30 22:06:18,287 [idb_RequestHandler_3e850039_addDomain] - duration_serializer_2 1ms
+INFO  2012-04-30 22:06:18,287 [idb_RequestHandler_3e850039_addDomain] - duration_requestHandler 195ms
+DEBUG 2012-04-30 22:06:18,290 [idb_RequestHandler_3e85003a_getDomains] - start_requestHandler
+INFO  2012-04-30 22:06:18,290 [idb_RequestHandler_3e85003a_getDomains] - duration_serializer_1 0ms
+INFO  2012-04-30 22:06:18,290 [idb_RequestHandler_3e85003a_getDomains] - duration_validator 0ms
+INFO  2012-04-30 22:06:18,444 [idb_RequestHandler_3e85003a_getDomains] - duration_processing 154ms
+INFO  2012-04-30 22:06:18,445 [idb_RequestHandler_3e85003a_getDomains] - duration_reply_settype 1ms
+DEBUG 2012-04-30 22:06:18,483 [idb_RequestHandler_3e85003b_deleteDomain] - start_requestHandler
+INFO  2012-04-30 22:06:18,484 [idb_RequestHandler_3e85003b_deleteDomain] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:18,484 [idb_RequestHandler_3e85003b_deleteDomain] - duration_validator 0ms
+INFO  2012-04-30 22:06:18,601 [idb_RequestHandler_3e85003b_deleteDomain] - duration_processing 117ms
+INFO  2012-04-30 22:06:18,601 [idb_RequestHandler_3e85003b_deleteDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:18,603 [idb_RequestHandler_3e85003b_deleteDomain] - duration_serializer_2 2ms
+INFO  2012-04-30 22:06:18,603 [idb_RequestHandler_3e85003b_deleteDomain] - duration_requestHandler 120ms
+DEBUG 2012-04-30 22:06:18,605 [idb_RequestHandler_3e85003c_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:06:18,606 [idb_RequestHandler_3e85003c_deleteEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:18,606 [idb_RequestHandler_3e85003c_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:06:18,619 [idb_RequestHandler_3e85003c_deleteEndpoint] - duration_processing 13ms
+INFO  2012-04-30 22:06:18,619 [idb_RequestHandler_3e85003c_deleteEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:18,622 [idb_RequestHandler_3e85003c_deleteEndpoint] - duration_serializer_2 3ms
+INFO  2012-04-30 22:06:18,622 [idb_RequestHandler_3e85003c_deleteEndpoint] - duration_requestHandler 17ms
+DEBUG 2012-04-30 22:06:18,626 [idb_RequestHandler_3e85003d_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:06:18,627 [idb_RequestHandler_3e85003d_deleteEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:18,627 [idb_RequestHandler_3e85003d_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:06:18,644 [idb_RequestHandler_3e85003d_deleteEndpoint] - duration_processing 17ms
+INFO  2012-04-30 22:06:18,644 [idb_RequestHandler_3e85003d_deleteEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:18,647 [idb_RequestHandler_3e85003d_deleteEndpoint] - duration_serializer_2 3ms
+INFO  2012-04-30 22:06:18,647 [idb_RequestHandler_3e85003d_deleteEndpoint] - duration_requestHandler 21ms
+DEBUG 2012-04-30 22:06:18,659 [idb_RequestHandler_3e85003e_addDomain] - start_requestHandler
+INFO  2012-04-30 22:06:18,661 [idb_RequestHandler_3e85003e_addDomain] - duration_serializer_1 2ms
+INFO  2012-04-30 22:06:18,661 [idb_RequestHandler_3e85003e_addDomain] - duration_validator 0ms
+INFO  2012-04-30 22:06:18,730 [idb_RequestHandler_3e85003e_addDomain] - duration_processing 69ms
+INFO  2012-04-30 22:06:18,730 [idb_RequestHandler_3e85003e_addDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:18,732 [idb_RequestHandler_3e85003e_addDomain] - duration_serializer_2 2ms
+INFO  2012-04-30 22:06:18,732 [idb_RequestHandler_3e85003e_addDomain] - duration_requestHandler 73ms
+DEBUG 2012-04-30 22:06:18,735 [idb_RequestHandler_3e85003f_addDomain] - start_requestHandler
+INFO  2012-04-30 22:06:18,737 [idb_RequestHandler_3e85003f_addDomain] - duration_serializer_1 2ms
+INFO  2012-04-30 22:06:18,737 [idb_RequestHandler_3e85003f_addDomain] - duration_validator 0ms
+INFO  2012-04-30 22:06:18,804 [idb_RequestHandler_3e85003f_addDomain] - duration_processing 67ms
+INFO  2012-04-30 22:06:18,805 [idb_RequestHandler_3e85003f_addDomain] - duration_reply_settype 1ms
+INFO  2012-04-30 22:06:18,806 [idb_RequestHandler_3e85003f_addDomain] - duration_serializer_2 1ms
+INFO  2012-04-30 22:06:18,807 [idb_RequestHandler_3e85003f_addDomain] - duration_requestHandler 71ms
+DEBUG 2012-04-30 22:06:18,809 [idb_RequestHandler_3e850040_addDomain] - start_requestHandler
+INFO  2012-04-30 22:06:18,811 [idb_RequestHandler_3e850040_addDomain] - duration_serializer_1 2ms
+INFO  2012-04-30 22:06:18,811 [idb_RequestHandler_3e850040_addDomain] - duration_validator 0ms
+INFO  2012-04-30 22:06:18,883 [idb_RequestHandler_3e850040_addDomain] - duration_processing 72ms
+INFO  2012-04-30 22:06:18,883 [idb_RequestHandler_3e850040_addDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:18,886 [idb_RequestHandler_3e850040_addDomain] - duration_serializer_2 3ms
+INFO  2012-04-30 22:06:18,886 [idb_RequestHandler_3e850040_addDomain] - duration_requestHandler 77ms
+DEBUG 2012-04-30 22:06:18,891 [idb_RequestHandler_3e850041_getDomains] - start_requestHandler
+INFO  2012-04-30 22:06:18,892 [idb_RequestHandler_3e850041_getDomains] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:18,892 [idb_RequestHandler_3e850041_getDomains] - duration_validator 0ms
+INFO  2012-04-30 22:06:19,004 [idb_RequestHandler_3e850041_getDomains] - duration_processing 112ms
+INFO  2012-04-30 22:06:19,004 [idb_RequestHandler_3e850041_getDomains] - duration_reply_settype 0ms
+DEBUG 2012-04-30 22:06:19,025 [idb_RequestHandler_3e850042_deleteDomain] - start_requestHandler
+INFO  2012-04-30 22:06:19,026 [idb_RequestHandler_3e850042_deleteDomain] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:19,026 [idb_RequestHandler_3e850042_deleteDomain] - duration_validator 0ms
+DEBUG 2012-04-30 22:06:19,065 [idb_RequestHandler_3e850043_addDomain] - start_requestHandler
+INFO  2012-04-30 22:06:19,068 [idb_RequestHandler_3e850043_addDomain] - duration_serializer_1 3ms
+INFO  2012-04-30 22:06:19,068 [idb_RequestHandler_3e850043_addDomain] - duration_validator 0ms
+INFO  2012-04-30 22:06:19,234 [idb_RequestHandler_3e850043_addDomain] - duration_processing 166ms
+INFO  2012-04-30 22:06:19,234 [idb_RequestHandler_3e850043_addDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:19,236 [idb_RequestHandler_3e850043_addDomain] - duration_serializer_2 2ms
+INFO  2012-04-30 22:06:19,236 [idb_RequestHandler_3e850043_addDomain] - duration_requestHandler 171ms
+DEBUG 2012-04-30 22:06:19,239 [idb_RequestHandler_3e850044_addEndpoint] - start_requestHandler
+INFO  2012-04-30 22:06:19,241 [idb_RequestHandler_3e850044_addEndpoint] - duration_serializer_1 2ms
+INFO  2012-04-30 22:06:19,241 [idb_RequestHandler_3e850044_addEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:06:19,300 [idb_RequestHandler_3e850044_addEndpoint] - duration_processing 59ms
+INFO  2012-04-30 22:06:19,300 [idb_RequestHandler_3e850044_addEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:19,302 [idb_RequestHandler_3e850044_addEndpoint] - duration_serializer_2 2ms
+INFO  2012-04-30 22:06:19,302 [idb_RequestHandler_3e850044_addEndpoint] - duration_requestHandler 63ms
+DEBUG 2012-04-30 22:06:19,305 [idb_RequestHandler_3e850045_getEndpoints] - start_requestHandler
+INFO  2012-04-30 22:06:19,306 [idb_RequestHandler_3e850045_getEndpoints] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:19,306 [idb_RequestHandler_3e850045_getEndpoints] - duration_validator 0ms
+INFO  2012-04-30 22:06:19,312 [idb_RequestHandler_3e850045_getEndpoints] - duration_processing 6ms
+INFO  2012-04-30 22:06:19,312 [idb_RequestHandler_3e850045_getEndpoints] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:19,315 [idb_RequestHandler_3e850045_getEndpoints] - duration_serializer_2 3ms
+INFO  2012-04-30 22:06:19,315 [idb_RequestHandler_3e850045_getEndpoints] - duration_requestHandler 10ms
+DEBUG 2012-04-30 22:06:19,318 [idb_RequestHandler_3e850046_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:06:19,319 [idb_RequestHandler_3e850046_deleteEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:19,319 [idb_RequestHandler_3e850046_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:06:19,368 [idb_RequestHandler_3e850046_deleteEndpoint] - duration_processing 49ms
+INFO  2012-04-30 22:06:19,368 [idb_RequestHandler_3e850046_deleteEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:19,372 [idb_RequestHandler_3e850046_deleteEndpoint] - duration_serializer_2 4ms
+INFO  2012-04-30 22:06:19,372 [idb_RequestHandler_3e850046_deleteEndpoint] - duration_requestHandler 54ms
+DEBUG 2012-04-30 22:06:19,379 [idb_RequestHandler_3e850047_deleteDomain] - start_requestHandler
+INFO  2012-04-30 22:06:19,381 [idb_RequestHandler_3e850047_deleteDomain] - duration_serializer_1 2ms
+INFO  2012-04-30 22:06:19,382 [idb_RequestHandler_3e850047_deleteDomain] - duration_validator 1ms
+INFO  2012-04-30 22:06:19,584 [idb_RequestHandler_3e850047_deleteDomain] - duration_processing 202ms
+INFO  2012-04-30 22:06:19,584 [idb_RequestHandler_3e850047_deleteDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:19,587 [idb_RequestHandler_3e850047_deleteDomain] - duration_serializer_2 3ms
+INFO  2012-04-30 22:06:19,587 [idb_RequestHandler_3e850047_deleteDomain] - duration_requestHandler 208ms
+DEBUG 2012-04-30 22:06:19,590 [idb_RequestHandler_3e850048_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:06:19,591 [idb_RequestHandler_3e850048_deleteEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:19,591 [idb_RequestHandler_3e850048_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:06:19,604 [idb_RequestHandler_3e850048_deleteEndpoint] - duration_processing 13ms
+INFO  2012-04-30 22:06:19,604 [idb_RequestHandler_3e850048_deleteEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:19,606 [idb_RequestHandler_3e850048_deleteEndpoint] - duration_serializer_2 2ms
+INFO  2012-04-30 22:06:19,606 [idb_RequestHandler_3e850048_deleteEndpoint] - duration_requestHandler 16ms
+DEBUG 2012-04-30 22:06:19,608 [idb_RequestHandler_3e850049_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:06:19,609 [idb_RequestHandler_3e850049_deleteEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:19,609 [idb_RequestHandler_3e850049_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:06:19,620 [idb_RequestHandler_3e850049_deleteEndpoint] - duration_processing 11ms
+INFO  2012-04-30 22:06:19,620 [idb_RequestHandler_3e850049_deleteEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:19,622 [idb_RequestHandler_3e850049_deleteEndpoint] - duration_serializer_2 2ms
+INFO  2012-04-30 22:06:19,622 [idb_RequestHandler_3e850049_deleteEndpoint] - duration_requestHandler 14ms
+DEBUG 2012-04-30 22:06:19,630 [idb_RequestHandler_3e85004a_deleteDomain] - start_requestHandler
+INFO  2012-04-30 22:06:19,631 [idb_RequestHandler_3e85004a_deleteDomain] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:19,632 [idb_RequestHandler_3e85004a_deleteDomain] - duration_validator 1ms
+DEBUG 2012-04-30 22:06:19,656 [idb_RequestHandler_3e85004b_addOrEditDomain] - start_requestHandler
+INFO  2012-04-30 22:06:19,657 [idb_RequestHandler_3e85004b_addOrEditDomain] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:19,658 [idb_RequestHandler_3e85004b_addOrEditDomain] - duration_validator 1ms
+INFO  2012-04-30 22:06:19,732 [idb_RequestHandler_3e85004b_addOrEditDomain] - duration_processing 74ms
+INFO  2012-04-30 22:06:19,732 [idb_RequestHandler_3e85004b_addOrEditDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:19,735 [idb_RequestHandler_3e85004b_addOrEditDomain] - duration_serializer_2 3ms
+INFO  2012-04-30 22:06:19,735 [idb_RequestHandler_3e85004b_addOrEditDomain] - duration_requestHandler 79ms
+DEBUG 2012-04-30 22:06:19,755 [idb_RequestHandler_3e85004c_bind] - start_requestHandler
+INFO  2012-04-30 22:06:19,757 [idb_RequestHandler_3e85004c_bind] - duration_serializer_1 2ms
+INFO  2012-04-30 22:06:19,757 [idb_RequestHandler_3e85004c_bind] - duration_validator 0ms
+INFO  2012-04-30 22:06:19,767 [idb_RequestHandler_3e85004c_bind] - duration_processing 10ms
+INFO  2012-04-30 22:06:19,768 [idb_RequestHandler_3e85004c_bind] - duration_reply_settype 1ms
+INFO  2012-04-30 22:06:19,772 [idb_RequestHandler_3e85004c_bind] - duration_serializer_2 4ms
+INFO  2012-04-30 22:06:19,772 [idb_RequestHandler_3e85004c_bind] - duration_requestHandler 17ms
+DEBUG 2012-04-30 22:06:19,787 [idb_RequestHandler_3e85004d_createReservation] - start_requestHandler
+INFO  2012-04-30 22:06:19,793 [idb_RequestHandler_3e85004d_createReservation] - duration_serializer_1 6ms
+INFO  2012-04-30 22:06:19,794 [idb_RequestHandler_3e85004d_createReservation] - duration_validator 1ms
+INFO  2012-04-30 22:06:19,971 [idb_RequestHandler_3e85004d_createReservation] - duration_prePathFinder 167ms
+INFO  2012-04-30 22:06:20,066 [idb_RequestHandler_3e85004d_createReservation] - duration_initPathFinder 95ms
+INFO  2012-04-30 22:06:20,066 [idb_RequestHandler_3e85004d_createReservation] - duration_availability 0ms
+INFO  2012-04-30 22:06:20,070 [idb_RequestHandler_3e85004d_createReservation] - duration_PathFinderGetResv 4ms
+INFO  2012-04-30 22:06:20,071 [idb_RequestHandler_3e85004d_createReservation] - duration_postPathFinder_preNRPSController 1ms
+PERFORMANCE_LOG 2012-04-30 22:06:20,117 [idb_RequestHandler_3e85004d_createReservation_NRPSController@localDummy] - NRPS_response_time localDummy -1335816380080ms
+DEBUG 2012-04-30 22:06:20,135 [idb_RequestHandler_3e85004e_createReservation] - start_requestHandler
+INFO  2012-04-30 22:06:20,140 [idb_RequestHandler_3e85004e_createReservation] - duration_serializer_1 4ms
+INFO  2012-04-30 22:06:20,140 [idb_RequestHandler_3e85004e_createReservation] - duration_validator 1ms
+INFO  2012-04-30 22:06:20,166 [idb_RequestHandler_3e85004e_createReservation] - duration_prePathFinder 24ms
+INFO  2012-04-30 22:06:20,224 [idb_RequestHandler_3e85004e_createReservation] - duration_initPathFinder 58ms
+INFO  2012-04-30 22:06:20,224 [idb_RequestHandler_3e85004e_createReservation] - duration_availability 0ms
+INFO  2012-04-30 22:06:20,266 [idb_RequestHandler_3e85004e_createReservation] - duration_PathFinderGetResv 42ms
+INFO  2012-04-30 22:06:20,267 [idb_RequestHandler_3e85004e_createReservation] - duration_postPathFinder_preNRPSController 1ms
+PERFORMANCE_LOG 2012-04-30 22:06:20,278 [idb_RequestHandler_3e85004e_createReservation_NRPSController@localDummy] - NRPS_response_time localDummy -1335816380273ms
+DEBUG 2012-04-30 22:06:20,330 [idb_RequestHandler_3e85004f_createReservation] - start_requestHandler
+INFO  2012-04-30 22:06:20,334 [idb_RequestHandler_3e85004f_createReservation] - duration_serializer_1 4ms
+INFO  2012-04-30 22:06:20,335 [idb_RequestHandler_3e85004f_createReservation] - duration_validator 1ms
+INFO  2012-04-30 22:06:20,352 [idb_RequestHandler_3e85004f_createReservation] - duration_prePathFinder 16ms
+INFO  2012-04-30 22:06:20,442 [idb_RequestHandler_3e85004f_createReservation] - duration_initPathFinder 90ms
+INFO  2012-04-30 22:06:20,442 [idb_RequestHandler_3e85004f_createReservation] - duration_availability 0ms
+INFO  2012-04-30 22:06:20,444 [idb_RequestHandler_3e85004f_createReservation] - duration_PathFinderGetResv 2ms
+INFO  2012-04-30 22:06:20,444 [idb_RequestHandler_3e85004f_createReservation] - duration_postPathFinder_preNRPSController 0ms
+PERFORMANCE_LOG 2012-04-30 22:06:20,456 [idb_RequestHandler_3e85004f_createReservation_NRPSController@localDummy] - NRPS_response_time localDummy -1335816380450ms
+DEBUG 2012-04-30 22:06:20,510 [idb_RequestHandler_3e850050_createReservation] - start_requestHandler
+INFO  2012-04-30 22:06:20,514 [idb_RequestHandler_3e850050_createReservation] - duration_serializer_1 4ms
+INFO  2012-04-30 22:06:20,515 [idb_RequestHandler_3e850050_createReservation] - duration_validator 1ms
+INFO  2012-04-30 22:06:20,540 [idb_RequestHandler_3e850050_createReservation] - duration_prePathFinder 25ms
+INFO  2012-04-30 22:06:20,623 [idb_RequestHandler_3e850050_createReservation] - duration_initPathFinder 83ms
+INFO  2012-04-30 22:06:20,623 [idb_RequestHandler_3e850050_createReservation] - duration_availability 0ms
+INFO  2012-04-30 22:06:20,625 [idb_RequestHandler_3e850050_createReservation] - duration_PathFinderGetResv 2ms
+INFO  2012-04-30 22:06:20,625 [idb_RequestHandler_3e850050_createReservation] - duration_postPathFinder_preNRPSController 0ms
+PERFORMANCE_LOG 2012-04-30 22:06:20,643 [idb_RequestHandler_3e850050_createReservation_NRPSController@localDummy] - NRPS_response_time localDummy -1335816380633ms
+DEBUG 2012-04-30 22:06:20,709 [idb_RequestHandler_3e850051_deleteDomain] - start_requestHandler
+INFO  2012-04-30 22:06:20,710 [idb_RequestHandler_3e850051_deleteDomain] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:20,710 [idb_RequestHandler_3e850051_deleteDomain] - duration_validator 0ms
+DEBUG 2012-04-30 22:06:20,920 [idb_RequestHandler_3e850052_addTopic] - start_requestHandler
+INFO  2012-04-30 22:06:20,921 [idb_RequestHandler_3e850052_addTopic] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:20,922 [idb_RequestHandler_3e850052_addTopic] - duration_validator 1ms
+INFO  2012-04-30 22:06:20,927 [idb_RequestHandler_3e850052_addTopic] - duration_processing 5ms
+INFO  2012-04-30 22:06:20,927 [idb_RequestHandler_3e850052_addTopic] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:20,930 [idb_RequestHandler_3e850052_addTopic] - duration_serializer_2 3ms
+INFO  2012-04-30 22:06:20,930 [idb_RequestHandler_3e850052_addTopic] - duration_requestHandler 10ms
+DEBUG 2012-04-30 22:06:20,935 [idb_RequestHandler_3e850053_getTopics] - start_requestHandler
+INFO  2012-04-30 22:06:20,936 [idb_RequestHandler_3e850053_getTopics] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:20,936 [idb_RequestHandler_3e850053_getTopics] - duration_validator 0ms
+INFO  2012-04-30 22:06:20,936 [idb_RequestHandler_3e850053_getTopics] - duration_processing 0ms
+INFO  2012-04-30 22:06:20,936 [idb_RequestHandler_3e850053_getTopics] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:20,939 [idb_RequestHandler_3e850053_getTopics] - duration_serializer_2 3ms
+INFO  2012-04-30 22:06:20,939 [idb_RequestHandler_3e850053_getTopics] - duration_requestHandler 4ms
+DEBUG 2012-04-30 22:06:20,943 [idb_RequestHandler_3e850054_subscribe] - start_requestHandler
+INFO  2012-04-30 22:06:20,945 [idb_RequestHandler_3e850054_subscribe] - duration_serializer_1 2ms
+INFO  2012-04-30 22:06:20,945 [idb_RequestHandler_3e850054_subscribe] - duration_validator 0ms
+INFO  2012-04-30 22:06:20,946 [idb_RequestHandler_3e850054_subscribe] - duration_processing 1ms
+INFO  2012-04-30 22:06:20,947 [idb_RequestHandler_3e850054_subscribe] - duration_reply_settype 1ms
+INFO  2012-04-30 22:06:20,949 [idb_RequestHandler_3e850054_subscribe] - duration_serializer_2 2ms
+INFO  2012-04-30 22:06:20,949 [idb_RequestHandler_3e850054_subscribe] - duration_requestHandler 6ms
+DEBUG 2012-04-30 22:06:20,955 [idb_RequestHandler_3e850055_publish] - start_requestHandler
+INFO  2012-04-30 22:06:20,957 [idb_RequestHandler_3e850055_publish] - duration_serializer_1 2ms
+INFO  2012-04-30 22:06:20,957 [idb_RequestHandler_3e850055_publish] - duration_validator 0ms
+INFO  2012-04-30 22:06:20,961 [idb_RequestHandler_3e850055_publish] - duration_processing 4ms
+INFO  2012-04-30 22:06:20,964 [idb_RequestHandler_3e850055_publish] - duration_reply_settype 3ms
+INFO  2012-04-30 22:06:20,967 [idb_RequestHandler_3e850055_publish] - duration_serializer_2 3ms
+INFO  2012-04-30 22:06:20,967 [idb_RequestHandler_3e850055_publish] - duration_requestHandler 12ms
+DEBUG 2012-04-30 22:06:20,974 [idb_RequestHandler_3e850056_unsubscribe] - start_requestHandler
+INFO  2012-04-30 22:06:20,980 [idb_RequestHandler_3e850056_unsubscribe] - duration_serializer_1 6ms
+INFO  2012-04-30 22:06:20,980 [idb_RequestHandler_3e850056_unsubscribe] - duration_validator 0ms
+INFO  2012-04-30 22:06:20,980 [idb_RequestHandler_3e850056_unsubscribe] - duration_processing 0ms
+INFO  2012-04-30 22:06:20,981 [idb_RequestHandler_3e850056_unsubscribe] - duration_reply_settype 1ms
+INFO  2012-04-30 22:06:20,983 [idb_RequestHandler_3e850056_unsubscribe] - duration_serializer_2 2ms
+INFO  2012-04-30 22:06:20,983 [idb_RequestHandler_3e850056_unsubscribe] - duration_requestHandler 9ms
+DEBUG 2012-04-30 22:06:20,989 [idb_RequestHandler_3e850057_removeTopic] - start_requestHandler
+INFO  2012-04-30 22:06:20,991 [idb_RequestHandler_3e850057_removeTopic] - duration_serializer_1 2ms
+INFO  2012-04-30 22:06:20,991 [idb_RequestHandler_3e850057_removeTopic] - duration_validator 0ms
+INFO  2012-04-30 22:06:20,991 [idb_RequestHandler_3e850057_removeTopic] - duration_processing 0ms
+INFO  2012-04-30 22:06:20,992 [idb_RequestHandler_3e850057_removeTopic] - duration_reply_settype 1ms
+INFO  2012-04-30 22:06:20,994 [idb_RequestHandler_3e850057_removeTopic] - duration_serializer_2 2ms
+INFO  2012-04-30 22:06:20,995 [idb_RequestHandler_3e850057_removeTopic] - duration_requestHandler 5ms
+DEBUG 2012-04-30 22:06:20,998 [idb_RequestHandler_3e850058_getTopics] - start_requestHandler
+INFO  2012-04-30 22:06:20,999 [idb_RequestHandler_3e850058_getTopics] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:20,999 [idb_RequestHandler_3e850058_getTopics] - duration_validator 0ms
+INFO  2012-04-30 22:06:21,000 [idb_RequestHandler_3e850058_getTopics] - duration_processing 1ms
+INFO  2012-04-30 22:06:21,000 [idb_RequestHandler_3e850058_getTopics] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:21,002 [idb_RequestHandler_3e850058_getTopics] - duration_serializer_2 2ms
+INFO  2012-04-30 22:06:21,002 [idb_RequestHandler_3e850058_getTopics] - duration_requestHandler 4ms
+DEBUG 2012-04-30 22:06:21,006 [idb_RequestHandler_3e850059_subscribe] - start_requestHandler
+INFO  2012-04-30 22:06:21,007 [idb_RequestHandler_3e850059_subscribe] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:21,007 [idb_RequestHandler_3e850059_subscribe] - duration_validator 0ms
+DEBUG 2012-04-30 22:06:21,015 [idb_RequestHandler_3e85005a_publish] - start_requestHandler
+INFO  2012-04-30 22:06:21,018 [idb_RequestHandler_3e85005a_publish] - duration_serializer_1 2ms
+INFO  2012-04-30 22:06:21,018 [idb_RequestHandler_3e85005a_publish] - duration_validator 0ms
+DEBUG 2012-04-30 22:06:21,025 [idb_RequestHandler_3e85005b_unsubscribe] - start_requestHandler
+INFO  2012-04-30 22:06:21,026 [idb_RequestHandler_3e85005b_unsubscribe] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:21,026 [idb_RequestHandler_3e85005b_unsubscribe] - duration_validator 0ms
+DEBUG 2012-04-30 22:06:21,036 [idb_RequestHandler_3e85005c_addTopic] - start_requestHandler
+INFO  2012-04-30 22:06:21,037 [idb_RequestHandler_3e85005c_addTopic] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:21,037 [idb_RequestHandler_3e85005c_addTopic] - duration_validator 0ms
+INFO  2012-04-30 22:06:21,037 [idb_RequestHandler_3e85005c_addTopic] - duration_processing 0ms
+INFO  2012-04-30 22:06:21,037 [idb_RequestHandler_3e85005c_addTopic] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:21,039 [idb_RequestHandler_3e85005c_addTopic] - duration_serializer_2 2ms
+INFO  2012-04-30 22:06:21,039 [idb_RequestHandler_3e85005c_addTopic] - duration_requestHandler 3ms
+DEBUG 2012-04-30 22:06:21,042 [idb_RequestHandler_3e85005d_subscribe] - start_requestHandler
+INFO  2012-04-30 22:06:21,043 [idb_RequestHandler_3e85005d_subscribe] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:21,043 [idb_RequestHandler_3e85005d_subscribe] - duration_validator 0ms
+INFO  2012-04-30 22:06:21,043 [idb_RequestHandler_3e85005d_subscribe] - duration_processing 0ms
+INFO  2012-04-30 22:06:21,043 [idb_RequestHandler_3e85005d_subscribe] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:21,045 [idb_RequestHandler_3e85005d_subscribe] - duration_serializer_2 2ms
+INFO  2012-04-30 22:06:21,045 [idb_RequestHandler_3e85005d_subscribe] - duration_requestHandler 3ms
+DEBUG 2012-04-30 22:06:23,051 [idb_RequestHandler_3e85005e_unsubscribe] - start_requestHandler
+INFO  2012-04-30 22:06:23,054 [idb_RequestHandler_3e85005e_unsubscribe] - duration_serializer_1 3ms
+INFO  2012-04-30 22:06:23,054 [idb_RequestHandler_3e85005e_unsubscribe] - duration_validator 0ms
+INFO  2012-04-30 22:06:23,055 [idb_RequestHandler_3e85005e_unsubscribe] - duration_processing 1ms
+INFO  2012-04-30 22:06:23,055 [idb_RequestHandler_3e85005e_unsubscribe] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:23,060 [idb_RequestHandler_3e85005e_unsubscribe] - duration_serializer_2 5ms
+INFO  2012-04-30 22:06:23,060 [idb_RequestHandler_3e85005e_unsubscribe] - duration_requestHandler 9ms
+DEBUG 2012-04-30 22:06:25,065 [idb_RequestHandler_3e85005f_removeTopic] - start_requestHandler
+INFO  2012-04-30 22:06:25,067 [idb_RequestHandler_3e85005f_removeTopic] - duration_serializer_1 2ms
+INFO  2012-04-30 22:06:25,067 [idb_RequestHandler_3e85005f_removeTopic] - duration_validator 0ms
+INFO  2012-04-30 22:06:25,067 [idb_RequestHandler_3e85005f_removeTopic] - duration_processing 0ms
+INFO  2012-04-30 22:06:25,067 [idb_RequestHandler_3e85005f_removeTopic] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:25,070 [idb_RequestHandler_3e85005f_removeTopic] - duration_serializer_2 3ms
+INFO  2012-04-30 22:06:25,070 [idb_RequestHandler_3e85005f_removeTopic] - duration_requestHandler 5ms
+DEBUG 2012-04-30 22:06:25,081 [idb_RequestHandler_3e850060_getDomains] - start_requestHandler
+INFO  2012-04-30 22:06:25,083 [idb_RequestHandler_3e850060_getDomains] - duration_serializer_1 2ms
+INFO  2012-04-30 22:06:25,083 [idb_RequestHandler_3e850060_getDomains] - duration_validator 0ms
+INFO  2012-04-30 22:06:25,355 [idb_RequestHandler_3e850060_getDomains] - duration_processing 272ms
+INFO  2012-04-30 22:06:25,355 [idb_RequestHandler_3e850060_getDomains] - duration_reply_settype 0ms
+DEBUG 2012-04-30 22:06:25,594 [idb_RequestHandler_3e850061_getReservations] - start_requestHandler
+INFO  2012-04-30 22:06:25,595 [idb_RequestHandler_3e850061_getReservations] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:25,595 [idb_RequestHandler_3e850061_getReservations] - duration_validator 0ms
+INFO  2012-04-30 22:06:25,641 [idb_RequestHandler_3e850061_getReservations] - duration_processing 46ms
+INFO  2012-04-30 22:06:25,641 [idb_RequestHandler_3e850061_getReservations] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:25,643 [idb_RequestHandler_3e850061_getReservations] - duration_serializer_2 2ms
+INFO  2012-04-30 22:06:25,643 [idb_RequestHandler_3e850061_getReservations] - duration_requestHandler 49ms
+DEBUG 2012-04-30 22:06:25,646 [idb_RequestHandler_3e850061_getReservations] - reservation_ID 59
+DEBUG 2012-04-30 22:06:25,647 [idb_RequestHandler_3e850061_getReservations] - reservation_ID 59
+DEBUG 2012-04-30 22:06:25,727 [idb_RequestHandler_3e850062_getReservations] - start_requestHandler
+INFO  2012-04-30 22:06:25,728 [idb_RequestHandler_3e850062_getReservations] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:25,729 [idb_RequestHandler_3e850062_getReservations] - duration_validator 1ms
+INFO  2012-04-30 22:06:25,745 [idb_RequestHandler_3e850062_getReservations] - duration_processing 16ms
+INFO  2012-04-30 22:06:25,746 [idb_RequestHandler_3e850062_getReservations] - duration_reply_settype 1ms
+INFO  2012-04-30 22:06:25,749 [idb_RequestHandler_3e850062_getReservations] - duration_serializer_2 3ms
+INFO  2012-04-30 22:06:25,749 [idb_RequestHandler_3e850062_getReservations] - duration_requestHandler 22ms
+DEBUG 2012-04-30 22:06:26,041 [idb_RequestHandler_3e850063_deleteDomain] - start_requestHandler
+INFO  2012-04-30 22:06:26,043 [idb_RequestHandler_3e850063_deleteDomain] - duration_serializer_1 2ms
+INFO  2012-04-30 22:06:26,043 [idb_RequestHandler_3e850063_deleteDomain] - duration_validator 0ms
+INFO  2012-04-30 22:06:26,195 [idb_RequestHandler_3e850063_deleteDomain] - duration_processing 152ms
+INFO  2012-04-30 22:06:26,195 [idb_RequestHandler_3e850063_deleteDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:26,197 [idb_RequestHandler_3e850063_deleteDomain] - duration_serializer_2 2ms
+INFO  2012-04-30 22:06:26,197 [idb_RequestHandler_3e850063_deleteDomain] - duration_requestHandler 156ms
+DEBUG 2012-04-30 22:06:26,200 [idb_RequestHandler_3e850064_addDomain] - start_requestHandler
+INFO  2012-04-30 22:06:26,201 [idb_RequestHandler_3e850064_addDomain] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:26,201 [idb_RequestHandler_3e850064_addDomain] - duration_validator 0ms
+INFO  2012-04-30 22:06:26,287 [idb_RequestHandler_3e850064_addDomain] - duration_processing 86ms
+INFO  2012-04-30 22:06:26,288 [idb_RequestHandler_3e850064_addDomain] - duration_reply_settype 1ms
+INFO  2012-04-30 22:06:26,291 [idb_RequestHandler_3e850064_addDomain] - duration_serializer_2 3ms
+INFO  2012-04-30 22:06:26,291 [idb_RequestHandler_3e850064_addDomain] - duration_requestHandler 91ms
+PERFORMANCE_LOG 2012-04-30 22:06:26,305 [idb_RequestHandler_3e850064_addDomain_NRPSController@localDummy] - NRPS_response_time localDummy -1335816386301ms
+DEBUG 2012-04-30 22:06:26,353 [idb_RequestHandler_3e850065_deleteDomain] - start_requestHandler
+INFO  2012-04-30 22:06:26,354 [idb_RequestHandler_3e850065_deleteDomain] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:26,354 [idb_RequestHandler_3e850065_deleteDomain] - duration_validator 0ms
+INFO  2012-04-30 22:06:26,410 [idb_RequestHandler_3e850065_deleteDomain] - duration_processing 56ms
+INFO  2012-04-30 22:06:26,410 [idb_RequestHandler_3e850065_deleteDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:26,414 [idb_RequestHandler_3e850065_deleteDomain] - duration_serializer_2 4ms
+INFO  2012-04-30 22:06:26,414 [idb_RequestHandler_3e850065_deleteDomain] - duration_requestHandler 61ms
+DEBUG 2012-04-30 22:06:27,146 [idb_RequestHandler_3e850066_cancelJob] - start_requestHandler
+INFO  2012-04-30 22:06:27,147 [idb_RequestHandler_3e850066_cancelJob] - duration_serializer_1 0ms
+INFO  2012-04-30 22:06:27,147 [idb_RequestHandler_3e850066_cancelJob] - duration_validator 1ms
+INFO  2012-04-30 22:06:27,158 [idb_RequestHandler_3e850066_cancelJob] - duration_processing 11ms
+INFO  2012-04-30 22:06:27,158 [idb_RequestHandler_3e850066_cancelJob] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:27,160 [idb_RequestHandler_3e850066_cancelJob] - duration_serializer_2 2ms
+INFO  2012-04-30 22:06:27,160 [idb_RequestHandler_3e850066_cancelJob] - duration_requestHandler 14ms
+DEBUG 2012-04-30 22:06:27,165 [idb_RequestHandler_3e850067_completeJob] - start_requestHandler
+INFO  2012-04-30 22:06:27,166 [idb_RequestHandler_3e850067_completeJob] - duration_serializer_1 1ms
+INFO  2012-04-30 22:06:27,166 [idb_RequestHandler_3e850067_completeJob] - duration_validator 0ms
+INFO  2012-04-30 22:06:27,173 [idb_RequestHandler_3e850067_completeJob] - duration_processing 7ms
+INFO  2012-04-30 22:06:27,173 [idb_RequestHandler_3e850067_completeJob] - duration_reply_settype 0ms
+INFO  2012-04-30 22:06:27,175 [idb_RequestHandler_3e850067_completeJob] - duration_serializer_2 2ms
+INFO  2012-04-30 22:06:27,175 [idb_RequestHandler_3e850067_completeJob] - duration_requestHandler 10ms
+DEBUG 2012-04-30 22:08:10,574 [idb_RequestHandler_0e4d0000_addOrEditDomain] - start_requestHandler
+INFO  2012-04-30 22:08:10,600 [idb_RequestHandler_0e4d0000_addOrEditDomain] - duration_serializer_1 26ms
+INFO  2012-04-30 22:08:10,602 [idb_RequestHandler_0e4d0000_addOrEditDomain] - duration_validator 2ms
+INFO  2012-04-30 22:08:10,698 [idb_RequestHandler_0e4d0000_addOrEditDomain] - duration_processing 96ms
+INFO  2012-04-30 22:08:10,699 [idb_RequestHandler_0e4d0000_addOrEditDomain] - duration_reply_settype 1ms
+INFO  2012-04-30 22:08:10,705 [idb_RequestHandler_0e4d0000_addOrEditDomain] - duration_serializer_2 6ms
+INFO  2012-04-30 22:08:10,705 [idb_RequestHandler_0e4d0000_addOrEditDomain] - duration_requestHandler 131ms
+DEBUG 2012-04-30 22:08:10,714 [idb_RequestHandler_0e4d0001_deleteDomain] - start_requestHandler
+INFO  2012-04-30 22:08:10,715 [idb_RequestHandler_0e4d0001_deleteDomain] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:10,715 [idb_RequestHandler_0e4d0001_deleteDomain] - duration_validator 0ms
+INFO  2012-04-30 22:08:10,834 [idb_RequestHandler_0e4d0001_deleteDomain] - duration_processing 119ms
+INFO  2012-04-30 22:08:10,835 [idb_RequestHandler_0e4d0001_deleteDomain] - duration_reply_settype 1ms
+INFO  2012-04-30 22:08:10,838 [idb_RequestHandler_0e4d0001_deleteDomain] - duration_serializer_2 3ms
+INFO  2012-04-30 22:08:10,838 [idb_RequestHandler_0e4d0001_deleteDomain] - duration_requestHandler 124ms
+DEBUG 2012-04-30 22:08:10,873 [idb_RequestHandler_0e4d0002_addDomain] - start_requestHandler
+INFO  2012-04-30 22:08:10,877 [idb_RequestHandler_0e4d0002_addDomain] - duration_serializer_1 3ms
+INFO  2012-04-30 22:08:10,877 [idb_RequestHandler_0e4d0002_addDomain] - duration_validator 0ms
+INFO  2012-04-30 22:08:11,170 [idb_RequestHandler_0e4d0002_addDomain] - duration_processing 293ms
+INFO  2012-04-30 22:08:11,170 [idb_RequestHandler_0e4d0002_addDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:11,175 [idb_RequestHandler_0e4d0002_addDomain] - duration_serializer_2 5ms
+INFO  2012-04-30 22:08:11,176 [idb_RequestHandler_0e4d0002_addDomain] - duration_requestHandler 301ms
+DEBUG 2012-04-30 22:08:11,183 [idb_RequestHandler_0e4d0003_deleteDomain] - start_requestHandler
+INFO  2012-04-30 22:08:11,184 [idb_RequestHandler_0e4d0003_deleteDomain] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:11,184 [idb_RequestHandler_0e4d0003_deleteDomain] - duration_validator 0ms
+INFO  2012-04-30 22:08:11,523 [idb_RequestHandler_0e4d0003_deleteDomain] - duration_processing 339ms
+INFO  2012-04-30 22:08:11,523 [idb_RequestHandler_0e4d0003_deleteDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:11,526 [idb_RequestHandler_0e4d0003_deleteDomain] - duration_serializer_2 3ms
+INFO  2012-04-30 22:08:11,526 [idb_RequestHandler_0e4d0003_deleteDomain] - duration_requestHandler 343ms
+DEBUG 2012-04-30 22:08:11,533 [idb_RequestHandler_0e4d0004_deleteDomain] - start_requestHandler
+INFO  2012-04-30 22:08:11,535 [idb_RequestHandler_0e4d0004_deleteDomain] - duration_serializer_1 2ms
+INFO  2012-04-30 22:08:11,535 [idb_RequestHandler_0e4d0004_deleteDomain] - duration_validator 0ms
+DEBUG 2012-04-30 22:08:11,586 [idb_RequestHandler_0e4d0005_addDomain] - start_requestHandler
+INFO  2012-04-30 22:08:11,589 [idb_RequestHandler_0e4d0005_addDomain] - duration_serializer_1 3ms
+INFO  2012-04-30 22:08:11,589 [idb_RequestHandler_0e4d0005_addDomain] - duration_validator 0ms
+INFO  2012-04-30 22:08:11,839 [idb_RequestHandler_0e4d0005_addDomain] - duration_processing 250ms
+INFO  2012-04-30 22:08:11,839 [idb_RequestHandler_0e4d0005_addDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:11,843 [idb_RequestHandler_0e4d0005_addDomain] - duration_serializer_2 4ms
+INFO  2012-04-30 22:08:11,843 [idb_RequestHandler_0e4d0005_addDomain] - duration_requestHandler 257ms
+DEBUG 2012-04-30 22:08:11,850 [idb_RequestHandler_0e4d0006_addEndpoint] - start_requestHandler
+INFO  2012-04-30 22:08:11,853 [idb_RequestHandler_0e4d0006_addEndpoint] - duration_serializer_1 3ms
+INFO  2012-04-30 22:08:11,854 [idb_RequestHandler_0e4d0006_addEndpoint] - duration_validator 1ms
+INFO  2012-04-30 22:08:11,928 [idb_RequestHandler_0e4d0006_addEndpoint] - duration_processing 74ms
+INFO  2012-04-30 22:08:11,928 [idb_RequestHandler_0e4d0006_addEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:11,930 [idb_RequestHandler_0e4d0006_addEndpoint] - duration_serializer_2 2ms
+INFO  2012-04-30 22:08:11,930 [idb_RequestHandler_0e4d0006_addEndpoint] - duration_requestHandler 80ms
+DEBUG 2012-04-30 22:08:11,933 [idb_RequestHandler_0e4d0007_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:08:11,934 [idb_RequestHandler_0e4d0007_deleteEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:11,935 [idb_RequestHandler_0e4d0007_deleteEndpoint] - duration_validator 1ms
+INFO  2012-04-30 22:08:11,984 [idb_RequestHandler_0e4d0007_deleteEndpoint] - duration_processing 49ms
+INFO  2012-04-30 22:08:11,985 [idb_RequestHandler_0e4d0007_deleteEndpoint] - duration_reply_settype 1ms
+INFO  2012-04-30 22:08:11,989 [idb_RequestHandler_0e4d0007_deleteEndpoint] - duration_serializer_2 4ms
+INFO  2012-04-30 22:08:11,989 [idb_RequestHandler_0e4d0007_deleteEndpoint] - duration_requestHandler 56ms
+DEBUG 2012-04-30 22:08:11,996 [idb_RequestHandler_0e4d0008_deleteDomain] - start_requestHandler
+INFO  2012-04-30 22:08:11,998 [idb_RequestHandler_0e4d0008_deleteDomain] - duration_serializer_1 2ms
+INFO  2012-04-30 22:08:11,998 [idb_RequestHandler_0e4d0008_deleteDomain] - duration_validator 0ms
+INFO  2012-04-30 22:08:12,167 [idb_RequestHandler_0e4d0008_deleteDomain] - duration_processing 169ms
+INFO  2012-04-30 22:08:12,167 [idb_RequestHandler_0e4d0008_deleteDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:12,170 [idb_RequestHandler_0e4d0008_deleteDomain] - duration_serializer_2 3ms
+INFO  2012-04-30 22:08:12,171 [idb_RequestHandler_0e4d0008_deleteDomain] - duration_requestHandler 174ms
+DEBUG 2012-04-30 22:08:12,175 [idb_RequestHandler_0e4d0009_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:08:12,176 [idb_RequestHandler_0e4d0009_deleteEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:12,176 [idb_RequestHandler_0e4d0009_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:08:12,188 [idb_RequestHandler_0e4d0009_deleteEndpoint] - duration_processing 12ms
+INFO  2012-04-30 22:08:12,188 [idb_RequestHandler_0e4d0009_deleteEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:12,190 [idb_RequestHandler_0e4d0009_deleteEndpoint] - duration_serializer_2 2ms
+INFO  2012-04-30 22:08:12,190 [idb_RequestHandler_0e4d0009_deleteEndpoint] - duration_requestHandler 15ms
+DEBUG 2012-04-30 22:08:12,193 [idb_RequestHandler_0e4d000a_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:08:12,202 [idb_RequestHandler_0e4d000a_deleteEndpoint] - duration_serializer_1 9ms
+INFO  2012-04-30 22:08:12,202 [idb_RequestHandler_0e4d000a_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:08:12,219 [idb_RequestHandler_0e4d000a_deleteEndpoint] - duration_processing 17ms
+INFO  2012-04-30 22:08:12,219 [idb_RequestHandler_0e4d000a_deleteEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:12,222 [idb_RequestHandler_0e4d000a_deleteEndpoint] - duration_serializer_2 3ms
+INFO  2012-04-30 22:08:12,223 [idb_RequestHandler_0e4d000a_deleteEndpoint] - duration_requestHandler 29ms
+DEBUG 2012-04-30 22:08:12,235 [idb_RequestHandler_0e4d000b_addDomain] - start_requestHandler
+INFO  2012-04-30 22:08:12,240 [idb_RequestHandler_0e4d000b_addDomain] - duration_serializer_1 5ms
+INFO  2012-04-30 22:08:12,240 [idb_RequestHandler_0e4d000b_addDomain] - duration_validator 0ms
+INFO  2012-04-30 22:08:12,474 [idb_RequestHandler_0e4d000b_addDomain] - duration_processing 234ms
+INFO  2012-04-30 22:08:12,475 [idb_RequestHandler_0e4d000b_addDomain] - duration_reply_settype 1ms
+INFO  2012-04-30 22:08:12,478 [idb_RequestHandler_0e4d000b_addDomain] - duration_serializer_2 3ms
+INFO  2012-04-30 22:08:12,479 [idb_RequestHandler_0e4d000b_addDomain] - duration_requestHandler 243ms
+DEBUG 2012-04-30 22:08:12,484 [idb_RequestHandler_0e4d000c_addDomain] - start_requestHandler
+INFO  2012-04-30 22:08:12,486 [idb_RequestHandler_0e4d000c_addDomain] - duration_serializer_1 2ms
+INFO  2012-04-30 22:08:12,486 [idb_RequestHandler_0e4d000c_addDomain] - duration_validator 0ms
+DEBUG 2012-04-30 22:08:12,497 [idb_RequestHandler_0e4d000d_deleteDomain] - start_requestHandler
+INFO  2012-04-30 22:08:12,499 [idb_RequestHandler_0e4d000d_deleteDomain] - duration_serializer_1 2ms
+INFO  2012-04-30 22:08:12,499 [idb_RequestHandler_0e4d000d_deleteDomain] - duration_validator 0ms
+INFO  2012-04-30 22:08:12,646 [idb_RequestHandler_0e4d000d_deleteDomain] - duration_processing 147ms
+INFO  2012-04-30 22:08:12,646 [idb_RequestHandler_0e4d000d_deleteDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:12,649 [idb_RequestHandler_0e4d000d_deleteDomain] - duration_serializer_2 3ms
+INFO  2012-04-30 22:08:12,649 [idb_RequestHandler_0e4d000d_deleteDomain] - duration_requestHandler 152ms
+DEBUG 2012-04-30 22:08:12,655 [idb_RequestHandler_0e4d000e_deleteDomain] - start_requestHandler
+INFO  2012-04-30 22:08:12,657 [idb_RequestHandler_0e4d000e_deleteDomain] - duration_serializer_1 2ms
+INFO  2012-04-30 22:08:12,657 [idb_RequestHandler_0e4d000e_deleteDomain] - duration_validator 0ms
+DEBUG 2012-04-30 22:08:12,710 [idb_RequestHandler_0e4d000f_addDomain] - start_requestHandler
+INFO  2012-04-30 22:08:12,715 [idb_RequestHandler_0e4d000f_addDomain] - duration_serializer_1 5ms
+INFO  2012-04-30 22:08:12,715 [idb_RequestHandler_0e4d000f_addDomain] - duration_validator 0ms
+INFO  2012-04-30 22:08:12,928 [idb_RequestHandler_0e4d000f_addDomain] - duration_processing 213ms
+INFO  2012-04-30 22:08:12,929 [idb_RequestHandler_0e4d000f_addDomain] - duration_reply_settype 1ms
+INFO  2012-04-30 22:08:12,932 [idb_RequestHandler_0e4d000f_addDomain] - duration_serializer_2 3ms
+INFO  2012-04-30 22:08:12,932 [idb_RequestHandler_0e4d000f_addDomain] - duration_requestHandler 222ms
+DEBUG 2012-04-30 22:08:12,938 [idb_RequestHandler_0e4d0010_addEndpoint] - start_requestHandler
+INFO  2012-04-30 22:08:12,941 [idb_RequestHandler_0e4d0010_addEndpoint] - duration_serializer_1 3ms
+INFO  2012-04-30 22:08:12,941 [idb_RequestHandler_0e4d0010_addEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:08:13,001 [idb_RequestHandler_0e4d0010_addEndpoint] - duration_processing 60ms
+INFO  2012-04-30 22:08:13,001 [idb_RequestHandler_0e4d0010_addEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:13,004 [idb_RequestHandler_0e4d0010_addEndpoint] - duration_serializer_2 3ms
+INFO  2012-04-30 22:08:13,004 [idb_RequestHandler_0e4d0010_addEndpoint] - duration_requestHandler 66ms
+DEBUG 2012-04-30 22:08:13,010 [idb_RequestHandler_0e4d0011_addEndpoint] - start_requestHandler
+INFO  2012-04-30 22:08:13,013 [idb_RequestHandler_0e4d0011_addEndpoint] - duration_serializer_1 3ms
+INFO  2012-04-30 22:08:13,013 [idb_RequestHandler_0e4d0011_addEndpoint] - duration_validator 0ms
+DEBUG 2012-04-30 22:08:13,033 [idb_RequestHandler_0e4d0012_deleteDomain] - start_requestHandler
+INFO  2012-04-30 22:08:13,034 [idb_RequestHandler_0e4d0012_deleteDomain] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:13,034 [idb_RequestHandler_0e4d0012_deleteDomain] - duration_validator 0ms
+INFO  2012-04-30 22:08:13,158 [idb_RequestHandler_0e4d0012_deleteDomain] - duration_processing 124ms
+INFO  2012-04-30 22:08:13,158 [idb_RequestHandler_0e4d0012_deleteDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:13,160 [idb_RequestHandler_0e4d0012_deleteDomain] - duration_serializer_2 2ms
+INFO  2012-04-30 22:08:13,160 [idb_RequestHandler_0e4d0012_deleteDomain] - duration_requestHandler 127ms
+DEBUG 2012-04-30 22:08:13,162 [idb_RequestHandler_0e4d0013_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:08:13,163 [idb_RequestHandler_0e4d0013_deleteEndpoint] - duration_serializer_1 0ms
+INFO  2012-04-30 22:08:13,163 [idb_RequestHandler_0e4d0013_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:08:13,177 [idb_RequestHandler_0e4d0013_deleteEndpoint] - duration_processing 14ms
+INFO  2012-04-30 22:08:13,177 [idb_RequestHandler_0e4d0013_deleteEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:13,179 [idb_RequestHandler_0e4d0013_deleteEndpoint] - duration_serializer_2 2ms
+INFO  2012-04-30 22:08:13,179 [idb_RequestHandler_0e4d0013_deleteEndpoint] - duration_requestHandler 16ms
+DEBUG 2012-04-30 22:08:13,183 [idb_RequestHandler_0e4d0014_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:08:13,184 [idb_RequestHandler_0e4d0014_deleteEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:13,184 [idb_RequestHandler_0e4d0014_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:08:13,195 [idb_RequestHandler_0e4d0014_deleteEndpoint] - duration_processing 11ms
+INFO  2012-04-30 22:08:13,195 [idb_RequestHandler_0e4d0014_deleteEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:13,197 [idb_RequestHandler_0e4d0014_deleteEndpoint] - duration_serializer_2 2ms
+INFO  2012-04-30 22:08:13,197 [idb_RequestHandler_0e4d0014_deleteEndpoint] - duration_requestHandler 14ms
+DEBUG 2012-04-30 22:08:13,206 [idb_RequestHandler_0e4d0015_addDomain] - start_requestHandler
+INFO  2012-04-30 22:08:13,210 [idb_RequestHandler_0e4d0015_addDomain] - duration_serializer_1 4ms
+INFO  2012-04-30 22:08:13,211 [idb_RequestHandler_0e4d0015_addDomain] - duration_validator 1ms
+INFO  2012-04-30 22:08:13,389 [idb_RequestHandler_0e4d0015_addDomain] - duration_processing 178ms
+INFO  2012-04-30 22:08:13,389 [idb_RequestHandler_0e4d0015_addDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:13,391 [idb_RequestHandler_0e4d0015_addDomain] - duration_serializer_2 2ms
+INFO  2012-04-30 22:08:13,391 [idb_RequestHandler_0e4d0015_addDomain] - duration_requestHandler 185ms
+DEBUG 2012-04-30 22:08:13,395 [idb_RequestHandler_0e4d0016_getDomains] - start_requestHandler
+INFO  2012-04-30 22:08:13,397 [idb_RequestHandler_0e4d0016_getDomains] - duration_serializer_1 2ms
+INFO  2012-04-30 22:08:13,397 [idb_RequestHandler_0e4d0016_getDomains] - duration_validator 0ms
+INFO  2012-04-30 22:08:13,549 [idb_RequestHandler_0e4d0016_getDomains] - duration_processing 152ms
+INFO  2012-04-30 22:08:13,549 [idb_RequestHandler_0e4d0016_getDomains] - duration_reply_settype 0ms
+DEBUG 2012-04-30 22:08:13,640 [idb_RequestHandler_0e4d0017_deleteDomain] - start_requestHandler
+INFO  2012-04-30 22:08:13,641 [idb_RequestHandler_0e4d0017_deleteDomain] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:13,641 [idb_RequestHandler_0e4d0017_deleteDomain] - duration_validator 0ms
+INFO  2012-04-30 22:08:13,777 [idb_RequestHandler_0e4d0017_deleteDomain] - duration_processing 136ms
+INFO  2012-04-30 22:08:13,778 [idb_RequestHandler_0e4d0017_deleteDomain] - duration_reply_settype 1ms
+INFO  2012-04-30 22:08:13,780 [idb_RequestHandler_0e4d0017_deleteDomain] - duration_serializer_2 2ms
+INFO  2012-04-30 22:08:13,781 [idb_RequestHandler_0e4d0017_deleteDomain] - duration_requestHandler 140ms
+DEBUG 2012-04-30 22:08:13,784 [idb_RequestHandler_0e4d0018_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:08:13,785 [idb_RequestHandler_0e4d0018_deleteEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:13,785 [idb_RequestHandler_0e4d0018_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:08:13,797 [idb_RequestHandler_0e4d0018_deleteEndpoint] - duration_processing 12ms
+INFO  2012-04-30 22:08:13,797 [idb_RequestHandler_0e4d0018_deleteEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:13,800 [idb_RequestHandler_0e4d0018_deleteEndpoint] - duration_serializer_2 3ms
+INFO  2012-04-30 22:08:13,800 [idb_RequestHandler_0e4d0018_deleteEndpoint] - duration_requestHandler 16ms
+DEBUG 2012-04-30 22:08:13,803 [idb_RequestHandler_0e4d0019_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:08:13,804 [idb_RequestHandler_0e4d0019_deleteEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:13,804 [idb_RequestHandler_0e4d0019_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:08:13,819 [idb_RequestHandler_0e4d0019_deleteEndpoint] - duration_processing 15ms
+INFO  2012-04-30 22:08:13,819 [idb_RequestHandler_0e4d0019_deleteEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:13,822 [idb_RequestHandler_0e4d0019_deleteEndpoint] - duration_serializer_2 3ms
+INFO  2012-04-30 22:08:13,822 [idb_RequestHandler_0e4d0019_deleteEndpoint] - duration_requestHandler 19ms
+DEBUG 2012-04-30 22:08:13,831 [idb_RequestHandler_0e4d001a_addDomain] - start_requestHandler
+INFO  2012-04-30 22:08:13,835 [idb_RequestHandler_0e4d001a_addDomain] - duration_serializer_1 4ms
+INFO  2012-04-30 22:08:13,835 [idb_RequestHandler_0e4d001a_addDomain] - duration_validator 0ms
+INFO  2012-04-30 22:08:14,049 [idb_RequestHandler_0e4d001a_addDomain] - duration_processing 214ms
+INFO  2012-04-30 22:08:14,049 [idb_RequestHandler_0e4d001a_addDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:14,052 [idb_RequestHandler_0e4d001a_addDomain] - duration_serializer_2 3ms
+INFO  2012-04-30 22:08:14,052 [idb_RequestHandler_0e4d001a_addDomain] - duration_requestHandler 221ms
+DEBUG 2012-04-30 22:08:14,056 [idb_RequestHandler_0e4d001b_addEndpoint] - start_requestHandler
+INFO  2012-04-30 22:08:14,057 [idb_RequestHandler_0e4d001b_addEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:14,057 [idb_RequestHandler_0e4d001b_addEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:08:14,126 [idb_RequestHandler_0e4d001b_addEndpoint] - duration_processing 69ms
+INFO  2012-04-30 22:08:14,126 [idb_RequestHandler_0e4d001b_addEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:14,129 [idb_RequestHandler_0e4d001b_addEndpoint] - duration_serializer_2 3ms
+INFO  2012-04-30 22:08:14,129 [idb_RequestHandler_0e4d001b_addEndpoint] - duration_requestHandler 73ms
+DEBUG 2012-04-30 22:08:14,136 [idb_RequestHandler_0e4d001c_editEndpoint] - start_requestHandler
+INFO  2012-04-30 22:08:14,138 [idb_RequestHandler_0e4d001c_editEndpoint] - duration_serializer_1 2ms
+INFO  2012-04-30 22:08:14,138 [idb_RequestHandler_0e4d001c_editEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:08:14,190 [idb_RequestHandler_0e4d001c_editEndpoint] - duration_processing 52ms
+INFO  2012-04-30 22:08:14,191 [idb_RequestHandler_0e4d001c_editEndpoint] - duration_reply_settype 1ms
+INFO  2012-04-30 22:08:14,194 [idb_RequestHandler_0e4d001c_editEndpoint] - duration_serializer_2 3ms
+INFO  2012-04-30 22:08:14,195 [idb_RequestHandler_0e4d001c_editEndpoint] - duration_requestHandler 58ms
+DEBUG 2012-04-30 22:08:14,200 [idb_RequestHandler_0e4d001d_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:08:14,201 [idb_RequestHandler_0e4d001d_deleteEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:14,201 [idb_RequestHandler_0e4d001d_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:08:14,249 [idb_RequestHandler_0e4d001d_deleteEndpoint] - duration_processing 48ms
+INFO  2012-04-30 22:08:14,249 [idb_RequestHandler_0e4d001d_deleteEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:14,253 [idb_RequestHandler_0e4d001d_deleteEndpoint] - duration_serializer_2 4ms
+INFO  2012-04-30 22:08:14,253 [idb_RequestHandler_0e4d001d_deleteEndpoint] - duration_requestHandler 53ms
+DEBUG 2012-04-30 22:08:14,258 [idb_RequestHandler_0e4d001e_deleteDomain] - start_requestHandler
+INFO  2012-04-30 22:08:14,259 [idb_RequestHandler_0e4d001e_deleteDomain] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:14,259 [idb_RequestHandler_0e4d001e_deleteDomain] - duration_validator 0ms
+INFO  2012-04-30 22:08:14,372 [idb_RequestHandler_0e4d001e_deleteDomain] - duration_processing 113ms
+INFO  2012-04-30 22:08:14,372 [idb_RequestHandler_0e4d001e_deleteDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:14,374 [idb_RequestHandler_0e4d001e_deleteDomain] - duration_serializer_2 2ms
+INFO  2012-04-30 22:08:14,374 [idb_RequestHandler_0e4d001e_deleteDomain] - duration_requestHandler 116ms
+DEBUG 2012-04-30 22:08:14,377 [idb_RequestHandler_0e4d001f_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:08:14,377 [idb_RequestHandler_0e4d001f_deleteEndpoint] - duration_serializer_1 0ms
+INFO  2012-04-30 22:08:14,377 [idb_RequestHandler_0e4d001f_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:08:14,387 [idb_RequestHandler_0e4d001f_deleteEndpoint] - duration_processing 10ms
+INFO  2012-04-30 22:08:14,388 [idb_RequestHandler_0e4d001f_deleteEndpoint] - duration_reply_settype 1ms
+INFO  2012-04-30 22:08:14,389 [idb_RequestHandler_0e4d001f_deleteEndpoint] - duration_serializer_2 1ms
+INFO  2012-04-30 22:08:14,390 [idb_RequestHandler_0e4d001f_deleteEndpoint] - duration_requestHandler 12ms
+DEBUG 2012-04-30 22:08:14,393 [idb_RequestHandler_0e4d0020_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:08:14,394 [idb_RequestHandler_0e4d0020_deleteEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:14,394 [idb_RequestHandler_0e4d0020_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:08:14,410 [idb_RequestHandler_0e4d0020_deleteEndpoint] - duration_processing 16ms
+INFO  2012-04-30 22:08:14,410 [idb_RequestHandler_0e4d0020_deleteEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:14,413 [idb_RequestHandler_0e4d0020_deleteEndpoint] - duration_serializer_2 3ms
+INFO  2012-04-30 22:08:14,413 [idb_RequestHandler_0e4d0020_deleteEndpoint] - duration_requestHandler 20ms
+DEBUG 2012-04-30 22:08:14,418 [idb_RequestHandler_0e4d0021_addDomain] - start_requestHandler
+INFO  2012-04-30 22:08:14,421 [idb_RequestHandler_0e4d0021_addDomain] - duration_serializer_1 3ms
+INFO  2012-04-30 22:08:14,421 [idb_RequestHandler_0e4d0021_addDomain] - duration_validator 0ms
+INFO  2012-04-30 22:08:14,601 [idb_RequestHandler_0e4d0021_addDomain] - duration_processing 180ms
+INFO  2012-04-30 22:08:14,601 [idb_RequestHandler_0e4d0021_addDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:14,603 [idb_RequestHandler_0e4d0021_addDomain] - duration_serializer_2 2ms
+INFO  2012-04-30 22:08:14,603 [idb_RequestHandler_0e4d0021_addDomain] - duration_requestHandler 185ms
+DEBUG 2012-04-30 22:08:14,607 [idb_RequestHandler_0e4d0022_editDomain] - start_requestHandler
+INFO  2012-04-30 22:08:14,609 [idb_RequestHandler_0e4d0022_editDomain] - duration_serializer_1 2ms
+INFO  2012-04-30 22:08:14,609 [idb_RequestHandler_0e4d0022_editDomain] - duration_validator 0ms
+INFO  2012-04-30 22:08:14,825 [idb_RequestHandler_0e4d0022_editDomain] - duration_processing 216ms
+INFO  2012-04-30 22:08:14,826 [idb_RequestHandler_0e4d0022_editDomain] - duration_reply_settype 1ms
+INFO  2012-04-30 22:08:14,829 [idb_RequestHandler_0e4d0022_editDomain] - duration_serializer_2 3ms
+INFO  2012-04-30 22:08:14,829 [idb_RequestHandler_0e4d0022_editDomain] - duration_requestHandler 222ms
+DEBUG 2012-04-30 22:08:14,834 [idb_RequestHandler_0e4d0023_getDomains] - start_requestHandler
+INFO  2012-04-30 22:08:14,835 [idb_RequestHandler_0e4d0023_getDomains] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:14,835 [idb_RequestHandler_0e4d0023_getDomains] - duration_validator 0ms
+INFO  2012-04-30 22:08:14,953 [idb_RequestHandler_0e4d0023_getDomains] - duration_processing 118ms
+INFO  2012-04-30 22:08:14,953 [idb_RequestHandler_0e4d0023_getDomains] - duration_reply_settype 0ms
+DEBUG 2012-04-30 22:08:14,984 [idb_RequestHandler_0e4d0024_deleteDomain] - start_requestHandler
+INFO  2012-04-30 22:08:14,985 [idb_RequestHandler_0e4d0024_deleteDomain] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:14,985 [idb_RequestHandler_0e4d0024_deleteDomain] - duration_validator 0ms
+INFO  2012-04-30 22:08:15,124 [idb_RequestHandler_0e4d0024_deleteDomain] - duration_processing 139ms
+INFO  2012-04-30 22:08:15,124 [idb_RequestHandler_0e4d0024_deleteDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:15,127 [idb_RequestHandler_0e4d0024_deleteDomain] - duration_serializer_2 3ms
+INFO  2012-04-30 22:08:15,128 [idb_RequestHandler_0e4d0024_deleteDomain] - duration_requestHandler 143ms
+DEBUG 2012-04-30 22:08:15,132 [idb_RequestHandler_0e4d0025_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:08:15,133 [idb_RequestHandler_0e4d0025_deleteEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:15,133 [idb_RequestHandler_0e4d0025_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:08:15,143 [idb_RequestHandler_0e4d0025_deleteEndpoint] - duration_processing 10ms
+INFO  2012-04-30 22:08:15,143 [idb_RequestHandler_0e4d0025_deleteEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:15,146 [idb_RequestHandler_0e4d0025_deleteEndpoint] - duration_serializer_2 3ms
+INFO  2012-04-30 22:08:15,146 [idb_RequestHandler_0e4d0025_deleteEndpoint] - duration_requestHandler 14ms
+DEBUG 2012-04-30 22:08:15,150 [idb_RequestHandler_0e4d0026_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:08:15,151 [idb_RequestHandler_0e4d0026_deleteEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:15,151 [idb_RequestHandler_0e4d0026_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:08:15,166 [idb_RequestHandler_0e4d0026_deleteEndpoint] - duration_processing 15ms
+INFO  2012-04-30 22:08:15,166 [idb_RequestHandler_0e4d0026_deleteEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:15,169 [idb_RequestHandler_0e4d0026_deleteEndpoint] - duration_serializer_2 3ms
+INFO  2012-04-30 22:08:15,169 [idb_RequestHandler_0e4d0026_deleteEndpoint] - duration_requestHandler 19ms
+DEBUG 2012-04-30 22:08:15,181 [idb_RequestHandler_0e4d0027_addDomain] - start_requestHandler
+INFO  2012-04-30 22:08:15,184 [idb_RequestHandler_0e4d0027_addDomain] - duration_serializer_1 3ms
+INFO  2012-04-30 22:08:15,184 [idb_RequestHandler_0e4d0027_addDomain] - duration_validator 0ms
+INFO  2012-04-30 22:08:15,378 [idb_RequestHandler_0e4d0027_addDomain] - duration_processing 194ms
+INFO  2012-04-30 22:08:15,379 [idb_RequestHandler_0e4d0027_addDomain] - duration_reply_settype 1ms
+INFO  2012-04-30 22:08:15,380 [idb_RequestHandler_0e4d0027_addDomain] - duration_serializer_2 1ms
+INFO  2012-04-30 22:08:15,380 [idb_RequestHandler_0e4d0027_addDomain] - duration_requestHandler 199ms
+DEBUG 2012-04-30 22:08:15,384 [idb_RequestHandler_0e4d0028_addEndpoint] - start_requestHandler
+INFO  2012-04-30 22:08:15,386 [idb_RequestHandler_0e4d0028_addEndpoint] - duration_serializer_1 2ms
+INFO  2012-04-30 22:08:15,386 [idb_RequestHandler_0e4d0028_addEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:08:15,444 [idb_RequestHandler_0e4d0028_addEndpoint] - duration_processing 58ms
+INFO  2012-04-30 22:08:15,444 [idb_RequestHandler_0e4d0028_addEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:15,448 [idb_RequestHandler_0e4d0028_addEndpoint] - duration_serializer_2 4ms
+INFO  2012-04-30 22:08:15,448 [idb_RequestHandler_0e4d0028_addEndpoint] - duration_requestHandler 64ms
+DEBUG 2012-04-30 22:08:15,453 [idb_RequestHandler_0e4d0029_editEndpoint] - start_requestHandler
+INFO  2012-04-30 22:08:15,454 [idb_RequestHandler_0e4d0029_editEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:15,454 [idb_RequestHandler_0e4d0029_editEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:08:15,505 [idb_RequestHandler_0e4d0029_editEndpoint] - duration_processing 51ms
+INFO  2012-04-30 22:08:15,506 [idb_RequestHandler_0e4d0029_editEndpoint] - duration_reply_settype 1ms
+INFO  2012-04-30 22:08:15,509 [idb_RequestHandler_0e4d0029_editEndpoint] - duration_serializer_2 3ms
+INFO  2012-04-30 22:08:15,509 [idb_RequestHandler_0e4d0029_editEndpoint] - duration_requestHandler 56ms
+DEBUG 2012-04-30 22:08:15,515 [idb_RequestHandler_0e4d002a_getEndpoints] - start_requestHandler
+INFO  2012-04-30 22:08:15,517 [idb_RequestHandler_0e4d002a_getEndpoints] - duration_serializer_1 2ms
+INFO  2012-04-30 22:08:15,517 [idb_RequestHandler_0e4d002a_getEndpoints] - duration_validator 0ms
+INFO  2012-04-30 22:08:15,528 [idb_RequestHandler_0e4d002a_getEndpoints] - duration_processing 11ms
+INFO  2012-04-30 22:08:15,528 [idb_RequestHandler_0e4d002a_getEndpoints] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:15,533 [idb_RequestHandler_0e4d002a_getEndpoints] - duration_serializer_2 5ms
+INFO  2012-04-30 22:08:15,533 [idb_RequestHandler_0e4d002a_getEndpoints] - duration_requestHandler 18ms
+DEBUG 2012-04-30 22:08:15,539 [idb_RequestHandler_0e4d002b_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:08:15,540 [idb_RequestHandler_0e4d002b_deleteEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:15,541 [idb_RequestHandler_0e4d002b_deleteEndpoint] - duration_validator 1ms
+INFO  2012-04-30 22:08:15,587 [idb_RequestHandler_0e4d002b_deleteEndpoint] - duration_processing 46ms
+INFO  2012-04-30 22:08:15,587 [idb_RequestHandler_0e4d002b_deleteEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:15,590 [idb_RequestHandler_0e4d002b_deleteEndpoint] - duration_serializer_2 3ms
+INFO  2012-04-30 22:08:15,590 [idb_RequestHandler_0e4d002b_deleteEndpoint] - duration_requestHandler 51ms
+DEBUG 2012-04-30 22:08:15,598 [idb_RequestHandler_0e4d002c_deleteDomain] - start_requestHandler
+INFO  2012-04-30 22:08:15,599 [idb_RequestHandler_0e4d002c_deleteDomain] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:15,599 [idb_RequestHandler_0e4d002c_deleteDomain] - duration_validator 0ms
+INFO  2012-04-30 22:08:15,719 [idb_RequestHandler_0e4d002c_deleteDomain] - duration_processing 120ms
+INFO  2012-04-30 22:08:15,719 [idb_RequestHandler_0e4d002c_deleteDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:15,722 [idb_RequestHandler_0e4d002c_deleteDomain] - duration_serializer_2 3ms
+INFO  2012-04-30 22:08:15,722 [idb_RequestHandler_0e4d002c_deleteDomain] - duration_requestHandler 124ms
+DEBUG 2012-04-30 22:08:15,725 [idb_RequestHandler_0e4d002d_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:08:15,725 [idb_RequestHandler_0e4d002d_deleteEndpoint] - duration_serializer_1 0ms
+INFO  2012-04-30 22:08:15,725 [idb_RequestHandler_0e4d002d_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:08:15,736 [idb_RequestHandler_0e4d002d_deleteEndpoint] - duration_processing 11ms
+INFO  2012-04-30 22:08:15,736 [idb_RequestHandler_0e4d002d_deleteEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:15,738 [idb_RequestHandler_0e4d002d_deleteEndpoint] - duration_serializer_2 2ms
+INFO  2012-04-30 22:08:15,738 [idb_RequestHandler_0e4d002d_deleteEndpoint] - duration_requestHandler 13ms
+DEBUG 2012-04-30 22:08:15,741 [idb_RequestHandler_0e4d002e_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:08:15,742 [idb_RequestHandler_0e4d002e_deleteEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:15,743 [idb_RequestHandler_0e4d002e_deleteEndpoint] - duration_validator 1ms
+INFO  2012-04-30 22:08:15,754 [idb_RequestHandler_0e4d002e_deleteEndpoint] - duration_processing 11ms
+INFO  2012-04-30 22:08:15,754 [idb_RequestHandler_0e4d002e_deleteEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:15,757 [idb_RequestHandler_0e4d002e_deleteEndpoint] - duration_serializer_2 3ms
+INFO  2012-04-30 22:08:15,757 [idb_RequestHandler_0e4d002e_deleteEndpoint] - duration_requestHandler 16ms
+DEBUG 2012-04-30 22:08:15,767 [idb_RequestHandler_0e4d002f_addDomain] - start_requestHandler
+INFO  2012-04-30 22:08:15,773 [idb_RequestHandler_0e4d002f_addDomain] - duration_serializer_1 6ms
+INFO  2012-04-30 22:08:15,773 [idb_RequestHandler_0e4d002f_addDomain] - duration_validator 0ms
+INFO  2012-04-30 22:08:16,038 [idb_RequestHandler_0e4d002f_addDomain] - duration_processing 265ms
+INFO  2012-04-30 22:08:16,039 [idb_RequestHandler_0e4d002f_addDomain] - duration_reply_settype 1ms
+INFO  2012-04-30 22:08:16,041 [idb_RequestHandler_0e4d002f_addDomain] - duration_serializer_2 2ms
+INFO  2012-04-30 22:08:16,041 [idb_RequestHandler_0e4d002f_addDomain] - duration_requestHandler 274ms
+DEBUG 2012-04-30 22:08:16,043 [idb_RequestHandler_0e4d0030_addEndpoint] - start_requestHandler
+INFO  2012-04-30 22:08:16,044 [idb_RequestHandler_0e4d0030_addEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:16,044 [idb_RequestHandler_0e4d0030_addEndpoint] - duration_validator 0ms
+DEBUG 2012-04-30 22:08:16,065 [idb_RequestHandler_0e4d0031_deleteDomain] - start_requestHandler
+INFO  2012-04-30 22:08:16,065 [idb_RequestHandler_0e4d0031_deleteDomain] - duration_serializer_1 0ms
+INFO  2012-04-30 22:08:16,065 [idb_RequestHandler_0e4d0031_deleteDomain] - duration_validator 0ms
+INFO  2012-04-30 22:08:16,165 [idb_RequestHandler_0e4d0031_deleteDomain] - duration_processing 100ms
+INFO  2012-04-30 22:08:16,165 [idb_RequestHandler_0e4d0031_deleteDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:16,168 [idb_RequestHandler_0e4d0031_deleteDomain] - duration_serializer_2 3ms
+INFO  2012-04-30 22:08:16,169 [idb_RequestHandler_0e4d0031_deleteDomain] - duration_requestHandler 103ms
+DEBUG 2012-04-30 22:08:16,173 [idb_RequestHandler_0e4d0032_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:08:16,175 [idb_RequestHandler_0e4d0032_deleteEndpoint] - duration_serializer_1 2ms
+INFO  2012-04-30 22:08:16,175 [idb_RequestHandler_0e4d0032_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:08:16,186 [idb_RequestHandler_0e4d0032_deleteEndpoint] - duration_processing 11ms
+INFO  2012-04-30 22:08:16,187 [idb_RequestHandler_0e4d0032_deleteEndpoint] - duration_reply_settype 1ms
+INFO  2012-04-30 22:08:16,189 [idb_RequestHandler_0e4d0032_deleteEndpoint] - duration_serializer_2 2ms
+INFO  2012-04-30 22:08:16,190 [idb_RequestHandler_0e4d0032_deleteEndpoint] - duration_requestHandler 16ms
+DEBUG 2012-04-30 22:08:16,194 [idb_RequestHandler_0e4d0033_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:08:16,195 [idb_RequestHandler_0e4d0033_deleteEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:16,195 [idb_RequestHandler_0e4d0033_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:08:16,209 [idb_RequestHandler_0e4d0033_deleteEndpoint] - duration_processing 14ms
+INFO  2012-04-30 22:08:16,209 [idb_RequestHandler_0e4d0033_deleteEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:16,212 [idb_RequestHandler_0e4d0033_deleteEndpoint] - duration_serializer_2 3ms
+INFO  2012-04-30 22:08:16,212 [idb_RequestHandler_0e4d0033_deleteEndpoint] - duration_requestHandler 18ms
+DEBUG 2012-04-30 22:08:16,223 [idb_RequestHandler_0e4d0034_addDomain] - start_requestHandler
+INFO  2012-04-30 22:08:16,229 [idb_RequestHandler_0e4d0034_addDomain] - duration_serializer_1 5ms
+INFO  2012-04-30 22:08:16,229 [idb_RequestHandler_0e4d0034_addDomain] - duration_validator 0ms
+INFO  2012-04-30 22:08:16,471 [idb_RequestHandler_0e4d0034_addDomain] - duration_processing 242ms
+INFO  2012-04-30 22:08:16,471 [idb_RequestHandler_0e4d0034_addDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:16,474 [idb_RequestHandler_0e4d0034_addDomain] - duration_serializer_2 3ms
+INFO  2012-04-30 22:08:16,474 [idb_RequestHandler_0e4d0034_addDomain] - duration_requestHandler 250ms
+DEBUG 2012-04-30 22:08:16,479 [idb_RequestHandler_0e4d0035_addEndpoint] - start_requestHandler
+INFO  2012-04-30 22:08:16,481 [idb_RequestHandler_0e4d0035_addEndpoint] - duration_serializer_1 2ms
+INFO  2012-04-30 22:08:16,481 [idb_RequestHandler_0e4d0035_addEndpoint] - duration_validator 0ms
+DEBUG 2012-04-30 22:08:16,505 [idb_RequestHandler_0e4d0036_deleteDomain] - start_requestHandler
+INFO  2012-04-30 22:08:16,506 [idb_RequestHandler_0e4d0036_deleteDomain] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:16,506 [idb_RequestHandler_0e4d0036_deleteDomain] - duration_validator 0ms
+INFO  2012-04-30 22:08:16,619 [idb_RequestHandler_0e4d0036_deleteDomain] - duration_processing 113ms
+INFO  2012-04-30 22:08:16,619 [idb_RequestHandler_0e4d0036_deleteDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:16,621 [idb_RequestHandler_0e4d0036_deleteDomain] - duration_serializer_2 2ms
+INFO  2012-04-30 22:08:16,621 [idb_RequestHandler_0e4d0036_deleteDomain] - duration_requestHandler 116ms
+DEBUG 2012-04-30 22:08:16,623 [idb_RequestHandler_0e4d0037_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:08:16,624 [idb_RequestHandler_0e4d0037_deleteEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:16,624 [idb_RequestHandler_0e4d0037_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:08:16,635 [idb_RequestHandler_0e4d0037_deleteEndpoint] - duration_processing 11ms
+INFO  2012-04-30 22:08:16,636 [idb_RequestHandler_0e4d0037_deleteEndpoint] - duration_reply_settype 1ms
+INFO  2012-04-30 22:08:16,639 [idb_RequestHandler_0e4d0037_deleteEndpoint] - duration_serializer_2 3ms
+INFO  2012-04-30 22:08:16,639 [idb_RequestHandler_0e4d0037_deleteEndpoint] - duration_requestHandler 16ms
+DEBUG 2012-04-30 22:08:16,644 [idb_RequestHandler_0e4d0038_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:08:16,645 [idb_RequestHandler_0e4d0038_deleteEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:16,645 [idb_RequestHandler_0e4d0038_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:08:16,662 [idb_RequestHandler_0e4d0038_deleteEndpoint] - duration_processing 17ms
+INFO  2012-04-30 22:08:16,662 [idb_RequestHandler_0e4d0038_deleteEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:16,666 [idb_RequestHandler_0e4d0038_deleteEndpoint] - duration_serializer_2 4ms
+INFO  2012-04-30 22:08:16,666 [idb_RequestHandler_0e4d0038_deleteEndpoint] - duration_requestHandler 22ms
+DEBUG 2012-04-30 22:08:16,679 [idb_RequestHandler_0e4d0039_addDomain] - start_requestHandler
+INFO  2012-04-30 22:08:16,681 [idb_RequestHandler_0e4d0039_addDomain] - duration_serializer_1 2ms
+INFO  2012-04-30 22:08:16,681 [idb_RequestHandler_0e4d0039_addDomain] - duration_validator 0ms
+INFO  2012-04-30 22:08:16,843 [idb_RequestHandler_0e4d0039_addDomain] - duration_processing 162ms
+INFO  2012-04-30 22:08:16,844 [idb_RequestHandler_0e4d0039_addDomain] - duration_reply_settype 1ms
+INFO  2012-04-30 22:08:16,847 [idb_RequestHandler_0e4d0039_addDomain] - duration_serializer_2 3ms
+INFO  2012-04-30 22:08:16,847 [idb_RequestHandler_0e4d0039_addDomain] - duration_requestHandler 168ms
+DEBUG 2012-04-30 22:08:16,852 [idb_RequestHandler_0e4d003a_getDomains] - start_requestHandler
+INFO  2012-04-30 22:08:16,853 [idb_RequestHandler_0e4d003a_getDomains] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:16,853 [idb_RequestHandler_0e4d003a_getDomains] - duration_validator 0ms
+INFO  2012-04-30 22:08:16,998 [idb_RequestHandler_0e4d003a_getDomains] - duration_processing 145ms
+INFO  2012-04-30 22:08:16,998 [idb_RequestHandler_0e4d003a_getDomains] - duration_reply_settype 0ms
+DEBUG 2012-04-30 22:08:17,024 [idb_RequestHandler_0e4d003b_deleteDomain] - start_requestHandler
+INFO  2012-04-30 22:08:17,024 [idb_RequestHandler_0e4d003b_deleteDomain] - duration_serializer_1 0ms
+INFO  2012-04-30 22:08:17,024 [idb_RequestHandler_0e4d003b_deleteDomain] - duration_validator 0ms
+INFO  2012-04-30 22:08:17,148 [idb_RequestHandler_0e4d003b_deleteDomain] - duration_processing 123ms
+INFO  2012-04-30 22:08:17,148 [idb_RequestHandler_0e4d003b_deleteDomain] - duration_reply_settype 1ms
+INFO  2012-04-30 22:08:17,150 [idb_RequestHandler_0e4d003b_deleteDomain] - duration_serializer_2 2ms
+INFO  2012-04-30 22:08:17,150 [idb_RequestHandler_0e4d003b_deleteDomain] - duration_requestHandler 126ms
+DEBUG 2012-04-30 22:08:17,152 [idb_RequestHandler_0e4d003c_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:08:17,153 [idb_RequestHandler_0e4d003c_deleteEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:17,153 [idb_RequestHandler_0e4d003c_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:08:17,165 [idb_RequestHandler_0e4d003c_deleteEndpoint] - duration_processing 12ms
+INFO  2012-04-30 22:08:17,165 [idb_RequestHandler_0e4d003c_deleteEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:17,167 [idb_RequestHandler_0e4d003c_deleteEndpoint] - duration_serializer_2 2ms
+INFO  2012-04-30 22:08:17,168 [idb_RequestHandler_0e4d003c_deleteEndpoint] - duration_requestHandler 15ms
+DEBUG 2012-04-30 22:08:17,171 [idb_RequestHandler_0e4d003d_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:08:17,172 [idb_RequestHandler_0e4d003d_deleteEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:17,172 [idb_RequestHandler_0e4d003d_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:08:17,187 [idb_RequestHandler_0e4d003d_deleteEndpoint] - duration_processing 15ms
+INFO  2012-04-30 22:08:17,187 [idb_RequestHandler_0e4d003d_deleteEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:17,190 [idb_RequestHandler_0e4d003d_deleteEndpoint] - duration_serializer_2 3ms
+INFO  2012-04-30 22:08:17,190 [idb_RequestHandler_0e4d003d_deleteEndpoint] - duration_requestHandler 19ms
+DEBUG 2012-04-30 22:08:17,205 [idb_RequestHandler_0e4d003e_addDomain] - start_requestHandler
+INFO  2012-04-30 22:08:17,209 [idb_RequestHandler_0e4d003e_addDomain] - duration_serializer_1 4ms
+INFO  2012-04-30 22:08:17,209 [idb_RequestHandler_0e4d003e_addDomain] - duration_validator 0ms
+INFO  2012-04-30 22:08:17,279 [idb_RequestHandler_0e4d003e_addDomain] - duration_processing 70ms
+INFO  2012-04-30 22:08:17,279 [idb_RequestHandler_0e4d003e_addDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:17,281 [idb_RequestHandler_0e4d003e_addDomain] - duration_serializer_2 2ms
+INFO  2012-04-30 22:08:17,281 [idb_RequestHandler_0e4d003e_addDomain] - duration_requestHandler 76ms
+DEBUG 2012-04-30 22:08:17,284 [idb_RequestHandler_0e4d003f_addDomain] - start_requestHandler
+INFO  2012-04-30 22:08:17,286 [idb_RequestHandler_0e4d003f_addDomain] - duration_serializer_1 2ms
+INFO  2012-04-30 22:08:17,286 [idb_RequestHandler_0e4d003f_addDomain] - duration_validator 0ms
+INFO  2012-04-30 22:08:17,343 [idb_RequestHandler_0e4d003f_addDomain] - duration_processing 57ms
+INFO  2012-04-30 22:08:17,343 [idb_RequestHandler_0e4d003f_addDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:17,345 [idb_RequestHandler_0e4d003f_addDomain] - duration_serializer_2 2ms
+INFO  2012-04-30 22:08:17,345 [idb_RequestHandler_0e4d003f_addDomain] - duration_requestHandler 61ms
+DEBUG 2012-04-30 22:08:17,349 [idb_RequestHandler_0e4d0040_addDomain] - start_requestHandler
+INFO  2012-04-30 22:08:17,351 [idb_RequestHandler_0e4d0040_addDomain] - duration_serializer_1 2ms
+INFO  2012-04-30 22:08:17,351 [idb_RequestHandler_0e4d0040_addDomain] - duration_validator 0ms
+INFO  2012-04-30 22:08:17,429 [idb_RequestHandler_0e4d0040_addDomain] - duration_processing 78ms
+INFO  2012-04-30 22:08:17,429 [idb_RequestHandler_0e4d0040_addDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:17,433 [idb_RequestHandler_0e4d0040_addDomain] - duration_serializer_2 4ms
+INFO  2012-04-30 22:08:17,433 [idb_RequestHandler_0e4d0040_addDomain] - duration_requestHandler 84ms
+DEBUG 2012-04-30 22:08:17,445 [idb_RequestHandler_0e4d0041_getDomains] - start_requestHandler
+INFO  2012-04-30 22:08:17,445 [idb_RequestHandler_0e4d0041_getDomains] - duration_serializer_1 0ms
+INFO  2012-04-30 22:08:17,445 [idb_RequestHandler_0e4d0041_getDomains] - duration_validator 0ms
+INFO  2012-04-30 22:08:17,560 [idb_RequestHandler_0e4d0041_getDomains] - duration_processing 115ms
+INFO  2012-04-30 22:08:17,560 [idb_RequestHandler_0e4d0041_getDomains] - duration_reply_settype 0ms
+DEBUG 2012-04-30 22:08:17,588 [idb_RequestHandler_0e4d0042_deleteDomain] - start_requestHandler
+INFO  2012-04-30 22:08:17,589 [idb_RequestHandler_0e4d0042_deleteDomain] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:17,589 [idb_RequestHandler_0e4d0042_deleteDomain] - duration_validator 0ms
+DEBUG 2012-04-30 22:08:17,619 [idb_RequestHandler_0e4d0043_addDomain] - start_requestHandler
+INFO  2012-04-30 22:08:17,622 [idb_RequestHandler_0e4d0043_addDomain] - duration_serializer_1 3ms
+INFO  2012-04-30 22:08:17,622 [idb_RequestHandler_0e4d0043_addDomain] - duration_validator 0ms
+INFO  2012-04-30 22:08:17,826 [idb_RequestHandler_0e4d0043_addDomain] - duration_processing 204ms
+INFO  2012-04-30 22:08:17,826 [idb_RequestHandler_0e4d0043_addDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:17,829 [idb_RequestHandler_0e4d0043_addDomain] - duration_serializer_2 3ms
+INFO  2012-04-30 22:08:17,830 [idb_RequestHandler_0e4d0043_addDomain] - duration_requestHandler 210ms
+DEBUG 2012-04-30 22:08:17,835 [idb_RequestHandler_0e4d0044_addEndpoint] - start_requestHandler
+INFO  2012-04-30 22:08:17,838 [idb_RequestHandler_0e4d0044_addEndpoint] - duration_serializer_1 3ms
+INFO  2012-04-30 22:08:17,838 [idb_RequestHandler_0e4d0044_addEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:08:17,898 [idb_RequestHandler_0e4d0044_addEndpoint] - duration_processing 60ms
+INFO  2012-04-30 22:08:17,898 [idb_RequestHandler_0e4d0044_addEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:17,901 [idb_RequestHandler_0e4d0044_addEndpoint] - duration_serializer_2 3ms
+INFO  2012-04-30 22:08:17,901 [idb_RequestHandler_0e4d0044_addEndpoint] - duration_requestHandler 66ms
+DEBUG 2012-04-30 22:08:17,903 [idb_RequestHandler_0e4d0045_getEndpoints] - start_requestHandler
+INFO  2012-04-30 22:08:17,904 [idb_RequestHandler_0e4d0045_getEndpoints] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:17,904 [idb_RequestHandler_0e4d0045_getEndpoints] - duration_validator 0ms
+INFO  2012-04-30 22:08:17,912 [idb_RequestHandler_0e4d0045_getEndpoints] - duration_processing 8ms
+INFO  2012-04-30 22:08:17,912 [idb_RequestHandler_0e4d0045_getEndpoints] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:17,914 [idb_RequestHandler_0e4d0045_getEndpoints] - duration_serializer_2 2ms
+INFO  2012-04-30 22:08:17,914 [idb_RequestHandler_0e4d0045_getEndpoints] - duration_requestHandler 11ms
+DEBUG 2012-04-30 22:08:17,917 [idb_RequestHandler_0e4d0046_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:08:17,918 [idb_RequestHandler_0e4d0046_deleteEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:17,918 [idb_RequestHandler_0e4d0046_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:08:17,967 [idb_RequestHandler_0e4d0046_deleteEndpoint] - duration_processing 48ms
+INFO  2012-04-30 22:08:17,967 [idb_RequestHandler_0e4d0046_deleteEndpoint] - duration_reply_settype 1ms
+INFO  2012-04-30 22:08:17,971 [idb_RequestHandler_0e4d0046_deleteEndpoint] - duration_serializer_2 4ms
+INFO  2012-04-30 22:08:17,971 [idb_RequestHandler_0e4d0046_deleteEndpoint] - duration_requestHandler 54ms
+DEBUG 2012-04-30 22:08:17,978 [idb_RequestHandler_0e4d0047_deleteDomain] - start_requestHandler
+INFO  2012-04-30 22:08:17,981 [idb_RequestHandler_0e4d0047_deleteDomain] - duration_serializer_1 3ms
+INFO  2012-04-30 22:08:17,981 [idb_RequestHandler_0e4d0047_deleteDomain] - duration_validator 0ms
+INFO  2012-04-30 22:08:18,139 [idb_RequestHandler_0e4d0047_deleteDomain] - duration_processing 158ms
+INFO  2012-04-30 22:08:18,139 [idb_RequestHandler_0e4d0047_deleteDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:18,141 [idb_RequestHandler_0e4d0047_deleteDomain] - duration_serializer_2 2ms
+INFO  2012-04-30 22:08:18,141 [idb_RequestHandler_0e4d0047_deleteDomain] - duration_requestHandler 163ms
+DEBUG 2012-04-30 22:08:18,143 [idb_RequestHandler_0e4d0048_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:08:18,144 [idb_RequestHandler_0e4d0048_deleteEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:18,144 [idb_RequestHandler_0e4d0048_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:08:18,154 [idb_RequestHandler_0e4d0048_deleteEndpoint] - duration_processing 10ms
+INFO  2012-04-30 22:08:18,155 [idb_RequestHandler_0e4d0048_deleteEndpoint] - duration_reply_settype 1ms
+INFO  2012-04-30 22:08:18,157 [idb_RequestHandler_0e4d0048_deleteEndpoint] - duration_serializer_2 2ms
+INFO  2012-04-30 22:08:18,157 [idb_RequestHandler_0e4d0048_deleteEndpoint] - duration_requestHandler 14ms
+DEBUG 2012-04-30 22:08:18,160 [idb_RequestHandler_0e4d0049_deleteEndpoint] - start_requestHandler
+INFO  2012-04-30 22:08:18,161 [idb_RequestHandler_0e4d0049_deleteEndpoint] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:18,161 [idb_RequestHandler_0e4d0049_deleteEndpoint] - duration_validator 0ms
+INFO  2012-04-30 22:08:18,171 [idb_RequestHandler_0e4d0049_deleteEndpoint] - duration_processing 10ms
+INFO  2012-04-30 22:08:18,171 [idb_RequestHandler_0e4d0049_deleteEndpoint] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:18,173 [idb_RequestHandler_0e4d0049_deleteEndpoint] - duration_serializer_2 2ms
+INFO  2012-04-30 22:08:18,173 [idb_RequestHandler_0e4d0049_deleteEndpoint] - duration_requestHandler 13ms
+DEBUG 2012-04-30 22:08:18,188 [idb_RequestHandler_0e4d004a_deleteDomain] - start_requestHandler
+INFO  2012-04-30 22:08:18,190 [idb_RequestHandler_0e4d004a_deleteDomain] - duration_serializer_1 2ms
+INFO  2012-04-30 22:08:18,190 [idb_RequestHandler_0e4d004a_deleteDomain] - duration_validator 0ms
+DEBUG 2012-04-30 22:08:18,221 [idb_RequestHandler_0e4d004b_addOrEditDomain] - start_requestHandler
+INFO  2012-04-30 22:08:18,222 [idb_RequestHandler_0e4d004b_addOrEditDomain] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:18,222 [idb_RequestHandler_0e4d004b_addOrEditDomain] - duration_validator 0ms
+INFO  2012-04-30 22:08:18,293 [idb_RequestHandler_0e4d004b_addOrEditDomain] - duration_processing 71ms
+INFO  2012-04-30 22:08:18,293 [idb_RequestHandler_0e4d004b_addOrEditDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:18,297 [idb_RequestHandler_0e4d004b_addOrEditDomain] - duration_serializer_2 4ms
+INFO  2012-04-30 22:08:18,297 [idb_RequestHandler_0e4d004b_addOrEditDomain] - duration_requestHandler 76ms
+DEBUG 2012-04-30 22:08:18,344 [idb_RequestHandler_0e4d004c_bind] - start_requestHandler
+INFO  2012-04-30 22:08:18,347 [idb_RequestHandler_0e4d004c_bind] - duration_serializer_1 3ms
+INFO  2012-04-30 22:08:18,347 [idb_RequestHandler_0e4d004c_bind] - duration_validator 0ms
+INFO  2012-04-30 22:08:18,355 [idb_RequestHandler_0e4d004c_bind] - duration_processing 8ms
+INFO  2012-04-30 22:08:18,355 [idb_RequestHandler_0e4d004c_bind] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:18,357 [idb_RequestHandler_0e4d004c_bind] - duration_serializer_2 2ms
+INFO  2012-04-30 22:08:18,357 [idb_RequestHandler_0e4d004c_bind] - duration_requestHandler 13ms
+DEBUG 2012-04-30 22:08:18,366 [idb_RequestHandler_0e4d004d_createReservation] - start_requestHandler
+INFO  2012-04-30 22:08:18,369 [idb_RequestHandler_0e4d004d_createReservation] - duration_serializer_1 3ms
+INFO  2012-04-30 22:08:18,370 [idb_RequestHandler_0e4d004d_createReservation] - duration_validator 1ms
+INFO  2012-04-30 22:08:18,551 [idb_RequestHandler_0e4d004d_createReservation] - duration_prePathFinder 176ms
+INFO  2012-04-30 22:08:18,636 [idb_RequestHandler_0e4d004d_createReservation] - duration_initPathFinder 84ms
+INFO  2012-04-30 22:08:18,636 [idb_RequestHandler_0e4d004d_createReservation] - duration_availability 1ms
+INFO  2012-04-30 22:08:18,639 [idb_RequestHandler_0e4d004d_createReservation] - duration_PathFinderGetResv 3ms
+INFO  2012-04-30 22:08:18,640 [idb_RequestHandler_0e4d004d_createReservation] - duration_postPathFinder_preNRPSController 1ms
+PERFORMANCE_LOG 2012-04-30 22:08:18,693 [idb_RequestHandler_0e4d004d_createReservation_NRPSController@localDummy] - NRPS_response_time localDummy -1335816498650ms
+DEBUG 2012-04-30 22:08:18,701 [idb_RequestHandler_0e4d004e_createReservation] - start_requestHandler
+INFO  2012-04-30 22:08:18,703 [idb_RequestHandler_0e4d004e_createReservation] - duration_serializer_1 2ms
+INFO  2012-04-30 22:08:18,703 [idb_RequestHandler_0e4d004e_createReservation] - duration_validator 0ms
+INFO  2012-04-30 22:08:18,726 [idb_RequestHandler_0e4d004e_createReservation] - duration_prePathFinder 22ms
+INFO  2012-04-30 22:08:18,778 [idb_RequestHandler_0e4d004e_createReservation] - duration_initPathFinder 52ms
+INFO  2012-04-30 22:08:18,778 [idb_RequestHandler_0e4d004e_createReservation] - duration_availability 0ms
+INFO  2012-04-30 22:08:18,779 [idb_RequestHandler_0e4d004e_createReservation] - duration_PathFinderGetResv 1ms
+INFO  2012-04-30 22:08:18,780 [idb_RequestHandler_0e4d004e_createReservation] - duration_postPathFinder_preNRPSController 1ms
+PERFORMANCE_LOG 2012-04-30 22:08:18,793 [idb_RequestHandler_0e4d004e_createReservation_NRPSController@localDummy] - NRPS_response_time localDummy -1335816498785ms
+DEBUG 2012-04-30 22:08:18,847 [idb_RequestHandler_0e4d004f_createReservation] - start_requestHandler
+INFO  2012-04-30 22:08:18,853 [idb_RequestHandler_0e4d004f_createReservation] - duration_serializer_1 6ms
+INFO  2012-04-30 22:08:18,853 [idb_RequestHandler_0e4d004f_createReservation] - duration_validator 0ms
+INFO  2012-04-30 22:08:18,874 [idb_RequestHandler_0e4d004f_createReservation] - duration_prePathFinder 20ms
+INFO  2012-04-30 22:08:18,934 [idb_RequestHandler_0e4d004f_createReservation] - duration_initPathFinder 60ms
+INFO  2012-04-30 22:08:18,934 [idb_RequestHandler_0e4d004f_createReservation] - duration_availability 0ms
+INFO  2012-04-30 22:08:18,936 [idb_RequestHandler_0e4d004f_createReservation] - duration_PathFinderGetResv 2ms
+INFO  2012-04-30 22:08:18,937 [idb_RequestHandler_0e4d004f_createReservation] - duration_postPathFinder_preNRPSController 1ms
+PERFORMANCE_LOG 2012-04-30 22:08:18,951 [idb_RequestHandler_0e4d004f_createReservation_NRPSController@localDummy] - NRPS_response_time localDummy -1335816498942ms
+DEBUG 2012-04-30 22:08:18,999 [idb_RequestHandler_0e4d0050_createReservation] - start_requestHandler
+INFO  2012-04-30 22:08:19,003 [idb_RequestHandler_0e4d0050_createReservation] - duration_serializer_1 4ms
+INFO  2012-04-30 22:08:19,004 [idb_RequestHandler_0e4d0050_createReservation] - duration_validator 1ms
+INFO  2012-04-30 22:08:19,017 [idb_RequestHandler_0e4d0050_createReservation] - duration_prePathFinder 13ms
+INFO  2012-04-30 22:08:19,070 [idb_RequestHandler_0e4d0050_createReservation] - duration_initPathFinder 53ms
+INFO  2012-04-30 22:08:19,070 [idb_RequestHandler_0e4d0050_createReservation] - duration_availability 0ms
+INFO  2012-04-30 22:08:19,071 [idb_RequestHandler_0e4d0050_createReservation] - duration_PathFinderGetResv 1ms
+INFO  2012-04-30 22:08:19,072 [idb_RequestHandler_0e4d0050_createReservation] - duration_postPathFinder_preNRPSController 1ms
+PERFORMANCE_LOG 2012-04-30 22:08:19,082 [idb_RequestHandler_0e4d0050_createReservation_NRPSController@localDummy] - NRPS_response_time localDummy -1335816499077ms
+DEBUG 2012-04-30 22:08:19,148 [idb_RequestHandler_0e4d0051_deleteDomain] - start_requestHandler
+INFO  2012-04-30 22:08:19,150 [idb_RequestHandler_0e4d0051_deleteDomain] - duration_serializer_1 2ms
+INFO  2012-04-30 22:08:19,150 [idb_RequestHandler_0e4d0051_deleteDomain] - duration_validator 0ms
+DEBUG 2012-04-30 22:08:19,334 [idb_RequestHandler_0e4d0052_addTopic] - start_requestHandler
+INFO  2012-04-30 22:08:19,335 [idb_RequestHandler_0e4d0052_addTopic] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:19,335 [idb_RequestHandler_0e4d0052_addTopic] - duration_validator 0ms
+INFO  2012-04-30 22:08:19,339 [idb_RequestHandler_0e4d0052_addTopic] - duration_processing 3ms
+INFO  2012-04-30 22:08:19,339 [idb_RequestHandler_0e4d0052_addTopic] - duration_reply_settype 1ms
+INFO  2012-04-30 22:08:19,341 [idb_RequestHandler_0e4d0052_addTopic] - duration_serializer_2 2ms
+INFO  2012-04-30 22:08:19,341 [idb_RequestHandler_0e4d0052_addTopic] - duration_requestHandler 7ms
+DEBUG 2012-04-30 22:08:19,346 [idb_RequestHandler_0e4d0053_getTopics] - start_requestHandler
+INFO  2012-04-30 22:08:19,347 [idb_RequestHandler_0e4d0053_getTopics] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:19,347 [idb_RequestHandler_0e4d0053_getTopics] - duration_validator 0ms
+INFO  2012-04-30 22:08:19,347 [idb_RequestHandler_0e4d0053_getTopics] - duration_processing 0ms
+INFO  2012-04-30 22:08:19,347 [idb_RequestHandler_0e4d0053_getTopics] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:19,350 [idb_RequestHandler_0e4d0053_getTopics] - duration_serializer_2 3ms
+INFO  2012-04-30 22:08:19,350 [idb_RequestHandler_0e4d0053_getTopics] - duration_requestHandler 4ms
+DEBUG 2012-04-30 22:08:19,355 [idb_RequestHandler_0e4d0054_subscribe] - start_requestHandler
+INFO  2012-04-30 22:08:19,357 [idb_RequestHandler_0e4d0054_subscribe] - duration_serializer_1 2ms
+INFO  2012-04-30 22:08:19,357 [idb_RequestHandler_0e4d0054_subscribe] - duration_validator 0ms
+INFO  2012-04-30 22:08:19,358 [idb_RequestHandler_0e4d0054_subscribe] - duration_processing 1ms
+INFO  2012-04-30 22:08:19,359 [idb_RequestHandler_0e4d0054_subscribe] - duration_reply_settype 1ms
+INFO  2012-04-30 22:08:19,361 [idb_RequestHandler_0e4d0054_subscribe] - duration_serializer_2 2ms
+INFO  2012-04-30 22:08:19,361 [idb_RequestHandler_0e4d0054_subscribe] - duration_requestHandler 6ms
+DEBUG 2012-04-30 22:08:19,366 [idb_RequestHandler_0e4d0055_publish] - start_requestHandler
+INFO  2012-04-30 22:08:19,369 [idb_RequestHandler_0e4d0055_publish] - duration_serializer_1 3ms
+INFO  2012-04-30 22:08:19,369 [idb_RequestHandler_0e4d0055_publish] - duration_validator 0ms
+INFO  2012-04-30 22:08:19,374 [idb_RequestHandler_0e4d0055_publish] - duration_processing 5ms
+INFO  2012-04-30 22:08:19,374 [idb_RequestHandler_0e4d0055_publish] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:19,376 [idb_RequestHandler_0e4d0055_publish] - duration_serializer_2 2ms
+INFO  2012-04-30 22:08:19,376 [idb_RequestHandler_0e4d0055_publish] - duration_requestHandler 10ms
+DEBUG 2012-04-30 22:08:19,382 [idb_RequestHandler_0e4d0056_unsubscribe] - start_requestHandler
+INFO  2012-04-30 22:08:19,383 [idb_RequestHandler_0e4d0056_unsubscribe] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:19,383 [idb_RequestHandler_0e4d0056_unsubscribe] - duration_validator 0ms
+INFO  2012-04-30 22:08:19,384 [idb_RequestHandler_0e4d0056_unsubscribe] - duration_processing 1ms
+INFO  2012-04-30 22:08:19,384 [idb_RequestHandler_0e4d0056_unsubscribe] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:19,396 [idb_RequestHandler_0e4d0056_unsubscribe] - duration_serializer_2 12ms
+INFO  2012-04-30 22:08:19,396 [idb_RequestHandler_0e4d0056_unsubscribe] - duration_requestHandler 14ms
+DEBUG 2012-04-30 22:08:19,401 [idb_RequestHandler_0e4d0057_removeTopic] - start_requestHandler
+INFO  2012-04-30 22:08:19,402 [idb_RequestHandler_0e4d0057_removeTopic] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:19,402 [idb_RequestHandler_0e4d0057_removeTopic] - duration_validator 0ms
+INFO  2012-04-30 22:08:19,402 [idb_RequestHandler_0e4d0057_removeTopic] - duration_processing 0ms
+INFO  2012-04-30 22:08:19,403 [idb_RequestHandler_0e4d0057_removeTopic] - duration_reply_settype 1ms
+INFO  2012-04-30 22:08:19,404 [idb_RequestHandler_0e4d0057_removeTopic] - duration_serializer_2 1ms
+INFO  2012-04-30 22:08:19,404 [idb_RequestHandler_0e4d0057_removeTopic] - duration_requestHandler 3ms
+DEBUG 2012-04-30 22:08:19,407 [idb_RequestHandler_0e4d0058_getTopics] - start_requestHandler
+INFO  2012-04-30 22:08:19,407 [idb_RequestHandler_0e4d0058_getTopics] - duration_serializer_1 0ms
+INFO  2012-04-30 22:08:19,408 [idb_RequestHandler_0e4d0058_getTopics] - duration_validator 1ms
+INFO  2012-04-30 22:08:19,408 [idb_RequestHandler_0e4d0058_getTopics] - duration_processing 0ms
+INFO  2012-04-30 22:08:19,408 [idb_RequestHandler_0e4d0058_getTopics] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:19,409 [idb_RequestHandler_0e4d0058_getTopics] - duration_serializer_2 1ms
+INFO  2012-04-30 22:08:19,409 [idb_RequestHandler_0e4d0058_getTopics] - duration_requestHandler 2ms
+DEBUG 2012-04-30 22:08:19,411 [idb_RequestHandler_0e4d0059_subscribe] - start_requestHandler
+INFO  2012-04-30 22:08:19,412 [idb_RequestHandler_0e4d0059_subscribe] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:19,412 [idb_RequestHandler_0e4d0059_subscribe] - duration_validator 0ms
+DEBUG 2012-04-30 22:08:19,420 [idb_RequestHandler_0e4d005a_publish] - start_requestHandler
+INFO  2012-04-30 22:08:19,422 [idb_RequestHandler_0e4d005a_publish] - duration_serializer_1 2ms
+INFO  2012-04-30 22:08:19,422 [idb_RequestHandler_0e4d005a_publish] - duration_validator 0ms
+DEBUG 2012-04-30 22:08:19,426 [idb_RequestHandler_0e4d005b_unsubscribe] - start_requestHandler
+INFO  2012-04-30 22:08:19,427 [idb_RequestHandler_0e4d005b_unsubscribe] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:19,427 [idb_RequestHandler_0e4d005b_unsubscribe] - duration_validator 0ms
+DEBUG 2012-04-30 22:08:19,437 [idb_RequestHandler_0e4d005c_addTopic] - start_requestHandler
+INFO  2012-04-30 22:08:19,438 [idb_RequestHandler_0e4d005c_addTopic] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:19,438 [idb_RequestHandler_0e4d005c_addTopic] - duration_validator 0ms
+INFO  2012-04-30 22:08:19,438 [idb_RequestHandler_0e4d005c_addTopic] - duration_processing 0ms
+INFO  2012-04-30 22:08:19,438 [idb_RequestHandler_0e4d005c_addTopic] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:19,440 [idb_RequestHandler_0e4d005c_addTopic] - duration_serializer_2 2ms
+INFO  2012-04-30 22:08:19,440 [idb_RequestHandler_0e4d005c_addTopic] - duration_requestHandler 3ms
+DEBUG 2012-04-30 22:08:19,443 [idb_RequestHandler_0e4d005d_subscribe] - start_requestHandler
+INFO  2012-04-30 22:08:19,444 [idb_RequestHandler_0e4d005d_subscribe] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:19,444 [idb_RequestHandler_0e4d005d_subscribe] - duration_validator 0ms
+INFO  2012-04-30 22:08:19,444 [idb_RequestHandler_0e4d005d_subscribe] - duration_processing 0ms
+INFO  2012-04-30 22:08:19,444 [idb_RequestHandler_0e4d005d_subscribe] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:19,446 [idb_RequestHandler_0e4d005d_subscribe] - duration_serializer_2 2ms
+INFO  2012-04-30 22:08:19,446 [idb_RequestHandler_0e4d005d_subscribe] - duration_requestHandler 3ms
+DEBUG 2012-04-30 22:08:21,451 [idb_RequestHandler_0e4d005e_unsubscribe] - start_requestHandler
+INFO  2012-04-30 22:08:21,453 [idb_RequestHandler_0e4d005e_unsubscribe] - duration_serializer_1 2ms
+INFO  2012-04-30 22:08:21,453 [idb_RequestHandler_0e4d005e_unsubscribe] - duration_validator 0ms
+INFO  2012-04-30 22:08:21,454 [idb_RequestHandler_0e4d005e_unsubscribe] - duration_processing 1ms
+INFO  2012-04-30 22:08:21,454 [idb_RequestHandler_0e4d005e_unsubscribe] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:21,457 [idb_RequestHandler_0e4d005e_unsubscribe] - duration_serializer_2 3ms
+INFO  2012-04-30 22:08:21,457 [idb_RequestHandler_0e4d005e_unsubscribe] - duration_requestHandler 6ms
+DEBUG 2012-04-30 22:08:23,462 [idb_RequestHandler_0e4d005f_removeTopic] - start_requestHandler
+INFO  2012-04-30 22:08:23,464 [idb_RequestHandler_0e4d005f_removeTopic] - duration_serializer_1 2ms
+INFO  2012-04-30 22:08:23,464 [idb_RequestHandler_0e4d005f_removeTopic] - duration_validator 0ms
+INFO  2012-04-30 22:08:23,464 [idb_RequestHandler_0e4d005f_removeTopic] - duration_processing 0ms
+INFO  2012-04-30 22:08:23,464 [idb_RequestHandler_0e4d005f_removeTopic] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:23,467 [idb_RequestHandler_0e4d005f_removeTopic] - duration_serializer_2 3ms
+INFO  2012-04-30 22:08:23,467 [idb_RequestHandler_0e4d005f_removeTopic] - duration_requestHandler 5ms
+DEBUG 2012-04-30 22:08:23,480 [idb_RequestHandler_0e4d0060_getDomains] - start_requestHandler
+INFO  2012-04-30 22:08:23,481 [idb_RequestHandler_0e4d0060_getDomains] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:23,481 [idb_RequestHandler_0e4d0060_getDomains] - duration_validator 0ms
+INFO  2012-04-30 22:08:23,735 [idb_RequestHandler_0e4d0060_getDomains] - duration_processing 254ms
+INFO  2012-04-30 22:08:23,735 [idb_RequestHandler_0e4d0060_getDomains] - duration_reply_settype 0ms
+DEBUG 2012-04-30 22:08:23,991 [idb_RequestHandler_0e4d0061_getReservations] - start_requestHandler
+INFO  2012-04-30 22:08:23,992 [idb_RequestHandler_0e4d0061_getReservations] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:23,992 [idb_RequestHandler_0e4d0061_getReservations] - duration_validator 0ms
+INFO  2012-04-30 22:08:24,042 [idb_RequestHandler_0e4d0061_getReservations] - duration_processing 50ms
+INFO  2012-04-30 22:08:24,042 [idb_RequestHandler_0e4d0061_getReservations] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:24,044 [idb_RequestHandler_0e4d0061_getReservations] - duration_serializer_2 2ms
+INFO  2012-04-30 22:08:24,044 [idb_RequestHandler_0e4d0061_getReservations] - duration_requestHandler 53ms
+DEBUG 2012-04-30 22:08:24,047 [idb_RequestHandler_0e4d0061_getReservations] - reservation_ID 59
+DEBUG 2012-04-30 22:08:24,048 [idb_RequestHandler_0e4d0061_getReservations] - reservation_ID 59
+DEBUG 2012-04-30 22:08:24,129 [idb_RequestHandler_0e4d0062_getReservations] - start_requestHandler
+INFO  2012-04-30 22:08:24,131 [idb_RequestHandler_0e4d0062_getReservations] - duration_serializer_1 2ms
+INFO  2012-04-30 22:08:24,131 [idb_RequestHandler_0e4d0062_getReservations] - duration_validator 0ms
+INFO  2012-04-30 22:08:24,153 [idb_RequestHandler_0e4d0062_getReservations] - duration_processing 22ms
+INFO  2012-04-30 22:08:24,153 [idb_RequestHandler_0e4d0062_getReservations] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:24,156 [idb_RequestHandler_0e4d0062_getReservations] - duration_serializer_2 3ms
+INFO  2012-04-30 22:08:24,156 [idb_RequestHandler_0e4d0062_getReservations] - duration_requestHandler 27ms
+DEBUG 2012-04-30 22:08:24,438 [idb_RequestHandler_0e4d0063_deleteDomain] - start_requestHandler
+INFO  2012-04-30 22:08:24,439 [idb_RequestHandler_0e4d0063_deleteDomain] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:24,439 [idb_RequestHandler_0e4d0063_deleteDomain] - duration_validator 0ms
+INFO  2012-04-30 22:08:24,528 [idb_RequestHandler_0e4d0063_deleteDomain] - duration_processing 89ms
+INFO  2012-04-30 22:08:24,528 [idb_RequestHandler_0e4d0063_deleteDomain] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:24,530 [idb_RequestHandler_0e4d0063_deleteDomain] - duration_serializer_2 2ms
+INFO  2012-04-30 22:08:24,530 [idb_RequestHandler_0e4d0063_deleteDomain] - duration_requestHandler 92ms
+DEBUG 2012-04-30 22:08:24,534 [idb_RequestHandler_0e4d0064_addDomain] - start_requestHandler
+INFO  2012-04-30 22:08:24,535 [idb_RequestHandler_0e4d0064_addDomain] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:24,535 [idb_RequestHandler_0e4d0064_addDomain] - duration_validator 0ms
+INFO  2012-04-30 22:08:24,600 [idb_RequestHandler_0e4d0064_addDomain] - duration_processing 65ms
+INFO  2012-04-30 22:08:24,601 [idb_RequestHandler_0e4d0064_addDomain] - duration_reply_settype 1ms
+INFO  2012-04-30 22:08:24,604 [idb_RequestHandler_0e4d0064_addDomain] - duration_serializer_2 3ms
+INFO  2012-04-30 22:08:24,604 [idb_RequestHandler_0e4d0064_addDomain] - duration_requestHandler 70ms
+PERFORMANCE_LOG 2012-04-30 22:08:24,623 [idb_RequestHandler_0e4d0064_addDomain_NRPSController@localDummy] - NRPS_response_time localDummy -1335816504615ms
+DEBUG 2012-04-30 22:08:24,666 [idb_RequestHandler_0e4d0065_deleteDomain] - start_requestHandler
+INFO  2012-04-30 22:08:24,668 [idb_RequestHandler_0e4d0065_deleteDomain] - duration_serializer_1 2ms
+INFO  2012-04-30 22:08:24,668 [idb_RequestHandler_0e4d0065_deleteDomain] - duration_validator 0ms
+INFO  2012-04-30 22:08:24,718 [idb_RequestHandler_0e4d0065_deleteDomain] - duration_processing 50ms
+INFO  2012-04-30 22:08:24,719 [idb_RequestHandler_0e4d0065_deleteDomain] - duration_reply_settype 1ms
+INFO  2012-04-30 22:08:24,722 [idb_RequestHandler_0e4d0065_deleteDomain] - duration_serializer_2 3ms
+INFO  2012-04-30 22:08:24,722 [idb_RequestHandler_0e4d0065_deleteDomain] - duration_requestHandler 56ms
+DEBUG 2012-04-30 22:08:25,448 [idb_RequestHandler_0e4d0066_cancelJob] - start_requestHandler
+INFO  2012-04-30 22:08:25,449 [idb_RequestHandler_0e4d0066_cancelJob] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:25,449 [idb_RequestHandler_0e4d0066_cancelJob] - duration_validator 0ms
+INFO  2012-04-30 22:08:25,461 [idb_RequestHandler_0e4d0066_cancelJob] - duration_processing 12ms
+INFO  2012-04-30 22:08:25,461 [idb_RequestHandler_0e4d0066_cancelJob] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:25,463 [idb_RequestHandler_0e4d0066_cancelJob] - duration_serializer_2 2ms
+INFO  2012-04-30 22:08:25,463 [idb_RequestHandler_0e4d0066_cancelJob] - duration_requestHandler 15ms
+DEBUG 2012-04-30 22:08:25,470 [idb_RequestHandler_0e4d0067_completeJob] - start_requestHandler
+INFO  2012-04-30 22:08:25,471 [idb_RequestHandler_0e4d0067_completeJob] - duration_serializer_1 1ms
+INFO  2012-04-30 22:08:25,471 [idb_RequestHandler_0e4d0067_completeJob] - duration_validator 0ms
+INFO  2012-04-30 22:08:25,479 [idb_RequestHandler_0e4d0067_completeJob] - duration_processing 8ms
+INFO  2012-04-30 22:08:25,479 [idb_RequestHandler_0e4d0067_completeJob] - duration_reply_settype 0ms
+INFO  2012-04-30 22:08:25,482 [idb_RequestHandler_0e4d0067_completeJob] - duration_serializer_2 3ms
+INFO  2012-04-30 22:08:25,482 [idb_RequestHandler_0e4d0067_completeJob] - duration_requestHandler 12ms

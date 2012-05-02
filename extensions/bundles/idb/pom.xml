@@ -1,0 +1,358 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<artifactId>org.opennaas.extensions.bundles</artifactId>
+		<groupId>org.opennaas</groupId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+	<!-- POM id -->
+	<artifactId>org.opennaas.extensions.idb</artifactId>
+	<modelVersion>4.0.0</modelVersion>
+	<packaging>bundle</packaging>
+	<name>IDB </name>
+	<description>IDB bundle</description>
+	
+	<dependencies>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.15</version>
+			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>com.sun.jdmk</groupId>
+					<artifactId>jmxtools</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.sun.jmx</groupId>
+					<artifactId>jmxri</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>dnsjava</groupId>
+			<artifactId>dnsjava</artifactId>
+			<version>2.1.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>xalan</groupId>
+			<artifactId>xalan</artifactId>
+			<version>2.7.0</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.apache.santuario</groupId>
+			<artifactId>xmlsec</artifactId>
+			<version>1.4.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>stax</groupId>
+			<artifactId>stax-api</artifactId>
+			<version>1.0.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>wsdl4j</groupId>
+			<artifactId>wsdl4j</artifactId>
+			<version>1.6.2</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.mockrunner</groupId>
+			<artifactId>mockrunner-jdk1.5-j2ee1.3</artifactId>
+			<version>0.4</version>
+			<exclusions>
+				<exclusion>
+					<groupId>cglib-nodep</groupId>
+					<artifactId>cglib-nodep</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>jboss</groupId>
+					<artifactId>jboss-jee</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.4</version>
+		</dependency>
+
+
+
+		<dependency>
+			<groupId>org.apache.muse</groupId>
+			<artifactId>muse-platform-mini </artifactId>
+			<version>2.2.0</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.aaaarch</groupId>
+			<artifactId>gaaa-toolkit</artifactId>
+			<version>v09</version>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java </artifactId>
+			<version>5.1.18</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>2.2.8</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.apache.muse</groupId>
+			<artifactId>muse-tools </artifactId>
+			<version>2.2.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>bouncycastle</groupId>
+			<artifactId>bcprov-jdk15</artifactId>
+			<version>140</version>
+		</dependency>
+
+
+
+		<dependency>
+			<groupId>org.apache.santuario</groupId>
+			<artifactId>xmlsecSamples </artifactId>
+			<version>1</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.apache.muse</groupId>
+			<artifactId>muse-complete</artifactId>
+			<version>2.2.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>sun-xacml</groupId>
+			<artifactId>sun-xacml</artifactId><!-- originally 1.6 -->
+			<version>2.0</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>javax.transaction</groupId>
+			<artifactId>jta </artifactId>
+			<version>1.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>eu.ist_phosphorus.harmony</groupId>
+			<artifactId>database </artifactId>
+			<version>1</version>
+		</dependency>
+
+
+
+		<dependency>
+			<groupId>eu.ist_phosphorus.harmony</groupId>
+			<artifactId>common-utils </artifactId>
+			<version>1</version>
+		</dependency>
+
+
+
+		<dependency>
+			<groupId>eu.ist_phosphorus.harmony</groupId>
+			<artifactId>common-serviceinterface </artifactId>
+			<version>1</version>
+		</dependency>
+
+
+
+		<dependency>
+			<groupId>eu.ist_phosphorus.harmony</groupId>
+			<artifactId>adapter-dummy</artifactId>
+			<version>1</version>
+			<classifier>classes</classifier>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.mysema.querydsl</groupId>
+			<artifactId>querydsl-apt</artifactId>
+			<version>2.5.0</version>
+		
+		</dependency>
+
+		<dependency>
+			<groupId>com.mysema.querydsl</groupId>
+			<artifactId>querydsl-jpa</artifactId>
+			<version>2.5.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.openjpa</groupId>
+			<artifactId>openjpa</artifactId>
+			<version>2.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.openjpa</groupId>
+			<artifactId>openjpa-lib</artifactId>
+			<version>2.2.0</version>
+		</dependency>
+<!-- opennaas dependencies -->
+					<dependency>
+						<groupId>org.opennaas</groupId>
+						<artifactId>org.opennaas.core.resources</artifactId>
+					</dependency>
+					<dependency>
+		            	<groupId>org.opennaas</groupId>
+			            <artifactId>org.opennaas.extensions.queuemanager</artifactId>
+	             	</dependency>
+	             	<dependency>
+			<groupId>com.googlecode.guava-osgi</groupId>
+			<artifactId>guava-osgi</artifactId>
+			<version>${guava.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.karaf.shell</groupId>
+			<artifactId>org.apache.karaf.shell.console</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.mysema.maven</groupId>
+				<artifactId>maven-apt-plugin</artifactId>
+				<version>0.3.2</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>process</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>target/generated-sources/java</outputDirectory>
+							<processor>com.mysema.query.apt.jpa.JPAAnnotationProcessor</processor>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.openjpa</groupId>
+				<artifactId>openjpa-maven-plugin</artifactId>
+				<version>2.2.0</version>
+				<configuration>
+					<includes>**/persistence/hibernate/*.class</includes>
+					<excludes>**/hibernate/XML*.class</excludes>
+					<addDefaultConstructor>true</addDefaultConstructor>
+					<enforcePropertyRestrictions>true</enforcePropertyRestrictions>
+				</configuration>
+				<executions>
+					<execution>
+						<id>enhancer</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>enhance</goal>
+						</goals>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.openjpa</groupId>
+						<artifactId>openjpa</artifactId>
+						<!-- set the version to be the same as the level in your runtime -->
+						<version>2.2.0</version>
+					</dependency>
+
+					<dependency>
+						<groupId>xerces</groupId>
+						<artifactId>xercesImpl</artifactId>
+						<version>2.4.0</version>
+					</dependency>
+
+				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>org.ops4j</groupId>
+				<artifactId>maven-pax-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<extensions>true</extensions>
+				<!-- | the following instructions build a simple set of public/private 
+					classes into an OSGi bundle -->
+				<configuration>
+					<instructions>
+						<Import-Package>com.mysema.query.jpa,*</Import-Package>
+						<Export-Package>org.opennaas.extensions.idb.*;version="${project.version}"</Export-Package> 
+					</instructions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<repositories>
+
+<repository>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+        <checksumPolicy>warn</checksumPolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+        <checksumPolicy>warn</checksumPolicy>
+      </snapshots>
+      <id>mysema</id>
+      <name>mysema</name>
+      <url>http://source.mysema.com/maven2/releases</url>
+      <layout>default</layout>
+    </repository>
+<repository>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+        <checksumPolicy>warn</checksumPolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+        <checksumPolicy>warn</checksumPolicy>
+      </snapshots>
+      <id>myproxy</id>
+      <name>MyProxy API and Client</name>
+      <url>https://cilogon.svn.sourceforge.net/svnroot/cilogon/m2-repo/</url>
+      <layout>default</layout>
+    </repository>
+</repositories>
+</project>
