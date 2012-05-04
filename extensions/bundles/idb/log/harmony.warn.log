@@ -493,3 +493,102 @@ WARN  2012-04-30 22:08:23,993 [idb_RequestHandler_0e4d0061_getReservations] - No
 WARN  2012-04-30 22:08:24,131 [idb_RequestHandler_0e4d0062_getReservations] - No such method: org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetReservationsType.getReservationID()
 WARN  2012-04-30 22:08:25,450 [idb_RequestHandler_0e4d0066_cancelJob] - No such method: org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CancelJobType.getReservationID()
 WARN  2012-04-30 22:08:25,471 [idb_RequestHandler_0e4d0067_completeJob] - No such method: org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CompleteJobType.getReservationID()
+WARN  2012-05-04 11:20:35,823 [idb_RequestHandler_9ce20002_addDomain] - advertised endpoint 157.213.1.101 is not declared as border endpoint
+WARN  2012-05-04 11:20:36,085 [idb_RequestHandler_9ce20005_addDomain] - advertised endpoint 158.231.1.101 is not declared as border endpoint
+WARN  2012-05-04 11:20:36,476 [idb_RequestHandler_9ce2000b_addDomain] - advertised endpoint 160.112.1.101 is not declared as border endpoint
+WARN  2012-05-04 11:20:36,765 [idb_RequestHandler_9ce2000f_addDomain] - advertised endpoint 161.140.1.101 is not declared as border endpoint
+WARN  2012-05-04 11:20:37,136 [idb_RequestHandler_9ce20015_addDomain] - advertised endpoint 162.253.1.101 is not declared as border endpoint
+WARN  2012-05-04 11:20:37,522 [idb_RequestHandler_9ce2001a_addDomain] - advertised endpoint 164.134.1.101 is not declared as border endpoint
+WARN  2012-05-04 11:20:37,901 [idb_RequestHandler_9ce20021_addDomain] - advertised endpoint 165.254.1.101 is not declared as border endpoint
+WARN  2012-05-04 11:20:38,041 [idb_RequestHandler_9ce20022_editDomain] - advertised endpoint 165.254.1.201 is not declared as border endpoint
+WARN  2012-05-04 11:20:38,418 [idb_RequestHandler_9ce20027_addDomain] - advertised endpoint 168.5.1.101 is not declared as border endpoint
+WARN  2012-05-04 11:20:38,809 [idb_RequestHandler_9ce2002f_addDomain] - advertised endpoint 169.137.1.101 is not declared as border endpoint
+WARN  2012-05-04 11:20:39,059 [idb_RequestHandler_9ce20034_addDomain] - advertised endpoint 170.137.1.101 is not declared as border endpoint
+WARN  2012-05-04 11:20:39,607 [idb_RequestHandler_9ce20039_addDomain] - advertised endpoint 172.168.1.101 is not declared as border endpoint
+WARN  2012-05-04 11:20:40,171 [idb_RequestHandler_9ce20043_addDomain] - advertised endpoint 174.213.1.101 is not declared as border endpoint
+FATAL 2012-05-04 11:20:41,644 [idb_RequestHandler_9ce20051_deleteDomain] - Exception <DatabaseException> handled by ExceptionHandler
+org.opennaas.extensions.idb.exception.database.DatabaseException: The transaction has been rolled back.  See the nested exceptions for details on the errors that occurred.
+	at org.opennaas.extensions.idb.database.TransactionManager.start(TransactionManager.java:113)
+	at org.opennaas.extensions.idb.database.TransactionManager.<init>(TransactionManager.java:75)
+	at org.opennaas.extensions.idb.database.hibernate.Domain$6.<init>(Domain.java:948)
+	at org.opennaas.extensions.idb.database.hibernate.Domain.delete(Domain.java:948)
+	at org.opennaas.extensions.idb.topology.handler.TopologyRequestHandler.deleteDomain(TopologyRequestHandler.java:362)
+	at sun.reflect.GeneratedMethodAccessor24.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:616)
+	at org.opennaas.extensions.idb.serviceinterface.RequestHandler.invokeMethod(RequestHandler.java:163)
+	at org.opennaas.extensions.idb.serviceinterface.RequestHandler.runRequest(RequestHandler.java:230)
+	at org.opennaas.extensions.idb.serviceinterface.RequestHandler.handle(RequestHandler.java:113)
+	at org.opennaas.extensions.idb.webservice.TopologyWS.deleteDomain(TopologyWS.java:68)
+	at sun.reflect.GeneratedMethodAccessor22.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:616)
+	at org.opennaas.extensions.idb.serviceinterface.topology.CommonTopologyClient.callServer(CommonTopologyClient.java:141)
+	at org.opennaas.extensions.idb.serviceinterface.topology.CommonTopologyClient.deleteDomain(CommonTopologyClient.java:163)
+	at org.opennaas.extensions.idb.serviceinterface.topology.SimpleTopologyClient.deleteDomain(SimpleTopologyClient.java:231)
+	at org.opennaas.extensions.idb.serviceinterface.topology.SimpleTopologyClient.deleteDomain(SimpleTopologyClient.java:247)
+	at org.opennaas.extensions.idb.test.webservice.TestReservationWebservice.cleanupTopology(TestReservationWebservice.java:100)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:616)
+	at org.junit.internal.runners.ClassRoadie.runAfters(ClassRoadie.java:65)
+	at org.junit.internal.runners.ClassRoadie.runProtected(ClassRoadie.java:40)
+	at org.junit.internal.runners.JUnit4ClassRunner.run(JUnit4ClassRunner.java:42)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:236)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:134)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:113)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:616)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:103)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:74)
+Caused by: <openjpa-2.2.0-r422266:1244990 fatal store error> org.apache.openjpa.persistence.EntityExistsException: The transaction has been rolled back.  See the nested exceptions for details on the errors that occurred.
+FailedObject: org.opennaas.extensions.idb.database.hibernate.Domain-localDummy
+	at org.apache.openjpa.kernel.BrokerImpl.newFlushException(BrokerImpl.java:2337)
+	at org.apache.openjpa.kernel.BrokerImpl.flush(BrokerImpl.java:2174)
+	at org.apache.openjpa.kernel.BrokerImpl.flushSafe(BrokerImpl.java:2072)
+	at org.apache.openjpa.kernel.BrokerImpl.flush(BrokerImpl.java:1843)
+	at org.apache.openjpa.kernel.DelegatingBroker.flush(DelegatingBroker.java:1045)
+	at org.apache.openjpa.persistence.EntityManagerImpl.flush(EntityManagerImpl.java:663)
+	at org.opennaas.extensions.idb.database.TransactionManager.start(TransactionManager.java:109)
+	... 38 more
+Caused by: <openjpa-2.2.0-r422266:1244990 fatal store error> org.apache.openjpa.persistence.EntityExistsException: Cannot delete or update a parent row: a foreign key constraint fails (`RealIDB`.`Endpoint`, CONSTRAINT `Endpoint_ibfk_1` FOREIGN KEY (`fkDomainName`) REFERENCES `Domain` (`name`)) {prepstmnt 1139676697 DELETE FROM Domain WHERE name = ? [params=?]} [code=1451, state=23000]
+FailedObject: org.opennaas.extensions.idb.database.hibernate.Domain-localDummy
+	at org.apache.openjpa.jdbc.sql.DBDictionary.narrow(DBDictionary.java:4903)
+	at org.apache.openjpa.jdbc.sql.DBDictionary.newStoreException(DBDictionary.java:4878)
+	at org.apache.openjpa.jdbc.sql.SQLExceptions.getStore(SQLExceptions.java:136)
+	at org.apache.openjpa.jdbc.sql.SQLExceptions.getStore(SQLExceptions.java:78)
+	at org.apache.openjpa.jdbc.kernel.PreparedStatementManagerImpl.flushAndUpdate(PreparedStatementManagerImpl.java:143)
+	at org.apache.openjpa.jdbc.kernel.BatchingPreparedStatementManagerImpl.flushAndUpdate(BatchingPreparedStatementManagerImpl.java:79)
+	at org.apache.openjpa.jdbc.kernel.PreparedStatementManagerImpl.flushInternal(PreparedStatementManagerImpl.java:99)
+	at org.apache.openjpa.jdbc.kernel.PreparedStatementManagerImpl.flush(PreparedStatementManagerImpl.java:87)
+	at org.apache.openjpa.jdbc.kernel.ConstraintUpdateManager.flush(ConstraintUpdateManager.java:357)
+	at org.apache.openjpa.jdbc.kernel.ConstraintUpdateManager.flushGraph(ConstraintUpdateManager.java:349)
+	at org.apache.openjpa.jdbc.kernel.ConstraintUpdateManager.flush(ConstraintUpdateManager.java:111)
+	at org.apache.openjpa.jdbc.kernel.BatchingConstraintUpdateManager.flush(BatchingConstraintUpdateManager.java:59)
+	at org.apache.openjpa.jdbc.kernel.AbstractUpdateManager.flush(AbstractUpdateManager.java:103)
+	at org.apache.openjpa.jdbc.kernel.AbstractUpdateManager.flush(AbstractUpdateManager.java:76)
+	at org.apache.openjpa.jdbc.kernel.JDBCStoreManager.flush(JDBCStoreManager.java:713)
+	at org.apache.openjpa.kernel.DelegatingStoreManager.flush(DelegatingStoreManager.java:131)
+	... 44 more
+Caused by: org.apache.openjpa.lib.jdbc.ReportingSQLException: Cannot delete or update a parent row: a foreign key constraint fails (`RealIDB`.`Endpoint`, CONSTRAINT `Endpoint_ibfk_1` FOREIGN KEY (`fkDomainName`) REFERENCES `Domain` (`name`)) {prepstmnt 1139676697 DELETE FROM Domain WHERE name = ? [params=?]} [code=1451, state=23000]
+	at org.apache.openjpa.lib.jdbc.LoggingConnectionDecorator.wrap(LoggingConnectionDecorator.java:247)
+	at org.apache.openjpa.lib.jdbc.LoggingConnectionDecorator.wrap(LoggingConnectionDecorator.java:223)
+	at org.apache.openjpa.lib.jdbc.LoggingConnectionDecorator.access$1000(LoggingConnectionDecorator.java:72)
+	at org.apache.openjpa.lib.jdbc.LoggingConnectionDecorator$LoggingConnection$LoggingPreparedStatement.executeUpdate(LoggingConnectionDecorator.java:1162)
+	at org.apache.openjpa.lib.jdbc.DelegatingPreparedStatement.executeUpdate(DelegatingPreparedStatement.java:272)
+	at org.apache.openjpa.jdbc.kernel.JDBCStoreManager$CancelPreparedStatement.executeUpdate(JDBCStoreManager.java:1741)
+	at org.apache.openjpa.jdbc.kernel.PreparedStatementManagerImpl.executeUpdate(PreparedStatementManagerImpl.java:267)
+	at org.apache.openjpa.jdbc.kernel.PreparedStatementManagerImpl.flushAndUpdate(PreparedStatementManagerImpl.java:118)
+	... 55 more
+WARN  2012-05-04 11:20:42,011 [Thread-6] - sending notification to http://localhost:8080/harmony-idb/services/Reservation failed! Calling http://localhost:8080/harmony-idb/services/Reservation:
+Connection refused
+WARN  2012-05-04 11:20:46,369 [idb_RequestHandler_9ce20061_getReservations] - No such method: org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetReservationsType.getReservationID()
+WARN  2012-05-04 11:20:46,591 [idb_RequestHandler_9ce20062_getReservations] - No such method: org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetReservationsType.getReservationID()
+WARN  2012-05-04 11:20:47,854 [idb_RequestHandler_9ce20066_cancelJob] - No such method: org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CancelJobType.getReservationID()
+WARN  2012-05-04 11:20:47,889 [idb_RequestHandler_9ce20067_completeJob] - No such method: org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CompleteJobType.getReservationID()

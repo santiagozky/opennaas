@@ -147,6 +147,7 @@
 		<feature version="${project.version}">opennaas-luminis</feature>
 		<feature version="${project.version}">opennaas-platformmanager</feature>
 		<feature version="${project.version}">opennaas-autobahn</feature>
+	
 	</feature>
 
 	<feature name="nexus-tests-helper" version="${project.version}">
@@ -158,4 +159,6 @@
 		<feature version="${opennaas.version}">org.opennaas.core</feature>
 		<bundle>mvn:org.opennaas/org.opennaas.core.tests-mockprofile/${project.version}</bundle>
 	</feature>
+	
+	
 </features>

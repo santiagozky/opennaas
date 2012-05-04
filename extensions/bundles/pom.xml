@@ -55,5 +55,6 @@
 		<module>bod.actionsets.dummy</module>
                 <module>bod.autobahn</module>
                 <module>idb</module>
+		<module>idb.serviceinterface</module>
 	</modules>
 </project>

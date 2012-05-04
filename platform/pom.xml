@@ -157,6 +157,12 @@
 			<groupId>org.apache.servicemix</groupId>
 			<artifactId>apache-servicemix</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>org.opennaas</groupId>
+			<artifactId>org.opennaas.extensions.idb</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>

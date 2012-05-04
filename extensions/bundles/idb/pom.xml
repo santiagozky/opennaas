@@ -1,6 +1,5 @@
-<?xml version="1.0"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<parent>
 		<artifactId>org.opennaas.extensions.bundles</artifactId>
 		<groupId>org.opennaas</groupId>
@@ -12,7 +11,7 @@
 	<packaging>bundle</packaging>
 	<name>IDB </name>
 	<description>IDB bundle</description>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>log4j</groupId>
@@ -83,29 +82,26 @@
 					<artifactId>jboss-jee</artifactId>
 				</exclusion>
 			</exclusions>
+			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.4</version>
+			<scope>test</scope>
 		</dependency>
 
 
 
 		<dependency>
-			<groupId>org.apache.muse</groupId>
+			<groupId>muse</groupId>
 			<artifactId>muse-platform-mini </artifactId>
 			<version>2.2.0</version>
 		</dependency>
 
 
-		<dependency>
-			<groupId>org.aaaarch</groupId>
-			<artifactId>gaaa-toolkit</artifactId>
-			<version>v09</version>
-		</dependency>
-
+		
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java </artifactId>
@@ -120,15 +116,15 @@
 
 
 		<dependency>
-			<groupId>org.apache.muse</groupId>
+			<groupId>muse</groupId>
 			<artifactId>muse-tools </artifactId>
 			<version>2.2.0</version>
 		</dependency>
 
 		<dependency>
-			<groupId>bouncycastle</groupId>
+			<groupId>org.bouncycastle</groupId>
 			<artifactId>bcprov-jdk15</artifactId>
-			<version>140</version>
+			<version>1.46</version>
 		</dependency>
 
 
@@ -141,7 +137,7 @@
 
 
 		<dependency>
-			<groupId>org.apache.muse</groupId>
+			<groupId>muse.osgi-bundles</groupId>
 			<artifactId>muse-complete</artifactId>
 			<version>2.2.0</version>
 		</dependency>
@@ -183,14 +179,6 @@
 
 		<dependency>
 			<groupId>eu.ist_phosphorus.harmony</groupId>
-			<artifactId>common-serviceinterface </artifactId>
-			<version>1</version>
-		</dependency>
-
-
-
-		<dependency>
-			<groupId>eu.ist_phosphorus.harmony</groupId>
 			<artifactId>adapter-dummy</artifactId>
 			<version>1</version>
 			<classifier>classes</classifier>
@@ -201,7 +189,7 @@
 			<groupId>com.mysema.querydsl</groupId>
 			<artifactId>querydsl-apt</artifactId>
 			<version>2.5.0</version>
-		
+
 		</dependency>
 
 		<dependency>
@@ -225,16 +213,21 @@
 			<artifactId>openjpa-lib</artifactId>
 			<version>2.2.0</version>
 		</dependency>
-<!-- opennaas dependencies -->
-					<dependency>
-						<groupId>org.opennaas</groupId>
-						<artifactId>org.opennaas.core.resources</artifactId>
-					</dependency>
-					<dependency>
-		            	<groupId>org.opennaas</groupId>
-			            <artifactId>org.opennaas.extensions.queuemanager</artifactId>
-	             	</dependency>
-	             	<dependency>
+		<!-- opennaas dependencies -->
+		<dependency>
+			<groupId>org.opennaas</groupId>
+			<artifactId>org.opennaas.extensions.idb.serviceinterface</artifactId>
+				<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.opennaas</groupId>
+			<artifactId>org.opennaas.core.resources</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.opennaas</groupId>
+			<artifactId>org.opennaas.extensions.queuemanager</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>com.googlecode.guava-osgi</groupId>
 			<artifactId>guava-osgi</artifactId>
 			<version>${guava.version}</version>
@@ -313,46 +306,40 @@
 					classes into an OSGi bundle -->
 				<configuration>
 					<instructions>
-						<Import-Package>com.mysema.query.jpa,*</Import-Package>
-						<Export-Package>org.opennaas.extensions.idb.*;version="${project.version}"</Export-Package> 
+						<Import-Package>com.mysema.query.*,*</Import-Package>
+						<Export-Package>org.opennaas.extensions.idb.*;version="${project.version}"</Export-Package>
 					</instructions>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.karaf.tooling</groupId>
+				<artifactId>features-maven-plugin</artifactId>
+				<version>2.2.7</version>
+
+				<executions>
+					<!-- add execution definitions here -->
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
 	<repositories>
 
-<repository>
-      <releases>
-        <enabled>true</enabled>
-        <updatePolicy>always</updatePolicy>
-        <checksumPolicy>warn</checksumPolicy>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-        <updatePolicy>never</updatePolicy>
-        <checksumPolicy>warn</checksumPolicy>
-      </snapshots>
-      <id>mysema</id>
-      <name>mysema</name>
-      <url>http://source.mysema.com/maven2/releases</url>
-      <layout>default</layout>
-    </repository>
-<repository>
-      <releases>
-        <enabled>true</enabled>
-        <updatePolicy>always</updatePolicy>
-        <checksumPolicy>warn</checksumPolicy>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-        <updatePolicy>never</updatePolicy>
-        <checksumPolicy>warn</checksumPolicy>
-      </snapshots>
-      <id>myproxy</id>
-      <name>MyProxy API and Client</name>
-      <url>https://cilogon.svn.sourceforge.net/svnroot/cilogon/m2-repo/</url>
-      <layout>default</layout>
-    </repository>
-</repositories>
+
+		<repository>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</snapshots>
+			<id>myproxy</id>
+			<name>MyProxy API and Client</name>
+			<url>https://cilogon.svn.sourceforge.net/svnroot/cilogon/m2-repo/</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
 </project>
