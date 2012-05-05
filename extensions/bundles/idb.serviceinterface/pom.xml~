@@ -8,9 +8,20 @@
 	<artifactId>org.opennaas.extensions.idb.serviceinterface</artifactId>
 	<modelVersion>4.0.0</modelVersion>
 	<packaging>bundle</packaging>
-	<name>IDB </name>
-	<description>IDB bundle</description>
-	
+	<name>IDB service interface</name>
+	<description>IDB service interface bundle</description>
+<properties>
+    <groupId>eu.ist_phosphorus.harmony</groupId>
+    <artifactId>harmony</artifactId>
+    <version>1.0</version>
+    <resources.dir>resources</resources.dir>
+    <webservices.dir>${resources.dir}/webservices</webservices.dir>
+    <scripts.dir>${resources.dir}/scripts</scripts.dir>
+    <muse.dir>/home/santiago/tools/muse</muse.dir>
+    <src.dir>${basedir}/src</src.dir>
+    <log.dir>${basedir}/log</log.dir>
+    <temp.dir>${basedir}/temp</temp.dir>
+</properties>
 	<build>
 		<directory>target</directory>
 		<outputDirectory>target/classes</outputDirectory>
@@ -345,6 +356,23 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>org.ops4j</groupId>
+				<artifactId>maven-pax-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<extensions>true</extensions>
+				<!-- | the following instructions build a simple set of public/private 
+					classes into an OSGi bundle -->
+				<configuration>
+					<instructions>
+						<Import-Package>*</Import-Package>
+						<Export-Package>org.opennaas.extensions.idb.*;version="${project.version}"</Export-Package> 
+					</instructions>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 	<dependencies>
@@ -393,9 +421,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>eu.ist_phosphorus.harmony</groupId>
-			<artifactId>common-utils</artifactId>
-			<version>1</version>
+			<groupId>org.opennaas</groupId>
+			<artifactId>org.opennas.extensions.idb.utils</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>eu.ist_phosphorus.harmony</groupId>
@@ -403,12 +431,12 @@
 			<version>1</version>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.muse</groupId>
+			<groupId>muse</groupId>
 			<artifactId>muse-platform-mini</artifactId>
 			<version>2.2.0</version>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.muse</groupId>
+			<groupId>muse</groupId>
 			<artifactId>muse-tools</artifactId>
 			<version>2.2.0</version>
 		</dependency>

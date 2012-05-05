@@ -421,9 +421,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>eu.ist_phosphorus.harmony</groupId>
-			<artifactId>common-utils</artifactId>
-			<version>1</version>
+			<groupId>org.opennaas</groupId>
+			<artifactId>org.opennaas.extensions.idb.utils</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>eu.ist_phosphorus.harmony</groupId>

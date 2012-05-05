@@ -56,5 +56,8 @@
                 <module>bod.autobahn</module>
                 <module>idb</module>
 		<module>idb.serviceinterface</module>
+		<module>idb.database</module>
+		<module>idb.utils</module>
+		<module>idb.da.dummy</module>
 	</modules>
 </project>

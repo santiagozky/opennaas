@@ -1,0 +1,12 @@
+TRACE 2012-05-05 19:36:45,618 [main] - Special log message at: 1336239405618
+DEBUG 2012-05-05 19:36:45,618 [main] - Special log message at: 1336239405618
+INFO  2012-05-05 19:36:45,618 [main] - Special log message at: 1336239405618
+WARN  2012-05-05 19:36:45,618 [main] - Special log message at: 1336239405618
+ERROR 2012-05-05 19:36:45,618 [main] - Special log message at: 1336239405618
+FATAL 2012-05-05 19:36:45,618 [main] - Special log message at: 1336239405618
+TRACE 2012-05-05 19:38:29,127 [main] - Special log message at: 1336239509127
+DEBUG 2012-05-05 19:38:29,127 [main] - Special log message at: 1336239509127
+INFO  2012-05-05 19:38:29,127 [main] - Special log message at: 1336239509127
+WARN  2012-05-05 19:38:29,127 [main] - Special log message at: 1336239509127
+ERROR 2012-05-05 19:38:29,127 [main] - Special log message at: 1336239509127
+FATAL 2012-05-05 19:38:29,127 [main] - Special log message at: 1336239509127

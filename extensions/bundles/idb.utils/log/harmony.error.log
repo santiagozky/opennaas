@@ -1,0 +1,8 @@
+ERROR 2012-05-05 19:36:45,582 [main] - Error log message at: 1336239405581
+FATAL 2012-05-05 19:36:45,607 [main] - Fatal log message at: 1336239405607
+ERROR 2012-05-05 19:36:45,626 [main] - logError
+FATAL 2012-05-05 19:36:45,626 [main] - logFatal
+ERROR 2012-05-05 19:38:29,083 [main] - Error log message at: 1336239509082
+FATAL 2012-05-05 19:38:29,110 [main] - Fatal log message at: 1336239509110
+ERROR 2012-05-05 19:38:29,129 [main] - logError
+FATAL 2012-05-05 19:38:29,129 [main] - logFatal

@@ -1,0 +1,16 @@
+ERROR 2012-05-05 19:36:45,582 [main] - Error log message at: 1336239405581
+INFO  2012-05-05 19:36:45,604 [main] - Info log message at: 1336239405603
+WARN  2012-05-05 19:36:45,605 [main] - Warn log message at: 1336239405605
+FATAL 2012-05-05 19:36:45,607 [main] - Fatal log message at: 1336239405607
+INFO  2012-05-05 19:36:45,626 [main] - logInfo
+WARN  2012-05-05 19:36:45,626 [main] - logWarn
+ERROR 2012-05-05 19:36:45,626 [main] - logError
+FATAL 2012-05-05 19:36:45,626 [main] - logFatal
+ERROR 2012-05-05 19:38:29,083 [main] - Error log message at: 1336239509082
+INFO  2012-05-05 19:38:29,101 [main] - Info log message at: 1336239509101
+WARN  2012-05-05 19:38:29,104 [main] - Warn log message at: 1336239509103
+FATAL 2012-05-05 19:38:29,110 [main] - Fatal log message at: 1336239509110
+INFO  2012-05-05 19:38:29,129 [main] - logInfo
+WARN  2012-05-05 19:38:29,129 [main] - logWarn
+ERROR 2012-05-05 19:38:29,129 [main] - logError
+FATAL 2012-05-05 19:38:29,129 [main] - logFatal
