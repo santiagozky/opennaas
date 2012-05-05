@@ -36,7 +36,6 @@
 <feature version='2.2.0'>openjpa-lib</feature-->
 <feature version='2.0'>sun-xacml</feature>
 <feature version='1'>xmlsecSamples</feature>
-<!--mine, bundle TODO-->
 <feature version='1.0.0-SNAPSHOT'>database</feature>
 <feature version='1.0.0-SNAPSHOT'>commons-utils</feature>
 <feature version='1.0.0-SNAPSHOT'>adapter-dummy</feature>
@@ -111,9 +110,13 @@
     <bundle>mvn:org.apache.geronimo.specs/geronimo-jta_1.1_spec/1.1.1</bundle>
   </feature>
   <feature name='database' version='1.0.0-SNAPSHOT'>
-    <bundle>mvn:org.opennaas.extensions.idb.database/1.0.0-SNAPSHOT</bundle>
+   <bundle>mvn:org.apache.felix/org.osgi.compendium/1.4.0</bundle>
+    <bundle>mvn:org.apache.geronimo.specs/geronimo-jpa_2.0_spec/1.1</bundle>
+    <bundle>mvn:org.opennaas/org.opennaas.extensions.idb.database/1.0.0-SNAPSHOT</bundle>
   </feature>
   <feature name='common-utils' version='1.0.0-SNAPSHOT'>
+    <feature version='2.1.1'>dnsjava</feature>
+    <feature version='2.2.0'>muse-complete</feature>
     <bundle>mvn:org.opennaas/org.opennaas.extensions.idb.utils/1.0.0-SNAPSHOT</bundle>
   </feature>
    <feature name='org.opennaas.extensions.idb.serviceinterface' version='1.0.0-SNAPSHOT'>
@@ -124,7 +127,8 @@
     <bundle>mvn:org.opennaas/org.opennaas.extensions.idb.serviceinterface/1.0.0-SNAPSHOT</bundle>
   </feature>
   <feature name='adapter-dummy' version='1.0.0-SNAPSHOT'>
-    <bundle>mvn:eu.ist_phosphorus.harmony/adapter-dummy/1.0.0-SNAPSHOT</bundle>
+    <feature version='1.0.0-SNAPSHOT'>org.opennaas.extensions.idb.utils</feature>
+    <bundle>mvn:org.opennaas/org.opennaas.extensions.idb.da.dummy/1.0.0-SNAPSHOT</bundle>
   </feature>
   <feature name='querydsl-apt' version='2.5.0'>
     <bundle>mvn:com.mysema.querydsl/querydsl-core/2.5.0</bundle>
