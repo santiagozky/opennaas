@@ -2,8 +2,6 @@
 <features>
 <feature name='opennaas-idb' version='1'>
 <feature version='2.1.1'>dnsjava</feature>
-<feature version='2.7.0'>xalan</feature>
-<feature version='1.4.3'>xmlsec</feature>
 <feature version='1.4.4'>mail</feature>
 <feature version='1.0.1'>stax-api</feature>
 <feature version='1.6.2'>wsdl4j</feature>
@@ -35,9 +33,8 @@
 <feature version='2.2.0'>muse-tools</feature>
 <feature version='2.2.0'>openjpa-lib</feature-->
 <feature version='2.0'>sun-xacml</feature>
-<feature version='1'>xmlsecSamples</feature>
 <feature version='1.0.0-SNAPSHOT'>database</feature>
-<feature version='1.0.0-SNAPSHOT'>commons-utils</feature>
+<feature version='1.0.0-SNAPSHOT'>common-utils</feature>
 <feature version='1.0.0-SNAPSHOT'>adapter-dummy</feature>
 </feature>
 
@@ -47,9 +44,6 @@
   </feature>
   <feature name='xalan' version='2.7.0'>
     <bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.xalan/2.7.1_1</bundle>
-  </feature>
-  <feature name='xmlsec' version='1.4.3'>
-    <bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.xmlsec/1.4.3_4</bundle>
   </feature>
   <feature name='mail' version='1.4.4'>
     <bundle>mvn:org.apache.geronimo.specs/geronimo-activation_1.1_spec/1.0.2</bundle>
@@ -93,9 +87,6 @@
   <feature name='bcprov-jdk15' version='140'>
     <bundle>mvn:org.bouncycastle/bcprov-jdk15/1.46</bundle>
   </feature>
-  <feature name='xmlsecSamples' version='1'>
-    <bundle>mvn:org.apache.santuario/xmlsecSamples/1</bundle>
-  </feature>
   <feature name='muse-complete' version='2.2.0'>
     <bundle>mvn:muse.osgi-bundles/muse-complete/2.2.0</bundle>
   </feature>
@@ -104,7 +95,7 @@
   </feature>
   
   <feature name='sun-xacml' version='2.0'>
-    <bundle>mvn:sun-xacml/sun-xacml/2.0</bundle>
+    <bundle>mvn:sun-xacml/sun-xacml-bundle/2.0</bundle>
   </feature>
   <feature name='jta' version='1.1'>
     <bundle>mvn:org.apache.geronimo.specs/geronimo-jta_1.1_spec/1.1.1</bundle>
@@ -127,7 +118,7 @@
     <bundle>mvn:org.opennaas/org.opennaas.extensions.idb.serviceinterface/1.0.0-SNAPSHOT</bundle>
   </feature>
   <feature name='adapter-dummy' version='1.0.0-SNAPSHOT'>
-    <feature version='1.0.0-SNAPSHOT'>org.opennaas.extensions.idb.utils</feature>
+    <feature version='1.0.0-SNAPSHOT'>common-utils</feature>
     <bundle>mvn:org.opennaas/org.opennaas.extensions.idb.da.dummy/1.0.0-SNAPSHOT</bundle>
   </feature>
   <feature name='querydsl-apt' version='2.5.0'>

@@ -36,24 +36,6 @@
 			<version>2.1.1</version>
 		</dependency>
 
-		<dependency>
-			<groupId>xalan</groupId>
-			<artifactId>xalan</artifactId>
-			<version>2.7.0</version>
-		</dependency>
-
-
-		<dependency>
-			<groupId>org.apache.santuario</groupId>
-			<artifactId>xmlsec</artifactId>
-			<version>1.4.3</version>
-		</dependency>
-
-		<dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>mail</artifactId>
-			<version>1.4.4</version>
-		</dependency>
 
 		<dependency>
 			<groupId>stax</groupId>
@@ -128,14 +110,6 @@
 		</dependency>
 
 
-
-		<dependency>
-			<groupId>org.apache.santuario</groupId>
-			<artifactId>xmlsecSamples </artifactId>
-			<version>1</version>
-		</dependency>
-
-
 		<dependency>
 			<groupId>muse.osgi-bundles</groupId>
 			<artifactId>muse-complete</artifactId>
@@ -150,7 +124,7 @@
 
 		<dependency>
 			<groupId>sun-xacml</groupId>
-			<artifactId>sun-xacml</artifactId><!-- originally 1.6 -->
+			<artifactId>sun-xacml-bundle</artifactId><!-- originally 1.6 -->
 			<version>2.0</version>
 		</dependency>
 
@@ -289,7 +263,7 @@
 					<dependency>
 						<groupId>xerces</groupId>
 						<artifactId>xercesImpl</artifactId>
-						<version>2.4.0</version>
+						<version>2.9.1</version>
 					</dependency>
 
 				</dependencies>

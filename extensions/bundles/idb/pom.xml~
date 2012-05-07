@@ -181,7 +181,7 @@
 			<groupId>org.opennaas</groupId>
 			<artifactId>org.opennaas.extensions.idb.da.dummy</artifactId>
 			<version>${project.version}</version>
-			<classifier>classes</classifier>
+			
 		</dependency>
 
 
