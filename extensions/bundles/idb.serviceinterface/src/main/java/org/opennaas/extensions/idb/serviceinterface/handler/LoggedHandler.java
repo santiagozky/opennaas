@@ -28,7 +28,7 @@
  */
 package org.opennaas.extensions.idb.serviceinterface.handler;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.apache.muse.ws.addressing.soap.SoapFault;
 
 import org.opennaas.extensions.idb.serviceinterface.RequestHandler;
@@ -40,107 +40,107 @@ import org.opennaas.core.utils.PhLogger;
  * 
  */
 public class LoggedHandler extends CachedHandler {
-    private static String logIDPrefix = null;
+	private static String logIDPrefix = null;
 
-    /** Unique ID for logging. */
-    private static int logID = 0;
+	/** Unique ID for logging. */
+	private static int logID = 0;
 
-    /** * */
-    private static Logger performanceLogger = null;
+	/** * */
+	private static Log performanceLogger = null;
 
-    /**
-     * @return
-     */
-    protected final static synchronized String getName() {
-        if (LoggedHandler.logID > 0xFFFF) {
-            LoggedHandler.logID = 0;
-        }
-        if (LoggedHandler.logID == 0) {
-            final String p = Long.toHexString(System.currentTimeMillis());
-            LoggedHandler.logIDPrefix = LoggedHandler.prefix4(p.substring(p
-                    .length() - 4));
-        }
-        return "RequestHandler_"
-                + LoggedHandler.logIDPrefix
-                + LoggedHandler.prefix4(Integer
-                        .toHexString(LoggedHandler.logID++));
-    }
+	/**
+	 * @return
+	 */
+	protected final static synchronized String getName() {
+		if (LoggedHandler.logID > 0xFFFF) {
+			LoggedHandler.logID = 0;
+		}
+		if (LoggedHandler.logID == 0) {
+			final String p = Long.toHexString(System.currentTimeMillis());
+			LoggedHandler.logIDPrefix = LoggedHandler.prefix4(p.substring(p
+					.length() - 4));
+		}
+		return "RequestHandler_"
+				+ LoggedHandler.logIDPrefix
+				+ LoggedHandler.prefix4(Integer
+						.toHexString(LoggedHandler.logID++));
+	}
 
-    private static final synchronized Logger getPerformanceLogger(
-            final String domainName) {
-        if (null == LoggedHandler.performanceLogger) {
-            LoggedHandler.performanceLogger = PhLogger
-                    .getSeparateLogger("performance." + domainName);
-        }
+	private static final synchronized Log getPerformanceLogger(
+			final String domainName) {
+		if (null == LoggedHandler.performanceLogger) {
+			LoggedHandler.performanceLogger = PhLogger
+					.getSeparateLogger("performance." + domainName);
+		}
 
-        return LoggedHandler.performanceLogger;
-    }
+		return LoggedHandler.performanceLogger;
+	}
 
-    /**
-     * @param s
-     * @return
-     */
-    private final static String prefix4(final String s) {
-        String r = s;
-        while (r.length() < 4) {
-            r = "0" + r;
-        }
-        return r;
-    }
+	/**
+	 * @param s
+	 * @return
+	 */
+	private final static String prefix4(final String s) {
+		String r = s;
+		while (r.length() < 4) {
+			r = "0" + r;
+		}
+		return r;
+	}
 
-    /**
+	/**
      * 
      */
-    private Logger logger = null;
+	private Log logger = null;
 
-    private String domainId = null;
+	private String domainId = null;
 
-    protected String getDomainId() {
-        if (this.domainId == null) {
-            final AbstractTopologyRegistrator registrator = AbstractTopologyRegistrator
-                    .getLatestInstance();
-            if (null == registrator) {
-                this.domainId = "unknown";
-            } else {
-                this.domainId = registrator.getDomainId();
-            }
-        }
-        return this.domainId;
-    }
+	protected String getDomainId() {
+		if (this.domainId == null) {
+			final AbstractTopologyRegistrator registrator = AbstractTopologyRegistrator
+					.getLatestInstance();
+			if (null == registrator) {
+				this.domainId = "unknown";
+			} else {
+				this.domainId = registrator.getDomainId();
+			}
+		}
+		return this.domainId;
+	}
 
-    /**
-     * Secure way to get instance (Catches runtime exceptions)
-     * 
-     * @return Instance
-     * @throws SoapFault
-     *             In case of any runtime exceptions
-     */
-    protected final Logger getLogger() throws SoapFault {
-        if (null == this.logger) {
-            try {
-                this.logger = PhLogger.getLogger(RequestHandler.class);
-            } catch (final Exception e) {
-                throw this.exceptionHandler.handleException(e);
-            }
-        }
+	/**
+	 * Secure way to get instance (Catches runtime exceptions)
+	 * 
+	 * @return Instance
+	 * @throws SoapFault
+	 *             In case of any runtime exceptions
+	 */
+	protected final Log getLogger() throws SoapFault {
+		if (null == this.logger) {
+			try {
+				this.logger = PhLogger.getLogger(RequestHandler.class);
+			} catch (final Exception e) {
+				throw this.exceptionHandler.handleException(e);
+			}
+		}
 
-        return this.logger;
-    }
+		return this.logger;
+	}
 
-    /**
-     * Secure way to get instance (Catches runtime exceptions)
-     * 
-     * @return Instance
-     * @throws SoapFault
-     *             In case of any runtime exceptions
-     */
-    public final Logger getPerformanceLogger() throws SoapFault {
-        Logger result = null;
-        try {
-            result = LoggedHandler.getPerformanceLogger(this.getDomainId());
-        } catch (final Exception e) {
-            this.exceptionHandler.handleException(e);
-        }
-        return result;
-    }
+	/**
+	 * Secure way to get instance (Catches runtime exceptions)
+	 * 
+	 * @return Instance
+	 * @throws SoapFault
+	 *             In case of any runtime exceptions
+	 */
+	public final Log getPerformanceLogger() throws SoapFault {
+		Log result = null;
+		try {
+			result = LoggedHandler.getPerformanceLogger(this.getDomainId());
+		} catch (final Exception e) {
+			this.exceptionHandler.handleException(e);
+		}
+		return result;
+	}
 }

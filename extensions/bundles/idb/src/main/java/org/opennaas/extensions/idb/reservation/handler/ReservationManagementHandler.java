@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.Map.Entry;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ConnectionConstraintType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.FixedReservationConstraintType;
@@ -76,7 +76,7 @@ public final class ReservationManagementHandler {
     }
 
     /** Logger. */
-    private final Logger logger = PhLogger.getLogger(this.getClass());
+    private final Log logger = PhLogger.getLogger(this.getClass());
 
     /** Private constructor: Singleton. */
     private ReservationManagementHandler() {

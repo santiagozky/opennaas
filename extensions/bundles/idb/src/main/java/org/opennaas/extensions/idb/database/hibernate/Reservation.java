@@ -46,7 +46,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 
 import com.mysema.query.jpa.impl.JPAQuery;
 
@@ -72,7 +72,7 @@ import org.opennaas.extensions.idb.exception.database.DatabaseException;
 @Table(name = "Reservation")
 public class Reservation implements java.io.Serializable {
 
-	private static Logger logger = PhLogger.getLogger();
+	private static Log logger = PhLogger.getLogger();
 	// Fields
 
 	/**

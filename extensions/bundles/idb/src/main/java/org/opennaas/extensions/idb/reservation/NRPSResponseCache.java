@@ -35,7 +35,7 @@ import java.util.TimerTask;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ConnectionAvailabilityType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ConnectionConstraintType;
@@ -129,7 +129,7 @@ public class NRPSResponseCache {
 	// static HashMap < String, Vector < NRPSResponseCache.CacheEntry > > cache;
 	static Hashtable<String, Hashtable<String, NRPSResponseCache.CacheEntry>> cache;
 
-	static Logger logger;
+	static Log logger;
 
 	/** Static instance getter * */
 	public static NRPSResponseCache getInstance() {

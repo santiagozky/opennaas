@@ -48,6 +48,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.validator.Syntax
 import org.opennaas.extensions.idb.serviceinterface.databinding.validator.TypeValidator;
 import org.opennaas.core.utils.Config;
 import org.opennaas.core.utils.PhLogger;
+import org.apache.commons.logging.Log;
 
 /**
  * Class to convert Element to Classes (and vice versa).
@@ -58,294 +59,295 @@ import org.opennaas.core.utils.PhLogger;
  * @version $Id$
  */
 public final class JaxbSerializer extends AJaxbSerializer {
-    private static org.apache.log4j.Logger logger = PhLogger.getLogger();
-    /** Singleton Instance. */
-    private static JaxbSerializer selfInstance = null;
+	private static Log logger = PhLogger.getLogger();
+	/** Singleton Instance. */
+	private static JaxbSerializer selfInstance = null;
 
-    /**
-     * Singleton instance getter.
-     * 
-     * @return Singleton Instance
-     */
-    public static synchronized JaxbSerializer getInstance() {
-        if (null == JaxbSerializer.selfInstance) {
-            JaxbSerializer.selfInstance = new JaxbSerializer();
-        }
+	/**
+	 * Singleton instance getter.
+	 * 
+	 * @return Singleton Instance
+	 */
+	public static synchronized JaxbSerializer getInstance() {
+		if (null == JaxbSerializer.selfInstance) {
+			JaxbSerializer.selfInstance = new JaxbSerializer();
+		}
 
-        return JaxbSerializer.selfInstance;
-    }
+		return JaxbSerializer.selfInstance;
+	}
 
-    /** JAXB serializer instance. */
-    private final JAXBContext serializer;
+	/** JAXB serializer instance. */
+	private final JAXBContext serializer;
 
-    /** JAXB marshaller instance. */
-    private final Marshaller marshaller;
+	/** JAXB marshaller instance. */
+	private final Marshaller marshaller;
 
-    /** Jaxb Unmarshaller. */
-    private final Unmarshaller unmarshaller;
+	/** Jaxb Unmarshaller. */
+	private final Unmarshaller unmarshaller;
 
-    /** Validator instance. */
-    private final SyntaxValidator syntaxValidator;
+	/** Validator instance. */
+	private final SyntaxValidator syntaxValidator;
 
-    /** Type Validator Instance. */
-    private final TypeValidator typeValidator;
+	/** Type Validator Instance. */
+	private final TypeValidator typeValidator;
 
-    /**
-     * Constructor.
-     */
-    private JaxbSerializer() {
+	/**
+	 * Constructor.
+	 */
+	private JaxbSerializer() {
 
-        this.serializer = this.createContext();
+		this.serializer = this.createContext();
 
-        this.marshaller = this.createMarshaller();
+		this.marshaller = this.createMarshaller();
 
-        this.unmarshaller = this.createUnmarshaller();
+		this.unmarshaller = this.createUnmarshaller();
 
-        this.syntaxValidator = this.createSyntaxValidator();
+		this.syntaxValidator = this.createSyntaxValidator();
 
-        this.typeValidator = new TypeValidator();
-    }
+		this.typeValidator = new TypeValidator();
+	}
 
-    /**
-     * Cloning _not_ supported! Should use the factory class instead
-     * 
-     * @return Nothing. Since cloning is _not_ supported!
-     * @throws CloneNotSupportedException
-     *             A CloneNotSupportedException
-     */
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        throw new CloneNotSupportedException();
-    }
+	/**
+	 * Cloning _not_ supported! Should use the factory class instead
+	 * 
+	 * @return Nothing. Since cloning is _not_ supported!
+	 * @throws CloneNotSupportedException
+	 *             A CloneNotSupportedException
+	 */
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		throw new CloneNotSupportedException();
+	}
 
-    /**
-     * Method to create the JaxbContext.
-     * 
-     * @return new JaxbContext
-     */
-    private final JAXBContext createContext() {
-        try {
-            return JAXBContext.newInstance(Config.getString("databinding",
-                    "jaxb.path"));
-        } catch (final JAXBException e) {
-            throw new RuntimeException("Cannot create JAXB context", e);
-        }
-    }
+	/**
+	 * Method to create the JaxbContext.
+	 * 
+	 * @return new JaxbContext
+	 */
+	private final JAXBContext createContext() {
+		try {
+			return JAXBContext.newInstance(Config.getString("databinding",
+					"jaxb.path"));
+		} catch (final JAXBException e) {
+			throw new RuntimeException("Cannot create JAXB context", e);
+		}
+	}
 
-    /**
-     * Method to create the Marshaller.
-     * 
-     * @return new Marshaller
-     */
-    private final Marshaller createMarshaller() {
-        try {
-            return this.serializer.createMarshaller();
-        } catch (final JAXBException e) {
-            throw new RuntimeException("Cannot create Marshaller", e);
-        }
-    }
+	/**
+	 * Method to create the Marshaller.
+	 * 
+	 * @return new Marshaller
+	 */
+	private final Marshaller createMarshaller() {
+		try {
+			return this.serializer.createMarshaller();
+		} catch (final JAXBException e) {
+			throw new RuntimeException("Cannot create Marshaller", e);
+		}
+	}
 
-    /**
-     * Method to create the Syntax Validator.
-     * 
-     * @return new SyntaxValidator
-     */
-    private synchronized final SyntaxValidator createSyntaxValidator() {
-        try {
-            return new SyntaxValidator(Config.getURL("databinding",
-                    "wsdl.validator"), 0);
-        } catch (final Exception e) {
-            throw new RuntimeException("Cannot create Validator: "
-                    + e.toString(), e);
-        }
-    }
+	/**
+	 * Method to create the Syntax Validator.
+	 * 
+	 * @return new SyntaxValidator
+	 */
+	private synchronized final SyntaxValidator createSyntaxValidator() {
+		try {
+			return new SyntaxValidator(Config.getURL("databinding",
+					"wsdl.validator"), 0);
+		} catch (final Exception e) {
+			throw new RuntimeException("Cannot create Validator: "
+					+ e.toString(), e);
+		}
+	}
 
-    /**
-     * Method to create the Unmarshaller.
-     * 
-     * @return new Unmarshaller
-     */
-    private final Unmarshaller createUnmarshaller() {
-        try {
-            return this.serializer.createUnmarshaller();
-        } catch (final JAXBException e) {
-            throw new RuntimeException("Cannot create Unmarshaller", e);
-        }
-    }
+	/**
+	 * Method to create the Unmarshaller.
+	 * 
+	 * @return new Unmarshaller
+	 */
+	private final Unmarshaller createUnmarshaller() {
+		try {
+			return this.serializer.createUnmarshaller();
+		} catch (final JAXBException e) {
+			throw new RuntimeException("Cannot create Unmarshaller", e);
+		}
+	}
 
-    /**
-     * Convert Element to Object.
-     * 
-     * @param element
-     *            Element to be converted to an Object
-     * @return Object Object derived out of Element
-     * @throws InvalidRequestFaultException
-     * @throws UnexpectedFaultException
-     */
-    @Override
-    public Object elementToObject(final Node element)
-            throws InvalidRequestFaultException, UnexpectedFaultException {
-        return this.elementToObject(element, true);
-    }
+	/**
+	 * Convert Element to Object.
+	 * 
+	 * @param element
+	 *            Element to be converted to an Object
+	 * @return Object Object derived out of Element
+	 * @throws InvalidRequestFaultException
+	 * @throws UnexpectedFaultException
+	 */
+	@Override
+	public Object elementToObject(final Node element)
+			throws InvalidRequestFaultException, UnexpectedFaultException {
+		return this.elementToObject(element, true);
+	}
 
-    /**
-     * Convert Element to Object.
-     * 
-     * @param element
-     *            Element to be converted to an Object
-     * @param useValidator
-     *            Use validator true/false
-     * @return Object Object derived out of Element
-     * @throws InvalidRequestFaultException
-     * @throws UnexpectedFaultException
-     */
-    @Override
-    public synchronized Object elementToObject(final Node element,
-            final boolean useValidator) throws UnexpectedFaultException,
-            InvalidRequestFaultException {
+	/**
+	 * Convert Element to Object.
+	 * 
+	 * @param element
+	 *            Element to be converted to an Object
+	 * @param useValidator
+	 *            Use validator true/false
+	 * @return Object Object derived out of Element
+	 * @throws InvalidRequestFaultException
+	 * @throws UnexpectedFaultException
+	 */
+	@Override
+	public synchronized Object elementToObject(final Node element,
+			final boolean useValidator) throws UnexpectedFaultException,
+			InvalidRequestFaultException {
 
-        if (useValidator) {
-            this.typeValidator.validate(element);
-        }
+		if (useValidator) {
+			this.typeValidator.validate(element);
+		}
 
-        final String xml = AJaxbSerializer.elementToXml(element);
+		final String xml = AJaxbSerializer.elementToXml(element);
 
-        if (useValidator) {
-            this.syntaxValidator.validate(xml);
-        }
+		if (useValidator) {
+			this.syntaxValidator.validate(xml);
+		}
 
-        Object obj;
-        try {
-            obj = this.xmlToObject(xml);
-        } catch (final JAXBException e) {
-            JaxbSerializer.logger.debug(e.getMessage(), e);
-            final UnexpectedFaultException e2 = new UnexpectedFaultException(
-                    "Error during element conversion: " + e.getMessage());
-            e2.setStackTrace(e.getStackTrace());
-            throw e2;
-        }
-        return obj;
-    }
+		Object obj;
+		try {
+			obj = this.xmlToObject(xml);
+		} catch (final JAXBException e) {
+			JaxbSerializer.logger.debug(e.getMessage(), e);
+			final UnexpectedFaultException e2 = new UnexpectedFaultException(
+					"Error during element conversion: " + e.getMessage());
+			e2.setStackTrace(e.getStackTrace());
+			throw e2;
+		}
+		return obj;
+	}
 
-    /**
-     * Convert Object to Element.
-     * 
-     * @param obj
-     *            Object to be converted to an Element
-     * @return DOM Element Element derived out of Object
-     * @throws InvalidRequestFaultException
-     * @throws UnexpectedFaultException
-     */
-    @Override
-    public Element objectToElement(final Object obj)
-            throws InvalidRequestFaultException, UnexpectedFaultException {
-        return this.objectToElement(obj, true);
-    }
+	/**
+	 * Convert Object to Element.
+	 * 
+	 * @param obj
+	 *            Object to be converted to an Element
+	 * @return DOM Element Element derived out of Object
+	 * @throws InvalidRequestFaultException
+	 * @throws UnexpectedFaultException
+	 */
+	@Override
+	public Element objectToElement(final Object obj)
+			throws InvalidRequestFaultException, UnexpectedFaultException {
+		return this.objectToElement(obj, true);
+	}
 
-    /**
-     * Convert Object to Element.
-     * 
-     * @param obj
-     *            Object to be converted to an Element
-     * @param useValidator
-     *            Use validator true/false
-     * @return DOM Element Element derived out of Object
-     * @throws InvalidRequestFaultException
-     * @throws UnexpectedFaultException
-     */
-    @Override
-    public synchronized Element objectToElement(final Object obj,
-            final boolean useValidator) throws InvalidRequestFaultException,
-            UnexpectedFaultException {
+	/**
+	 * Convert Object to Element.
+	 * 
+	 * @param obj
+	 *            Object to be converted to an Element
+	 * @param useValidator
+	 *            Use validator true/false
+	 * @return DOM Element Element derived out of Object
+	 * @throws InvalidRequestFaultException
+	 * @throws UnexpectedFaultException
+	 */
+	@Override
+	public synchronized Element objectToElement(final Object obj,
+			final boolean useValidator) throws InvalidRequestFaultException,
+			UnexpectedFaultException {
 
-        String xml;
-        try {
-            xml = this.objectToXml(obj);
-        } catch (final JAXBException e) {
-            JaxbSerializer.logger.debug(e.getMessage(), e);
-            final UnexpectedFaultException e2 = new UnexpectedFaultException(
-                    "Error during object conversion: " + e.getMessage());
-            e2.setStackTrace(e.getStackTrace());
-            throw e2;
-        }
+		String xml;
+		try {
+			xml = this.objectToXml(obj);
+		} catch (final JAXBException e) {
+			JaxbSerializer.logger.debug(e.getMessage(), e);
+			final UnexpectedFaultException e2 = new UnexpectedFaultException(
+					"Error during object conversion: " + e.getMessage());
+			e2.setStackTrace(e.getStackTrace());
+			throw e2;
+		}
 
-        if (useValidator) {
-            this.syntaxValidator.validate(xml);
-        }
+		if (useValidator) {
+			this.syntaxValidator.validate(xml);
+		}
 
-        Element element;
-        try {
-            element = AJaxbSerializer.xmlToElement(xml);
-        } catch (final IOException e) {
-            JaxbSerializer.logger.debug(e.getMessage(), e);
-            final UnexpectedFaultException e2 = new UnexpectedFaultException(
-                    "Error during object conversion: " + e.getMessage());
-            e2.setStackTrace(e.getStackTrace());
-            throw e2;
-        } catch (final SAXException e) {
-            JaxbSerializer.logger.debug(e.getMessage(), e);
-            final UnexpectedFaultException e2 = new UnexpectedFaultException(
-                    "Error during object conversion: " + e.getMessage());
-            e2.setStackTrace(e.getStackTrace());
-            throw e2;
-        }
+		Element element;
+		try {
+			element = AJaxbSerializer.xmlToElement(xml);
+		} catch (final IOException e) {
+			JaxbSerializer.logger.debug(e.getMessage(), e);
+			final UnexpectedFaultException e2 = new UnexpectedFaultException(
+					"Error during object conversion: " + e.getMessage());
+			e2.setStackTrace(e.getStackTrace());
+			throw e2;
+		} catch (final SAXException e) {
+			JaxbSerializer.logger.debug(e.getMessage(), e);
+			final UnexpectedFaultException e2 = new UnexpectedFaultException(
+					"Error during object conversion: " + e.getMessage());
+			e2.setStackTrace(e.getStackTrace());
+			throw e2;
+		}
 
-        if (useValidator) {
-            this.typeValidator.validate(element);
-        }
+		if (useValidator) {
+			this.typeValidator.validate(element);
+		}
 
-        return (element);
-    }
+		return (element);
+	}
 
-    /**
-     * Convert Object to XML.
-     * 
-     * @param obj
-     *            Object to be converted to a XML-String
-     * @return XML String XML-String derived out of Object
-     * @throws JAXBException
-     *             A JAXBException
-     */
-    @Override
-    @SuppressWarnings("unchecked")
-    public String objectToXml(final Object obj) throws JAXBException {
+	/**
+	 * Convert Object to XML.
+	 * 
+	 * @param obj
+	 *            Object to be converted to a XML-String
+	 * @return XML String XML-String derived out of Object
+	 * @throws JAXBException
+	 *             A JAXBException
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public String objectToXml(final Object obj) throws JAXBException {
 
-        final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        final StreamResult result = new StreamResult(outputStream);
+		final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		final StreamResult result = new StreamResult(outputStream);
 
-        try {
-            if (obj.getClass().isAnnotationPresent(XmlRootElement.class)) {
-                this.marshaller.marshal(obj, result);
-            } else {
-                final Class<?> objClass = obj.getClass();
+		try {
+			if (obj.getClass().isAnnotationPresent(XmlRootElement.class)) {
+				this.marshaller.marshal(obj, result);
+			} else {
+				final Class<?> objClass = obj.getClass();
 
-                this.marshaller.marshal(new JAXBElement(new QName(objClass
-                        .getName()), objClass, obj), result);
-            }
-        } catch (final NullPointerException npe) {
-            throw new JAXBException(npe.getMessage()
-                    + "\n\nMay be caused by an invalid XMLGregorianCalendar.\n"
-                    + "Please make shure to use the generateXMLCalendar"
-                    + " method from Helpers to create new Calendars to"
-                    + " avoid illegal calendar states", npe);
-        }
+				this.marshaller.marshal(
+						new JAXBElement(new QName(objClass.getName()),
+								objClass, obj), result);
+			}
+		} catch (final NullPointerException npe) {
+			throw new JAXBException(npe.getMessage()
+					+ "\n\nMay be caused by an invalid XMLGregorianCalendar.\n"
+					+ "Please make shure to use the generateXMLCalendar"
+					+ " method from Helpers to create new Calendars to"
+					+ " avoid illegal calendar states", npe);
+		}
 
-        return (outputStream.toString());
-    }
+		return (outputStream.toString());
+	}
 
-    /**
-     * Convert XML to Object.
-     * 
-     * @param xml
-     *            XML-String to be converted to an Object
-     * @return Object Object derived out of XML-String
-     * @throws JAXBException
-     *             A JAXBException
-     */
-    @Override
-    public Object xmlToObject(final String xml) throws JAXBException {
-        final StringReader is = new StringReader(xml);
+	/**
+	 * Convert XML to Object.
+	 * 
+	 * @param xml
+	 *            XML-String to be converted to an Object
+	 * @return Object Object derived out of XML-String
+	 * @throws JAXBException
+	 *             A JAXBException
+	 */
+	@Override
+	public Object xmlToObject(final String xml) throws JAXBException {
+		final StringReader is = new StringReader(xml);
 
-        return this.unmarshaller.unmarshal(is);
-    }
+		return this.unmarshaller.unmarshal(is);
+	}
 }

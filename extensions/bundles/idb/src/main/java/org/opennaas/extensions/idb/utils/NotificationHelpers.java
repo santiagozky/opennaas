@@ -28,7 +28,7 @@ package org.opennaas.extensions.idb.utils;
 
 import java.util.MissingResourceException;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.apache.muse.ws.addressing.soap.SoapFault;
 import org.w3c.dom.Element;
 
@@ -51,7 +51,7 @@ import org.opennaas.extensions.idb.exception.database.DatabaseException;
 
 public class NotificationHelpers {
     /** Logger. */
-    private static Logger logger = PhLogger
+    private static Log logger = PhLogger
             .getLogger(NotificationHelpers.class);
 
     /**

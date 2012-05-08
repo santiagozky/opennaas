@@ -32,7 +32,6 @@
 <feature version='2.2.0'>muse-platform-mini</feature>
 <feature version='2.2.0'>muse-tools</feature>
 <feature version='2.0'>sun-xacml</feature>
-<featue version='1.2.15'>log4j</featue>
 <feature version='1.0.0-SNAPSHOT'>database</feature>
 <feature version='1.0.0-SNAPSHOT'>common-utils</feature>
 <feature version='1.0.0-SNAPSHOT'>adapter-dummy</feature>
@@ -229,8 +228,5 @@
     <bundle>mvn:org.apache.geronimo.specs/geronimo-jta_1.1_spec/1.1.1</bundle>
     <bundle>mvn:org.apache.geronimo.specs/geronimo-jms_1.1_spec/1.1.1</bundle>
     <bundle>mvn:org.ops4j.pax.logging/pax-logging-service/1.6.5</bundle>
-  </feature>
-  <feature name='log4j' version='1.2.15'>
-  <bundle>mvn:log4j/log4j/1.2.15</bundle>
   </feature>
 </features>

@@ -41,7 +41,7 @@ package org.opennaas.extensions.idb.reservation.handler;
 
 import java.util.MissingResourceException;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ConnectionStatusType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.NotificationMessageType;
@@ -75,7 +75,7 @@ public class NotificationConsumerHandler implements INotificationConsumer {
     }
 
     /** Logger instance. */
-    Logger logger = PhLogger.getLogger(this.getClass());
+    Log logger = PhLogger.getLogger(this.getClass());
 
     /** Private constructor: Singleton. */
     private NotificationConsumerHandler() {
