@@ -29,9 +29,8 @@
 <feature version='140'>bcprov-jdk15</feature>
 <feature version='1.1'>jta</feature>
 <!--not bundle available-->
-<!--feature version='2.2.0'>muse-platform-mini</feature>
+<feature version='2.2.0'>muse-platform-mini</feature>
 <feature version='2.2.0'>muse-tools</feature>
-<feature version='2.2.0'>openjpa-lib</feature-->
 <feature version='2.0'>sun-xacml</feature>
 <feature version='1.0.0-SNAPSHOT'>database</feature>
 <feature version='1.0.0-SNAPSHOT'>common-utils</feature>
@@ -154,7 +153,7 @@
     <bundle>mvn:org.apache.geronimo.specs/geronimo-jms_1.1_spec/1.1.1</bundle>
     <bundle>mvn:org.apache.openjpa/openjpa/2.2.0</bundle>
   </feature>
-   <feature name='openjpa-lib' version='2.2.0'>
+   <feature name='op-lib' version='2.2.0'>
     <bundle>mvn:org.apache.openjpa/openjpa-lib/2.2.0</bundle>
   </feature>
   <feature name='org.opennaas.core.resources' version='1.0.0-SNAPSHOT'>

@@ -26,7 +26,7 @@
 
 package org.opennaas.extensions.idb.test;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 
 import org.opennaas.core.utils.PhLogger;
 import org.opennaas.extensions.idb.Constants;
@@ -44,5 +44,5 @@ public abstract class AbstractTest {
      */
     protected static final int TIMEOUT = 5 * 60 * 1000;
 
-    protected Logger logger = PhLogger.getLogger(Constants.testProperties);
+    protected Log logger = PhLogger.getLogger(Constants.testProperties);
 }

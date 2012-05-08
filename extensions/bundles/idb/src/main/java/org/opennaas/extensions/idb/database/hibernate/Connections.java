@@ -51,7 +51,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 
 import com.mysema.query.jpa.impl.JPAQuery;
 
@@ -78,7 +78,7 @@ import org.opennaas.extensions.idb.exception.database.DatabaseException;
 public class Connections implements java.io.Serializable {
 	/** */
 	private static final long serialVersionUID = 4589942413245237237L;
-	private static Logger logger = PhLogger.getLogger();
+	private static Log logger = PhLogger.getLogger();
 	/** primary key in the DB */
 	private long PK_Connections;
 

@@ -12,22 +12,7 @@
 	<name>IDB utils </name>
 	<description>IDB utils bundle</description>
 <dependencies>
-	<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.15</version>
-			<scope>provided</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>com.sun.jdmk</groupId>
-					<artifactId>jmxtools</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.sun.jmx</groupId>
-					<artifactId>jmxri</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
+	
 				<dependency>
 			<groupId>dnsjava</groupId>
 			<artifactId>dnsjava</artifactId>
@@ -44,7 +29,16 @@
 			<version>2.9.1</version>
 			
 		</dependency>
-
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>${commons.logging.version}</version>
+			</dependency>
+			<dependency>
+			<groupId>org.ops4j.pax.logging</groupId>
+			<artifactId>pax-logging-api</artifactId>
+			<version>${pax.logging.version}</version>
+			</dependency>
 	</dependencies>
 	<build>
 		<plugins>

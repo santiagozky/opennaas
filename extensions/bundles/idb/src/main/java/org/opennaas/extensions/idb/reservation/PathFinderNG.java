@@ -40,7 +40,7 @@ import java.util.Map.Entry;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.apache.muse.ws.addressing.soap.SoapFault;
 
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AvailabilityCodeType;
@@ -124,14 +124,14 @@ public class PathFinderNG {
 	private IManager nrpsManager = null;
 
 	/** Logger. */
-	private final Logger log = PhLogger.getLogger(PathFinderNG.class);
+	private final Log log = PhLogger.getLogger(PathFinderNG.class);
 
 	/** Performance-Logger. */
-	private final Logger performanceLogger = PhLogger.getLogger("Performance");
+	private final Log performanceLogger = PhLogger.getLogger("Performance");
 
 	private String logMsg;
 
-	private boolean malleable;
+	private final boolean malleable;
 
 	/**
 	 * Constructor.
@@ -495,8 +495,7 @@ public class PathFinderNG {
 		this.processed = true;
 
 		// start path-computing time-measuring
-		this.performanceLogger.log(PerformanceLogLevel.PERFORMANCE_LOG,
-				"started path-computing: " + new Date());
+		this.performanceLogger.debug("started path-computing: " + new Date());
 
 		int maxAvailableConnections = -1;
 		// table that contains reservations for each domain
@@ -704,7 +703,7 @@ public class PathFinderNG {
 		MalleableReservationHelpers malleableHelpers = MalleableReservationHelpers
 				.getInstance();
 		/** extra logger instance for the malleable reservations. */
-		Logger malleableLogger = PhLogger.getSeparateLogger("malleable");
+		Log malleableLogger = PhLogger.getSeparateLogger("malleable");
 
 		boolean reservationFound = false;
 

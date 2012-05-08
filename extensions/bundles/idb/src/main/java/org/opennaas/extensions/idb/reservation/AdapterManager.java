@@ -33,7 +33,7 @@ import java.util.Hashtable;
 
 import javax.xml.bind.JAXBException;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.apache.muse.ws.addressing.soap.SoapFault;
 import org.xml.sax.SAXException;
 
@@ -111,10 +111,10 @@ public final class AdapterManager implements IManager {
     }
 
     /** Logger. */
-    private final Logger logger;
+    private final Log logger;
 
     /** PerformanceLogger. */
-    private final Logger performanceLogger;
+    private final Log performanceLogger;
 
     /** Timeout for the NRPS responses (in milliseconds) */
     private final long nrpsTimeout;
