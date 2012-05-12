@@ -25,7 +25,7 @@
 
 package org.opennaas.extensions.idb.serviceinterface.topology.registrator;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.apache.muse.ws.addressing.soap.SoapFault;
 
 /**
@@ -37,77 +37,77 @@ import org.apache.muse.ws.addressing.soap.SoapFault;
  * call.
  */
 public abstract class GenericRegistrator {
-    /** Registration request. */
-    public final Object req;
+	/** Registration request. */
+	public final Object req;
 
-    /** Sleep interval (in ms) between unsuccessful registration attempts. */
-    public final long sleep;
+	/** Sleep interval (in ms) between unsuccessful registration attempts. */
+	public final long sleep;
 
-    /**
-     * Constructor.
-     * 
-     * @param req
-     *            Registration request.
-     * @param sleep
-     *            Sleep interval (in ms) between unsuccessful registration
-     *            attempts.
-     */
-    public GenericRegistrator(final Object req, final long sleep) {
-        this.req = req;
-        this.sleep = sleep;
-    }
+	/**
+	 * Constructor.
+	 * 
+	 * @param req
+	 *            Registration request.
+	 * @param sleep
+	 *            Sleep interval (in ms) between unsuccessful registration
+	 *            attempts.
+	 */
+	public GenericRegistrator(final Object req, final long sleep) {
+		this.req = req;
+		this.sleep = sleep;
+	}
 
-    /**
-     * Start the registration proccess.
-     * 
-     * @param log
-     *            Logger object to use for logging. This may be null to disable
-     *            logging.
-     * @param tries
-     *            Number of registration attempts before giving up.
-     * @param bailException
-     *            If registration result in this exception, then a new
-     *            GenericRegistrator specified as next parameter is immediately
-     *            called.
-     * @param bail
-     *            Use this GenericRegistrator in case the exception specified in
-     *            the bailException parameter is caught.
-     * @return Success of registration (true if successful, false otherwise).
-     */
-    public final boolean genericRegistrator(final Logger log, final int tries,
-            final Class<? extends Exception> bailException,
-            final GenericRegistrator bail) {
-        int triesLeft = tries;
-        while (triesLeft-- > 0) {
-            try {
-                if (this.register()) {
-                    return true;
-                }
-            } catch (final Throwable t) {
-                if (t.getClass().equals(bailException)) {
-                    return bail.genericRegistrator(log, tries, null, null);
-                }
-                if (log != null) {
-                    log.error("Error occured in GenericRegistrator: " + t);
-                }
-            }
-            try {
-                Thread.sleep(this.sleep);
-            } catch (final InterruptedException e) {
-                if (log != null) {
-                    log.error("GenericRegistrator interrupted -- aborting");
-                }
-                return false;
-            }
-        }
-        return false;
-    }
+	/**
+	 * Start the registration proccess.
+	 * 
+	 * @param log
+	 *            Logger object to use for logging. This may be null to disable
+	 *            logging.
+	 * @param tries
+	 *            Number of registration attempts before giving up.
+	 * @param bailException
+	 *            If registration result in this exception, then a new
+	 *            GenericRegistrator specified as next parameter is immediately
+	 *            called.
+	 * @param bail
+	 *            Use this GenericRegistrator in case the exception specified in
+	 *            the bailException parameter is caught.
+	 * @return Success of registration (true if successful, false otherwise).
+	 */
+	public final boolean genericRegistrator(final Log log, final int tries,
+			final Class<? extends Exception> bailException,
+			final GenericRegistrator bail) {
+		int triesLeft = tries;
+		while (triesLeft-- > 0) {
+			try {
+				if (this.register()) {
+					return true;
+				}
+			} catch (final Throwable t) {
+				if (t.getClass().equals(bailException)) {
+					return bail.genericRegistrator(log, tries, null, null);
+				}
+				if (log != null) {
+					log.error("Error occured in GenericRegistrator: " + t);
+				}
+			}
+			try {
+				Thread.sleep(this.sleep);
+			} catch (final InterruptedException e) {
+				if (log != null) {
+					log.error("GenericRegistrator interrupted -- aborting");
+				}
+				return false;
+			}
+		}
+		return false;
+	}
 
-    /**
-     * The specific registration attempt, to be implemented by a child class.
-     * 
-     * @return Success of registration (true if successful, false otherwise).
-     * @throws SoapFault
-     */
-    public abstract boolean register() throws SoapFault;
+	/**
+	 * The specific registration attempt, to be implemented by a child class.
+	 * 
+	 * @return Success of registration (true if successful, false otherwise).
+	 * @throws SoapFault
+	 */
+	public abstract boolean register() throws SoapFault;
 }

@@ -27,7 +27,7 @@ package org.opennaas.extensions.idb.serviceinterface;
 
 import java.lang.reflect.Method;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.apache.muse.ws.addressing.soap.SoapFault;
 
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.UnexpectedFaultException;
@@ -42,78 +42,78 @@ import org.opennaas.core.utils.PhLogger;
  */
 public class ExceptionHandler {
 
-    /** Owner Object. */
-    private final HarmonyHandler owner;
-    /** Owner Class. */
-    private final Class<?> ownerClass;
-    /** Logger for fatal-mail-logging. */
-    private final Logger logger = PhLogger.getLogger(this.getClass());
+	/** Owner Object. */
+	private final HarmonyHandler owner;
+	/** Owner Class. */
+	private final Class<?> ownerClass;
+	/** Logger for fatal-mail-logging. */
+	private final Log logger = PhLogger.getLogger(this.getClass());
 
-    /**
-     * Default Constructor.
-     * 
-     * @param paramOwner
-     *            Owner Class for Exception Handler
-     */
-    public ExceptionHandler(final HarmonyHandler paramOwner) {
-        this.owner = paramOwner;
-        this.ownerClass = paramOwner.getClass();
-    }
+	/**
+	 * Default Constructor.
+	 * 
+	 * @param paramOwner
+	 *            Owner Class for Exception Handler
+	 */
+	public ExceptionHandler(final HarmonyHandler paramOwner) {
+		this.owner = paramOwner;
+		this.ownerClass = paramOwner.getClass();
+	}
 
-    /**
-     * Handle exceptions which are not handled by sub RequestHandler.
-     * 
-     * @param cause
-     *            Thrown exception
-     * @return Detail Element
-     */
-    private UnexpectedFaultException handleDefaultException(
-            final Throwable cause) {
-        return new UnexpectedFaultException(cause);
-    }
+	/**
+	 * Handle exceptions which are not handled by sub RequestHandler.
+	 * 
+	 * @param cause
+	 *            Thrown exception
+	 * @return Detail Element
+	 */
+	private UnexpectedFaultException handleDefaultException(
+			final Throwable cause) {
+		return new UnexpectedFaultException(cause);
+	}
 
-    /**
-     * Send out default exception message. Overwrite this in derived classes.
-     * 
-     * To implement HandlerSpecific exception handle methods, you need to create
-     * a function like this in the according RequestHandler:
-     * 
-     * public final SoapFault runException(Throwable cause) { // Retrun own
-     * Fault }
-     * 
-     * @param cause
-     *            Exception
-     * @return Exception Message Object
-     */
-    public final SoapFault handleException(final Throwable cause) {
-        this.logger.fatal("Exception <" + cause.getClass().getSimpleName()
-                + "> handled by ExceptionHandler", cause);
+	/**
+	 * Send out default exception message. Overwrite this in derived classes.
+	 * 
+	 * To implement HandlerSpecific exception handle methods, you need to create
+	 * a function like this in the according RequestHandler:
+	 * 
+	 * public final SoapFault runException(Throwable cause) { // Retrun own
+	 * Fault }
+	 * 
+	 * @param cause
+	 *            Exception
+	 * @return Exception Message Object
+	 */
+	public final SoapFault handleException(final Throwable cause) {
+		this.logger.fatal("Exception <" + cause.getClass().getSimpleName()
+				+ "> handled by ExceptionHandler", cause);
 
-        // Try to find exception handler
-        try {
-            final Method method = this.ownerClass.getMethod("runException",
-                    Throwable.class);
+		// Try to find exception handler
+		try {
+			final Method method = this.ownerClass.getMethod("runException",
+					Throwable.class);
 
-            return (SoapFault) method.invoke(this.owner, cause);
-            // SubHandler has no own exception handler
-        } catch (final NoSuchMethodException ex) {
-            return this.handleDefaultException(cause);
-            // Exception can't be handled / Error while Serializing
-        } catch (final Exception ex) {
-            return this.handleInternalException(ex);
-        }
-    }
+			return (SoapFault) method.invoke(this.owner, cause);
+			// SubHandler has no own exception handler
+		} catch (final NoSuchMethodException ex) {
+			return this.handleDefaultException(cause);
+			// Exception can't be handled / Error while Serializing
+		} catch (final Exception ex) {
+			return this.handleInternalException(ex);
+		}
+	}
 
-    /**
-     * Handle exceptions which are thrown during Exception processing. E.g.
-     * Serializer faults etc.
-     * 
-     * @param cause
-     *            Thrown exception
-     * @return Detail Element
-     */
-    private UnexpectedFaultException handleInternalException(
-            final Throwable cause) {
-        return this.handleDefaultException(cause);
-    }
+	/**
+	 * Handle exceptions which are thrown during Exception processing. E.g.
+	 * Serializer faults etc.
+	 * 
+	 * @param cause
+	 *            Thrown exception
+	 * @return Detail Element
+	 */
+	private UnexpectedFaultException handleInternalException(
+			final Throwable cause) {
+		return this.handleDefaultException(cause);
+	}
 }

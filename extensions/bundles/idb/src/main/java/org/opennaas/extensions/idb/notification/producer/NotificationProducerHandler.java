@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.Vector;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AddTopicResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AddTopicType;
@@ -86,7 +86,7 @@ public class NotificationProducerHandler {
     private final HashMap<String, Vector<String>> subscriptions;
 
     /** Logger. */
-    private final Logger logger = PhLogger.getLogger(this.getClass());
+    private final Log logger = PhLogger.getLogger(this.getClass());
 
     /** flag if subscriptions should be persisted. */
     private final boolean persistSubscription;
@@ -154,7 +154,7 @@ public class NotificationProducerHandler {
                     }
 
                     if (!resultDB) {
-                        Logger logger = PhLogger.getLogger(this.getClass());
+                        Log logger = PhLogger.getLogger(this.getClass());
                         logger.debug("subscribed " + epr + " on topic " + topic
                                 + " , but not persistent in DB!");
                     }
@@ -363,7 +363,7 @@ public class NotificationProducerHandler {
                     try {
                         sub.delete();
                     } catch (DatabaseException e) {
-                        Logger logger = PhLogger.getLogger(this.getClass());
+                        Log logger = PhLogger.getLogger(this.getClass());
                         logger.debug("unsubscribed " + epr + " from topic "
                                 + topic + " , but not persistent in DB!");
                         e.printStackTrace();
@@ -421,7 +421,7 @@ public class NotificationProducerHandler {
                             sub.delete();
                         }
                     } catch (DatabaseException e) {
-                        Logger logger = PhLogger.getLogger(this.getClass());
+                        Log logger = PhLogger.getLogger(this.getClass());
                         logger.debug("removed topic " + topic
                                 + " , but not persistent in DB!");
                         e.printStackTrace();

@@ -35,7 +35,7 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
@@ -65,188 +65,191 @@ import org.opennaas.core.utils.PhLogger;
  * @author gassen
  */
 public class SyntaxValidator {
-    /**
-     * Error handler for Xerces Validator.
-     * 
-     * @author gassen
-     */
-    protected static class ValidatorErrorHandler implements ErrorHandler {
-        /** * */
-        private final int failLevel;
+	/**
+	 * Error handler for Xerces Validator.
+	 * 
+	 * @author gassen
+	 */
+	protected static class ValidatorErrorHandler implements ErrorHandler {
+		/** * */
+		private final int failLevel;
 
-        /**
-         * Constructor.
-         * 
-         * @param failLevelParam
-         *            Level of failure
-         */
-        public ValidatorErrorHandler(final int failLevelParam) {
-            this.failLevel = failLevelParam;
-        }
+		/**
+		 * Constructor.
+		 * 
+		 * @param failLevelParam
+		 *            Level of failure
+		 */
+		public ValidatorErrorHandler(final int failLevelParam) {
+			this.failLevel = failLevelParam;
+		}
 
-        /**
-         * Error Handler.
-         * 
-         * @param ex
-         *            SAXParseException
-         * @throws SAXException
-         *             A SAXExeption
-         */
-        public final void error(final SAXParseException ex) throws SAXException {
-            if (SyntaxValidator.ERROR >= this.failLevel) {
-                throw ex;
-            }
-        }
+		/**
+		 * Error Handler.
+		 * 
+		 * @param ex
+		 *            SAXParseException
+		 * @throws SAXException
+		 *             A SAXExeption
+		 */
+		public final void error(final SAXParseException ex) throws SAXException {
+			if (SyntaxValidator.ERROR >= this.failLevel) {
+				throw ex;
+			}
+		}
 
-        /**
-         * Fatal Handler.
-         * 
-         * @param ex
-         *            SAXParseException
-         * @throws SAXException
-         *             A SAXException
-         */
-        public final void fatalError(final SAXParseException ex)
-                throws SAXException {
-            if (SyntaxValidator.FATAL >= this.failLevel) {
-                throw ex;
-            }
-        }
+		/**
+		 * Fatal Handler.
+		 * 
+		 * @param ex
+		 *            SAXParseException
+		 * @throws SAXException
+		 *             A SAXException
+		 */
+		public final void fatalError(final SAXParseException ex)
+				throws SAXException {
+			if (SyntaxValidator.FATAL >= this.failLevel) {
+				throw ex;
+			}
+		}
 
-        /**
-         * Warning Handler.
-         * 
-         * @param ex
-         *            SAXParseException
-         * @throws SAXException
-         *             A SAXException
-         */
-        public final void warning(final SAXParseException ex)
-                throws SAXException {
-            if (SyntaxValidator.WARN >= this.failLevel) {
-                throw ex;
-            }
-        }
+		/**
+		 * Warning Handler.
+		 * 
+		 * @param ex
+		 *            SAXParseException
+		 * @throws SAXException
+		 *             A SAXException
+		 */
+		public final void warning(final SAXParseException ex)
+				throws SAXException {
+			if (SyntaxValidator.WARN >= this.failLevel) {
+				throw ex;
+			}
+		}
 
-    }
+	}
 
-    /** * */
-    public static final int WARN = 0;
-    /** * */
-    public static final int ERROR = 1;
-    /** * */
-    public static final int FATAL = 2;
+	/** * */
+	public static final int WARN = 0;
+	/** * */
+	public static final int ERROR = 1;
+	/** * */
+	public static final int FATAL = 2;
 
-    /** * */
-    public static final int NONE = 3;
+	/** * */
+	public static final int NONE = 3;
 
-    /** Validator instance. */
-    private Validator validator;
+	/** Validator instance. */
+	private Validator validator;
 
-    private final Logger logger = PhLogger.getLogger();
+	private final Log logger = PhLogger.getLogger();
 
-    /** Generic Scheme Factory. */
-    private static final SchemaFactory FACTORY = SchemaFactory
-            .newInstance("http://www.w3.org/2001/XMLSchema");
+	/** Generic Scheme Factory. */
+	private static final SchemaFactory FACTORY = SchemaFactory
+			.newInstance("http://www.w3.org/2001/XMLSchema");
 
-    /**
-     * Constructor.
-     * 
-     * @param schemeLocation
-     *            schemeLocation-URL
-     * @throws SAXException
-     *             A SAXException
-     */
-    public SyntaxValidator(final URL schemeLocation) throws SAXException {
+	/**
+	 * Constructor.
+	 * 
+	 * @param schemeLocation
+	 *            schemeLocation-URL
+	 * @throws SAXException
+	 *             A SAXException
+	 */
+	public SyntaxValidator(final URL schemeLocation) throws SAXException {
 
-        this.init(schemeLocation, Integer.valueOf(
-                Config.getString("databinding", "validator.fail")).intValue());
-    }
+		this.init(
+				schemeLocation,
+				Integer.valueOf(
+						Config.getString("databinding", "validator.fail"))
+						.intValue());
+	}
 
-    /**
-     * Constructor.
-     * 
-     * @param schemeLocation
-     *            schemeLocation-URL
-     * @param failLevel
-     *            level of Failure
-     * @throws SAXException
-     *             A SAXException
-     */
-    public SyntaxValidator(final URL schemeLocation, final int failLevel)
-            throws SAXException {
+	/**
+	 * Constructor.
+	 * 
+	 * @param schemeLocation
+	 *            schemeLocation-URL
+	 * @param failLevel
+	 *            level of Failure
+	 * @throws SAXException
+	 *             A SAXException
+	 */
+	public SyntaxValidator(final URL schemeLocation, final int failLevel)
+			throws SAXException {
 
-        this.init(schemeLocation, failLevel);
-    }
+		this.init(schemeLocation, failLevel);
+	}
 
-    /**
-     * Constructor.
-     * 
-     * @param schemeLocation
-     *            schemeLocation-URL
-     * @param failLevel
-     *            level of Failure
-     * @throws SAXException
-     *             A SAXException
-     */
-    private void init(final URL schemeLocation, final int failLevel)
-            throws SAXException {
+	/**
+	 * Constructor.
+	 * 
+	 * @param schemeLocation
+	 *            schemeLocation-URL
+	 * @param failLevel
+	 *            level of Failure
+	 * @throws SAXException
+	 *             A SAXException
+	 */
+	private void init(final URL schemeLocation, final int failLevel)
+			throws SAXException {
 
-        final Schema schema = SyntaxValidator.FACTORY.newSchema(schemeLocation);
-        this.validator = schema.newValidator();
+		final Schema schema = SyntaxValidator.FACTORY.newSchema(schemeLocation);
+		this.validator = schema.newValidator();
 
-        final ValidatorErrorHandler errorHandler = new ValidatorErrorHandler(
-                failLevel);
+		final ValidatorErrorHandler errorHandler = new ValidatorErrorHandler(
+				failLevel);
 
-        this.validator.setErrorHandler(errorHandler);
-    }
+		this.validator.setErrorHandler(errorHandler);
+	}
 
-    /**
-     * Validates the xml string against a given scheme.
-     * 
-     * @param xml
-     *            XML-String
-     * @return True if xml is valid
-     * @throws IOException
-     *             A IOException
-     */
-    public final boolean isValid(final String xml)
-            throws UnexpectedFaultException {
+	/**
+	 * Validates the xml string against a given scheme.
+	 * 
+	 * @param xml
+	 *            XML-String
+	 * @return True if xml is valid
+	 * @throws IOException
+	 *             A IOException
+	 */
+	public final boolean isValid(final String xml)
+			throws UnexpectedFaultException {
 
-        try {
-            this.validate(xml);
-            return true;
-        } catch (final InvalidRequestFaultException ex) {
-            return false;
-        }
-    }
+		try {
+			this.validate(xml);
+			return true;
+		} catch (final InvalidRequestFaultException ex) {
+			return false;
+		}
+	}
 
-    /**
-     * Validates the xml string against a given scheme.
-     * 
-     * @param xml
-     *            XML-Stringl
-     * @throws InvalidRequestFaultException
-     *             Error while parsing
-     * @throws UnexpectedFaultException
-     * @throws IOException
-     *             A IOException
-     */
-    public final void validate(final String xml)
-            throws InvalidRequestFaultException, UnexpectedFaultException {
+	/**
+	 * Validates the xml string against a given scheme.
+	 * 
+	 * @param xml
+	 *            XML-Stringl
+	 * @throws InvalidRequestFaultException
+	 *             Error while parsing
+	 * @throws UnexpectedFaultException
+	 * @throws IOException
+	 *             A IOException
+	 */
+	public final void validate(final String xml)
+			throws InvalidRequestFaultException, UnexpectedFaultException {
 
-        final StringReader is = new StringReader(xml);
-        final Source source = new StreamSource(is);
+		final StringReader is = new StringReader(xml);
+		final Source source = new StreamSource(is);
 
-        try {
-            this.validator.validate(source);
-        } catch (final SAXException e) {
-            this.logger.debug(e.getMessage() + ":\n" + xml);
+		try {
+			this.validator.validate(source);
+		} catch (final SAXException e) {
+			this.logger.debug(e.getMessage() + ":\n" + xml);
 
-            throw new InvalidRequestFaultException(e);
-        } catch (final IOException e) {
-            throw new UnexpectedFaultException("Error during validation: "
-                    + e.getMessage());
-        }
-    }
+			throw new InvalidRequestFaultException(e);
+		} catch (final IOException e) {
+			throw new UnexpectedFaultException("Error during validation: "
+					+ e.getMessage());
+		}
+	}
 }

@@ -28,7 +28,7 @@ package org.opennaas.extensions.idb.notification.producer;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.apache.muse.ws.addressing.soap.SoapFault;
 
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.NotificationMessageType;
@@ -41,7 +41,7 @@ import org.opennaas.core.utils.PhLogger;
 public class NotificationSender extends Thread {
 
     /** Logger. */
-    private final Logger logger = PhLogger.getLogger(this.getClass());
+    private final Log logger = PhLogger.getLogger(this.getClass());
 
     /**
      * Proxy for the consumerClient.

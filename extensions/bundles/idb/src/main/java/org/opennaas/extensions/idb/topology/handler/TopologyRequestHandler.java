@@ -28,7 +28,7 @@ package org.opennaas.extensions.idb.topology.handler;
 
 import java.util.Set;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AddDomainResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AddDomainType;
@@ -92,7 +92,7 @@ public final class TopologyRequestHandler extends CommonTopologyHandler {
 
     private String myDomainName = null;
 
-    private final Logger log = PhLogger.getLogger(TopologyRequestHandler.class);
+    private final Log log = PhLogger.getLogger(TopologyRequestHandler.class);
 
     /**
      * Private constructor: Singleton.

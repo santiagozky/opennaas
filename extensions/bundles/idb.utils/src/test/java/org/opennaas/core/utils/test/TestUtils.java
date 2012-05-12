@@ -36,7 +36,6 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 import org.opennaas.core.utils.Helpers;
-import org.opennaas.core.utils.MethodReflectionCache;
 
 /**
  * @author gassen

@@ -48,144 +48,144 @@ import org.opennaas.core.utils.Helpers;
  * 
  */
 public class CommonNotificationClient extends NotificationClient {
-    private final boolean testDirectly;
-    private Object notificationServer;
+	private final boolean testDirectly;
+	private Object notificationServer;
 
-    /**
-     * Instantiate the notification client with the given EPR.
-     * 
-     * @param endpointReference
-     *            The URL/EPR to the notification adapter.
-     */
-    public CommonNotificationClient(final EndpointReference endpointReference) {
-        super(endpointReference, EPRHelper.getSource(EPRHelper.NOTIFICATION),
-                SecurityHelper.createSoapClient());
-        this.testDirectly = false;
-    }
+	/**
+	 * Instantiate the notification client with the given EPR.
+	 * 
+	 * @param endpointReference
+	 *            The URL/EPR to the notification adapter.
+	 */
+	public CommonNotificationClient(final EndpointReference endpointReference) {
+		super(endpointReference, EPRHelper.getSource(EPRHelper.NOTIFICATION),
+				SecurityHelper.createSoapClient());
+		this.testDirectly = false;
+	}
 
-    /**
-     * To use the Webservice Java class instead of the servlet TCP/IP
-     * communication.
-     * 
-     * @param webservice
-     *            The Webservice class
-     * @throws URISyntaxException
-     */
-    public CommonNotificationClient(final INotificationWS webservice) {
-        super(new EndpointReference(WebserviceUtils.getEmptyURI()), EPRHelper
-                .getSource(EPRHelper.NOTIFICATION), SecurityHelper
-                .createSoapClient());
-        this.testDirectly = true;
-        this.notificationServer = webservice;
-    }
+	/**
+	 * To use the Webservice Java class instead of the servlet TCP/IP
+	 * communication.
+	 * 
+	 * @param webservice
+	 *            The Webservice class
+	 * @throws URISyntaxException
+	 */
+	public CommonNotificationClient(final INotificationWS webservice) {
+		super(new EndpointReference(WebserviceUtils.getEmptyURI()), EPRHelper
+				.getSource(EPRHelper.NOTIFICATION), SecurityHelper
+				.createSoapClient());
+		this.testDirectly = true;
+		this.notificationServer = webservice;
+	}
 
-    /**
-     * Instantiate the reservation client with the given EPR.
-     * 
-     * @param endpointReference
-     *            The URI/EPR to the reservation adapter.
-     * @throws URISyntaxException
-     *             If the given EPR is not a valid URI.
-     */
-    public CommonNotificationClient(final String endpointReference) {
-        this(Helpers.convertStringtoEPR(endpointReference));
-    }
+	/**
+	 * Instantiate the reservation client with the given EPR.
+	 * 
+	 * @param endpointReference
+	 *            The URI/EPR to the reservation adapter.
+	 * @throws URISyntaxException
+	 *             If the given EPR is not a valid URI.
+	 */
+	public CommonNotificationClient(final String endpointReference) {
+		this(EPRHelper.convertStringtoEPR(endpointReference));
+	}
 
-    @Override
-    public Element addTopic(final Element addTopic) throws SoapFault {
-        if (!this.testDirectly) {
-            return super.addTopic(addTopic);
-        }
+	@Override
+	public Element addTopic(final Element addTopic) throws SoapFault {
+		if (!this.testDirectly) {
+			return super.addTopic(addTopic);
+		}
 
-        final String methodName = new Exception().getStackTrace()[0]
-                .getMethodName();
-        return this.callServer(addTopic, methodName);
-    }
+		final String methodName = new Exception().getStackTrace()[0]
+				.getMethodName();
+		return this.callServer(addTopic, methodName);
+	}
 
-    /**
-     * @param activate
-     * @param methodName
-     * @return
-     * @throws SoapFault
-     */
-    @SuppressWarnings("unchecked")
-    private Element callServer(final Element activate, final String methodName)
-            throws SoapFault {
-        final Class[] argsClass = { Element.class };
-        Element result = null;
-        try {
-            final Method method = this.notificationServer.getClass().getMethod(
-                    methodName, argsClass);
-            result = (Element) method.invoke(this.notificationServer, activate);
-        } catch (final InvocationTargetException e) {
-            if (SoapFault.class.isInstance(e.getCause())) {
-                throw (SoapFault) (e.getCause());
-            }
-            throw new UnexpectedFaultException("No SoapFault? (ID:4e8722f)", e
-                    .getCause());
-        } catch (final Exception e) {
-            throw new UnexpectedFaultException("No SoapFault? (ID:4e8723f)", e
-                    .getCause());
-        }
-        return result;
-    }
+	/**
+	 * @param activate
+	 * @param methodName
+	 * @return
+	 * @throws SoapFault
+	 */
+	@SuppressWarnings("unchecked")
+	private Element callServer(final Element activate, final String methodName)
+			throws SoapFault {
+		final Class[] argsClass = { Element.class };
+		Element result = null;
+		try {
+			final Method method = this.notificationServer.getClass().getMethod(
+					methodName, argsClass);
+			result = (Element) method.invoke(this.notificationServer, activate);
+		} catch (final InvocationTargetException e) {
+			if (SoapFault.class.isInstance(e.getCause())) {
+				throw (SoapFault) (e.getCause());
+			}
+			throw new UnexpectedFaultException("No SoapFault? (ID:4e8722f)",
+					e.getCause());
+		} catch (final Exception e) {
+			throw new UnexpectedFaultException("No SoapFault? (ID:4e8723f)",
+					e.getCause());
+		}
+		return result;
+	}
 
-    @Override
-    public Element getTopics(final Element getTopics) throws SoapFault {
-        if (!this.testDirectly) {
-            return super.getTopics(getTopics);
-        }
+	@Override
+	public Element getTopics(final Element getTopics) throws SoapFault {
+		if (!this.testDirectly) {
+			return super.getTopics(getTopics);
+		}
 
-        final String methodName = new Exception().getStackTrace()[0]
-                .getMethodName();
-        return this.callServer(getTopics, methodName);
-    }
+		final String methodName = new Exception().getStackTrace()[0]
+				.getMethodName();
+		return this.callServer(getTopics, methodName);
+	}
 
-    @Override
-    public Element publish(final Element publish) throws SoapFault {
-        if (!this.testDirectly) {
-            return super.publish(publish);
-        }
+	@Override
+	public Element publish(final Element publish) throws SoapFault {
+		if (!this.testDirectly) {
+			return super.publish(publish);
+		}
 
-        final String methodName = new Exception().getStackTrace()[0]
-                .getMethodName();
-        return this.callServer(publish, methodName);
-    }
+		final String methodName = new Exception().getStackTrace()[0]
+				.getMethodName();
+		return this.callServer(publish, methodName);
+	}
 
-    @Override
-    public Element removeTopic(final Element removeTopic) throws SoapFault {
-        if (!this.testDirectly) {
-            return super.removeTopic(removeTopic);
-        }
+	@Override
+	public Element removeTopic(final Element removeTopic) throws SoapFault {
+		if (!this.testDirectly) {
+			return super.removeTopic(removeTopic);
+		}
 
-        final String methodName = new Exception().getStackTrace()[0]
-                .getMethodName();
-        return this.callServer(removeTopic, methodName);
-    }
+		final String methodName = new Exception().getStackTrace()[0]
+				.getMethodName();
+		return this.callServer(removeTopic, methodName);
+	}
 
-    public void setServer(final Object server) {
-        this.notificationServer = server;
-    }
+	public void setServer(final Object server) {
+		this.notificationServer = server;
+	}
 
-    @Override
-    public Element subscribe(final Element subscribe) throws SoapFault {
-        if (!this.testDirectly) {
-            return super.subscribe(subscribe);
-        }
+	@Override
+	public Element subscribe(final Element subscribe) throws SoapFault {
+		if (!this.testDirectly) {
+			return super.subscribe(subscribe);
+		}
 
-        final String methodName = new Exception().getStackTrace()[0]
-                .getMethodName();
-        return this.callServer(subscribe, methodName);
-    }
+		final String methodName = new Exception().getStackTrace()[0]
+				.getMethodName();
+		return this.callServer(subscribe, methodName);
+	}
 
-    @Override
-    public Element unsubscribe(final Element unsubscribe) throws SoapFault {
-        if (!this.testDirectly) {
-            return super.unsubscribe(unsubscribe);
-        }
+	@Override
+	public Element unsubscribe(final Element unsubscribe) throws SoapFault {
+		if (!this.testDirectly) {
+			return super.unsubscribe(unsubscribe);
+		}
 
-        final String methodName = new Exception().getStackTrace()[0]
-                .getMethodName();
-        return this.callServer(unsubscribe, methodName);
-    }
+		final String methodName = new Exception().getStackTrace()[0]
+				.getMethodName();
+		return this.callServer(unsubscribe, methodName);
+	}
 }

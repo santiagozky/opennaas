@@ -24,7 +24,7 @@
  */
 
 
-package org.opennaas.core.utils;
+package org.opennaas.core.utils.test;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;

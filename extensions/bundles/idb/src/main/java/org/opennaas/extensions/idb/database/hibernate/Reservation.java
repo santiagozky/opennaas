@@ -46,7 +46,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 
 import com.mysema.query.jpa.impl.JPAQuery;
 
@@ -72,7 +72,7 @@ import org.opennaas.extensions.idb.exception.database.DatabaseException;
 @Table(name = "Reservation")
 public class Reservation implements java.io.Serializable {
 
-	private static Logger logger = PhLogger.getLogger();
+	private static Log logger = PhLogger.getLogger();
 	// Fields
 
 	/**
@@ -721,7 +721,7 @@ public class Reservation implements java.io.Serializable {
 						} else {
 							GetStatusType gs = getStatusTypeMap.get(nc
 									.getDomain().getName());
-							if (!Helpers.isInList(gs.getServiceID(),
+							if (!isInList(gs.getServiceID(),
 									service.getServiceId())) {
 								gs.getServiceID().add(
 										new Integer(service.getServiceId()));
@@ -758,5 +758,14 @@ public class Reservation implements java.io.Serializable {
 			gsrt.getServiceStatus().add(service.getServiceStatus());
 		}
 		return gsrt;
+	}
+
+	private boolean isInList(List<Integer> list, int value) {
+		for (Integer integer : list) {
+			if (integer.intValue() == value) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

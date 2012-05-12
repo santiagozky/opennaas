@@ -30,7 +30,7 @@ import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.apache.muse.ws.addressing.soap.SoapFault;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -369,7 +369,7 @@ public class TestReservationWebservice extends AbstractReservationTest {
      */
     //@Test(timeout = AbstractTest.TIMEOUT)
     public final void testStressDummy() throws SoapFault {
-        final Logger logger = PhLogger.getSeparateLogger("stresstest");
+        final Log logger = PhLogger.getSeparateLogger("stresstest");
         final String source = Config.getString("test.default.domain.endpoint1");
         final String target = Config.getString("test.default.domain.endpoint2");
         long beginning = 0;

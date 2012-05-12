@@ -29,7 +29,7 @@ import javax.xml.datatype.DatatypeConfigurationException;
 
 import junit.framework.Assert;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
 import org.apache.muse.ws.addressing.soap.SoapFault;
 import org.junit.Test;
 
@@ -55,7 +55,7 @@ public class TestWorkflow {
 	private SimpleTopologyClient topologyClient;
 
 	/** The logger. */
-	private final Logger logger;
+	private final Log logger;
 
 	/**
 	 * Default constructor.
