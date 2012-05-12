@@ -55,7 +55,6 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.IsAvailable
 import org.opennaas.extensions.idb.serviceinterface.databinding.utils.JaxbSerializer;
 import org.opennaas.extensions.idb.serviceinterface.reservation.SimpleReservationClient;
 import org.opennaas.core.utils.Config;
-import org.opennaas.core.utils.PerformanceLogLevel;
 import org.opennaas.core.utils.PhLogger;
 import org.opennaas.extensions.idb.Constants;
 import org.opennaas.extensions.idb.database.hibernate.Domain;
@@ -413,9 +412,9 @@ public class NRPSController extends Thread {
 		}
 
 		this.logger.info("finished");
-		this.performanceLogger.debug(
-				"NRPS_response_time " + this.domain.getName() + " "
-						+ this.proxyRSV.getLastCallDuration() + "ms");
+		this.performanceLogger.debug("NRPS_response_time "
+				+ this.domain.getName() + " "
+				+ this.proxyRSV.getLastCallDuration() + "ms");
 	}
 
 	public void setProxyRSV(final SimpleReservationClient proxyRSV) {

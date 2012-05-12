@@ -39,6 +39,13 @@
 			<artifactId>pax-logging-api</artifactId>
 			<version>${pax.logging.version}</version>
 			</dependency>
+			
+		<dependency>
+			<groupId>com.googlecode.guava-osgi</groupId>
+			<artifactId>guava-osgi</artifactId>
+			<version>${guava.version}</version>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>

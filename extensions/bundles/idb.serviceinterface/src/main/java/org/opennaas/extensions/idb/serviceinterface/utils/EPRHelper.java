@@ -25,6 +25,9 @@
 
 package org.opennaas.extensions.idb.serviceinterface.utils;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import org.apache.muse.ws.addressing.EndpointReference;
 import org.apache.muse.ws.addressing.WsaConstants;
 
@@ -39,56 +42,65 @@ import org.opennaas.core.utils.PhLogger;
  * 
  */
 public class EPRHelper {
-    public static final String RESERVATION = "domain.reservationEPR";
-    public static final String TOPOLOGY = "domain.topologyEPR";
-    public static final String NOTIFICATION = "domain.notificationEPR";
+	public static final String RESERVATION = "domain.reservationEPR";
+	public static final String TOPOLOGY = "domain.topologyEPR";
+	public static final String NOTIFICATION = "domain.notificationEPR";
 
-    /**
-     * Get the string EPR
-     * 
-     * @param option
-     * @return
-     */
-    public static final String getEPR(final String option) {
-        String epr = "";
-        try {
-            epr = Config.getString("hsi", option);
-        } catch (final Exception e) {
-            try {
-                epr = Config.getString("hsiIDB", option);
-            } catch (final Exception e2) {
-                try {
-                    epr = Config.getString("hsiTranslatorG2MPLS", option);
-                } catch (final Exception e3) {
-                    return "";
-                }
-            }
-        }
+	/**
+	 * Get the string EPR
+	 * 
+	 * @param option
+	 * @return
+	 */
+	public static final String getEPR(final String option) {
+		String epr = "";
+		try {
+			epr = Config.getString("hsi", option);
+		} catch (final Exception e) {
+			try {
+				epr = Config.getString("hsiIDB", option);
+			} catch (final Exception e2) {
+				try {
+					epr = Config.getString("hsiTranslatorG2MPLS", option);
+				} catch (final Exception e3) {
+					return "";
+				}
+			}
+		}
 
-        return epr;
-    }
+		return epr;
+	}
 
-    /**
-     * Get the string EPR source
-     * 
-     * @param option
-     * @return
-     */
-    public static final EndpointReference getSource(final String option) {
-        try {
+	/**
+	 * Get the string EPR source
+	 * 
+	 * @param option
+	 * @return
+	 */
+	public static final EndpointReference getSource(final String option) {
+		try {
 
-            final String epr = EPRHelper.getEPR(option);
-            if ((epr == null) || epr.equalsIgnoreCase("")) {
-                PhLogger.getLogger().info(
-                        "Warning, it was impossible to get some EPR.");
-                return WsaConstants.ANONYMOUS_EPR;
-            }
-            return Helpers.convertStringtoEPR(epr);
+			final String epr = EPRHelper.getEPR(option);
+			if ((epr == null) || epr.equalsIgnoreCase("")) {
+				PhLogger.getLogger().info(
+						"Warning, it was impossible to get some EPR.");
+				return WsaConstants.ANONYMOUS_EPR;
+			}
+			return convertStringtoEPR(epr);
 
-        } catch (final Exception e) {
-            PhLogger.getLogger().info("Could not get a EPR " + option);
-            return WsaConstants.ANONYMOUS_EPR;
-        }
-    }
+		} catch (final Exception e) {
+			PhLogger.getLogger().info("Could not get a EPR " + option);
+			return WsaConstants.ANONYMOUS_EPR;
+		}
+	}
 
+	public static EndpointReference convertStringtoEPR(String epr) {
+		EndpointReference result = null;
+		try {
+			result = new EndpointReference(new URI(epr));
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 }

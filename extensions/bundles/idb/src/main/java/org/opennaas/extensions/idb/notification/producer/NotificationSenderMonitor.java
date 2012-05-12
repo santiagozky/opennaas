@@ -35,7 +35,6 @@ import org.apache.commons.logging.Log;
 
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.NotificationMessageType;
 import org.opennaas.core.utils.Config;
-import org.opennaas.core.utils.PerformanceLogLevel;
 import org.opennaas.core.utils.PhLogger;
 
 public class NotificationSenderMonitor extends Thread {

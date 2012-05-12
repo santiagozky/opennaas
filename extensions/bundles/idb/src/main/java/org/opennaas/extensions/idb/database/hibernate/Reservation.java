@@ -721,7 +721,7 @@ public class Reservation implements java.io.Serializable {
 						} else {
 							GetStatusType gs = getStatusTypeMap.get(nc
 									.getDomain().getName());
-							if (!Helpers.isInList(gs.getServiceID(),
+							if (!isInList(gs.getServiceID(),
 									service.getServiceId())) {
 								gs.getServiceID().add(
 										new Integer(service.getServiceId()));
@@ -758,5 +758,14 @@ public class Reservation implements java.io.Serializable {
 			gsrt.getServiceStatus().add(service.getServiceStatus());
 		}
 		return gsrt;
+	}
+
+	private boolean isInList(List<Integer> list, int value) {
+		for (Integer integer : list) {
+			if (integer.intValue() == value) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

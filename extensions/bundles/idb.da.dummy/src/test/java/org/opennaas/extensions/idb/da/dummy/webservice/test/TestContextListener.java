@@ -31,6 +31,7 @@
  */
 package org.opennaas.extensions.idb.da.dummy.webservice.test;
 
+import java.io.File;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -40,7 +41,6 @@ import org.junit.Test;
 import org.opennaas.extensions.idb.da.dummy.webservice.ContextListener;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DomainInformationType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.EndpointType;
-import org.opennaas.core.utils.FileHelper;
 
 /**
  * @author Alexander Willner (willner@cs.uni-bonn.de)
@@ -53,10 +53,10 @@ public class TestContextListener extends ContextListener {
 	 */
 	@Test
 	public final void testGetInterdomainPropertyFile() {
-		final String filename = "resources/properties/"
+		final String filename = "src/test/resources/properties/"
 				+ this.getInterdomainPropertyFile() + ".properties";
-		Assert.assertTrue("Should return a valid property file",
-				FileHelper.fileExists(filename));
+		Assert.assertTrue("Should return a valid property file", new File(
+				filename).exists());
 	}
 
 	/**

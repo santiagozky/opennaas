@@ -54,7 +54,6 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ServiceCons
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.StatusType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.EndpointNotFoundFaultException;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.PathNotFoundFaultException;
-import org.opennaas.core.utils.PerformanceLogLevel;
 import org.opennaas.core.utils.PhLogger;
 import org.opennaas.core.utils.Tuple;
 import org.opennaas.extensions.idb.database.hibernate.Connections;

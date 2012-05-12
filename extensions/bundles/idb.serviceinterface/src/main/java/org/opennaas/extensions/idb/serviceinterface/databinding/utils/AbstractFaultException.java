@@ -28,6 +28,9 @@
  */
 package org.opennaas.extensions.idb.serviceinterface.databinding.utils;
 
+import java.text.CharacterIterator;
+import java.text.StringCharacterIterator;
+
 import org.apache.muse.ws.addressing.soap.SoapFault;
 import org.w3c.dom.Element;
 
@@ -154,7 +157,7 @@ public class AbstractFaultException extends SoapFault {
      */
     private final void generateStackTraces() {
         final Description stackTrace = new Description();
-        stackTrace.setValue(Helpers.stackTraceToXML(this));
+        stackTrace.setValue(stackTraceToXML(this));
         stackTrace.setLang("stack");
 
         this.faultClass.getDescription().add(stackTrace);
@@ -269,5 +272,78 @@ public class AbstractFaultException extends SoapFault {
     protected AJaxbSerializer getSerializer() {
         return JaxbSerializer.getInstance();
     }
+    
+    /**
+     * Convert a Stacktrace to String.
+     * 
+     * @param ex
+     *            Throwable which contains needed stacktrace
+     * @return Stacktrace String
+     */
+    private String stackTraceToXML(final Throwable ex) {
+        String result =
+                "<stackTrace " + "className=\"" + ex.getClass().getName()
+                        + "\">";
+
+        for (StackTraceElement element : ex.getStackTrace()) {
+            result +=
+                    "<stackTraceElement " + "className=\""
+                            + element.getClassName() + "\" " + "fileName=\""
+                            + element.getFileName() + "\" " + "lineNumber=\""
+                            + element.getLineNumber() + "\" " + "methodName=\""
+                            + escapeXmlSpecialChars(element.getMethodName())
+                            + "\" isNativeMethod=\"" + element.isNativeMethod()
+                            + "\"/>\n";
+        }
+
+        result += "</stackTrace>\n";
+
+        return result;
+    }
+    
+    /**
+     * Method to escape special chars in strings.
+     * 
+     * @param input
+     *            Any input string
+     * @return String with escaped xml special chars
+     */
+   private String escapeXmlSpecialChars(String input) {
+        final StringBuilder result = new StringBuilder();
+        final StringCharacterIterator iterator =
+                new StringCharacterIterator(input);
+
+        char character = iterator.first();
+
+        while (character != CharacterIterator.DONE) {
+        	switch(character){
+        	case '<':
+        		result.append("lt;");
+        	break;
+        	case '>':
+        		result.append("lt;");
+        	break;
+        	case '\"':
+        		result.append("$quot;");
+        	break;
+        	case '\'':
+        		result.append("&#039;");
+        	break;
+        	case '\\':
+        		result.append("&#092;");
+        	break;
+            case '&':
+        		result.append("&amp;");
+        	break;
+        	default:
+        		result.append(character);
+        	break;
+          }
+            character = iterator.next();
+        }
+        return result.toString();
+    
+    }
 
 }
+

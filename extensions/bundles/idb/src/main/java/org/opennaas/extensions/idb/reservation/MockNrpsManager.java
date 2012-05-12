@@ -60,7 +60,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.utils.Webservice
 import org.opennaas.extensions.idb.serviceinterface.reservation.SimpleReservationClient;
 import org.opennaas.core.utils.Config;
 import org.opennaas.core.utils.Helpers;
-import org.opennaas.core.utils.PerformanceLogLevel;
+
 import org.opennaas.core.utils.PhLogger;
 import org.opennaas.extensions.idb.Constants;
 import org.opennaas.extensions.idb.database.hibernate.Domain;
