@@ -51,20 +51,17 @@
 		<module>bod.repository</module>
 		<module>bod.capability.l2bod</module>
 		<module>bod.actionsets.dummy</module>
-<<<<<<< HEAD
-                <module>bod.autobahn</module>
-                <module>idb</module>
+
+           <module>bod.autobahn</module>
+           <module>itests.helpers</module>
+		
+		<module>webservice</module>
+		<module>webservice-proxy</module>
+           <module>idb</module>
 		<module>idb.serviceinterface</module>
 		<module>idb.database</module>
 		<module>idb.utils</module>
 		<module>idb.da.dummy</module>
-=======
-        <module>bod.autobahn</module>
-         
-		<module>itests.helpers</module>
-		
-		<module>webservice</module>
-		<module>webservice-proxy</module>
->>>>>>> 16f7a3b235979ed1abdfab7bfce92220d4b75df2
+
 	</modules>
 </project>
