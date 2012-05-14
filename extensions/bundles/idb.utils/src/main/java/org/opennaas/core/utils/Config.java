@@ -45,7 +45,7 @@ import java.util.ResourceBundle;
 public final class Config {
 
 	/** Properties directory. */
-	private static final String PROPERTIES_DIR = "properties.";
+	private static final String PROPERTIES_DIR = "";
 
 	/** Local suffix. */
 	private static final String LOCAL_SUFFIX = "_local";
@@ -158,7 +158,7 @@ public final class Config {
 		}
 
 		try {
-			// Try to find key in locale file
+			// We try first the local file
 			result = Config.getStringFromBundle(localFileName, key);
 		} catch (MissingResourceException e) {
 			// Use common file else

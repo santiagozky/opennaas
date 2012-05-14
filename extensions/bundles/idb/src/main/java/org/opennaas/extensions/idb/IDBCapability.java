@@ -1,9 +1,5 @@
 package org.opennaas.extensions.idb;
 
-import java.util.Vector;
-
-import org.opennaas.extensions.queuemanager.IQueueManagerService;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.opennaas.core.resources.ActivatorException;
@@ -11,13 +7,13 @@ import org.opennaas.core.resources.action.IAction;
 import org.opennaas.core.resources.action.IActionSet;
 import org.opennaas.core.resources.capability.AbstractCapability;
 import org.opennaas.core.resources.capability.CapabilityException;
-import org.opennaas.core.resources.command.Response;
 import org.opennaas.core.resources.descriptor.CapabilityDescriptor;
 import org.opennaas.core.resources.descriptor.ResourceDescriptorConstants;
+import org.opennaas.extensions.queuemanager.IQueueManagerCapability;
 
-public class IDBCapability extends AbstractCapability {
+public class IDBCapability extends AbstractCapability /* implements IDBCapability */{
 
-	public static String CAPABILITY_NAME = "IDB";
+	public static String CAPABILITY_TYPE = "idb";
 
 	Log log = LogFactory.getLog(IDBCapability.class);
 
@@ -31,45 +27,8 @@ public class IDBCapability extends AbstractCapability {
 	}
 
 	@Override
-	public Object sendMessage(String idOperation, Object params) {
-
-		log.debug("Sending message to IDB Capability");
-		try {
-			IQueueManagerService queueManager = Activator
-					.getQueueManagerService(resourceId);
-			IAction action = createAction(idOperation);
-			action.setParams(params);
-			action.setModelToUpdate(resource.getModel());
-			queueManager.queueAction(action);
-
-		} catch (Exception e) {
-			Vector<String> errorMsgs = new Vector<String>();
-			errorMsgs
-					.add(e.getMessage() + ":" + '\n' + e.getLocalizedMessage());
-			return Response.errorResponse(idOperation, errorMsgs);
-		}
-
-		return Response.okResponse(idOperation);
-	}
-
-	@Override
-	protected void initializeCapability() throws CapabilityException {
-
-	}
-
-	@Override
-	protected void activateCapability() throws CapabilityException {
-
-	}
-
-	@Override
-	protected void deactivateCapability() throws CapabilityException {
-
-	}
-
-	@Override
-	protected void shutdownCapability() throws CapabilityException {
-
+	public String getCapabilityName() {
+		return CAPABILITY_TYPE;
 	}
 
 	@Override
@@ -84,6 +43,28 @@ public class IDBCapability extends AbstractCapability {
 			return Activator.getIDBActionSetService(name, version);
 		} catch (ActivatorException e) {
 			throw new CapabilityException(e);
+		}
+	}
+
+	@Override
+	public void queueAction(IAction action) throws CapabilityException {
+		getQueueManager(resourceId).queueAction(action);
+	}
+
+	/**
+	 * 
+	 * @return QueuemanagerService this capability is associated to.
+	 * @throws CapabilityException
+	 *             if desired queueManagerService could not be retrieved.
+	 */
+	private IQueueManagerCapability getQueueManager(String resourceId)
+			throws CapabilityException {
+		try {
+			return Activator.getQueueManagerService(resourceId);
+		} catch (ActivatorException e) {
+			throw new CapabilityException(
+					"Failed to get QueueManagerService for resource "
+							+ resourceId, e);
 		}
 	}
 

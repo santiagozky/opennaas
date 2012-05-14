@@ -57,7 +57,7 @@
 		
 		<module>webservice</module>
 		<module>webservice-proxy</module>
-           <module>idb</module>
+	           <module>idb</module>
 		<module>idb.serviceinterface</module>
 		<module>idb.database</module>
 		<module>idb.utils</module>

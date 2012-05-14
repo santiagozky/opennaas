@@ -15,7 +15,7 @@ public class IDBCapabilityFactory extends AbstractCapabilityFactory {
 	public ICapability create(IResource resource) throws CapabilityException {
 
 		ICapability capability = this.create(resource.getResourceDescriptor()
-				.getCapabilityDescriptor(IDBCapability.CAPABILITY_NAME),
+				.getCapabilityDescriptor(IDBCapability.CAPABILITY_TYPE),
 				resource.getResourceDescriptor().getId());
 		capability.setResource(resource);
 		return capability;

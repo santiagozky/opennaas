@@ -2,7 +2,7 @@ package org.opennaas.extensions.idb;
 
 import java.util.Properties;
 
-import org.opennaas.extensions.queuemanager.IQueueManagerService;
+import org.opennaas.extensions.queuemanager.IQueueManagerCapability;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -53,12 +53,12 @@ public class Activator extends AbstractActivator implements BundleActivator {
 	 * @return IQueueManagerService
 	 * @throws ActivatorException
 	 */
-	public static IQueueManagerService getQueueManagerService(String resourceId)
-			throws ActivatorException {
+	public static IQueueManagerCapability getQueueManagerService(
+			String resourceId) throws ActivatorException {
 
 		try {
 			log.debug("Calling QueueManagerService");
-			return (IQueueManagerService) getServiceFromRegistry(context,
+			return (IQueueManagerCapability) getServiceFromRegistry(context,
 					createFilterQueueManager(resourceId));
 		} catch (InvalidSyntaxException e) {
 			throw new ActivatorException(e);
@@ -79,7 +79,7 @@ public class Activator extends AbstractActivator implements BundleActivator {
 		properties.setProperty(ResourceDescriptorConstants.CAPABILITY, "queue");
 		properties.setProperty(ResourceDescriptorConstants.CAPABILITY_NAME,
 				resourceId);
-		return createServiceFilter(IQueueManagerService.class.getName(),
+		return createServiceFilter(IQueueManagerCapability.class.getName(),
 				properties);
 	}
 
@@ -95,7 +95,7 @@ public class Activator extends AbstractActivator implements BundleActivator {
 			throws ActivatorException {
 
 		try {
-			log.debug("Calling L2IDBActionSetService");
+			log.debug("Calling IDBActionSetService");
 			return (IActionSet) getServiceFromRegistry(context,
 					createFilterIDBActionSet(name, version));
 		} catch (InvalidSyntaxException e) {

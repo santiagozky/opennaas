@@ -24,7 +24,7 @@
  */
 
 
-package org.opennaas.core.utils.test;
+package utils.test;
 
 import java.net.UnknownHostException;
 
