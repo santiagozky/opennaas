@@ -30,13 +30,14 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import junit.framework.Assert;
 
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.muse.ws.addressing.soap.SoapFault;
 import org.junit.Test;
 
 import org.opennaas.extensions.idb.serviceinterface.reservation.SimpleReservationClient;
 import org.opennaas.extensions.idb.serviceinterface.topology.SimpleTopologyClient;
 import org.opennaas.core.utils.Config;
-import org.opennaas.core.utils.PhLogger;
+
 import org.opennaas.extensions.idb.Constants;
 import org.opennaas.extensions.idb.exception.database.DatabaseException;
 import org.opennaas.extensions.idb.webservice.ReservationWS;
@@ -73,7 +74,7 @@ public class TestWorkflow {
 					new ReservationWS());
 			this.topologyClient = new SimpleTopologyClient(new TopologyWS());
 		}
-		this.logger = PhLogger.getLogger();
+		this.logger = LogFactory.getLog(this.getClass());
 	}
 
 	/**

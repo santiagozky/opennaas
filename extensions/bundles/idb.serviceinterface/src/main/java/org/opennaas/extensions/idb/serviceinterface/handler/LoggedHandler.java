@@ -29,11 +29,12 @@
 package org.opennaas.extensions.idb.serviceinterface.handler;
 
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.muse.ws.addressing.soap.SoapFault;
 
 import org.opennaas.extensions.idb.serviceinterface.RequestHandler;
 import org.opennaas.extensions.idb.serviceinterface.topology.registrator.AbstractTopologyRegistrator;
-import org.opennaas.core.utils.PhLogger;
+
 
 /**
  * @author gassen
@@ -69,8 +70,8 @@ public class LoggedHandler extends CachedHandler {
 	private static final synchronized Log getPerformanceLogger(
 			final String domainName) {
 		if (null == LoggedHandler.performanceLogger) {
-			LoggedHandler.performanceLogger = PhLogger
-					.getSeparateLogger("performance." + domainName);
+			LoggedHandler.performanceLogger = LogFactory.getLog("performance."
+					+ domainName);
 		}
 
 		return LoggedHandler.performanceLogger;
@@ -118,7 +119,7 @@ public class LoggedHandler extends CachedHandler {
 	protected final Log getLogger() throws SoapFault {
 		if (null == this.logger) {
 			try {
-				this.logger = PhLogger.getLogger(RequestHandler.class);
+				this.logger = LogFactory.getLog(this.getClass());
 			} catch (final Exception e) {
 				throw this.exceptionHandler.handleException(e);
 			}

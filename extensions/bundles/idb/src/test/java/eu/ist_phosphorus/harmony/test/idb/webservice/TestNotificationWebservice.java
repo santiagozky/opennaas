@@ -54,9 +54,9 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.SubscribeTy
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.UnsubscribeResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.UnsubscribeType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.utils.WebserviceUtils;
+import org.opennaas.extensions.idb.utils.NotificationTopic;
 import org.opennaas.core.utils.Config;
 import org.opennaas.core.utils.Helpers;
-import org.opennaas.core.utils.NotificationTopic;
 import org.opennaas.extensions.idb.database.hibernate.Subscription;
 
 /**

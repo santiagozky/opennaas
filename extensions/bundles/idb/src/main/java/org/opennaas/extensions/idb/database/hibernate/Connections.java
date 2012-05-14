@@ -52,6 +52,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.mysema.query.jpa.impl.JPAQuery;
 
@@ -61,7 +62,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DomainConne
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.EndpointType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.StatusType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.EndpointNotFoundFaultException;
-import org.opennaas.core.utils.PhLogger;
+
 import org.opennaas.extensions.idb.database.TransactionManager;
 import org.opennaas.extensions.idb.database.TransactionManagerLoad;
 import org.opennaas.extensions.idb.exception.database.DatabaseException;
@@ -78,7 +79,7 @@ import org.opennaas.extensions.idb.exception.database.DatabaseException;
 public class Connections implements java.io.Serializable {
 	/** */
 	private static final long serialVersionUID = 4589942413245237237L;
-	private static Log logger = PhLogger.getLogger();
+	private static Log logger = LogFactory.getLog(Connections.class);
 	/** primary key in the DB */
 	private long PK_Connections;
 

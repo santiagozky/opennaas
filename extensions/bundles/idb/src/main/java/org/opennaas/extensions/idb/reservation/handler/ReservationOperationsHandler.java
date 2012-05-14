@@ -33,6 +33,7 @@ import java.util.Set;
 import java.util.Map.Entry;
 
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.muse.ws.addressing.soap.SoapFault;
 
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ActivateResponseType;
@@ -52,7 +53,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetStatusRe
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.InvalidServiceIDFaultException;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.ReservationIDNotFoundFaultException;
 import org.opennaas.extensions.idb.serviceinterface.databinding.utils.WebserviceUtils;
-import org.opennaas.core.utils.PhLogger;
+
 import org.opennaas.extensions.idb.database.hibernate.Connections;
 import org.opennaas.extensions.idb.database.hibernate.Domain;
 import org.opennaas.extensions.idb.database.hibernate.MAPNRPSResvID;
@@ -87,7 +88,7 @@ public final class ReservationOperationsHandler {
 	private final IManager nrpsManager;
 
 	/** Log instance. */
-	private final Log logger = PhLogger.getLogger(this.getClass());
+	private final Log logger = LogFactory.getLog(this.getClass());
 
 	private Log performanceLogger = null;
 

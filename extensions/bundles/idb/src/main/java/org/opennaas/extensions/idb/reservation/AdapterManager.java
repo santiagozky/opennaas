@@ -1,11 +1,11 @@
 /**
-*  This code is part of the Harmony System implemented in Work Package 1 
-*  of the Phosphorus project. This work is supported by the European 
-*  Comission under the Sixth Framework Programme with contract number 
-*  IST-034115.
-*
-*  Copyright (C) 2006-2009 Phosphorus WP1 partners. Phosphorus Consortium.
-*  http://ist-phosphorus.eu/
+ *  This code is part of the Harmony System implemented in Work Package 1 
+ *  of the Phosphorus project. This work is supported by the European 
+ *  Comission under the Sixth Framework Programme with contract number 
+ *  IST-034115.
+ *
+ *  Copyright (C) 2006-2009 Phosphorus WP1 partners. Phosphorus Consortium.
+ *  http://ist-phosphorus.eu/
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -23,7 +23,6 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 
-
 package org.opennaas.extensions.idb.reservation;
 
 import java.io.IOException;
@@ -34,6 +33,7 @@ import java.util.Hashtable;
 import javax.xml.bind.JAXBException;
 
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.muse.ws.addressing.soap.SoapFault;
 import org.xml.sax.SAXException;
 
@@ -52,7 +52,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.IsAvailable
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.TimeoutFaultException;
 import org.opennaas.extensions.idb.serviceinterface.databinding.utils.WebserviceUtils;
 import org.opennaas.core.utils.Config;
-import org.opennaas.core.utils.PhLogger;
+
 import org.opennaas.extensions.idb.Constants;
 import org.opennaas.extensions.idb.database.hibernate.Domain;
 import org.opennaas.extensions.idb.exception.database.DatabaseException;
@@ -68,653 +68,658 @@ import org.opennaas.extensions.idb.reservation.handler.ReservationRequestHandler
  */
 public final class AdapterManager implements IManager {
 
-    /** Singleton Instance. */
-    private static IManager selfInstance = null;
+	/** Singleton Instance. */
+	private static IManager selfInstance = null;
 
-    /** Singelton instance. */
-    private static IManager selfMalleableInstance = null;
+	/** Singelton instance. */
+	private static IManager selfMalleableInstance = null;
 
-    /** malleable reservation flag. */
-    private boolean malleable;
+	/** malleable reservation flag. */
+	private final boolean malleable;
 
-    /**
-     * Instance getter.
-     * 
-     * @return Singleton Instance
-     */
-    public static IManager getInstance() {
-        if (AdapterManager.selfInstance == null) {
-            if (Config.getString(Constants.idbProperties, "useMockManager").equals("true")) {
-                try {
-                    AdapterManager.selfInstance = MockNrpsManager.getInstance();
-                } catch (final DatabaseException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            } else {
-                AdapterManager.selfInstance = new AdapterManager(false);
-            }
-        }
-        return AdapterManager.selfInstance;
-    }
+	/**
+	 * Instance getter.
+	 * 
+	 * @return Singleton Instance
+	 */
+	public static IManager getInstance() {
+		if (AdapterManager.selfInstance == null) {
+			if (Config.getString(Constants.idbProperties, "useMockManager")
+					.equals("true")) {
+				try {
+					AdapterManager.selfInstance = MockNrpsManager.getInstance();
+				} catch (final DatabaseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else {
+				AdapterManager.selfInstance = new AdapterManager(false);
+			}
+		}
+		return AdapterManager.selfInstance;
+	}
 
-    /**
-     * Instance getter.
-     * 
-     * @return Singleton Instance
-     */
-    public static IManager getMalleableInstance() {
-        if (AdapterManager.selfMalleableInstance == null) {
-                AdapterManager.selfMalleableInstance = new AdapterManager(true);
-        }
-        return AdapterManager.selfMalleableInstance;
-    }
+	/**
+	 * Instance getter.
+	 * 
+	 * @return Singleton Instance
+	 */
+	public static IManager getMalleableInstance() {
+		if (AdapterManager.selfMalleableInstance == null) {
+			AdapterManager.selfMalleableInstance = new AdapterManager(true);
+		}
+		return AdapterManager.selfMalleableInstance;
+	}
 
-    /** Logger. */
-    private final Log logger;
+	/** Logger. */
+	private final Log logger;
 
-    /** PerformanceLogger. */
-    private final Log performanceLogger;
+	/** PerformanceLogger. */
+	private final Log performanceLogger;
 
-    /** Timeout for the NRPS responses (in milliseconds) */
-    private final long nrpsTimeout;
+	/** Timeout for the NRPS responses (in milliseconds) */
+	private final long nrpsTimeout;
 
-    /**
-     * List to keep track of the Domains that have created successfully the
-     * reservation for rollback on errors
-     */
-    private final HashMap<Domain, Long> rollbackList;
+	/**
+	 * List to keep track of the Domains that have created successfully the
+	 * reservation for rollback on errors
+	 */
+	private final HashMap<Domain, Long> rollbackList;
 
-    private AdapterManager(boolean malleable) {
+	private AdapterManager(boolean malleable) {
 
-    	this.malleable = malleable;
+		this.malleable = malleable;
 
-        this.logger = PhLogger.getLogger(this.getClass());
+		this.logger = LogFactory.getLog(this.getClass());
 
-        try {
-			this.performanceLogger = ReservationRequestHandler.getInstance().getPerformanceLogger();
+		try {
+			this.performanceLogger = ReservationRequestHandler.getInstance()
+					.getPerformanceLogger();
 		} catch (SoapFault e) {
-			throw new RuntimeException("cannot retrieve performance logger instance", e);
+			throw new RuntimeException(
+					"cannot retrieve performance logger instance", e);
 		}
 
-        this.rollbackList = new HashMap<Domain, Long>();
+		this.rollbackList = new HashMap<Domain, Long>();
 
-        this.nrpsTimeout = Long.parseLong(Config
-                .getString(Constants.idbProperties, "nrpsTimeout"));
+		this.nrpsTimeout = Long.parseLong(Config.getString(
+				Constants.idbProperties, "nrpsTimeout"));
 
-        this.logger.info("Threaded NRPSManager created");
-    }
+		this.logger.info("Threaded NRPSManager created");
+	}
 
-    /**
-     * This method implements the ActivateReservation operation for a set of
-     * domains and messages. It creates the controllers, executes the single
-     * operation in each one and returns the responses for each one of the
-     * domains.
-     * 
-     * @param requests
-     *            Set of requests for the NRPSs
-     * @return Status of the activation
-     * @throws SAXException
-     * @throws IOException
-     * @throws JAXBException
-     * @throws SoapFault
-     */
-    public Hashtable<Domain, ActivateResponseType> activateReservation(
-            final Hashtable<Domain, ActivateType> requests) throws SoapFault {
-    	final long startTime = System.currentTimeMillis();
+	/**
+	 * This method implements the ActivateReservation operation for a set of
+	 * domains and messages. It creates the controllers, executes the single
+	 * operation in each one and returns the responses for each one of the
+	 * domains.
+	 * 
+	 * @param requests
+	 *            Set of requests for the NRPSs
+	 * @return Status of the activation
+	 * @throws SAXException
+	 * @throws IOException
+	 * @throws JAXBException
+	 * @throws SoapFault
+	 */
+	public Hashtable<Domain, ActivateResponseType> activateReservation(
+			final Hashtable<Domain, ActivateType> requests) throws SoapFault {
+		final long startTime = System.currentTimeMillis();
 
-        final Enumeration<Domain> doms = requests.keys();
-        final Hashtable<Domain, ActivateResponseType> response = new Hashtable<Domain, ActivateResponseType>();
+		final Enumeration<Domain> doms = requests.keys();
+		final Hashtable<Domain, ActivateResponseType> response = new Hashtable<Domain, ActivateResponseType>();
 
-        final NRPSController[] threads = new NRPSController[requests.size()];
+		final NRPSController[] threads = new NRPSController[requests.size()];
 
-        final long responseTime = System.currentTimeMillis();
+		final long responseTime = System.currentTimeMillis();
 
-        int i = 0;
+		int i = 0;
 
-        while (doms.hasMoreElements()) {
+		while (doms.hasMoreElements()) {
 
-            final Domain dom = doms.nextElement();
+			final Domain dom = doms.nextElement();
 
-            threads[i] = new NRPSController(dom, "activateReservation",
-                    requests.get(dom), this.malleable, this.performanceLogger);
+			threads[i] = new NRPSController(dom, "activateReservation",
+					requests.get(dom), this.malleable, this.performanceLogger);
 
-            threads[i].activateReservation(requests.get(dom));
+			threads[i].activateReservation(requests.get(dom));
 
-            i++;
-        }
+			i++;
+		}
 
-        this.waitForThreads(threads);
+		this.waitForThreads(threads);
 
-        this.logResponse(responseTime);
+		this.logResponse(responseTime);
 
-        for (final NRPSController element : threads) {
+		for (final NRPSController element : threads) {
 
-            ActivateResponseType res = (ActivateResponseType) element
-                    .getResult();
+			ActivateResponseType res = (ActivateResponseType) element
+					.getResult();
 
-            if (res != null) {
-                response.put(element.getDomain(), res);
-            } else {
-                this.logger.error("NRPS returned a null message...");
+			if (res != null) {
+				response.put(element.getDomain(), res);
+			} else {
+				this.logger.error("NRPS returned a null message...");
 
-                res = new ActivateResponseType();
-                response.put(element.getDomain(), res);
-            }
-        }
+				res = new ActivateResponseType();
+				response.put(element.getDomain(), res);
+			}
+		}
 
-        this.cleanupThreads(threads);
+		this.cleanupThreads(threads);
 
-        this.logTotalDuration(startTime);
+		this.logTotalDuration(startTime);
 
-        return response;
-    }
+		return response;
+	}
 
-    /**
-     * This method implements the ActivateReservation operation for a set of
-     * domains and messages. It creates the controllers, executes the single
-     * operation in each one and returns the responses for each one of the
-     * domains.
-     * 
-     * @param requests
-     * @return
-     * @throws SAXException
-     * @throws IOException
-     * @throws JAXBException
-     * @throws SoapFault
-     */
-    public Hashtable<Domain, CancelReservationResponseType> cancelReservation(
-            final Hashtable<Domain, CancelReservationType> requests)
-            throws SoapFault {
-    	final long startTime = System.currentTimeMillis();
+	/**
+	 * This method implements the ActivateReservation operation for a set of
+	 * domains and messages. It creates the controllers, executes the single
+	 * operation in each one and returns the responses for each one of the
+	 * domains.
+	 * 
+	 * @param requests
+	 * @return
+	 * @throws SAXException
+	 * @throws IOException
+	 * @throws JAXBException
+	 * @throws SoapFault
+	 */
+	public Hashtable<Domain, CancelReservationResponseType> cancelReservation(
+			final Hashtable<Domain, CancelReservationType> requests)
+			throws SoapFault {
+		final long startTime = System.currentTimeMillis();
 
-        final Enumeration<Domain> doms = requests.keys();
-        final Hashtable<Domain, CancelReservationResponseType> response = new Hashtable<Domain, CancelReservationResponseType>();
+		final Enumeration<Domain> doms = requests.keys();
+		final Hashtable<Domain, CancelReservationResponseType> response = new Hashtable<Domain, CancelReservationResponseType>();
 
-        final NRPSController[] threads = new NRPSController[requests.size()];
+		final NRPSController[] threads = new NRPSController[requests.size()];
 
-        final long responseTime = System.currentTimeMillis();
+		final long responseTime = System.currentTimeMillis();
 
-        int i = 0;
+		int i = 0;
 
-        while (doms.hasMoreElements()) {
+		while (doms.hasMoreElements()) {
 
-            final Domain dom = doms.nextElement();
+			final Domain dom = doms.nextElement();
 
-            threads[i] = new NRPSController(dom, "cancelReservation", requests
-                    .get(dom), this.malleable, this.performanceLogger);
+			threads[i] = new NRPSController(dom, "cancelReservation",
+					requests.get(dom), this.malleable, this.performanceLogger);
 
-            threads[i].cancelReservation(requests.get(dom));
+			threads[i].cancelReservation(requests.get(dom));
 
-            i++;
-        }
+			i++;
+		}
 
-        this.waitForThreads(threads);
+		this.waitForThreads(threads);
 
-        this.logResponse(responseTime);
+		this.logResponse(responseTime);
 
-        for (final NRPSController element : threads) {
+		for (final NRPSController element : threads) {
 
-            CancelReservationResponseType res = (CancelReservationResponseType) element
-                    .getResult();
+			CancelReservationResponseType res = (CancelReservationResponseType) element
+					.getResult();
 
-            if (res != null) {
-                response.put(element.getDomain(), res);
-            } else {
-                this.logger.error("NRPS returned a null message...");
+			if (res != null) {
+				response.put(element.getDomain(), res);
+			} else {
+				this.logger.error("NRPS returned a null message...");
 
-                res = new CancelReservationResponseType();
-                response.put(element.getDomain(), res);
-            }
-        }
+				res = new CancelReservationResponseType();
+				response.put(element.getDomain(), res);
+			}
+		}
 
-        this.cleanupThreads(threads);
+		this.cleanupThreads(threads);
 
-        this.logTotalDuration(startTime);
+		this.logTotalDuration(startTime);
 
-        return response;
-    }
+		return response;
+	}
 
-    private void cleanupThreads(final NRPSController[] threads) {
-        // Kill all the threads
-        for (int z = 0; z < threads.length; z++) {
+	private void cleanupThreads(final NRPSController[] threads) {
+		// Kill all the threads
+		for (int z = 0; z < threads.length; z++) {
 
-            threads[z].finalize();
-            threads[z] = null;
-        }
-        // Deep clean for the threads
-        System.gc();
-    }
+			threads[z].finalize();
+			threads[z] = null;
+		}
+		// Deep clean for the threads
+		System.gc();
+	}
 
-    /**
-     * Singleton - Cloning _not_ supported!
-     * 
-     * @return Should never return anything...
-     * @throws CloneNotSupportedException
-     *             Singleton hates to be cloned!
-     */
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        throw new CloneNotSupportedException();
-    }
+	/**
+	 * Singleton - Cloning _not_ supported!
+	 * 
+	 * @return Should never return anything...
+	 * @throws CloneNotSupportedException
+	 *             Singleton hates to be cloned!
+	 */
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		throw new CloneNotSupportedException();
+	}
 
-    /**
-     * This method implements the CreateReservation operation for a set of
-     * domains and messages. It creates the controllers, executes the single
-     * operation in each one and returns the responses for each one of the
-     * domains.
-     * 
-     * @return Hasthtable with the results for each NRPS
-     */
-    public Hashtable<Domain, CreateReservationResponseType> createReservation(
-            final Hashtable<Domain, CreateReservationType> requests)
-            throws SoapFault {
-    	final long startTime = System.currentTimeMillis();
+	/**
+	 * This method implements the CreateReservation operation for a set of
+	 * domains and messages. It creates the controllers, executes the single
+	 * operation in each one and returns the responses for each one of the
+	 * domains.
+	 * 
+	 * @return Hasthtable with the results for each NRPS
+	 */
+	public Hashtable<Domain, CreateReservationResponseType> createReservation(
+			final Hashtable<Domain, CreateReservationType> requests)
+			throws SoapFault {
+		final long startTime = System.currentTimeMillis();
 
-        this.logger.info("Entered NRPSManager.CreateReservation");
+		this.logger.info("Entered NRPSManager.CreateReservation");
 
-        final Enumeration<Domain> doms = requests.keys();
-        final Hashtable<Domain, CreateReservationResponseType> response = new Hashtable<Domain, CreateReservationResponseType>();
+		final Enumeration<Domain> doms = requests.keys();
+		final Hashtable<Domain, CreateReservationResponseType> response = new Hashtable<Domain, CreateReservationResponseType>();
 
-        final NRPSController[] threads = new NRPSController[requests.size()];
+		final NRPSController[] threads = new NRPSController[requests.size()];
 
-        final long responseTime = System.currentTimeMillis();
+		final long responseTime = System.currentTimeMillis();
 
-        int i = 0;
+		int i = 0;
 
-        while (doms.hasMoreElements()) {
+		while (doms.hasMoreElements()) {
 
-            final Domain dom = doms.nextElement();
+			final Domain dom = doms.nextElement();
 
-            threads[i] = new NRPSController(dom, "createReservation", requests
-                    .get(dom), this.malleable, this.performanceLogger);
+			threads[i] = new NRPSController(dom, "createReservation",
+					requests.get(dom), this.malleable, this.performanceLogger);
 
-            threads[i].createReservation(requests.get(dom));
+			threads[i].createReservation(requests.get(dom));
 
-            i++;
-        }
+			i++;
+		}
 
-        this.waitForThreads(threads);
+		this.waitForThreads(threads);
 
-        this.logResponse(responseTime);
+		this.logResponse(responseTime);
 
-        boolean rollbackNeeded = false;
+		boolean rollbackNeeded = false;
 
-        for (final NRPSController element : threads) {
+		for (final NRPSController element : threads) {
 
-            CreateReservationResponseType res = (CreateReservationResponseType) element
-                    .getResult();
+			CreateReservationResponseType res = (CreateReservationResponseType) element
+					.getResult();
 
-            if (res != null) {
-                response.put(element.getDomain(), res);
-                // Put in the rollback list
-                this.rollbackList.put(element.getDomain(), WebserviceUtils.convertReservationID(res
-                        .getReservationID()));
-            } else {
-                this.logger.error("NRPS returned a null message...");
+			if (res != null) {
+				response.put(element.getDomain(), res);
+				// Put in the rollback list
+				this.rollbackList.put(element.getDomain(), WebserviceUtils
+						.convertReservationID(res.getReservationID()));
+			} else {
+				this.logger.error("NRPS returned a null message...");
 
-                res = new CreateReservationResponseType();
-                response.put(element.getDomain(), res);
-            }
+				res = new CreateReservationResponseType();
+				response.put(element.getDomain(), res);
+			}
 
-            // If a thread is tagged with rollback, do the operation after the
-            // loop
-            if (element.isRollback()) {
-                rollbackNeeded = true;
-            }
-        }
+			// If a thread is tagged with rollback, do the operation after the
+			// loop
+			if (element.isRollback()) {
+				rollbackNeeded = true;
+			}
+		}
 
-        this.cleanupThreads(threads);
+		this.cleanupThreads(threads);
 
-        if (rollbackNeeded) {
+		if (rollbackNeeded) {
 
-            this.logger.warn("One or more NRPSs couldn't "
-                    + "complete the reservation... making rollback!");
-            this.rollback();
-        }
+			this.logger.warn("One or more NRPSs couldn't "
+					+ "complete the reservation... making rollback!");
+			this.rollback();
+		}
 
-        this.logTotalDuration(startTime);
+		this.logTotalDuration(startTime);
 
-        return response;
-    }
+		return response;
+	}
 
-    /**
-     * Gets the reservations for each domain included in the request
-     * 
-     * @param requests
-     *            Requests for domains
-     * @return Responses of each domain
-     * @throws SoapFault
-     */
-    public Hashtable<Domain, GetReservationsResponseType> getReservations(
-            final Hashtable<Domain, GetReservationsType> requests)
-            throws SoapFault {
-    	final long startTime = System.currentTimeMillis();
+	/**
+	 * Gets the reservations for each domain included in the request
+	 * 
+	 * @param requests
+	 *            Requests for domains
+	 * @return Responses of each domain
+	 * @throws SoapFault
+	 */
+	public Hashtable<Domain, GetReservationsResponseType> getReservations(
+			final Hashtable<Domain, GetReservationsType> requests)
+			throws SoapFault {
+		final long startTime = System.currentTimeMillis();
 
-        final Enumeration<Domain> doms = requests.keys();
-        final Hashtable<Domain, GetReservationsResponseType> response = new Hashtable<Domain, GetReservationsResponseType>();
+		final Enumeration<Domain> doms = requests.keys();
+		final Hashtable<Domain, GetReservationsResponseType> response = new Hashtable<Domain, GetReservationsResponseType>();
 
-        final NRPSController[] threads = new NRPSController[requests.size()];
+		final NRPSController[] threads = new NRPSController[requests.size()];
 
-        final long responseTime = System.currentTimeMillis();
+		final long responseTime = System.currentTimeMillis();
 
-        int i = 0;
+		int i = 0;
 
-        while (doms.hasMoreElements()) {
+		while (doms.hasMoreElements()) {
 
-            final Domain dom = doms.nextElement();
+			final Domain dom = doms.nextElement();
 
-            threads[i] = new NRPSController(dom, "getReservations", requests
-                    .get(dom), this.malleable, this.performanceLogger);
+			threads[i] = new NRPSController(dom, "getReservations",
+					requests.get(dom), this.malleable, this.performanceLogger);
 
-            threads[i].getReservations(requests.get(dom));
+			threads[i].getReservations(requests.get(dom));
 
-            i++;
-        }
+			i++;
+		}
 
-        this.waitForThreads(threads);
+		this.waitForThreads(threads);
 
-        this.logResponse(responseTime);
+		this.logResponse(responseTime);
 
-        for (final NRPSController element : threads) {
+		for (final NRPSController element : threads) {
 
-            GetReservationsResponseType res = (GetReservationsResponseType) element
-                    .getResult();
+			GetReservationsResponseType res = (GetReservationsResponseType) element
+					.getResult();
 
-            if (res != null) {
-                response.put(element.getDomain(), res);
-            } else {
-                this.logger.error("NRPS returned a null message...");
+			if (res != null) {
+				response.put(element.getDomain(), res);
+			} else {
+				this.logger.error("NRPS returned a null message...");
 
-                res = new GetReservationsResponseType();
-                response.put(element.getDomain(), res);
-            }
-        }
+				res = new GetReservationsResponseType();
+				response.put(element.getDomain(), res);
+			}
+		}
 
-        this.cleanupThreads(threads);
+		this.cleanupThreads(threads);
 
-        this.logTotalDuration(startTime);
+		this.logTotalDuration(startTime);
 
-        return response;
-    }
+		return response;
+	}
 
-    /**
-     * @param requests
-     * @return
-     * @throws SAXException
-     * @throws IOException
-     * @throws JAXBException
-     * @throws SoapFault
-     */
-    public Hashtable<Domain, GetStatusResponseType> getStatus(
-            final Hashtable<Domain, GetStatusType> requests) throws SoapFault {
+	/**
+	 * @param requests
+	 * @return
+	 * @throws SAXException
+	 * @throws IOException
+	 * @throws JAXBException
+	 * @throws SoapFault
+	 */
+	public Hashtable<Domain, GetStatusResponseType> getStatus(
+			final Hashtable<Domain, GetStatusType> requests) throws SoapFault {
 
-        final long startTime = System.currentTimeMillis();
+		final long startTime = System.currentTimeMillis();
 
-        final Enumeration<Domain> doms = requests.keys();
-        final Hashtable<Domain, GetStatusResponseType> response = new Hashtable<Domain, GetStatusResponseType>();
+		final Enumeration<Domain> doms = requests.keys();
+		final Hashtable<Domain, GetStatusResponseType> response = new Hashtable<Domain, GetStatusResponseType>();
 
-        final NRPSController[] threads = new NRPSController[requests.size()];
+		final NRPSController[] threads = new NRPSController[requests.size()];
 
-        final long responseTime = System.currentTimeMillis();
+		final long responseTime = System.currentTimeMillis();
 
-        int i = 0;
+		int i = 0;
 
-        while (doms.hasMoreElements()) {
+		while (doms.hasMoreElements()) {
 
-            final Domain dom = doms.nextElement();
+			final Domain dom = doms.nextElement();
 
-            threads[i] = new NRPSController(dom, "getStatus", requests.get(dom), this.malleable, this.performanceLogger);
+			threads[i] = new NRPSController(dom, "getStatus",
+					requests.get(dom), this.malleable, this.performanceLogger);
 
-            threads[i].getStatus(requests.get(dom));
+			threads[i].getStatus(requests.get(dom));
 
-            i++;
-        }
+			i++;
+		}
 
-        this.waitForThreads(threads);
+		this.waitForThreads(threads);
 
-        this.logResponse(responseTime);
+		this.logResponse(responseTime);
 
-        for (final NRPSController element : threads) {
+		for (final NRPSController element : threads) {
 
-            GetStatusResponseType res = (GetStatusResponseType) element
-                    .getResult();
+			GetStatusResponseType res = (GetStatusResponseType) element
+					.getResult();
 
-            if (res != null) {
-                response.put(element.getDomain(), res);
-            } else {
-                this.logger.error("NRPS returned a null message...");
+			if (res != null) {
+				response.put(element.getDomain(), res);
+			} else {
+				this.logger.error("NRPS returned a null message...");
 
-                res = new GetStatusResponseType();
-                response.put(element.getDomain(), res);
-            }
-        }
+				res = new GetStatusResponseType();
+				response.put(element.getDomain(), res);
+			}
+		}
 
-        this.cleanupThreads(threads);
+		this.cleanupThreads(threads);
 
-        this.logTotalDuration(startTime);
+		this.logTotalDuration(startTime);
 
-        return response;
-    }
+		return response;
+	}
 
-    public Hashtable<Domain, IsAvailableResponseType> isAvailable(
-            final Hashtable<Domain, IsAvailableType> requests) throws SoapFault {
+	public Hashtable<Domain, IsAvailableResponseType> isAvailable(
+			final Hashtable<Domain, IsAvailableType> requests) throws SoapFault {
 
-    	final long startTime = System.currentTimeMillis();
-    	
-    	// auxiliary hashtable for requests
-    	// -> so the original requests won't be deleted
-    	Hashtable<Domain, IsAvailableType> auxRequests = 
-    											new Hashtable<Domain, IsAvailableType>();
-    	auxRequests.putAll(requests);
+		final long startTime = System.currentTimeMillis();
 
-        final boolean useCache = Config
-                .getString(Constants.idbProperties, "useNRPSResponseCache").equals("true");
+		// auxiliary hashtable for requests
+		// -> so the original requests won't be deleted
+		Hashtable<Domain, IsAvailableType> auxRequests = new Hashtable<Domain, IsAvailableType>();
+		auxRequests.putAll(requests);
 
-        Enumeration<Domain> doms = auxRequests.keys();
-        final Hashtable<Domain, IsAvailableResponseType> response = new Hashtable<Domain, IsAvailableResponseType>();
+		final boolean useCache = Config.getString(Constants.idbProperties,
+				"useNRPSResponseCache").equals("true");
 
-        // Look for objects in the cache if configured to do so
-        if (useCache) {
-            while (doms.hasMoreElements()) {
+		Enumeration<Domain> doms = auxRequests.keys();
+		final Hashtable<Domain, IsAvailableResponseType> response = new Hashtable<Domain, IsAvailableResponseType>();
 
-                final Domain dom = doms.nextElement();
+		// Look for objects in the cache if configured to do so
+		if (useCache) {
+			while (doms.hasMoreElements()) {
 
-                final IsAvailableResponseType resp = NRPSResponseCache
-                        .getInstance().lookup(auxRequests.get(dom));
+				final Domain dom = doms.nextElement();
 
-                // Put the cached response in the result and remove from
-                // requests.
-                // If the result is null, the object was not in the cache
-                if (resp != null) {
-                    response.put(dom, resp);
-                    auxRequests.remove(dom);
-                }
-            }
-        }
+				final IsAvailableResponseType resp = NRPSResponseCache
+						.getInstance().lookup(auxRequests.get(dom));
 
-        // Send requests to the NRPSs whose response was not cached
-        // or if we don't use the cache
-        if (!auxRequests.isEmpty()) {
+				// Put the cached response in the result and remove from
+				// requests.
+				// If the result is null, the object was not in the cache
+				if (resp != null) {
+					response.put(dom, resp);
+					auxRequests.remove(dom);
+				}
+			}
+		}
 
-            doms = auxRequests.keys();
+		// Send requests to the NRPSs whose response was not cached
+		// or if we don't use the cache
+		if (!auxRequests.isEmpty()) {
 
-            final NRPSController[] threads = new NRPSController[auxRequests.size()];
+			doms = auxRequests.keys();
 
-            final long responseTime = System.currentTimeMillis();
+			final NRPSController[] threads = new NRPSController[auxRequests
+					.size()];
 
-            int i = 0;
+			final long responseTime = System.currentTimeMillis();
 
-            while (doms.hasMoreElements()) {
+			int i = 0;
 
-                final Domain dom = doms.nextElement();
+			while (doms.hasMoreElements()) {
 
-                threads[i] = new NRPSController(dom, "isAvailable", auxRequests
-                        .get(dom), this.malleable, this.performanceLogger);
+				final Domain dom = doms.nextElement();
 
-                threads[i].isAvailable(auxRequests.get(dom));
+				threads[i] = new NRPSController(dom, "isAvailable",
+						auxRequests.get(dom), this.malleable,
+						this.performanceLogger);
 
-                i++;
-            }
+				threads[i].isAvailable(auxRequests.get(dom));
 
-            this.waitForThreads(threads);
+				i++;
+			}
 
-            this.logResponse(responseTime);
+			this.waitForThreads(threads);
 
-            for (final NRPSController element : threads) {
+			this.logResponse(responseTime);
 
-                IsAvailableResponseType res = (IsAvailableResponseType) element
-                        .getResult();
+			for (final NRPSController element : threads) {
 
-                if (res != null) {
-                    response.put(element.getDomain(), res);
+				IsAvailableResponseType res = (IsAvailableResponseType) element
+						.getResult();
 
-                    // Put response in the cache
-                    if (useCache) {
-                        NRPSResponseCache.getInstance().insert(
-                                (IsAvailableType) element.getMsg(), res);
-                    }
-                } else {
-                    this.logger.error("NRPS returned a null message...");
+				if (res != null) {
+					response.put(element.getDomain(), res);
 
-                    res = new IsAvailableResponseType();
-                    response.put(element.getDomain(), res);
-                }
-            }
+					// Put response in the cache
+					if (useCache) {
+						NRPSResponseCache.getInstance().insert(
+								(IsAvailableType) element.getMsg(), res);
+					}
+				} else {
+					this.logger.error("NRPS returned a null message...");
 
-            this.cleanupThreads(threads);
-        }
+					res = new IsAvailableResponseType();
+					response.put(element.getDomain(), res);
+				}
+			}
 
-        this.logTotalDuration(startTime);
+			this.cleanupThreads(threads);
+		}
 
-        return response;
-    }
+		this.logTotalDuration(startTime);
 
-    private void logResponse(final long startTime) {
-        this.performanceLogger.info("NrpsManager_response_time "
-                + (System.currentTimeMillis() - startTime) + "ms");
-    }
-    
-    private void logTotalDuration(final long startTime) {
-        this.performanceLogger.info("NrpsManager_total_time "
-                + (System.currentTimeMillis() - startTime) + "ms");
-    }
+		return response;
+	}
 
-    /**
-     * Rollback for the createReservation operation.
-     * 
-     */
-    private void rollback() throws SoapFault {
+	private void logResponse(final long startTime) {
+		this.performanceLogger.info("NrpsManager_response_time "
+				+ (System.currentTimeMillis() - startTime) + "ms");
+	}
 
-        if (!this.rollbackList.isEmpty()) {
+	private void logTotalDuration(final long startTime) {
+		this.performanceLogger.info("NrpsManager_total_time "
+				+ (System.currentTimeMillis() - startTime) + "ms");
+	}
 
-            final Hashtable<Domain, CancelReservationType> requests = new Hashtable<Domain, CancelReservationType>();
+	/**
+	 * Rollback for the createReservation operation.
+	 * 
+	 */
+	private void rollback() throws SoapFault {
 
-            Hashtable<Domain, CancelReservationResponseType> responses;
+		if (!this.rollbackList.isEmpty()) {
 
-            for (final Domain dom : this.rollbackList.keySet()) {
+			final Hashtable<Domain, CancelReservationType> requests = new Hashtable<Domain, CancelReservationType>();
 
-                final CancelReservationType cancelType = new CancelReservationType();
+			Hashtable<Domain, CancelReservationResponseType> responses;
 
-                cancelType.setReservationID(WebserviceUtils
-                        .convertReservationID(this.rollbackList.get(dom)
-                                .longValue()));
+			for (final Domain dom : this.rollbackList.keySet()) {
 
-                requests.put(dom, cancelType);
-            }
+				final CancelReservationType cancelType = new CancelReservationType();
 
-            // Call the cancel reservation operation
-            responses = this.cancelReservation(requests);
+				cancelType.setReservationID(WebserviceUtils
+						.convertReservationID(this.rollbackList.get(dom)
+								.longValue()));
 
-            for (final CancelReservationResponseType res : responses.values()) {
+				requests.put(dom, cancelType);
+			}
 
-                if (!res.isSuccess()) {
-                    this.logger.info("Rollback failed!");
-                }
-            }
-        } else {
-            this.logger.info("No work to rollback...");
-        }
+			// Call the cancel reservation operation
+			responses = this.cancelReservation(requests);
 
-    }
+			for (final CancelReservationResponseType res : responses.values()) {
 
-    /**
-     * This method waits for the finalization of the sender threads
-     * 
-     * @param threads
-     *            Array of threads to wait for
-     * @return True if all the threads ended on time
-     */
-    private boolean waitForThreads(final NRPSController[] threads)
-            throws TimeoutFaultException, SoapFault {
+				if (!res.isSuccess()) {
+					this.logger.info("Rollback failed!");
+				}
+			}
+		} else {
+			this.logger.info("No work to rollback...");
+		}
 
-        boolean alive = true;
-        boolean success = true;
+	}
 
-        int iterations = 0;
+	/**
+	 * This method waits for the finalization of the sender threads
+	 * 
+	 * @param threads
+	 *            Array of threads to wait for
+	 * @return True if all the threads ended on time
+	 */
+	private boolean waitForThreads(final NRPSController[] threads)
+			throws TimeoutFaultException, SoapFault {
 
-        if (threads.length < 1) {
-            alive = false;
-        }
+		boolean alive = true;
+		boolean success = true;
 
-        while (alive) {
+		int iterations = 0;
 
-            // Check if exceptions have occurred in the threads
-            for (final NRPSController element : threads) {
+		if (threads.length < 1) {
+			alive = false;
+		}
 
-                if (element.isSetException()) {
-                    throw element.getException();
-                }
-            }
+		while (alive) {
 
-            alive = threads[0].isAlive();
+			// Check if exceptions have occurred in the threads
+			for (final NRPSController element : threads) {
 
-            for (int z = 1; z < threads.length; z++) {
+				if (element.isSetException()) {
+					throw element.getException();
+				}
+			}
 
-                alive = alive || threads[z].isAlive();
-            }
+			alive = threads[0].isAlive();
 
-            // Check if there is some thread alive
-            if (alive) {
-                try {
+			for (int z = 1; z < threads.length; z++) {
 
-                    if (iterations % 40 == 0) {
-                        this.logger.info("Found some thread alive... waiting");
-                    }
+				alive = alive || threads[z].isAlive();
+			}
 
-                    Thread.sleep(50);
-                } catch (final InterruptedException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
+			// Check if there is some thread alive
+			if (alive) {
+				try {
 
-            // Check the timeout
-            if ((50 * iterations) > this.nrpsTimeout) {
-                alive = false;
-                success = false;
+					if (iterations % 40 == 0) {
+						this.logger.info("Found some thread alive... waiting");
+					}
 
-                String failed = "";
+					Thread.sleep(50);
+				} catch (final InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 
-                for (final NRPSController element : threads) {
+			// Check the timeout
+			if ((50 * iterations) > this.nrpsTimeout) {
+				alive = false;
+				success = false;
 
-                    if (element.isAlive()) {
-                        failed = failed + element.getDomain().getName() + " ";
-                        element.interrupt();
-                    }
-                }
+				String failed = "";
 
-                this.logger.error("Timeout expired (" + this.nrpsTimeout
-                        + " ms)... " + "One or more NRPSs did not reply: "
-                        + failed);
+				for (final NRPSController element : threads) {
 
-                throw new TimeoutFaultException(
-                        "The next Domains have failed (TIMEOUT): " + failed);
-            }
+					if (element.isAlive()) {
+						failed = failed + element.getDomain().getName() + " ";
+						element.interrupt();
+					}
+				}
 
-            iterations++;
-        }
+				this.logger.error("Timeout expired (" + this.nrpsTimeout
+						+ " ms)... " + "One or more NRPSs did not reply: "
+						+ failed);
 
-        return success;
-    }
+				throw new TimeoutFaultException(
+						"The next Domains have failed (TIMEOUT): " + failed);
+			}
+
+			iterations++;
+		}
+
+		return success;
+	}
 }

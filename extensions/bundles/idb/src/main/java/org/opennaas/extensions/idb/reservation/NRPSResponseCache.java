@@ -1,11 +1,11 @@
 /**
-*  This code is part of the Harmony System implemented in Work Package 1 
-*  of the Phosphorus project. This work is supported by the European 
-*  Comission under the Sixth Framework Programme with contract number 
-*  IST-034115.
-*
-*  Copyright (C) 2006-2009 Phosphorus WP1 partners. Phosphorus Consortium.
-*  http://ist-phosphorus.eu/
+ *  This code is part of the Harmony System implemented in Work Package 1 
+ *  of the Phosphorus project. This work is supported by the European 
+ *  Comission under the Sixth Framework Programme with contract number 
+ *  IST-034115.
+ *
+ *  Copyright (C) 2006-2009 Phosphorus WP1 partners. Phosphorus Consortium.
+ *  http://ist-phosphorus.eu/
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -23,7 +23,6 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 
-
 package org.opennaas.extensions.idb.reservation;
 
 import java.util.ArrayList;
@@ -36,6 +35,7 @@ import java.util.TimerTask;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ConnectionAvailabilityType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ConnectionConstraintType;
@@ -44,7 +44,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.IsAvailable
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ReservationType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ServiceConstraintType;
 import org.opennaas.core.utils.Config;
-import org.opennaas.core.utils.PhLogger;
+
 import org.opennaas.extensions.idb.Constants;
 
 /**
@@ -149,7 +149,7 @@ public class NRPSResponseCache {
 
 		NRPSResponseCache.cache = new Hashtable<String, Hashtable<String, NRPSResponseCache.CacheEntry>>();
 
-		NRPSResponseCache.logger = PhLogger.getLogger(this.getClass());
+		NRPSResponseCache.logger = LogFactory.getLog(this.getClass());
 	}
 
 	/**
@@ -366,8 +366,9 @@ public class NRPSResponseCache {
 							sTime = auxsrv.getMalleableReservationConstraints()
 									.getStartTime();
 
-							if (NRPSResponseCache.cache.get(dom).get(
-									"" + conn.getSource()
+							if (NRPSResponseCache.cache
+									.get(dom)
+									.get("" + conn.getSource()
 											+ conn.getTarget().get(0))
 									.getStartTime().equals(sTime)) {
 
@@ -386,15 +387,12 @@ public class NRPSResponseCache {
 
 								// Set the alternative start time (offset)
 								Long alternativeStartTime = NRPSResponseCache.cache
-										.get(dom).get(
-												""
-														+ conn.getSource()
-														+ conn.getTarget().get(
-																0))
+										.get(dom)
+										.get("" + conn.getSource()
+												+ conn.getTarget().get(0))
 										.getAlternativeStartTime();
 
-								resp
-										.setAlternativeStartTimeOffset(alternativeStartTime);
+								resp.setAlternativeStartTimeOffset(alternativeStartTime);
 
 								// Add the connAvail
 								resp.getDetailedResult().add(connAvail);
@@ -421,12 +419,11 @@ public class NRPSResponseCache {
 
 							// Set the alternative start time
 							Long alternativeStartTime = NRPSResponseCache.cache
-									.get(dom).get(
-											"" + conn.getSource()
-													+ conn.getTarget().get(0))
+									.get(dom)
+									.get("" + conn.getSource()
+											+ conn.getTarget().get(0))
 									.getAlternativeStartTime();
-							resp
-									.setAlternativeStartTimeOffset(alternativeStartTime);
+							resp.setAlternativeStartTimeOffset(alternativeStartTime);
 
 							// Add the connAvail
 							resp.getDetailedResult().add(connAvail);

@@ -49,6 +49,7 @@ import javax.persistence.Transient;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.mysema.query.jpa.impl.JPAQuery;
 
@@ -62,7 +63,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.StatusType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetStatusResponseType.ServiceStatus;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.EndpointNotFoundFaultException;
 import org.opennaas.core.utils.Helpers;
-import org.opennaas.core.utils.PhLogger;
+
 import org.opennaas.core.utils.Tuple;
 import org.opennaas.extensions.idb.database.TransactionManager;
 import org.opennaas.extensions.idb.database.TransactionManagerLoad;
@@ -78,7 +79,7 @@ import org.opennaas.extensions.idb.exception.database.DatabaseException;
 @Entity
 @Table(name = "Service")
 public class Service implements java.io.Serializable {
-	private static Log logger = PhLogger.getLogger();
+
 	// Fields
 
 	/**
@@ -708,6 +709,7 @@ public class Service implements java.io.Serializable {
 		for (Connections connection : getConnections().values()) {
 			result = aggregateStatus(result, connection.getStatus());
 		}
+		Log logger = LogFactory.getLog(this.getClass());
 		logger.debug("Service: " + getServiceId() + " Status" + result);
 		return result;
 	}

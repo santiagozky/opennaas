@@ -32,7 +32,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.xbill.DNS.TextParseException;
 
-import org.opennaas.core.utils.TNAHelper;
+import org.opennaas.extensions.idb.utils.TNAHelper;
 
 /**
  * @author Alexander Willner (willner@cs.uni-bonn.de)
@@ -42,7 +42,7 @@ public class TestTNAHelper {
 
     /**
      * Test method for
-     * {@link org.opennaas.core.utils.TNAHelper#resolve(java.lang.String)}.
+     * {@link org.opennaas.extensions.idb.utils.TNAHelper#resolve(java.lang.String)}.
      * 
      * @throws UnknownHostException
      * @throws TextParseException

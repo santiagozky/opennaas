@@ -41,6 +41,7 @@ import java.util.Map.Entry;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.muse.ws.addressing.soap.SoapFault;
 
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AvailabilityCodeType;
@@ -54,7 +55,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ServiceCons
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.StatusType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.EndpointNotFoundFaultException;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.PathNotFoundFaultException;
-import org.opennaas.core.utils.PhLogger;
+
 import org.opennaas.core.utils.Tuple;
 import org.opennaas.extensions.idb.database.hibernate.Connections;
 import org.opennaas.extensions.idb.database.hibernate.Domain;
@@ -123,10 +124,10 @@ public class PathFinderNG {
 	private IManager nrpsManager = null;
 
 	/** Logger. */
-	private final Log log = PhLogger.getLogger(PathFinderNG.class);
+	private final Log log = LogFactory.getLog(this.getClass());
 
 	/** Performance-Logger. */
-	private final Log performanceLogger = PhLogger.getLogger("Performance");
+	private final Log performanceLogger = LogFactory.getLog(this.getClass());
 
 	private String logMsg;
 
@@ -702,7 +703,7 @@ public class PathFinderNG {
 		MalleableReservationHelpers malleableHelpers = MalleableReservationHelpers
 				.getInstance();
 		/** extra logger instance for the malleable reservations. */
-		Log malleableLogger = PhLogger.getSeparateLogger("malleable");
+		Log malleableLogger = LogFactory.getLog("malleable");
 
 		boolean reservationFound = false;
 

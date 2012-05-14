@@ -28,6 +28,7 @@ package org.opennaas.extensions.idb.da.dummy.webservice.test;
 import javax.xml.datatype.DatatypeConfigurationException;
 
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.muse.ws.addressing.soap.SoapFault;
 import org.junit.Assert;
 import org.junit.Test;
@@ -35,7 +36,7 @@ import org.junit.Test;
 import org.opennaas.extensions.idb.da.dummy.webservice.ReservationWS;
 import org.opennaas.extensions.idb.serviceinterface.reservation.SimpleReservationClient;
 import org.opennaas.core.utils.Config;
-import org.opennaas.core.utils.PhLogger;
+
 
 /**
  * @author Alexander Willner (willner@cs.uni-bonn.de)
@@ -58,7 +59,7 @@ public final class TestWorkflow {
 		} else {
 			this.client = new SimpleReservationClient(new ReservationWS());
 		}
-		this.logger = PhLogger.getLogger();
+		this.logger = LogFactory.getLog(TestWorkflow.class);
 	}
 
 	/**

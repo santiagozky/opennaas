@@ -32,10 +32,10 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.NotificationMessageType;
 import org.opennaas.core.utils.Config;
-import org.opennaas.core.utils.PhLogger;
 
 public class NotificationSenderMonitor extends Thread {
 
@@ -196,7 +196,7 @@ public class NotificationSenderMonitor extends Thread {
 				} else {
 					// third send-trial timeout -> stop all still running
 					// sender-Threads
-					final Log logger = PhLogger.getLogger(this.getClass());
+					final Log logger = LogFactory.getLog(this.getClass());
 					logger.error("monitorThread timeout! "
 							+ "Stopping all still running senderThreads! "
 							+ "Not all notifications could be delivered!");
@@ -212,7 +212,7 @@ public class NotificationSenderMonitor extends Thread {
 
 		final long endTime = System.currentTimeMillis();
 
-		final Log performanceLogger = PhLogger.getLogger("Performance");
+		final Log performanceLogger = LogFactory.getLog(this.getClass());
 		performanceLogger.debug("Overall time for notification-distribution: "
 				+ (endTime - startTime) + " MilliSecs");
 	}

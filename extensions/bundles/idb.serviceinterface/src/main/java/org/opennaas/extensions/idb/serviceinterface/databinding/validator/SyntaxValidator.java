@@ -36,6 +36,7 @@ import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
@@ -43,7 +44,7 @@ import org.xml.sax.SAXParseException;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.InvalidRequestFaultException;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.UnexpectedFaultException;
 import org.opennaas.core.utils.Config;
-import org.opennaas.core.utils.PhLogger;
+
 
 /**
  * Class to validate XML strings against a XSD scheme. <br>
@@ -143,7 +144,7 @@ public class SyntaxValidator {
 	/** Validator instance. */
 	private Validator validator;
 
-	private final Log logger = PhLogger.getLogger();
+	private final Log logger = LogFactory.getLog(this.getClass());
 
 	/** Generic Scheme Factory. */
 	private static final SchemaFactory FACTORY = SchemaFactory

@@ -25,41 +25,42 @@
 
 package org.opennaas.extensions.idb.serviceinterface.utils;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.muse.ws.addressing.soap.SimpleSoapClient;
 import org.apache.muse.ws.addressing.soap.SoapClient;
 
 import org.opennaas.core.utils.Config;
-import org.opennaas.core.utils.PhLogger;
+
 
 public class SecurityHelper {
 
-    /**
-     * Create a SecureClient if possible.
-     * 
-     * @return
-     */
-    public static final SoapClient createSoapClient() {
-        SoapClient client = null;
+	/**
+	 * Create a SecureClient if possible.
+	 * 
+	 * @return
+	 */
+	public static final SoapClient createSoapClient() {
+		SoapClient client = null;
+		Log logger = LogFactory.getLog(SecurityHelper.class);
+		try {
+			final Class<?> scClass = Class.forName(Config.getString(
+					"databinding", "secure.client"));
 
-        try {
-            final Class<?> scClass = Class.forName(Config.getString(
-                    "databinding", "secure.client"));
+			client = (SoapClient) scClass.newInstance();
 
-            client = (SoapClient) scClass.newInstance();
+			logger.info("Using SecureSoapClient");
+		} catch (final ClassNotFoundException e) {
+			client = new SimpleSoapClient();
 
-            PhLogger.getLogger().info("Using SecureSoapClient");
-        } catch (final ClassNotFoundException e) {
-            client = new SimpleSoapClient();
+			logger.info("Using default SimpleSoapClient");
+		} catch (final Exception e) {
+			client = new SimpleSoapClient();
 
-            PhLogger.getLogger().info("Using default SimpleSoapClient");
-        } catch (final Exception e) {
-            client = new SimpleSoapClient();
+			logger.error("Can not Create SecureSoapClient! "
+					+ "Using SimpleSoapClient instead...", e);
+		}
 
-            PhLogger.getLogger().error(
-                    "Can not Create SecureSoapClient! "
-                            + "Using SimpleSoapClient instead...", e);
-        }
-
-        return client;
-    }
+		return client;
+	}
 }

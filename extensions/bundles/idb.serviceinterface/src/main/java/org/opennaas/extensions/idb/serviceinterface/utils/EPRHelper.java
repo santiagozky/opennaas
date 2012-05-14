@@ -28,12 +28,14 @@ package org.opennaas.extensions.idb.serviceinterface.utils;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.muse.ws.addressing.EndpointReference;
 import org.apache.muse.ws.addressing.WsaConstants;
 
 import org.opennaas.core.utils.Config;
 import org.opennaas.core.utils.Helpers;
-import org.opennaas.core.utils.PhLogger;
+
 
 /**
  * Class loader for the service interface configuration
@@ -78,18 +80,18 @@ public class EPRHelper {
 	 * @return
 	 */
 	public static final EndpointReference getSource(final String option) {
+		Log logger = LogFactory.getLog(EPRHelper.class);
 		try {
 
 			final String epr = EPRHelper.getEPR(option);
 			if ((epr == null) || epr.equalsIgnoreCase("")) {
-				PhLogger.getLogger().info(
-						"Warning, it was impossible to get some EPR.");
+				logger.info("Warning, it was impossible to get some EPR.");
 				return WsaConstants.ANONYMOUS_EPR;
 			}
 			return convertStringtoEPR(epr);
 
 		} catch (final Exception e) {
-			PhLogger.getLogger().info("Could not get a EPR " + option);
+			logger.info("Could not get a EPR " + option);
 			return WsaConstants.ANONYMOUS_EPR;
 		}
 	}

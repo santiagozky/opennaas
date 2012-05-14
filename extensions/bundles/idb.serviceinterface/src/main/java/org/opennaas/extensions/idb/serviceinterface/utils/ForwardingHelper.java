@@ -31,6 +31,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.muse.ws.addressing.soap.SoapFault;
 
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ConnectionConstraintType;
@@ -43,10 +44,9 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.UnexpectedFaultException;
 import org.opennaas.extensions.idb.serviceinterface.topology.registrator.AbstractTopologyRegistrator;
 import org.opennaas.core.utils.Helpers;
-import org.opennaas.core.utils.PhLogger;
 
 public class ForwardingHelper {
-	private final Log logger = PhLogger.getLogger(ForwardingHelper.class);
+	private final Log logger = LogFactory.getLog(ForwardingHelper.class);
 
 	private static final String GET_METHOD = "getReservationID";
 	private static final String SET_METHOD = "setReservationID";

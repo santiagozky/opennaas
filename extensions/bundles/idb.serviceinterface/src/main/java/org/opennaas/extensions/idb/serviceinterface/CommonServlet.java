@@ -37,10 +37,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.muse.core.platform.mini.MiniServlet;
 
 import org.opennaas.extensions.idb.serviceinterface.topology.registrator.AbstractTopologyRegistrator;
-import org.opennaas.core.utils.PhLogger;
+
 
 public class CommonServlet extends MiniServlet {
 	/**
@@ -184,7 +185,7 @@ public class CommonServlet extends MiniServlet {
      * 
      */
 	public CommonServlet() {
-		this.performanceLogger = PhLogger.getSeparateLogger("performance");
+		this.performanceLogger = LogFactory.getLog("performance");
 		final AbstractTopologyRegistrator registrator = AbstractTopologyRegistrator
 				.getLatestInstance();
 		final String domainId;
@@ -193,7 +194,7 @@ public class CommonServlet extends MiniServlet {
 		} else {
 			domainId = registrator.getDomainId();
 		}
-		this.requestLogger = PhLogger.getSeparateLogger("requests." + domainId);
+		this.requestLogger = LogFactory.getLog("requests." + domainId);
 	}
 
 	@Override
@@ -208,8 +209,7 @@ public class CommonServlet extends MiniServlet {
 
 		/* performance logging ---------------------------------------------- */
 		/*
-		 * this.performanceLogger.debug(
-		 * "start_servlet"); final String name =
+		 * this.performanceLogger.debug( "start_servlet"); final String name =
 		 * Thread.currentThread().getName(); final long startTime =
 		 * System.currentTimeMillis();
 		 */
@@ -220,9 +220,8 @@ public class CommonServlet extends MiniServlet {
 		/*
 		 * final long endTime = System.currentTimeMillis();
 		 * Thread.currentThread().setName(name); final long duration = endTime -
-		 * startTime;
-		 * this.performanceLogger.debug(
-		 * "duration_servlet " + duration + "ms");
+		 * startTime; this.performanceLogger.debug( "duration_servlet " +
+		 * duration + "ms");
 		 */
 		/* ------------------------------------------------------------------ */
 	}

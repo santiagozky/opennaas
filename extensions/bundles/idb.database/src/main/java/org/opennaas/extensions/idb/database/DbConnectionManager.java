@@ -34,13 +34,14 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 //import org.hibernate.HibernateException;
 //import org.hibernate.Session;
 //import org.hibernate.SessionFactory;
 //import org.hibernate.cfg.AnnotationConfiguration;
 
 import org.opennaas.core.utils.Config;
-import org.opennaas.core.utils.PhLogger;
+
 import org.opennaas.extensions.idb.exception.database.DatabaseException;
 
 /**
@@ -53,7 +54,7 @@ import org.opennaas.extensions.idb.exception.database.DatabaseException;
 public class DbConnectionManager {
 	// Do not remove this. Nothing will work otherwise...
 	@SuppressWarnings("unused")
-	private static Log logger = PhLogger.getLogger();
+	private static Log logger = LogFactory.getLog(DbConnectionManager.class);
 
 	// private static Session privSession = null;
 	private static final ThreadLocal<EntityManager> privSession = new ThreadLocal<EntityManager>();

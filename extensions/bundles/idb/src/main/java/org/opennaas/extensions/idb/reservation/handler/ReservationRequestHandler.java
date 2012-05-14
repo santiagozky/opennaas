@@ -66,7 +66,7 @@ public final class ReservationRequestHandler extends CommonReservationHandler {
 
     /** Performance logger instance. */
     // private static Logger performanceLogger =
-    // PhLogger.getLogger("Performance");
+    // LogFactory.getLog(this.getClass());
     /**
      * Instance getter.
      * 

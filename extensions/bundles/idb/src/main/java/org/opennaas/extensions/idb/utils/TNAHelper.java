@@ -24,7 +24,7 @@
  */
 
 
-package org.opennaas.core.utils;
+package org.opennaas.extensions.idb.utils;
 
 import java.net.UnknownHostException;
 import java.util.HashMap;
@@ -32,6 +32,7 @@ import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.opennaas.core.utils.Tuple;
 import org.xbill.DNS.Lookup;
 import org.xbill.DNS.Record;
 import org.xbill.DNS.Resolver;

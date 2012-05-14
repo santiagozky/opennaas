@@ -28,11 +28,11 @@ package org.opennaas.extensions.idb.serviceinterface;
 import java.lang.reflect.Method;
 
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.muse.ws.addressing.soap.SoapFault;
 
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.UnexpectedFaultException;
 import org.opennaas.extensions.idb.serviceinterface.handler.HarmonyHandler;
-import org.opennaas.core.utils.PhLogger;
 
 /**
  * Class to handle Exception caused by Request Handler.
@@ -47,7 +47,7 @@ public class ExceptionHandler {
 	/** Owner Class. */
 	private final Class<?> ownerClass;
 	/** Logger for fatal-mail-logging. */
-	private final Log logger = PhLogger.getLogger(this.getClass());
+	private final Log logger = LogFactory.getLog(this.getClass());
 
 	/**
 	 * Default Constructor.

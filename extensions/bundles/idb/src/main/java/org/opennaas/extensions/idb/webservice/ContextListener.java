@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DomainInformationType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DomainRelationshipType;
@@ -39,7 +40,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.EndpointInt
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.EndpointType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.InterdomainLinkType;
 import org.opennaas.extensions.idb.serviceinterface.topology.registrator.AbstractTopologyRegistrator;
-import org.opennaas.core.utils.PhLogger;
+
 import org.opennaas.extensions.idb.Constants;
 import org.opennaas.extensions.idb.database.hibernate.Domain;
 import org.opennaas.extensions.idb.database.hibernate.Endpoint;
@@ -192,7 +193,7 @@ public class ContextListener extends AbstractTopologyRegistrator {
 
 	@Override
 	protected Log getLogger() {
-		return PhLogger.getLogger(ContextListener.class);
+		return LogFactory.getLog(this.getClass());
 	}
 
 	private boolean saveDomain() {

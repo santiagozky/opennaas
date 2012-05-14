@@ -34,8 +34,10 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.opennaas.core.utils.Config;
-import org.opennaas.core.utils.PhLogger;
+
 
 /**
  * Dummy Servlet Filter Class.
@@ -48,57 +50,58 @@ import org.opennaas.core.utils.PhLogger;
  */
 public class CommonServletFilter implements Filter {
 
-    private Filter servletFiler = null;
+	private Filter servletFiler = null;
+	private final Log logger = LogFactory.getLog(this.getClass());
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see javax.servlet.Filter#destroy()
-     */
-    @Override
-    public void destroy() {
-        if (null != this.servletFiler) {
-            this.servletFiler.destroy();
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.servlet.Filter#destroy()
+	 */
+	@Override
+	public void destroy() {
+		if (null != this.servletFiler) {
+			this.servletFiler.destroy();
+		}
+	}
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see javax.servlet.Filter#doFilter(javax.servlet.ServletRequest,
-     * javax.servlet.ServletResponse, javax.servlet.FilterChain)
-     */
-    @Override
-    public void doFilter(final ServletRequest arg0, final ServletResponse arg1,
-            final FilterChain arg2) throws IOException, ServletException {
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.servlet.Filter#doFilter(javax.servlet.ServletRequest,
+	 * javax.servlet.ServletResponse, javax.servlet.FilterChain)
+	 */
+	@Override
+	public void doFilter(final ServletRequest arg0, final ServletResponse arg1,
+			final FilterChain arg2) throws IOException, ServletException {
 
-        if (null != this.servletFiler) {
-            this.servletFiler.doFilter(arg0, arg1, arg2);
-        } else {
-            arg2.doFilter(arg0, arg1);
-        }
-    }
+		if (null != this.servletFiler) {
+			this.servletFiler.doFilter(arg0, arg1, arg2);
+		} else {
+			arg2.doFilter(arg0, arg1);
+		}
+	}
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see javax.servlet.Filter#init(javax.servlet.FilterConfig)
-     */
-    @Override
-    public void init(final FilterConfig arg0) throws ServletException {
-        try {
-            final Class<?> filterClass = Class.forName(Config.getString(
-                    "databinding", "secure.filter"));
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.servlet.Filter#init(javax.servlet.FilterConfig)
+	 */
+	@Override
+	public void init(final FilterConfig arg0) throws ServletException {
+		try {
+			final Class<?> filterClass = Class.forName(Config.getString(
+					"databinding", "secure.filter"));
 
-            this.servletFiler = (Filter) filterClass.newInstance();
-            this.servletFiler.init(arg0);
+			this.servletFiler = (Filter) filterClass.newInstance();
+			this.servletFiler.init(arg0);
 
-            PhLogger.getLogger().info("Security Filter successfully loaded");
-        } catch (final ClassNotFoundException e) {
-            PhLogger.getLogger().info("No Security Filter available");
-        } catch (final Exception e) {
-            PhLogger.getLogger().error(
-                    "Could not create Servlet Filter: " + e.getMessage(), e);
-        }
-    }
+			logger.info("Security Filter successfully loaded");
+		} catch (final ClassNotFoundException e) {
+			logger.info("No Security Filter available");
+		} catch (final Exception e) {
+			logger.error("Could not create Servlet Filter: " + e.getMessage(),
+					e);
+		}
+	}
 }

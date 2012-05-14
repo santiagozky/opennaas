@@ -33,6 +33,7 @@ import java.util.Set;
 import java.util.Map.Entry;
 
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.muse.ws.addressing.EndpointReference;
 import org.apache.muse.ws.addressing.soap.SoapFault;
 import org.w3c.dom.Element;
@@ -61,7 +62,6 @@ import org.opennaas.extensions.idb.serviceinterface.reservation.SimpleReservatio
 import org.opennaas.core.utils.Config;
 import org.opennaas.core.utils.Helpers;
 
-import org.opennaas.core.utils.PhLogger;
 import org.opennaas.extensions.idb.Constants;
 import org.opennaas.extensions.idb.database.hibernate.Domain;
 import org.opennaas.extensions.idb.exception.database.DatabaseException;
@@ -103,10 +103,11 @@ public final class MockNrpsManager implements IManager {
 	private final HashMap<String, SimpleReservationClient> services = new HashMap<String, SimpleReservationClient>();
 
 	/** Log. */
-	private final Log log = PhLogger.getLogger(MockNrpsManager.class);
+	private final Log log = LogFactory.getLog(MockNrpsManager.class);
 
 	/** PerformanceLogger instance. */
-	private final Log performanceLogger = PhLogger.getLogger("Performance");
+	private final Log performanceLogger = LogFactory
+			.getLog(MockNrpsManager.class);
 
 	/**
 	 * Private constructor: Singleton.

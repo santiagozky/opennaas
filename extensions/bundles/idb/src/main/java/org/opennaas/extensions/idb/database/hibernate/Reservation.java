@@ -47,6 +47,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.mysema.query.jpa.impl.JPAQuery;
 
@@ -58,7 +59,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.InvalidReservationIDFaultException;
 import org.opennaas.extensions.idb.serviceinterface.databinding.utils.WebserviceUtils;
 import org.opennaas.core.utils.Helpers;
-import org.opennaas.core.utils.PhLogger;
+
 import org.opennaas.core.utils.Tuple;
 import org.opennaas.extensions.idb.database.TransactionManager;
 import org.opennaas.extensions.idb.database.TransactionManagerDelete;
@@ -72,7 +73,7 @@ import org.opennaas.extensions.idb.exception.database.DatabaseException;
 @Table(name = "Reservation")
 public class Reservation implements java.io.Serializable {
 
-	private static Log logger = PhLogger.getLogger();
+	private static Log logger = LogFactory.getLog(Reservation.class);
 	// Fields
 
 	/**

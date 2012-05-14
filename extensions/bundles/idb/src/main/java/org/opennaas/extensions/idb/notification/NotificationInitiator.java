@@ -33,9 +33,10 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import org.opennaas.core.utils.Config;
-import org.opennaas.core.utils.PhLogger;
+
 import org.opennaas.extensions.idb.database.hibernate.Subscription;
 import org.opennaas.extensions.idb.exception.database.DatabaseException;
 import org.opennaas.extensions.idb.notification.producer.NotificationProducerHandler;
@@ -49,7 +50,8 @@ public class NotificationInitiator implements ServletContextListener {
 
 	@Override
 	public void contextInitialized(final ServletContextEvent arg0) {
-		final Log performanceLogger = PhLogger.getLogger("Performance");
+		final Log performanceLogger = LogFactory
+				.getLog(NotificationInitiator.class);
 		// only check DB if the persistingSubscriptions-flag is set
 		if (Config.isTrue("idb", "persistingSubscriptions")) {
 			System.out.println("Dating up from DB ...");

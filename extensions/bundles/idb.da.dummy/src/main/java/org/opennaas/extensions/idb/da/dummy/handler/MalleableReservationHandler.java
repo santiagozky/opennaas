@@ -29,6 +29,7 @@ import java.util.Hashtable;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ActivateResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ActivateType;
@@ -49,7 +50,6 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.Reservation
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ServiceConstraintType;
 import org.opennaas.extensions.idb.serviceinterface.reservation.CommonReservationHandler;
 import org.opennaas.core.utils.Helpers;
-import org.opennaas.core.utils.PhLogger;
 
 /**
  * Class to handle NSP reservation-requests in a predictable manner for
@@ -143,8 +143,8 @@ public final class MalleableReservationHandler extends CommonReservationHandler 
 	private static MalleableReservationHandler selfInstance;
 
 	/** logger instance. */
-	private final Log logger = PhLogger
-			.getSeparateLogger("malleableDummyHandler");
+	private final Log logger = LogFactory
+			.getLog(MalleableReservationHandler.class);
 
 	/*
 	 * Status properties

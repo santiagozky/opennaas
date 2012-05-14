@@ -35,6 +35,7 @@ import java.util.Map.Entry;
 import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.muse.ws.addressing.soap.SoapFault;
 
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AvailabilityCodeType;
@@ -53,7 +54,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.ReservationFaultException;
 import org.opennaas.extensions.idb.serviceinterface.databinding.utils.WebserviceUtils;
 import org.opennaas.core.utils.Config;
-import org.opennaas.core.utils.PhLogger;
+
 import org.opennaas.extensions.idb.Constants;
 import org.opennaas.extensions.idb.database.hibernate.Connections;
 import org.opennaas.extensions.idb.database.hibernate.Domain;
@@ -77,12 +78,12 @@ public final class ReservationSetupHandler {
 	/** NRPS Manager, for test-purposes using the JUnit-Mock. */
 	private static IManager nrpsManager;
 	/** standard Log instance. */
-	private final Log logger = PhLogger.getLogger(this.getClass());
+	private final Log logger = LogFactory.getLog(this.getClass());
 
 	private Log performanceLogger = null;
 
 	/** extra logger instance for the malleable reservations. */
-	private final Log malleableLogger = PhLogger.getSeparateLogger("malleable");
+	private final Log malleableLogger = LogFactory.getLog("malleable");
 
 	/**
 	 * Instance getter.
@@ -104,7 +105,7 @@ public final class ReservationSetupHandler {
 	private ReentrantLock createLock = null;
 
 	/** Log. */
-	// private Log log = PhLogger.getLogger(ReservationSetupHandler.class);
+	// private Log log = LogFactory.getLog(this.getClass());
 	/**
 	 * Private constructor: Singleton.
 	 * 

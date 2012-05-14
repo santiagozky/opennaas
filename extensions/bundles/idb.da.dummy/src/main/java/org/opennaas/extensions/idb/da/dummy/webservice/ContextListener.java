@@ -29,12 +29,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DomainInformationType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.EndpointType;
 import org.opennaas.extensions.idb.serviceinterface.topology.registrator.AbstractTopologyRegistrator;
 import org.opennaas.core.utils.Config;
-import org.opennaas.core.utils.PhLogger;
 
 /**
  * @author Alexander Willner (willner@cs.uni-bonn.de)
@@ -78,7 +78,7 @@ public class ContextListener extends AbstractTopologyRegistrator {
      */
 	@Override
 	protected final Log getLogger() {
-		return PhLogger.getLogger();
+		return LogFactory.getLog(ContextListener.class);
 	}
 
 	/**

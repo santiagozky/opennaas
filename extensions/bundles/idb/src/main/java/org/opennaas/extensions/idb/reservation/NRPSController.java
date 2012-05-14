@@ -28,6 +28,7 @@ package org.opennaas.extensions.idb.reservation;
 import java.io.Serializable;
 
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.muse.ws.addressing.EndpointReference;
 import org.apache.muse.ws.addressing.soap.SoapFault;
 import org.w3c.dom.Element;
@@ -55,7 +56,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.IsAvailable
 import org.opennaas.extensions.idb.serviceinterface.databinding.utils.JaxbSerializer;
 import org.opennaas.extensions.idb.serviceinterface.reservation.SimpleReservationClient;
 import org.opennaas.core.utils.Config;
-import org.opennaas.core.utils.PhLogger;
+
 import org.opennaas.extensions.idb.Constants;
 import org.opennaas.extensions.idb.database.hibernate.Domain;
 
@@ -69,7 +70,7 @@ public class NRPSController extends Thread {
 	/**
 	 * Log.
 	 */
-	private final Log logger = PhLogger.getLogger(this.getClass());
+	private final Log logger;
 
 	/**
 	 * Performance Log.
@@ -129,6 +130,7 @@ public class NRPSController extends Thread {
 			final Serializable message, final boolean malleable,
 			final Log performanceLogger) {
 
+		logger = LogFactory.getLog(this.getClass());
 		this.op = operation;
 		this.msg = message;
 		this.domain = dom;

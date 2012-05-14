@@ -24,7 +24,7 @@
  */
 
 
-package org.opennaas.core.utils;
+package org.opennaas.extensions.idb.utils;
 
 public class NotificationTopic {
 
