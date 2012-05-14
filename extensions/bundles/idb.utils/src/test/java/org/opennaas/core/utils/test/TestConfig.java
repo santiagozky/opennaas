@@ -25,6 +25,12 @@
 
 package org.opennaas.core.utils.test;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Properties;
+
 import org.apache.log4j.Level;
 import org.junit.Assert;
 import org.junit.Test;
@@ -52,6 +58,16 @@ public class TestConfig {
 		Assert.assertTrue("Test boolean", Config.isTrue("test.junit.boolValue"));
 		Assert.assertEquals("Test string",
 				Config.getString("test.junit.stringValue"), "testValue");
+
+	}
+
+	@Test
+	public final void testGetUrl() throws MalformedURLException,
+			FileNotFoundException {
+
+		URL url = Config.getURL("test", "junit.urlValue");
+		Assert.assertEquals("test url",
+				this.getClass().getResource("/test.properties"), url);
 	}
 
 	/**
@@ -73,4 +89,23 @@ public class TestConfig {
 		Assert.assertTrue("Should be cached.",
 				Config.isCached(propertyFile + key));
 	}
+
+	@Test
+	public final void testGetProperties() throws IOException {
+		final String propertyFile = "test";
+		Config.resetCache();
+		Properties props = Config.getProperties(propertyFile);
+		Assert.assertTrue("we get the correct properties object",
+				props.containsKey("junit.stringValue"));
+
+	}
+
+	@Test(expected = FileNotFoundException.class)
+	public final void testMissingPropertisFile() throws IOException {
+		Properties props;
+
+		props = Config.getProperties("" + Math.random());
+
+	}
+
 }

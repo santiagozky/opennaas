@@ -101,8 +101,8 @@ public final class Config {
 	public static Properties getProperties(final String propertyFile)
 			throws IOException {
 		final Properties properties = new Properties();
-		final URL resource = Config.CLASSLOADER.getResource("properties/"
-				+ propertyFile + ".properties");
+		final URL resource = Config.CLASSLOADER.getResource(propertyFile
+				+ ".properties");
 
 		if (null == resource) {
 			throw new FileNotFoundException(propertyFile

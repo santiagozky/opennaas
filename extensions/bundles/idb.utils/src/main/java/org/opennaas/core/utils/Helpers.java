@@ -105,48 +105,26 @@ public final class Helpers {
 
 	public static int getRandomInt() {
 		if (Helpers.random == null)
-			Helpers.random = new Random(Config.getLong("utils", "pseudoSeed")
-					.longValue());
+			Helpers.random = new Random();
 		return Helpers.random.nextInt();
 	}
 
 	public static int getPositiveRandomInt() {
 		if (Helpers.random == null)
-			Helpers.random = new Random(Config.getLong("utils", "pseudoSeed")
-					.longValue());
+			Helpers.random = new Random();
 		return Math.abs(Helpers.random.nextInt());
 	}
 
 	public static long getRandomLong() {
 		if (Helpers.random == null)
-			Helpers.random = new Random(Config.getLong("utils", "pseudoSeed")
-					.longValue());
+			Helpers.random = new Random();
 		return Helpers.random.nextLong();
 	}
 
 	public static long getPositiveRandomLong() {
 		if (Helpers.random == null)
-			Helpers.random = new Random(Config.getLong("utils", "pseudoSeed")
-					.longValue());
+			Helpers.random = new Random();
 		return Math.abs(Helpers.random.nextLong());
-	}
-
-	/**
-	 * Check if String represents a True-Value. Just like ant does.
-	 * 
-	 * @param val
-	 *            A String
-	 * @return True if val quals True,On,Yes,1
-	 */
-	public static final boolean isTrue(final String val) {
-		if (null != val
-				&& ("yes".equalsIgnoreCase(val) || "on".equalsIgnoreCase(val)
-						|| "true".equalsIgnoreCase(val) || "1"
-							.equalsIgnoreCase(val))) {
-			return true;
-		}
-
-		return false;
 	}
 
 	/**
