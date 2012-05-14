@@ -44,8 +44,8 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.Reservation
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ServiceConstraintType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.DomainNotFoundFaultException;
 import org.opennaas.extensions.idb.serviceinterface.topology.SimpleTopologyClient;
-import org.opennaas.core.utils.Config;
-import org.opennaas.core.utils.Helpers;
+import org.opennaas.core.resources.helpers.Config;
+import org.opennaas.core.resources.helpers.Helpers;
 import org.opennaas.extensions.idb.Constants;
 import org.opennaas.extensions.idb.database.hibernate.Domain;
 import org.opennaas.extensions.idb.reservation.AdapterManager;

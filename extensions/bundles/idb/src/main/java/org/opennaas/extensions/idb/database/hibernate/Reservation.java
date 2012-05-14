@@ -58,9 +58,9 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ServiceCons
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.EndpointNotFoundFaultException;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.InvalidReservationIDFaultException;
 import org.opennaas.extensions.idb.serviceinterface.databinding.utils.WebserviceUtils;
-import org.opennaas.core.utils.Helpers;
+import org.opennaas.core.resources.helpers.Helpers;
+import org.opennaas.core.resources.helpers.Tuple;
 
-import org.opennaas.core.utils.Tuple;
 import org.opennaas.extensions.idb.database.TransactionManager;
 import org.opennaas.extensions.idb.database.TransactionManagerDelete;
 import org.opennaas.extensions.idb.database.TransactionManagerLoad;

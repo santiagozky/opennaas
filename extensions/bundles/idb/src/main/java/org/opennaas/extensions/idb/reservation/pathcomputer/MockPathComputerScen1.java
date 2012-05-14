@@ -37,7 +37,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.
 import org.opennaas.extensions.idb.database.hibernate.Endpoint;
 import org.opennaas.extensions.idb.exception.database.DatabaseException;
 import org.opennaas.extensions.idb.reservation.exceptions.InvalidServiceIdException;
-import org.opennaas.core.utils.Tuple;
+import org.opennaas.core.resources.helpers.Tuple;
 
 /**
  * @author dewaal

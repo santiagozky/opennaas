@@ -34,7 +34,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CreateReser
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.EndpointType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ServiceConstraintType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.InvalidRequestFaultException;
-import org.opennaas.core.utils.Helpers;
+import org.opennaas.core.resources.helpers.Helpers;
 
 public class SemanticValidator {
 

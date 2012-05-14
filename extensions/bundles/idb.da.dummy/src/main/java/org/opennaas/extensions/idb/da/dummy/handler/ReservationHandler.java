@@ -57,7 +57,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ServiceCons
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.StatusType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetStatusResponseType.ServiceStatus;
 import org.opennaas.extensions.idb.serviceinterface.reservation.CommonReservationHandler;
-import org.opennaas.core.utils.Config;
+import org.opennaas.core.resources.helpers.Config;
 
 /**
  * Class to handle NSP reservation-requests in a predictable manner.

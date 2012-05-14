@@ -124,16 +124,6 @@
 			<version>${project.version}</version>
 		</dependency>
 
-
-
-		<dependency>
-			<groupId>org.opennaas</groupId>
-			<artifactId>org.opennaas.extensions.idb.utils</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-
-
-
 		<dependency>
 			<groupId>org.opennaas</groupId>
 			<artifactId>org.opennaas.extensions.idb.da.dummy</artifactId>

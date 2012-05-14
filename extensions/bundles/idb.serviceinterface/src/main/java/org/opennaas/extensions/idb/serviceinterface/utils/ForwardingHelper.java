@@ -43,7 +43,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.OperationNotAllowedFaultException;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.UnexpectedFaultException;
 import org.opennaas.extensions.idb.serviceinterface.topology.registrator.AbstractTopologyRegistrator;
-import org.opennaas.core.utils.Helpers;
+import org.opennaas.core.resources.helpers.Helpers;
 
 public class ForwardingHelper {
 	private final Log logger = LogFactory.getLog(ForwardingHelper.class);

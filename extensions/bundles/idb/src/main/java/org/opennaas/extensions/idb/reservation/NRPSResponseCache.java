@@ -43,7 +43,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.IsAvailable
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.IsAvailableType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ReservationType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ServiceConstraintType;
-import org.opennaas.core.utils.Config;
+import org.opennaas.core.resources.helpers.Config;
 
 import org.opennaas.extensions.idb.Constants;
 

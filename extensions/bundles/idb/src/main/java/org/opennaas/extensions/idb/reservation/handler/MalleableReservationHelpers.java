@@ -37,8 +37,8 @@ import java.util.List;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.IsAvailableResponseType;
-import org.opennaas.core.utils.Helpers;
-import org.opennaas.core.utils.Tuple;
+import org.opennaas.core.resources.helpers.Helpers;
+import org.opennaas.core.resources.helpers.Tuple;
 import org.opennaas.extensions.idb.database.hibernate.Connections;
 import org.opennaas.extensions.idb.database.hibernate.Domain;
 import org.opennaas.extensions.idb.database.hibernate.Endpoint;

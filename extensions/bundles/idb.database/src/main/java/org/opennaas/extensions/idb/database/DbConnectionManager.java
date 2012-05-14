@@ -40,7 +40,7 @@ import org.apache.commons.logging.LogFactory;
 //import org.hibernate.SessionFactory;
 //import org.hibernate.cfg.AnnotationConfiguration;
 
-import org.opennaas.core.utils.Config;
+import org.opennaas.core.resources.helpers.Config;
 
 import org.opennaas.extensions.idb.exception.database.DatabaseException;
 

@@ -372,6 +372,10 @@
 		</plugins>
 	</build>
 	<dependencies>
+	<dependency>
+			<groupId>org.opennaas</groupId>
+			<artifactId>org.opennaas.core.resources</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.mortbay.jetty</groupId>
 			<artifactId>servlet-api</artifactId>
@@ -401,11 +405,6 @@
 			<scope>test</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>org.opennaas</groupId>
-			<artifactId>org.opennaas.extensions.idb.utils</artifactId>
-			<version>${project.version}</version>
-		</dependency>
 		<dependency>
 			<groupId>eu.ist_phosphorus.harmony</groupId>
 			<artifactId>common-synthesizer</artifactId>

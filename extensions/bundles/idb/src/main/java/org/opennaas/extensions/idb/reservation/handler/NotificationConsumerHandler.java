@@ -49,7 +49,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.Notificatio
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.NotificationType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.StatusType;
 import org.opennaas.extensions.idb.utils.NotificationTopic;
-import org.opennaas.core.utils.Config;
+import org.opennaas.core.resources.helpers.Config;
 
 import org.opennaas.extensions.idb.Constants;
 import org.opennaas.extensions.idb.database.hibernate.NrpsConnections;

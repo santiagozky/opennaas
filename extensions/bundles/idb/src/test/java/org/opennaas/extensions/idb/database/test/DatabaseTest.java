@@ -36,8 +36,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.EndpointInterfaceType;
-import org.opennaas.core.utils.Config;
-import org.opennaas.core.utils.Helpers;
+import org.opennaas.core.resources.helpers.Config;
+import org.opennaas.core.resources.helpers.Helpers;
 import org.opennaas.extensions.idb.Constants;
 import org.opennaas.extensions.idb.database.hibernate.Connections;
 import org.opennaas.extensions.idb.database.hibernate.Domain;

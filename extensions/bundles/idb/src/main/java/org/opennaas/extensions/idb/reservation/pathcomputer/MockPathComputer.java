@@ -42,7 +42,7 @@ import org.opennaas.extensions.idb.database.hibernate.TNAPrefix;
 import org.opennaas.extensions.idb.exception.database.DatabaseException;
 import org.opennaas.extensions.idb.reservation.exceptions.InvalidConnectionIdException;
 import org.opennaas.extensions.idb.reservation.exceptions.InvalidServiceIdException;
-import org.opennaas.core.utils.Tuple;
+import org.opennaas.core.resources.helpers.Tuple;
 
 /**
  * Basic path computer mock that implements the new interface. For additional

@@ -63,7 +63,7 @@
 				<configuration>
 					<instructions>
 						<Import-Package>*</Import-Package>
-						<Export-Package>org.opennaas.core.utils.*;version="${project.version}"</Export-Package>
+						<Export-Package>org.opennaas.core.resources.helper.*;version="${project.version}"</Export-Package>
 					</instructions>
 				</configuration>
 			</plugin>

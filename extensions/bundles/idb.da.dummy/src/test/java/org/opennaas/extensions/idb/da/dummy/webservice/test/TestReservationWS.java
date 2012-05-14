@@ -50,7 +50,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ServiceStat
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.StatusType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.OperationNotSupportedFaultException;
 import org.opennaas.extensions.idb.serviceinterface.reservation.SimpleReservationClient;
-import org.opennaas.core.utils.Config;
+import org.opennaas.core.resources.helpers.Config;
 
 /**
  * @author Alexander Willner (willner@cs.uni-bonn.de)

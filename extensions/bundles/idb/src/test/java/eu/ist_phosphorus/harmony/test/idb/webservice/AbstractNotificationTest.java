@@ -29,7 +29,7 @@ package org.opennaas.extensions.idb.test.webservice;
 import java.net.URISyntaxException;
 
 import org.opennaas.extensions.idb.serviceinterface.notification.SimpleNotificationClient;
-import org.opennaas.core.utils.Config;
+import org.opennaas.core.resources.helpers.Config;
 import org.opennaas.extensions.idb.webservice.NotificationWS;
 
 /**

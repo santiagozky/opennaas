@@ -30,7 +30,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.muse.ws.addressing.soap.SimpleSoapClient;
 import org.apache.muse.ws.addressing.soap.SoapClient;
 
-import org.opennaas.core.utils.Config;
+import org.opennaas.core.resources.helpers.Config;
 
 
 public class SecurityHelper {

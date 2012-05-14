@@ -51,7 +51,7 @@ import com.mysema.query.jpa.impl.JPAQuery;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DomainInformationType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DomainRelationshipType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DomainTechnologyType;
-import org.opennaas.core.utils.Helpers;
+import org.opennaas.core.resources.helpers.Helpers;
 import org.opennaas.extensions.idb.database.TransactionManager;
 import org.opennaas.extensions.idb.database.TransactionManagerLoad;
 import org.opennaas.extensions.idb.exception.database.DatabaseException;

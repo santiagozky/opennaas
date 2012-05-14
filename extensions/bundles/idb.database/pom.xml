@@ -39,12 +39,6 @@
 			<artifactId>stax-api</artifactId>
 			<version>1.0.1</version>
 		</dependency>
-		
-		<dependency>
-			<groupId>org.opennaas</groupId>
-			<artifactId>org.opennaas.extensions.idb.utils</artifactId>
-			<version>${project.version}</version>
-		</dependency>
 
 <dependency>
 			<groupId>muse.osgi-bundles</groupId>

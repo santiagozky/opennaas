@@ -42,7 +42,7 @@ import com.mysema.query.jpa.impl.JPAQuery;
 import org.opennaas.extensions.idb.database.TransactionManager;
 import org.opennaas.extensions.idb.database.TransactionManagerLoad;
 import org.opennaas.extensions.idb.exception.database.DatabaseException;
-import org.opennaas.core.utils.Tuple;
+import org.opennaas.core.resources.helpers.Tuple;
 
 /**
  * Java representation of of the database entity {@link Subscription}. This

@@ -38,7 +38,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.BaseFaultTy
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.UnexpectedFault;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.BaseFaultType.Description;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.BaseFaultType.FaultCause;
-import org.opennaas.core.utils.Helpers;
+import org.opennaas.core.resources.helpers.Helpers;
 
 /**
  * @author gassen

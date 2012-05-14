@@ -25,7 +25,7 @@
 		<class>org.opennaas.extensions.idb.database.hibernate.DomSupportedSwitch</class>        
 		<class>org.opennaas.extensions.idb.database.hibernate.DomSupportedBandwidth</class>        
         <properties>
-            <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true, SchemaAction='add,refresh,deleteTableContents')"/>
+            <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true, SchemaAction='add,refresh')"/>
             <property name="openjpa.ConnectionURL" value="jdbc:mysql://localhost/RealIDB"/>
             <property name="openjpa.ConnectionDriverName" value="com.mysql.jdbc.Driver"/>
              <property name="openjpa.jdbc.DBDictionary" value="mysql(DriverVendor=mysql)" />

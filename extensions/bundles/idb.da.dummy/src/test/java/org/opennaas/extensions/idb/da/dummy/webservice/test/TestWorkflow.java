@@ -35,7 +35,7 @@ import org.junit.Test;
 
 import org.opennaas.extensions.idb.da.dummy.webservice.ReservationWS;
 import org.opennaas.extensions.idb.serviceinterface.reservation.SimpleReservationClient;
-import org.opennaas.core.utils.Config;
+import org.opennaas.core.resources.helpers.Config;
 
 
 /**

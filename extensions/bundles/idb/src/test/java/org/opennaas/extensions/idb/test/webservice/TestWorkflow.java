@@ -36,7 +36,7 @@ import org.junit.Test;
 
 import org.opennaas.extensions.idb.serviceinterface.reservation.SimpleReservationClient;
 import org.opennaas.extensions.idb.serviceinterface.topology.SimpleTopologyClient;
-import org.opennaas.core.utils.Config;
+import org.opennaas.core.resources.helpers.Config;
 
 import org.opennaas.extensions.idb.Constants;
 import org.opennaas.extensions.idb.exception.database.DatabaseException;

@@ -37,7 +37,7 @@ import org.w3c.dom.Element;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.BaseFaultType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.BaseFaultType.Description;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.UnexpectedFaultException;
-import org.opennaas.core.utils.Config;
+import org.opennaas.core.resources.helpers.Config;
 
 /**
  * @author jangassen

@@ -35,7 +35,7 @@ import javax.servlet.ServletContextListener;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.opennaas.core.utils.Config;
+import org.opennaas.core.resources.helpers.Config;
 
 import org.opennaas.extensions.idb.database.hibernate.Subscription;
 import org.opennaas.extensions.idb.exception.database.DatabaseException;

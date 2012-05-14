@@ -39,7 +39,7 @@ import org.opennaas.extensions.idb.da.dummy.webservice.NotificationWS;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AddTopicType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.OperationNotSupportedFaultException;
 import org.opennaas.extensions.idb.serviceinterface.notification.SimpleNotificationClient;
-import org.opennaas.core.utils.Config;
+import org.opennaas.core.resources.helpers.Config;
 
 /**
  * @author Alexander Willner (willner@cs.uni-bonn.de)

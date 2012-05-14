@@ -54,8 +54,8 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ServiceCons
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.StatusType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.InvalidReservationIDFaultException;
 import org.opennaas.extensions.idb.serviceinterface.topology.SimpleTopologyClient;
-import org.opennaas.core.utils.Config;
-import org.opennaas.core.utils.Helpers;
+import org.opennaas.core.resources.helpers.Config;
+import org.opennaas.core.resources.helpers.Helpers;
 
 import org.opennaas.extensions.idb.Constants;
 import org.opennaas.extensions.idb.database.hibernate.Reservation;

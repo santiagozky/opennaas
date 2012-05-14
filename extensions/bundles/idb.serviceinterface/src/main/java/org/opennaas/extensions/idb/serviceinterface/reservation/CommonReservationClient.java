@@ -38,7 +38,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.
 import org.opennaas.extensions.idb.serviceinterface.databinding.utils.WebserviceUtils;
 import org.opennaas.extensions.idb.serviceinterface.utils.EPRHelper;
 import org.opennaas.extensions.idb.serviceinterface.utils.SecurityHelper;
-import org.opennaas.core.utils.Helpers;
+import org.opennaas.core.resources.helpers.Helpers;
 
 /**
  * Reservation client.
