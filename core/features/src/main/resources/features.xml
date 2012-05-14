@@ -77,6 +77,16 @@
 		<bundle start="false">mvn:org.opennaas/org.opennaas.extensions.fragment.velocity/${project.version}</bundle>
 	</feature>
 
+	<feature name="opennaas-ws" version="${project.version}">		
+		<feature>http</feature>
+		<feature>cxf</feature>
+		
+		<bundle dependency="true">mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.javax-inject/${servicemix.javax-inject.version}</bundle>
+		
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.ws/${project.version}</bundle>
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.ws.proxy/${project.version}</bundle>	
+	</feature>
+
 	<feature name="opennaas-junos" version="${project.version}">
 		<feature version="${project.version}">opennaas-cim</feature>
 		<feature version="${project.version}">opennaas-netconf</feature>
@@ -96,9 +106,9 @@
 		<bundle>mvn:org.opennaas/org.opennaas.extensions.router.repository/${project.version}</bundle>
 		<bundle>mvn:org.opennaas/org.opennaas.extensions.router.capability.chassis/${project.version}</bundle>
 		<bundle>mvn:org.opennaas/org.opennaas.extensions.router.capability.ip/${project.version}</bundle>
-		<bundle>mvn:org.opennaas/org.opennaas.extensions.router.capability.gretunnel/1.0.0-SNAPSHOT</bundle>
-		<bundle>mvn:org.opennaas/org.opennaas.extensions.router.capability.ospf/1.0.0-SNAPSHOT</bundle>
-		<bundle>mvn:org.opennaas/org.opennaas.extensions.router.capability.staticroute/1.0.0-SNAPSHOT</bundle>
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.router.capability.gretunnel/${project.version}</bundle>
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.router.capability.ospf/${project.version}</bundle>
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.router.capability.staticroute/${project.version}</bundle>
 	</feature>
 
 	<feature name="opennaas-network" version="${project.version}">
@@ -108,6 +118,7 @@
 		<bundle>mvn:org.opennaas/org.opennaas.extensions.network.capability.basic/${project.version}</bundle>
 		<bundle>mvn:org.opennaas/org.opennaas.extensions.network.capability.queue/${project.version}</bundle>
 		<bundle>mvn:org.opennaas/org.opennaas.extensions.network.capability.ospf/${project.version}</bundle>
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.router.capability.ospf/${project.version}</bundle>
 	</feature>
 
 	<feature name="opennaas-bod" version="${project.version}">
@@ -141,6 +152,7 @@
 	</feature>
 
 	<feature name="opennaas" version="${project.version}">
+		<feature version="${project.version}">opennaas-ws</feature>
 		<feature version="${project.version}">opennaas-router</feature>
 		<feature version="${project.version}">opennaas-network</feature>
 		<feature version="${project.version}">opennaas-bod</feature>
@@ -150,10 +162,10 @@
 	
 	</feature>
 
-	<feature name="nexus-tests-helper" version="${project.version}">
-		<feature version="${opennaas.version}">org.opennaas.core</feature>
-		<bundle>mvn:org.opennaas/org.opennaas.extensions.nexus.tests.helper/${project.version}</bundle>
-	</feature>
+   <feature name="itests-helpers" version="${project.version}">	  	
+     <feature version="${opennaas.version}">org.opennaas.core</feature>	  	
+     <bundle>mvn:org.opennaas/org.opennaas.extensions.itests.helpers/${project.version}</bundle>  	
+  </feature>
 
 	<feature name="nexus-testprofile" version="${project.version}">
 		<feature version="${opennaas.version}">org.opennaas.core</feature>

@@ -5,8 +5,10 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.opennaas.core.resources.ILifecycle;
 import org.opennaas.core.resources.IModel;
 import org.opennaas.core.resources.IResource;
+import org.opennaas.core.resources.action.IAction;
 import org.opennaas.core.resources.action.IActionSet;
 import org.opennaas.core.resources.capability.AbstractCapability;
 import org.opennaas.core.resources.capability.CapabilityException;
@@ -21,7 +23,7 @@ import org.opennaas.extensions.network.repository.NetworkMapperModelToDescriptor
 import org.opennaas.extensions.router.model.ManagedElement;
 import org.opennaas.extensions.router.model.mappers.Cim2NdlMapper;
 
-public class NetworkBasicCapability extends AbstractCapability implements ITopologyManager {
+public class NetworkBasicCapability extends AbstractCapability implements INetworkBasicCapability {
 
 	public static final String	CAPABILITY_NAME	= "basicNetwork";
 
@@ -36,53 +38,13 @@ public class NetworkBasicCapability extends AbstractCapability implements ITopol
 	}
 
 	@Override
-	public Object sendMessage(String idOperation, Object paramsModel) throws CapabilityException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public IActionSet getActionSet() throws CapabilityException {
-		// FIXME obtain actionSet dynamically
-		return new NetActionSet();
-	}
-
-	// LIVE-CYCLE METHODS //
-
-	@Override
-	protected void initializeCapability() throws CapabilityException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected void activateCapability() throws CapabilityException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected void deactivateCapability() throws CapabilityException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected void shutdownCapability() throws CapabilityException {
-		// TODO Auto-generated method stub
-
-	}
-
-	// ITopologyManager IMPLEMENTATION //
-
-	@Override
 	public NetworkModel addResource(IResource resourceToAdd) throws CapabilityException {
 
 		if (resourceToAdd == null) {
 			throw new CapabilityException("Invalid null resourceToAdd");
 		}
 
-		if (!resourceToAdd.getState().equals(State.ACTIVE)) {
+		if (!resourceToAdd.getState().equals(ILifecycle.State.ACTIVE)) {
 			throw new CapabilityException("Resource should be started before adding it to a network.");
 		}
 
@@ -159,7 +121,7 @@ public class NetworkBasicCapability extends AbstractCapability implements ITopol
 	}
 
 	@Override
-	public NetworkConnection L2attach(Interface interface1, Interface interface2) throws CapabilityException {
+	public NetworkConnection l2attach(Interface interface1, Interface interface2) throws CapabilityException {
 
 		if (interface1 == null || interface2 == null) {
 			throw new CapabilityException("Invalid null interface");
@@ -215,7 +177,7 @@ public class NetworkBasicCapability extends AbstractCapability implements ITopol
 	}
 
 	@Override
-	public void L2detach(Interface interface1, Interface interface2) throws CapabilityException {
+	public void l2detach(Interface interface1, Interface interface2) throws CapabilityException {
 
 		if (interface1 == null || interface2 == null) {
 			throw new CapabilityException("Invalid null interface");
@@ -242,6 +204,21 @@ public class NetworkBasicCapability extends AbstractCapability implements ITopol
 		} else {
 			log.info("L2detach: Interfaces were not attached.");
 		}
+	}
+
+	@Override
+	public String getCapabilityName() {
+		return CAPABILITY_NAME;
+	}
+
+	@Override
+	public IActionSet getActionSet() throws CapabilityException {
+		// FIXME obtain actionSet dynamically
+		return new NetworkBasicActionSetImpl();
+	}
+
+	@Override
+	public void queueAction(IAction action) throws CapabilityException {
 	}
 
 	private NetworkConnection createConnectionBetweenInterfaces(Interface interface1, Interface interface2, IResource network) {
@@ -289,4 +266,5 @@ public class NetworkBasicCapability extends AbstractCapability implements ITopol
 		NetworkTopology topology = NetworkMapperModelToDescriptor.modelToDescriptor((NetworkModel) network.getModel());
 		network.getResourceDescriptor().setNetworkTopology(topology);
 	}
+
 }
