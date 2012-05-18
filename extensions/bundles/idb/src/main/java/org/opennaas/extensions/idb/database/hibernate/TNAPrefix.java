@@ -39,7 +39,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.EntityManager;
 
-import com.mysema.query.jpa.impl.JPAQuery;
+//import com.mysema.query.jpa.impl.JPAQuery;
 
 import org.opennaas.extensions.idb.database.TransactionManager;
 import org.opennaas.extensions.idb.database.TransactionManagerLoad;
@@ -167,6 +167,7 @@ public class TNAPrefix implements java.io.Serializable, Comparable<TNAPrefix> {
 	 * @return -1 0 1
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
+	@Override
 	public int compareTo(TNAPrefix domainPrefixParam) {
 		if (this.getPrefix().length() < domainPrefixParam.getPrefix().length()) {
 			return -1;
@@ -285,10 +286,12 @@ public class TNAPrefix implements java.io.Serializable, Comparable<TNAPrefix> {
 			@Override
 			protected void dbOperation() {
 				Set<TNAPrefix> result = new HashSet<TNAPrefix>();
-				QTNAPrefix tnaPrefix = QTNAPrefix.tNAPrefix;
-				JPAQuery query = new JPAQuery(this.session);
-				List<TNAPrefix> tmpPrefix = query.from(tnaPrefix).list(
-						tnaPrefix);
+				// QTNAPrefix tnaPrefix = QTNAPrefix.tNAPrefix;
+				// JPAQuery query = new JPAQuery(this.session);
+				// List<TNAPrefix> tmpPrefix = query.from(tnaPrefix).list(
+				// tnaPrefix);
+				List<TNAPrefix> tmpPrefix = this.session.createQuery(
+						"select t from TNAPrefix t").getResultList();
 
 				for (TNAPrefix d : tmpPrefix) {
 					result.add(d);

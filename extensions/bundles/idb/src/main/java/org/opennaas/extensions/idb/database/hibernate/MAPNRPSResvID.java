@@ -25,28 +25,27 @@
 
 package org.opennaas.extensions.idb.database.hibernate;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Query;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.persistence.EntityManager;
 
-import com.mysema.query.jpa.impl.JPAQuery;
-
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.InvalidReservationIDFaultException;
-import org.opennaas.extensions.idb.serviceinterface.databinding.utils.WebserviceUtils;
 import org.opennaas.extensions.idb.database.DbConnectionManager;
 import org.opennaas.extensions.idb.database.TransactionManager;
 import org.opennaas.extensions.idb.exception.database.DatabaseException;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.InvalidReservationIDFaultException;
+import org.opennaas.extensions.idb.serviceinterface.databinding.utils.WebserviceUtils;
+
+//import com.mysema.query.jpa.impl.JPAQuery;
 
 /**
  * Java representation of of the database entity {@link MAPNRPSResvID}. This
@@ -291,18 +290,24 @@ public class MAPNRPSResvID implements java.io.Serializable {
 
 	public void save(EntityManager session) {
 		session.persist(this);
+
 	}
 
 	@Transient
 	public static List<MAPNRPSResvID> getMappingForReservation(Reservation res)
 			throws DatabaseException {
 		EntityManager session = DbConnectionManager.openSession();
-		QMAPNRPSResvID mapnrpsResvID = QMAPNRPSResvID.mAPNRPSResvID;
-		JPAQuery query = new JPAQuery(session);
-		List<MAPNRPSResvID> tmpMAPResConnDom = query.from(mapnrpsResvID)
-				.where(mapnrpsResvID.reservation.eq(res)).list(mapnrpsResvID);
-
+		// QMAPNRPSResvID mapnrpsResvID = QMAPNRPSResvID.mAPNRPSResvID;
+		// JPAQuery query = new JPAQuery(session);
+		// List<MAPNRPSResvID> tmpMAPResConnDom = query.from(mapnrpsResvID)
+		// .where(mapnrpsResvID.reservation.eq(res)).list(mapnrpsResvID);
+		//
+		Query query = session
+				.createQuery("select m from MAPNRPSResvID m where m.reservation=:arg");
+		query.setParameter("arg", res);
+		List<MAPNRPSResvID> tmpMAPResConnDom = query.getResultList();
 		session.close();
+
 		return tmpMAPResConnDom;
 	}
 }

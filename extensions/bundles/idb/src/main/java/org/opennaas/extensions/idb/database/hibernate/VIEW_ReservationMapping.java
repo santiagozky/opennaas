@@ -33,10 +33,11 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Query;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import com.mysema.query.jpa.impl.JPAQuery;
+//import com.mysema.query.jpa.impl.JPAQuery;
 
 import org.opennaas.extensions.idb.database.TransactionManager;
 import org.opennaas.extensions.idb.exception.database.DatabaseException;
@@ -280,36 +281,21 @@ public class VIEW_ReservationMapping implements java.io.Serializable {
 				new Long(resId)) {
 			@Override
 			protected void dbOperation() {
-				QVIEW_ReservationMapping reservationMapping = QVIEW_ReservationMapping.vIEW_ReservationMapping;
-				JPAQuery query = new JPAQuery(this.session);
-				this.result = query
-						.from(reservationMapping)
-						.where(reservationMapping.nrpsReservationId
-								.eq((Long) this.arg)).list(reservationMapping);
+				// QVIEW_ReservationMapping reservationMapping =
+				// QVIEW_ReservationMapping.vIEW_ReservationMapping;
+				// JPAQuery query = new JPAQuery(this.session);
+				// this.result = query
+				// .from(reservationMapping)
+				// .where(reservationMapping.nrpsReservationId
+				// .eq((Long) this.arg)).list(reservationMapping);
+				Query query = this.session
+						.createQuery("select r from ReservationMapping r where r.nrpsReservationId=:arg");
+				query.setParameter("arg", this.arg);
+				this.result = query.getResultList();
 
 			}
 		}).getResult();
 		return mappings;
 	}
 
-	@Transient
-	@SuppressWarnings("unchecked")
-	public static final List<VIEW_ReservationMapping> getMappingsForNSPResID(
-			final long resId) throws DatabaseException {
-		final List<VIEW_ReservationMapping> mappings = (List<VIEW_ReservationMapping>) (new TransactionManager(
-				new Long(resId)) {
-			@Override
-			protected void dbOperation() {
-				QVIEW_ReservationMapping reservationMapping = QVIEW_ReservationMapping.vIEW_ReservationMapping;
-				JPAQuery query = new JPAQuery(this.session);
-
-				this.result = query
-						.from(reservationMapping)
-						.where(reservationMapping.reservationId
-								.eq((Long) this.arg)).list(reservationMapping);
-
-			}
-		}).getResult();
-		return mappings;
-	}
 }

@@ -42,6 +42,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapKey;
 import javax.persistence.MapKeyColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.Query;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.EntityManager;
@@ -50,7 +51,7 @@ import javax.persistence.JoinTable;
 
 import org.apache.openjpa.kernel.jpql.JPQL;
 
-import com.mysema.query.jpa.impl.JPAQuery;
+//import com.mysema.query.jpa.impl.JPAQuery;
 
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.EndpointInterfaceType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.EndpointType;
@@ -232,7 +233,7 @@ public class Endpoint implements java.io.Serializable, Comparable<Endpoint> {
 	 */
 
 	@Id
-	@Column(length = 15)
+	@Column(length = 15, name = "TNA")
 	public String getTNA() {
 		return this.TNA;
 	}
@@ -526,6 +527,7 @@ public class Endpoint implements java.io.Serializable, Comparable<Endpoint> {
 	 * @return -1 0 1
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
+	@Override
 	public int compareTo(Endpoint endpoint) {
 		if (Endpoint.ipv4ToInt(this.getTNA()) < Endpoint.ipv4ToInt(endpoint
 				.getTNA())) {
@@ -606,8 +608,8 @@ public class Endpoint implements java.io.Serializable, Comparable<Endpoint> {
 			// own
 			// exception?
 		}
-		for (int i = 0; i < s.length; i++) {
-			int b = Integer.parseInt(s[i]);
+		for (String element : s) {
+			int b = Integer.parseInt(element);
 			if ((b < 0) || (b > 255)) {
 				throw new RuntimeException("malformed IPv4 address: " + ipStr); // TODO
 				// own
@@ -769,11 +771,13 @@ public class Endpoint implements java.io.Serializable, Comparable<Endpoint> {
 			@Override
 			protected void dbOperation() {
 				Set<Endpoint> result = new HashSet<Endpoint>();
-				QEndpoint endpoint = QEndpoint.endpoint;
-				JPAQuery query = new JPAQuery(this.session);
-				List<Endpoint> tmpEndpoint = query.from(endpoint)
-						.list(endpoint);
-
+				// QEndpoint endpoint = QEndpoint.endpoint;
+				// JPAQuery query = new JPAQuery(this.session);
+				// List<Endpoint> tmpEndpoint = query.from(endpoint)
+				// .list(endpoint);
+				Query query = this.session
+						.createQuery("select e from Endpoint e");
+				List<Endpoint> tmpEndpoint = query.getResultList();
 				for (Endpoint d : tmpEndpoint) {
 					result.add(d);
 				}
@@ -788,16 +792,25 @@ public class Endpoint implements java.io.Serializable, Comparable<Endpoint> {
 			@Override
 			protected void dbOperation() {
 				Set<VIEW_InterDomainLink> result = new HashSet<VIEW_InterDomainLink>();
-				QVIEW_InterDomainLink interlink = QVIEW_InterDomainLink.vIEW_InterDomainLink;
-				JPAQuery query = new JPAQuery(this.session);
-				List<VIEW_InterDomainLink> tmpSrc = query
-						.from(interlink)
-						.where(interlink.sourceEndpoint.eq((Endpoint) this.arg))
-						.list(interlink);
+				// QVIEW_InterDomainLink interlink =
+				// QVIEW_InterDomainLink.vIEW_InterDomainLink;
+				// JPAQuery query = new JPAQuery(this.session);
+				// List<VIEW_InterDomainLink> tmpSrc = query
+				// .from(interlink)
+				// .where(interlink.sourceEndpoint.eq((Endpoint) this.arg))
+				// .list(interlink);
+				Query query = this.session.createQuery(
+						"select from Interlink i where i.sourceEndpoint=:arg")
+						.setParameter("arg", this.arg);
+				List<VIEW_InterDomainLink> tmpSrc = query.getResultList();
 
-				List<VIEW_InterDomainLink> tmpDst = query.from(interlink)
-						.where(interlink.destEndpoint.eq((Endpoint) this.arg))
-						.list(interlink);
+				// List<VIEW_InterDomainLink> tmpDst = query.from(interlink)
+				// .where(interlink.destEndpoint.eq((Endpoint) this.arg))
+				// .list(interlink);
+				query = this.session.createQuery(
+						"select from Interlink i where i.destEndpoint=:arg")
+						.setParameter("arg", this.arg);
+				List<VIEW_InterDomainLink> tmpDst = query.getResultList();
 
 				for (VIEW_InterDomainLink l : tmpSrc) {
 					result.add(l);

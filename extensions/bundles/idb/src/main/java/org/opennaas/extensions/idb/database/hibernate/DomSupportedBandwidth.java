@@ -30,6 +30,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
@@ -38,10 +39,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Query;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import com.mysema.query.jpa.impl.JPAQuery;
+//import com.mysema.query.jpa.impl.JPAQuery;
 
 import org.opennaas.extensions.idb.database.TransactionManager;
 import org.opennaas.extensions.idb.database.TransactionManagerLoad;
@@ -102,6 +104,7 @@ public class DomSupportedBandwidth implements java.io.Serializable,
 	 * @return the pkBw
 	 */
 	@Id
+	@Column(name = "PK_Bandwidth")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public long getPK_Bandwidth() {
 		return this.PK_Bw;
@@ -135,6 +138,7 @@ public class DomSupportedBandwidth implements java.io.Serializable,
 	/**
 	 * @return supported bandwidth of the domain
 	 */
+	@Column(name = "Bandwidth")
 	public long getBandwidth() {
 		return this.bw;
 	}
@@ -153,6 +157,7 @@ public class DomSupportedBandwidth implements java.io.Serializable,
 	 * @return -1 0 1
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
+	@Override
 	public int compareTo(DomSupportedBandwidth domainBwParam) {
 		if (this.bw < domainBwParam.getBandwidth()) {
 			return -1;
@@ -246,10 +251,16 @@ public class DomSupportedBandwidth implements java.io.Serializable,
 			@Override
 			protected void dbOperation() {
 				Domain d = (Domain) this.arg;
-				QDomSupportedBandwidth domBandwidth = QDomSupportedBandwidth.domSupportedBandwidth;
-				JPAQuery query = new JPAQuery(this.session);
-				List<DomSupportedBandwidth> bList = query.from(domBandwidth)
-						.where(domBandwidth.domain.eq(d)).list(domBandwidth);
+				// QDomSupportedBandwidth domBandwidth =
+				// QDomSupportedBandwidth.domSupportedBandwidth;
+				// JPAQuery query = new JPAQuery(this.session);
+				// List<DomSupportedBandwidth> bList = query.from(domBandwidth)
+				// .where(domBandwidth.domain.eq(d)).list(domBandwidth);
+
+				Query query = this.session
+						.createQuery("select d from DomSupportedBandwidth d where d.domain=:arg");
+				query.setParameter("arg", d);
+				List<DomSupportedBandwidth> bList = query.getResultList();
 
 				Set<DomSupportedBandwidth> bws = new HashSet<DomSupportedBandwidth>();
 				for (DomSupportedBandwidth bw : bList) {

@@ -39,11 +39,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Query;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.EntityManager;
 
-import com.mysema.query.jpa.impl.JPAQuery;
+//import com.mysema.query.jpa.impl.JPAQuery;
 
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.EndpointInterfaceType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.EndpointType;
@@ -131,6 +132,7 @@ public class InterDomainLink implements java.io.Serializable,
 
 	// Property accessors
 	@Id
+	@Column(name = "PK_interdomainlink")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public long getPk_Interdomainlink() {
 		return this.PK_interdomainlink;
@@ -140,7 +142,7 @@ public class InterDomainLink implements java.io.Serializable,
 		this.PK_interdomainlink = pkInterdomainlink;
 	}
 
-	@Column(nullable = false, length = 40)
+	@Column(nullable = false, length = 40, name = "LinkName")
 	public String getLinkName() {
 		return this.linkName;
 	}
@@ -148,6 +150,7 @@ public class InterDomainLink implements java.io.Serializable,
 	/**
 	 * @return the disabled
 	 */
+	@Column(name = "Disabled")
 	public boolean isDisabled() {
 		return this.disabled;
 	}
@@ -163,6 +166,7 @@ public class InterDomainLink implements java.io.Serializable,
 	/**
 	 * @return the priority
 	 */
+	@Column(name = "priority")
 	public int getPriority() {
 		return this.priority;
 	}
@@ -191,11 +195,12 @@ public class InterDomainLink implements java.io.Serializable,
 	 * @return the linkCosts
 	 */
 	@Basic(optional = true)
+	@Column(name = "LinkCosts")
 	public int getLinkCosts() {
 		return this.linkCosts;
 	}
 
-	@Column(nullable = false, length = 40)
+	@Column(nullable = false, length = 40, name = "SourceDomain")
 	public String getSourceDomain() {
 		return this.sourceDomain;
 	}
@@ -207,7 +212,7 @@ public class InterDomainLink implements java.io.Serializable,
 	/**
 	 * @return destination of the link
 	 */
-	@Column(nullable = false, length = 40)
+	@Column(nullable = false, length = 40, name = "DestinationDomain")
 	public String getDestinationDomain() {
 		return this.destinationDomain;
 	}
@@ -392,11 +397,15 @@ public class InterDomainLink implements java.io.Serializable,
 			@Override
 			protected void dbOperation() {
 				Set<InterDomainLink> result = new HashSet<InterDomainLink>();
-				QInterDomainLink interlink = QInterDomainLink.interDomainLink;
-				JPAQuery query = new JPAQuery(this.session);
-
-				List<InterDomainLink> tmpLink = query.from(interlink).list(
-						interlink);
+				// QInterDomainLink interlink =
+				// QInterDomainLink.interDomainLink;
+				// JPAQuery query = new JPAQuery(this.session);
+				//
+				// List<InterDomainLink> tmpLink = query.from(interlink).list(
+				// interlink);
+				Query query = this.session
+						.createQuery("select i  from InterDomainLink i");
+				List<InterDomainLink> tmpLink = query.getResultList();
 
 				for (InterDomainLink l : tmpLink) {
 					result.add(l);

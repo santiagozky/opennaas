@@ -35,11 +35,12 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Query;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.EntityManager;
 
-import com.mysema.query.jpa.impl.JPAQuery;
+//import com.mysema.query.jpa.impl.JPAQuery;
 
 import org.opennaas.extensions.idb.database.TransactionManager;
 import org.opennaas.extensions.idb.exception.database.DatabaseException;
@@ -321,16 +322,20 @@ public class VIEW_InterDomainLink implements java.io.Serializable,
 		return result;
 	}
 
+	@SuppressWarnings("unchecked")
 	public static Set<VIEW_InterDomainLink> loadAll() throws DatabaseException {
 		return (Set<VIEW_InterDomainLink>) (new TransactionManager() {
 			@Override
 			protected void dbOperation() {
 				Set<VIEW_InterDomainLink> result = new HashSet<VIEW_InterDomainLink>();
-				QVIEW_InterDomainLink interlink = QVIEW_InterDomainLink.vIEW_InterDomainLink;
-				JPAQuery query = new JPAQuery(this.session);
-
-				List<VIEW_InterDomainLink> tmpLink = query.from(interlink)
-						.list(interlink);
+				// QVIEW_InterDomainLink interlink =
+				// QVIEW_InterDomainLink.vIEW_InterDomainLink;
+				// JPAQuery query = new JPAQuery(this.session);
+				//
+				// List<VIEW_InterDomainLink> tmpLink = query.from(interlink)
+				// .list(interlink);
+				List<VIEW_InterDomainLink> tmpLink = this.session.createQuery(
+						"select l from VIEW_InterDomainLink l").getResultList();
 				for (VIEW_InterDomainLink l : tmpLink) {
 					result.add(l);
 				}
@@ -350,16 +355,21 @@ public class VIEW_InterDomainLink implements java.io.Serializable,
 			@Override
 			protected void dbOperation() {
 				Tuple<Endpoint, Endpoint> ep = (Tuple<Endpoint, Endpoint>) this.arg;
-				QVIEW_InterDomainLink interlink = QVIEW_InterDomainLink.vIEW_InterDomainLink;
-				JPAQuery query = new JPAQuery(this.session);
-				List<VIEW_InterDomainLink> tmpLink = query
-						.from(interlink)
-						.where(interlink.sourceEndpoint
-								.eq(ep.getFirstElement()).and(
-										interlink.destEndpoint.eq(ep
-												.getSecondElement())))
-						.list(interlink);
-
+				// QVIEW_InterDomainLink interlink =
+				// QVIEW_InterDomainLink.vIEW_InterDomainLink;
+				// JPAQuery query = new JPAQuery(this.session);
+				// List<VIEW_InterDomainLink> tmpLink = query
+				// .from(interlink)
+				// .where(interlink.sourceEndpoint
+				// .eq(ep.getFirstElement()).and(
+				// interlink.destEndpoint.eq(ep
+				// .getSecondElement())))
+				// .list(interlink);
+				Query query = this.session
+						.createQuery("select i from VIEW_InterDomainLink i where i.sourceEndpoint=:arg1 and i.destEndpoint=:arg2");
+				query.setParameter("arg1", ep.getFirstElement());
+				query.setParameter("arg2", ep.getSecondElement());
+				List<VIEW_InterDomainLink> tmpLink = query.getResultList();
 				if (tmpLink.size() > 0) {
 					this.result = tmpLink.get(0);
 				}

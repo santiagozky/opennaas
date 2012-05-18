@@ -131,7 +131,7 @@
 			
 		</dependency>
 
-
+<!-- 
 		<dependency>
 			<groupId>com.mysema.querydsl</groupId>
 			<artifactId>querydsl-apt</artifactId>
@@ -150,6 +150,7 @@
 			</exclusion>
 			</exclusions>
 		</dependency>
+		 -->
 
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -208,7 +209,7 @@
 	</dependencies>
 	<build>
 		<plugins>
-			<plugin>
+			<!-- <plugin>
 				<groupId>com.mysema.maven</groupId>
 				<artifactId>maven-apt-plugin</artifactId>
 				<version>0.3.2</version>
@@ -223,7 +224,7 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin> -->
 			<plugin>
 				<groupId>org.apache.openjpa</groupId>
 				<artifactId>openjpa-maven-plugin</artifactId>
@@ -271,8 +272,9 @@
 					classes into an OSGi bundle -->
 				<configuration>
 					<instructions>
-						<Import-Package>com.mysema.query.*,*</Import-Package>
+						<Import-Package>*</Import-Package>
 						<Export-Package>org.opennaas.extensions.idb.*;version="${project.version}"</Export-Package>
+						<Meta-Persistence>META-INF/persistence.xml</Meta-Persistence>
 					</instructions>
 				</configuration>
 			</plugin>

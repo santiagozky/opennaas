@@ -35,6 +35,7 @@ import java.util.Set;
 import java.util.Map.Entry;
 
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
@@ -43,13 +44,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MapKey;
 import javax.persistence.OneToMany;
+import javax.persistence.Query;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.mysema.query.jpa.impl.JPAQuery;
+//import com.mysema.query.jpa.impl.JPAQuery;
 
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CreateReservationType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetStatusResponseType;
@@ -184,6 +186,7 @@ public class Reservation implements java.io.Serializable {
 	 * @return Reservation ID.
 	 */
 	@Id
+	@Column(name = "reservationID")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public long getReservationId() {
 		return this.reservationId;
@@ -203,6 +206,7 @@ public class Reservation implements java.io.Serializable {
 	 * @return consumer url
 	 */
 	@Basic(optional = true)
+	@Column(name = "consumerURL")
 	public String getConsumerUrl() {
 		return this.consumerUrl;
 	}
@@ -234,6 +238,7 @@ public class Reservation implements java.io.Serializable {
 	/**
 	 * @return job id
 	 */
+	@Column(name = "jobID")
 	public long getJobId() {
 		return this.jobId;
 	}
@@ -505,10 +510,13 @@ public class Reservation implements java.io.Serializable {
 			@Override
 			protected void dbOperation() {
 				Set<Reservation> result = new HashSet<Reservation>();
-				QReservation reservation = QReservation.reservation;
-				JPAQuery query = new JPAQuery(this.session);
-				List<Reservation> tmpReservation = query.from(reservation)
-						.list(reservation);
+				// QReservation reservation = QReservation.reservation;
+				// JPAQuery query = new JPAQuery(this.session);
+				// List<Reservation> tmpReservation = query.from(reservation)
+				// .list(reservation);
+				Query query = this.session
+						.createQuery("select r from Reservation r");
+				List<Reservation> tmpReservation = query.getResultList();
 				for (Reservation r : tmpReservation) {
 					result.add(r);
 				}
@@ -531,31 +539,41 @@ public class Reservation implements java.io.Serializable {
 				Tuple<Date, Date> times = (Tuple<Date, Date>) this.arg;
 				// select all reservation-IDs from ReservationPeriod-view, which
 				// lie in the given time-period
-				QVIEW_ReservationPeriod reservationPeriod = QVIEW_ReservationPeriod.vIEW_ReservationPeriod;
-				JPAQuery subQuery = new JPAQuery(this.session);
-				subQuery.from(reservationPeriod).where(
-						reservationPeriod.startTime
-								.between(times.getFirstElement(),
-										times.getSecondElement())
-								.or(reservationPeriod.endTime.between(
-										times.getFirstElement(),
-										times.getSecondElement()))
-								.or(reservationPeriod.startTime.lt(
-										times.getFirstElement()).and(
-										reservationPeriod.endTime.gt(times
-												.getSecondElement())))
-
-				);
+				// QVIEW_ReservationPeriod reservationPeriod =
+				// QVIEW_ReservationPeriod.vIEW_ReservationPeriod;
+				// JPAQuery subQuery = new JPAQuery(this.session);
+				// subQuery.from(reservationPeriod).where(
+				// reservationPeriod.startTime
+				// .between(times.getFirstElement(),
+				// times.getSecondElement())
+				// .or(reservationPeriod.endTime.between(
+				// times.getFirstElement(),
+				// times.getSecondElement()))
+				// .or(reservationPeriod.startTime.lt(
+				// times.getFirstElement()).and(
+				// reservationPeriod.endTime.gt(times
+				// .getSecondElement())))
+				// );
 
 				// select all reservations from DB accoring to the IDs from step
 				// one
-				JPAQuery query = new JPAQuery(this.session);
-				QReservation reservation = QReservation.reservation;
-				List<Reservation> tmpReservation = query
-						.from(reservation)
-						.where(reservation.reservationId.in(subQuery
-								.list(reservationPeriod.reservationId)))
-						.list(reservation);
+				// JPAQuery query = new JPAQuery(this.session);
+				// QReservation reservation = QReservation.reservation;
+				// List<Reservation> tmpReservation = query
+				// .from(reservation)
+				// .where(reservation.reservationId.in(subQuery
+				// .list(reservationPeriod.reservationId)))
+				// .list(reservation);
+				Query query = this.session
+						.createQuery("select r from Reservation r where r.reservationId in (select period from VIEW_ReservationPeriod period where "
+								+ "period.startTime BETWEEN :time1 AND :time2 "
+								+ "or period.endTime BETWEEN :time1 AND :time2 "
+								+ "or ("
+								+ "period.startTime<:time1 and period.endTime>:time2"
+								+ "))");
+				query.setParameter("time1", times.getFirstElement());
+				query.setParameter("time2", times.getSecondElement());
+				List<Reservation> tmpReservation = query.getResultList();
 
 				for (Reservation r : tmpReservation) {
 					result.add(r);
@@ -576,13 +594,17 @@ public class Reservation implements java.io.Serializable {
 	@SuppressWarnings("unchecked")
 	public static List<Reservation> loadJob(final long jobId)
 			throws DatabaseException {
-		return (List<Reservation>) (new TransactionManager("jobID=" + jobId) {
+		return (List<Reservation>) (new TransactionManager(jobId) {
 			@Override
 			protected void dbOperation() {
-				QReservation reservation = QReservation.reservation;
-				JPAQuery query = new JPAQuery(this.session);
-				this.result = query.from(reservation)
-						.where(reservation.jobId.eq(jobId)).list(reservation);
+				// QReservation reservation = QReservation.reservation;
+				// JPAQuery query = new JPAQuery(this.session);
+				// this.result = query.from(reservation)
+				// .where(reservation.jobId.eq(jobId)).list(reservation);
+				Query query = this.session
+						.createQuery("select r from Reservation r where r.jobId=:arg");
+				query.setParameter("arg", this.arg);
+				this.result = query.getResultList();
 
 			}
 		}).getResult();

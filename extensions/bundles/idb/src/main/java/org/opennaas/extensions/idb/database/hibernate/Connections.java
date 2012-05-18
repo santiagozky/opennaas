@@ -32,10 +32,11 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
@@ -43,7 +44,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapKey;
@@ -53,19 +53,15 @@ import javax.persistence.Transient;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import com.mysema.query.jpa.impl.JPAQuery;
-
+import org.opennaas.extensions.idb.database.TransactionManager;
+import org.opennaas.extensions.idb.database.TransactionManagerLoad;
+import org.opennaas.extensions.idb.exception.database.DatabaseException;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ConnectionConstraintType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ConnectionStatusType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DomainConnectionStatusType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.EndpointType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.StatusType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.EndpointNotFoundFaultException;
-
-import org.opennaas.extensions.idb.database.TransactionManager;
-import org.opennaas.extensions.idb.database.TransactionManagerLoad;
-import org.opennaas.extensions.idb.exception.database.DatabaseException;
 
 /**
  * Java representation of of the database entity {@link Connections}. This
@@ -191,6 +187,7 @@ public class Connections implements java.io.Serializable {
 	 * @return the pkConnection
 	 */
 	@Id
+	@Column(name = "PK_Connections")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public long getPK_Connections() {
 		return this.PK_Connections;
@@ -220,7 +217,7 @@ public class Connections implements java.io.Serializable {
 	 * @return service
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "FK_Service")
+	@JoinColumn(name = "FK_Service", nullable = false)
 	public Service getService() {
 		return this.service;
 	}
@@ -630,6 +627,7 @@ public class Connections implements java.io.Serializable {
 	}
 
 	public void delete(EntityManager session) {
+		this.service = null;
 		session.remove(this);
 	}
 

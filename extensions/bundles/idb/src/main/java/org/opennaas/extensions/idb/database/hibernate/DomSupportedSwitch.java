@@ -39,10 +39,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Query;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import com.mysema.query.jpa.impl.JPAQuery;
+//import com.mysema.query.jpa.impl.JPAQuery;
 
 import org.opennaas.extensions.idb.database.TransactionManager;
 import org.opennaas.extensions.idb.database.TransactionManagerLoad;
@@ -103,6 +104,7 @@ public class DomSupportedSwitch implements java.io.Serializable,
 	 * @return the pkSwitch
 	 */
 	@Id
+	@Column(name = "PK_Switch")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public long getPK_Switch() {
 		return this.PK_Switch;
@@ -136,7 +138,7 @@ public class DomSupportedSwitch implements java.io.Serializable,
 	/**
 	 * @return technology switch of the domain
 	 */
-	@Column(nullable = false, length = 40)
+	@Column(nullable = false, length = 40, name = "Switch")
 	public String getSwitch() {
 		if (this.switchd == null) {
 			this.switchd = "";
@@ -158,6 +160,7 @@ public class DomSupportedSwitch implements java.io.Serializable,
 	 * @return -1 0 1
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
+	@Override
 	public int compareTo(DomSupportedSwitch domainSwitchParam) {
 		if (this.getSwitch().length() < domainSwitchParam.getSwitch().length()) {
 			return -1;
@@ -252,10 +255,16 @@ public class DomSupportedSwitch implements java.io.Serializable,
 			@Override
 			protected void dbOperation() {
 				Domain d = (Domain) this.arg;
-				QDomSupportedSwitch domSwitch = QDomSupportedSwitch.domSupportedSwitch;
-				JPAQuery query = new JPAQuery(this.session);
-				List<DomSupportedSwitch> sList = query.from(domSwitch)
-						.where(domSwitch.domain.eq(d)).list(domSwitch);
+				// QDomSupportedSwitch domSwitch =
+				// QDomSupportedSwitch.domSupportedSwitch;
+				// JPAQuery query = new JPAQuery(this.session);
+				// List<DomSupportedSwitch> sList = query.from(domSwitch)
+				// .where(domSwitch.domain.eq(d)).list(domSwitch);
+				Query query = this.session
+						.createQuery(
+								"select d from DomSupportedSwitch d where d.domain=:arg")
+						.setParameter("arg", d);
+				List<DomSupportedSwitch> sList = query.getResultList();
 
 				Set<DomSupportedSwitch> switches = new HashSet<DomSupportedSwitch>();
 				for (DomSupportedSwitch switchd : sList) {

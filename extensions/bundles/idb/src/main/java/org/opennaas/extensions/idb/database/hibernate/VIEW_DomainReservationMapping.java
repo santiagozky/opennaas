@@ -31,10 +31,11 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+import javax.persistence.Query;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import com.mysema.query.jpa.impl.JPAQuery;
+//import com.mysema.query.jpa.impl.JPAQuery;
 
 import org.opennaas.extensions.idb.database.TransactionManager;
 import org.opennaas.extensions.idb.exception.database.DatabaseException;
@@ -176,13 +177,18 @@ public class VIEW_DomainReservationMapping implements java.io.Serializable {
 				domName) {
 			@Override
 			protected void dbOperation() {
-				QVIEW_DomainReservationMapping domainReservationMap = QVIEW_DomainReservationMapping.vIEW_DomainReservationMapping;
-				JPAQuery query = new JPAQuery(this.session);
-				this.result = query
-						.from(domainReservationMap)
-						.where(domainReservationMap.domainName
-								.eq((String) this.arg))
-						.list(domainReservationMap);
+				// QVIEW_DomainReservationMapping domainReservationMap =
+				// QVIEW_DomainReservationMapping.vIEW_DomainReservationMapping;
+				// JPAQuery query = new JPAQuery(this.session);
+				// this.result = query
+				// .from(domainReservationMap)
+				// .where(domainReservationMap.domainName
+				// .eq((String) this.arg))
+				// .list(domainReservationMap);
+				Query query = this.session
+						.createQuery("select d from VIEW_DomainReservationMapping d where d.domainName=:arg");
+				query.setParameter("arg", this.arg);
+				this.result = query.getResultList();
 			}
 		}).getResult();
 		return mappings;

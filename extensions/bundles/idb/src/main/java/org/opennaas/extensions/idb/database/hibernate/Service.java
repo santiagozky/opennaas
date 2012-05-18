@@ -34,6 +34,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
@@ -44,6 +45,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapKey;
 import javax.persistence.OneToMany;
+import javax.persistence.Query;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -51,7 +53,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.mysema.query.jpa.impl.JPAQuery;
+//import com.mysema.query.jpa.impl.JPAQuery;
 
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ConnectionConstraintType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DomainStatusType;
@@ -327,7 +329,7 @@ public class Service implements java.io.Serializable {
 	/**
 	 * @return connections
 	 */
-	@OneToMany(mappedBy = "service", fetch = FetchType.LAZY, cascade = { javax.persistence.CascadeType.ALL })
+	@OneToMany(mappedBy = "service", cascade = { javax.persistence.CascadeType.ALL }, orphanRemoval = true)
 	@MapKey(name = "connectionId")
 	public Map<Integer, Connections> getConnections() {
 		return this.connections;
@@ -357,6 +359,7 @@ public class Service implements java.io.Serializable {
 	 * @return the pkService
 	 */
 	@Id
+	@Column(name = "PK_service")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public long getPK_service() {
 		return this.PK_service;
@@ -373,6 +376,7 @@ public class Service implements java.io.Serializable {
 	/**
 	 * @return the serviceId
 	 */
+	@Column(name = "serviceID")
 	public int getServiceId() {
 		return this.serviceId;
 	}
@@ -602,14 +606,19 @@ public class Service implements java.io.Serializable {
 			@Override
 			protected void dbOperation() {
 				Tuple<Integer, Reservation> args = (Tuple<Integer, Reservation>) this.arg;
-				QService service = QService.service;
-				JPAQuery query = new JPAQuery(this.session);
+				// QService service = QService.service;
+				// JPAQuery query = new JPAQuery(this.session);
+				Query query = this.session
+						.createQuery("select s from Service s where s.serviceId=:arg1 and s.reservation=:arg2");
+				query.setParameter("arg1", args.getFirstElement());
+				query.setParameter("arg2", args.getSecondElement());
+				this.result = query.getResultList();
 
-				this.result = query
-						.from(service)
-						.where(service.serviceId.eq(args.getFirstElement())
-								.and(service.reservation.eq(args
-										.getSecondElement()))).list(service);
+				// this.result = query
+				// .from(service)
+				// .where(service.serviceId.eq(args.getFirstElement())
+				// .and(service.reservation.eq(args
+				// .getSecondElement()))).list(service);
 			}
 		}).getResult();
 	}
@@ -658,11 +667,15 @@ public class Service implements java.io.Serializable {
 				new Long(this.getPK_service())) {
 			@Override
 			protected void dbOperation() {
-				QConnections connections = QConnections.connections;
-				JPAQuery query = new JPAQuery(this.session);
-				this.result = query.from(connections)
-						.where(connections.service.eq((Service) this.arg))
-						.list(connections);
+				// QConnections connections = QConnections.connections;
+				Query query = this.session
+						.createQuery("select c from Connections c where c.service=:arg");
+				query.setParameter("arg", this.arg);
+				this.result = query.getResultList();
+				// JPAQuery query = new JPAQuery(this.session);
+				// this.result = query.from(connections)
+				// .where(connections.service.eq((Service) this.arg))
+				// .list(connections);
 			}
 		}).getResult();
 

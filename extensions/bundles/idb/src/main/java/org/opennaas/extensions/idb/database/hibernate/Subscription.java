@@ -34,10 +34,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Query;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import com.mysema.query.jpa.impl.JPAQuery;
+//import com.mysema.query.jpa.impl.JPAQuery;
 
 import org.opennaas.extensions.idb.database.TransactionManager;
 import org.opennaas.extensions.idb.database.TransactionManagerLoad;
@@ -75,8 +76,7 @@ public class Subscription implements java.io.Serializable,
 	// Property accessors
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	// @Column(name = "subscriptionId", unique = true, nullable = false, length
-	// = 20)
+	@Column(name = "subscriptionID")
 	public long getSubscriptionId() {
 		return this.subscriptionId;
 	}
@@ -233,12 +233,16 @@ public class Subscription implements java.io.Serializable,
 		return (List<Subscription>) (new TransactionManager(topic) {
 			@Override
 			protected void dbOperation() {
-				QSubscription subscription = QSubscription.subscription;
-				JPAQuery query = new JPAQuery(this.session);
-				this.result = query
-						.from(subscription)
-						.where(subscription.subscriptionTopic
-								.eq((String) this.arg)).list(subscription);
+				// QSubscription subscription = QSubscription.subscription;
+				// JPAQuery query = new JPAQuery(this.session);
+				// this.result = query
+				// .from(subscription)
+				// .where(subscription.subscriptionTopic
+				// .eq((String) this.arg)).list(subscription);
+				Query query = this.session
+						.createQuery("select s from Subscription s where s.subscriptionTopic=:arg");
+				query.setParameter("arg", this.arg);
+				this.result = query.getResultList();
 
 			}
 		}).getResult();
@@ -253,16 +257,20 @@ public class Subscription implements java.io.Serializable,
 			@Override
 			protected void dbOperation() {
 				Tuple<String, String> subscribe = (Tuple<String, String>) this.arg;
-				QSubscription subscription = QSubscription.subscription;
-				JPAQuery query = new JPAQuery(this.session);
-				final List<Subscription> tmpSub = query
-						.from(subscription)
-						.where(subscription.subscriptionTopic.eq(
-								subscribe.getFirstElement()).and(
-								subscription.subscriptionEPR.eq(subscribe
-										.getSecondElement())))
-						.list(subscription);
-
+				// QSubscription subscription = QSubscription.subscription;
+				// JPAQuery query = new JPAQuery(this.session);
+				// final List<Subscription> tmpSub = query
+				// .from(subscription)
+				// .where(subscription.subscriptionTopic.eq(
+				// subscribe.getFirstElement()).and(
+				// subscription.subscriptionEPR.eq(subscribe
+				// .getSecondElement())))
+				// .list(subscription);
+				Query query = this.session
+						.createQuery("select s from Subscription s where s.subscriptionTopic=:arg1 and s.subscriptionEPR=:arg2");
+				query.setParameter("arg1", subscribe.getFirstElement());
+				query.setParameter("arg2", subscribe.getSecondElement());
+				final List<Subscription> tmpSub = query.getResultList();
 				if (tmpSub.size() > 0) {
 					this.result = tmpSub.get(0);
 				}
@@ -276,9 +284,12 @@ public class Subscription implements java.io.Serializable,
 		List<Subscription> tmpSubscriptions = (List<Subscription>) (new TransactionManager() {
 			@Override
 			protected void dbOperation() {
-				QSubscription subscription = QSubscription.subscription;
-				JPAQuery query = new JPAQuery(this.session);
-				this.result = query.from(subscription).list(subscription);
+				// QSubscription subscription = QSubscription.subscription;
+				// JPAQuery query = new JPAQuery(this.session);
+				// this.result = query.from(subscription).list(subscription);
+				Query query = this.session
+						.createQuery("select s from Subscription s");
+				this.result = query.getResultList();
 			}
 		}).getResult();
 
@@ -299,9 +310,11 @@ public class Subscription implements java.io.Serializable,
 		return (List<Subscription>) (new TransactionManager() {
 			@Override
 			protected void dbOperation() {
-				QSubscription subscription = QSubscription.subscription;
-				JPAQuery query = new JPAQuery(this.session);
-				this.result = query.from(subscription).list(subscription);
+				// QSubscription subscription = QSubscription.subscription;
+				// JPAQuery query = new JPAQuery(this.session);
+				// this.result = query.from(subscription).list(subscription);
+				this.result = this.session.createQuery(
+						"select s from Subscription s").getResultList();
 
 			}
 		}).getResult();

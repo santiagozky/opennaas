@@ -52,7 +52,7 @@ import org.opennaas.extensions.idb.reservation.AdapterManager;
 import org.opennaas.extensions.idb.reservation.IManager;
 import org.opennaas.extensions.idb.utils.TopologyHelpers;
 import org.opennaas.extensions.idb.webservice.TopologyWS;
-import org.opennaas.extensions.idb.test.webservice.AbstractReservationTest;
+import org.opennaas.extensions.idb.webservice.test.AbstractReservationTest;
 
 /**
  * JUnit test case for the response-cahce of the AdapterManager.

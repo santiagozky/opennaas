@@ -53,7 +53,7 @@ public class TestContextListener extends ContextListener {
 	 */
 	@Test
 	public final void testGetInterdomainPropertyFile() {
-		final String filename = "src/test/resources/properties/"
+		final String filename = "src/test/resources/"
 				+ this.getInterdomainPropertyFile() + ".properties";
 		Assert.assertTrue("Should return a valid property file", new File(
 				filename).exists());

@@ -29,7 +29,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -41,20 +40,19 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.MapKey;
 import javax.persistence.OneToMany;
+import javax.persistence.Query;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.apache.openjpa.persistence.jdbc.DataStoreIdColumn;
-
-import com.mysema.query.jpa.impl.JPAQuery;
-
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DomainInformationType;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DomainRelationshipType;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DomainTechnologyType;
 import org.opennaas.core.resources.helpers.Helpers;
 import org.opennaas.extensions.idb.database.TransactionManager;
 import org.opennaas.extensions.idb.database.TransactionManagerLoad;
 import org.opennaas.extensions.idb.exception.database.DatabaseException;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DomainInformationType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DomainRelationshipType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DomainTechnologyType;
+
+//import com.mysema.query.jpa.impl.JPAQuery;
 
 /**
  * Java representation of of the database entity {@link Domain}. This object
@@ -125,6 +123,7 @@ public class Domain implements java.io.Serializable, Comparable<Domain> {
 	}
 
 	@Basic(optional = true)
+	@Column(name = "seqno")
 	public int getSeqNo() {
 		return this.seqNo;
 	}
@@ -555,21 +554,6 @@ public class Domain implements java.io.Serializable, Comparable<Domain> {
 				^ this.getAvgDelay() ^ this.getMaxBW() ^ this.getPriority()
 				^ this.getDisabled();
 
-		// in the underlying objects, don't use the hashCode()-method, because
-		// this can end in
-		// dependency-circles. Instead only use the DB-primary key for the hash.
-		// for (NrpsConnections c : this.getNrpsConnections()) {
-		// result ^= new Long(c.getPkNrpsConnection()).hashCode();
-		// }
-		//
-		// for(Endpoint e : this.getEndpoints()) {
-		// result ^= e.getTNA().hashCode();
-		// }
-		//
-		// for(TNAPrefix p : this.getPrefixes()) {
-		// result ^= p.getPrefix().hashCode();
-		// }
-
 		return result;
 	}
 
@@ -732,6 +716,7 @@ public class Domain implements java.io.Serializable, Comparable<Domain> {
 	 * @return -1 0 or 1
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
+	@Override
 	public int compareTo(Domain domain) {
 		if (this.getName().length() < domain.getName().length()) {
 			return -1;
@@ -809,9 +794,13 @@ public class Domain implements java.io.Serializable, Comparable<Domain> {
 			@Override
 			protected void dbOperation() {
 
-				QTNAPrefix qprefix = QTNAPrefix.tNAPrefix;
-				JPAQuery query = new JPAQuery(session);
-				List<TNAPrefix> tmpPrefix = query.from(qprefix).list(qprefix);
+				// QTNAPrefix qprefix = QTNAPrefix.tNAPrefix;
+				Query query = this.session
+						.createQuery("select p from TNAPrefix p");
+				List<TNAPrefix> tmpPrefix = query.getResultList();
+				// JPAQuery query = new JPAQuery(session);
+				// List<TNAPrefix> tmpPrefix =
+				// query.from(qprefix).list(qprefix);
 
 				TNAPrefix match = null;
 				for (TNAPrefix prefix : tmpPrefix) {
@@ -833,9 +822,11 @@ public class Domain implements java.io.Serializable, Comparable<Domain> {
 			@Override
 			protected void dbOperation() {
 				Set<Domain> result = new HashSet<Domain>();
-				QDomain domain = QDomain.domain;
-				JPAQuery query = new JPAQuery(this.session);
-				List<Domain> tmpDomain = query.from(domain).list(domain);
+				// QDomain domain = QDomain.domain;
+				// JPAQuery query = new JPAQuery(this.session);
+				// List<Domain> tmpDomain = query.from(domain).list(domain);
+				List<Domain> tmpDomain = this.session.createQuery(
+						"select d from Domain d").getResultList();
 
 				for (Domain d : tmpDomain) {
 					result.add(d);
@@ -853,16 +844,25 @@ public class Domain implements java.io.Serializable, Comparable<Domain> {
 				Set<VIEW_InterDomainLink> result = new HashSet<VIEW_InterDomainLink>();
 				for (Endpoint e : Domain.this.getEndpoints()) {
 
-					QVIEW_InterDomainLink interlink = QVIEW_InterDomainLink.vIEW_InterDomainLink;
-					JPAQuery query = new JPAQuery(session);
-					List<VIEW_InterDomainLink> tmpSrc = query.from(interlink)
-							.where(interlink.sourceEndpoint.eq(e))
-							.list(interlink);
-					interlink = QVIEW_InterDomainLink.vIEW_InterDomainLink;
-					query = new JPAQuery(session);
-					List<VIEW_InterDomainLink> tmpDst = query.from(interlink)
-							.where(interlink.destEndpoint.eq(e))
-							.list(interlink);
+					// QVIEW_InterDomainLink interlink =
+					// QVIEW_InterDomainLink.vIEW_InterDomainLink;
+					// JPAQuery query = new JPAQuery(session);
+					// List<VIEW_InterDomainLink> tmpSrc = query.from(interlink)
+					// .where(interlink.sourceEndpoint.eq(e))
+					// .list(interlink);
+					Query query = this.session
+							.createQuery("select i from Interlink i where i.sourceEndpoint=:arg1");
+					query.setParameter("arg1", e);
+					List<VIEW_InterDomainLink> tmpSrc = query.getResultList();
+					// interlink = QVIEW_InterDomainLink.vIEW_InterDomainLink;
+					// query = new JPAQuery(session);
+					// List<VIEW_InterDomainLink> tmpDst = query.from(interlink)
+					// .where(interlink.destEndpoint.eq(e))
+					// .list(interlink);
+					query = this.session
+							.createQuery("select i from Interlink i where i.destEndpoint=:arg1");
+					query.setParameter("arg1", e);
+					List<VIEW_InterDomainLink> tmpDst = query.getResultList();
 
 					for (VIEW_InterDomainLink l : tmpSrc) {
 						result.add(l);
@@ -897,11 +897,16 @@ public class Domain implements java.io.Serializable, Comparable<Domain> {
 			protected void dbOperation() throws Exception {
 				Domain me = (Domain) this.arg;
 
-				QNrpsConnections nrpsConnection = QNrpsConnections.nrpsConnections;
-				JPAQuery query = new JPAQuery(this.session);
-				List<NrpsConnections> cList = query.from(nrpsConnection)
-						.where(nrpsConnection.domain.eq(me))
-						.list(nrpsConnection);
+				// QNrpsConnections nrpsConnection =
+				// QNrpsConnections.nrpsConnections;
+				// JPAQuery query = new JPAQuery(this.session);
+				// List<NrpsConnections> cList = query.from(nrpsConnection)
+				// .where(nrpsConnection.domain.eq(me))
+				// .list(nrpsConnection);
+				Query query = this.session
+						.createQuery("select n from NrpsConnections n where n.domain=:arg");
+				query.setParameter("arg", me);
+				List<NrpsConnections> cList = query.getResultList();
 
 				Set<Connections> connections = new HashSet<Connections>();
 				for (NrpsConnections nConn : cList) {

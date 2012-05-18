@@ -56,7 +56,7 @@ import org.opennaas.extensions.idb.exception.database.DatabaseException;
 import org.opennaas.extensions.idb.reservation.handler.ReservationRequestHandler;
 import org.opennaas.extensions.idb.utils.ReservationHelpers;
 import org.opennaas.extensions.idb.utils.TopologyHelpers;
-import org.opennaas.extensions.idb.test.webservice.AbstractReservationTest;
+import org.opennaas.extensions.idb.webservice.test.AbstractReservationTest;
 
 /**
  * @author zimmerm2

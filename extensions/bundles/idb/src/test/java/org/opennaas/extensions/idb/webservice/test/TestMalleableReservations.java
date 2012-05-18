@@ -1,11 +1,11 @@
 /**
-*  This code is part of the Harmony System implemented in Work Package 1 
-*  of the Phosphorus project. This work is supported by the European 
-*  Comission under the Sixth Framework Programme with contract number 
-*  IST-034115.
-*
-*  Copyright (C) 2006-2009 Phosphorus WP1 partners. Phosphorus Consortium.
-*  http://ist-phosphorus.eu/
+ *  This code is part of the Harmony System implemented in Work Package 1 
+ *  of the Phosphorus project. This work is supported by the European 
+ *  Comission under the Sixth Framework Programme with contract number 
+ *  IST-034115.
+ *
+ *  Copyright (C) 2006-2009 Phosphorus WP1 partners. Phosphorus Consortium.
+ *  http://ist-phosphorus.eu/
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -23,11 +23,10 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 
-
 /**
  *
  */
-package org.opennaas.extensions.idb.test.webservice;
+package org.opennaas.extensions.idb.webservice.test;
 
 import org.apache.muse.ws.addressing.soap.SoapFault;
 import org.junit.AfterClass;
@@ -65,530 +64,560 @@ import org.opennaas.extensions.idb.webservice.TopologyWS;
  */
 public class TestMalleableReservations extends AbstractReservationTest {
 
-    // source TNA of the malleable reservation
-    private static String sourceTNA1;
-    private static String sourceTNA2;
-    // destination TNA of the malleable reservation
-    private static String destinationTNA1;
-    private static String destinationTNA2;
-    // data-amount to be transferred in MB 
-    // (45000 MB should induce a duration of 3600 seconds on a 100 MBit path) 
-    private static long dataAmount = 45000;
+	// source TNA of the malleable reservation
+	private static String sourceTNA1;
+	private static String sourceTNA2;
+	// destination TNA of the malleable reservation
+	private static String destinationTNA1;
+	private static String destinationTNA2;
+	// data-amount to be transferred in MB
+	// (45000 MB should induce a duration of 3600 seconds on a 100 MBit path)
+	private static long dataAmount = 45000;
 
-    // referenceDomain
-    private static Domain referenceDomain;
-    private static Domain referenceDomain2;
-    private static Domain referenceDomain3;
+	// referenceDomain
+	private static Domain referenceDomain;
+	private static Domain referenceDomain2;
+	private static Domain referenceDomain3;
 
-    // created reservation
-    private static String reservationId = "";
+	// created reservation
+	private static String reservationId = "";
 
-    // topology client
-    private static SimpleTopologyClient topologyClient;
+	// topology client
+	private static SimpleTopologyClient topologyClient;
 
-    public TestMalleableReservations() throws SoapFault {
-        super();
-    }
+	public TestMalleableReservations() throws SoapFault {
+		super();
+	}
 
-    /**
-     * @throws SoapFault 
-     * @throws java.lang.Exception
-     */
-    @BeforeClass
-    public static void setUpBeforeClass() throws SoapFault {
-        if (Config.isTrue(Constants.testProperties, "test.callWebservice")) {
-            final String topoEpr = Config.getString(Constants.testProperties, "epr.topology");
-            TestMalleableReservations.topologyClient = new SimpleTopologyClient(topoEpr);
-        } else {
-            TestMalleableReservations.topologyClient = new SimpleTopologyClient(new TopologyWS());
-        }
+	/**
+	 * @throws SoapFault
+	 * @throws java.lang.Exception
+	 */
+	@BeforeClass
+	public static void setUpBeforeClass() throws SoapFault {
+		if (Config.isTrue(Constants.testProperties, "test.callWebservice")) {
+			final String topoEpr = Config.getString(Constants.testProperties,
+					"epr.topology");
+			TestMalleableReservations.topologyClient = new SimpleTopologyClient(
+					topoEpr);
+		} else {
+			TestMalleableReservations.topologyClient = new SimpleTopologyClient(
+					new TopologyWS());
+		}
 
-        int auxSequenceNr = 10;
+		int auxSequenceNr = 10;
 
-        /* cleanup database ------------------------------------------------- */
-        GetDomainsResponseType domains = TestMalleableReservations.topologyClient.getDomains();
-        for (DomainInformationType domain : domains.getDomains()) {
-            try {
-                TestMalleableReservations.topologyClient.deleteDomain(domain.getDomainId());
-            } catch (SoapFault e) {
-//                logger.info("Could not remove domain: " + e.getMessage(),
-//                        e);
-            }
-        }
-        /* ------------------------------------------------------------------ */
+		/* cleanup database ------------------------------------------------- */
+		GetDomainsResponseType domains = TestMalleableReservations.topologyClient
+				.getDomains();
+		for (DomainInformationType domain : domains.getDomains()) {
+			try {
+				TestMalleableReservations.topologyClient.deleteDomain(domain
+						.getDomainId());
+			} catch (SoapFault e) {
+				// logger.info("Could not remove domain: " + e.getMessage(),
+				// e);
+			}
+		}
+		/* ------------------------------------------------------------------ */
 
-        // create reference domain1 in the IDB
-        TestMalleableReservations.referenceDomain = new Domain(Config.getString(Constants.testProperties,
-                "test.malleable.domain1.name"), Config.getString(Constants.testProperties,
-                "test.malleable.domain1.epr"), Config.getString(Constants.testProperties,
-                "test.malleable.domain1.epr"));
-        TestMalleableReservations.referenceDomain.addPrefix(Config.getString(Constants.testProperties,
-                "test.malleable.domain1.prefix"));
-        Endpoint end1_1 = TopologyHelpers
-                .getTestEndpointForDomain(TestMalleableReservations.referenceDomain);
-        Endpoint end1_2 = TopologyHelpers
-                .getTestEndpointForDomain(TestMalleableReservations.referenceDomain);
-        Endpoint end1_3 = TopologyHelpers
-                .getTestEndpointForDomain(TestMalleableReservations.referenceDomain);
-        end1_1.setTNA(Config.getString(Constants.testProperties,
-                "test.malleable.domain1.endpoint.border1"));
-        end1_1.setType(EndpointInterfaceType.BORDER.ordinal());
-        	end1_1.setBandwidth(600);
-        TestMalleableReservations.referenceDomain.getEndpoints().add(end1_1);
-        end1_2.setTNA(Config.getString(Constants.testProperties,
-                "test.malleable.domain1.endpoint.border2"));
-        end1_2.setType(EndpointInterfaceType.BORDER.ordinal());
-        	end1_2.setBandwidth(600);
-        TestMalleableReservations.referenceDomain.getEndpoints().add(end1_2);
-        end1_3.setTNA(Config.getString(Constants.testProperties,
-                "test.malleable.domain1.endpoint.border3"));
-        end1_3.setType(EndpointInterfaceType.BORDER.ordinal());
-        	end1_3.setBandwidth(600);
-        TestMalleableReservations.referenceDomain.getEndpoints().add(end1_3);
+		// create reference domain1 in the IDB
+		TestMalleableReservations.referenceDomain = new Domain(
+				Config.getString(Constants.testProperties,
+						"test.malleable.domain1.name"),
+				Config.getString(Constants.testProperties,
+						"test.malleable.domain1.epr"), Config.getString(
+						Constants.testProperties, "test.malleable.domain1.epr"));
+		TestMalleableReservations.referenceDomain.addPrefix(Config.getString(
+				Constants.testProperties, "test.malleable.domain1.prefix"));
+		Endpoint end1_1 = TopologyHelpers
+				.getTestEndpointForDomain(TestMalleableReservations.referenceDomain);
+		Endpoint end1_2 = TopologyHelpers
+				.getTestEndpointForDomain(TestMalleableReservations.referenceDomain);
+		Endpoint end1_3 = TopologyHelpers
+				.getTestEndpointForDomain(TestMalleableReservations.referenceDomain);
+		end1_1.setTNA(Config.getString(Constants.testProperties,
+				"test.malleable.domain1.endpoint.border1"));
+		end1_1.setType(EndpointInterfaceType.BORDER.ordinal());
+		end1_1.setBandwidth(600);
+		TestMalleableReservations.referenceDomain.getEndpoints().add(end1_1);
+		end1_2.setTNA(Config.getString(Constants.testProperties,
+				"test.malleable.domain1.endpoint.border2"));
+		end1_2.setType(EndpointInterfaceType.BORDER.ordinal());
+		end1_2.setBandwidth(600);
+		TestMalleableReservations.referenceDomain.getEndpoints().add(end1_2);
+		end1_3.setTNA(Config.getString(Constants.testProperties,
+				"test.malleable.domain1.endpoint.border3"));
+		end1_3.setType(EndpointInterfaceType.BORDER.ordinal());
+		end1_3.setBandwidth(600);
+		TestMalleableReservations.referenceDomain.getEndpoints().add(end1_3);
 
-        AddOrEditDomainType aedt = new AddOrEditDomainType();
-        aedt.setDomain(TestMalleableReservations.referenceDomain.toJaxb());
-        // add it to the topology-client
-        TestMalleableReservations.topologyClient.addOrEditDomain(aedt);
-        TestMalleableReservations.topologyClient.addEndpoint(end1_1.toJaxb());
-        TestMalleableReservations.topologyClient.addEndpoint(end1_2.toJaxb());
-        TestMalleableReservations.topologyClient.addEndpoint(end1_3.toJaxb());
+		AddOrEditDomainType aedt = new AddOrEditDomainType();
+		aedt.setDomain(TestMalleableReservations.referenceDomain.toJaxb());
+		// add it to the topology-client
+		TestMalleableReservations.topologyClient.addOrEditDomain(aedt);
+		TestMalleableReservations.topologyClient.addEndpoint(end1_1.toJaxb());
+		TestMalleableReservations.topologyClient.addEndpoint(end1_2.toJaxb());
+		TestMalleableReservations.topologyClient.addEndpoint(end1_3.toJaxb());
 
-        // create reference domain2
-        TestMalleableReservations.referenceDomain2 = new Domain(Config.getString(Constants.testProperties,
-                "test.malleable.domain2.name"), Config.getString(Constants.testProperties,
-                "test.malleable.domain2.epr"), Config.getString(Constants.testProperties,
-                "test.malleable.domain2.epr"));
-        TestMalleableReservations.referenceDomain2.addPrefix(Config.getString(Constants.testProperties,
-                "test.malleable.domain2.prefix"));
-        Endpoint end2_1 = TopologyHelpers
-                .getTestEndpointForDomain(TestMalleableReservations.referenceDomain2);
-        Endpoint end2_2 = TopologyHelpers
-                .getTestEndpointForDomain(TestMalleableReservations.referenceDomain2);
-        Endpoint end2_3 = TopologyHelpers
-                .getTestEndpointForDomain(TestMalleableReservations.referenceDomain2);
-        Endpoint end2_4 = TopologyHelpers
-        		.getTestEndpointForDomain(TestMalleableReservations.referenceDomain2);
-        Endpoint end2_5 = TopologyHelpers
-        		.getTestEndpointForDomain(TestMalleableReservations.referenceDomain2);
-        Endpoint end2_6 = TopologyHelpers
-        		.getTestEndpointForDomain(TestMalleableReservations.referenceDomain2);
-        end2_1.setTNA(Config.getString(Constants.testProperties,
-                "test.malleable.domain2.endpoint.border1"));
-        end2_1.setType(EndpointInterfaceType.BORDER.ordinal());
-        	end2_1.setBandwidth(600);
-        TestMalleableReservations.referenceDomain2.getEndpoints().add(end2_1);
-        end2_2.setTNA(Config.getString(Constants.testProperties,
-                "test.malleable.domain2.endpoint.border2"));
-        end2_2.setType(EndpointInterfaceType.BORDER.ordinal());
-        	end2_2.setBandwidth(600);
-        TestMalleableReservations.referenceDomain2.getEndpoints().add(end2_2);
-        end2_3.setTNA(Config.getString(Constants.testProperties,
-                "test.malleable.domain2.endpoint.border3"));
-        end2_3.setType(EndpointInterfaceType.BORDER.ordinal());
-        	end2_3.setBandwidth(600);
-        TestMalleableReservations.referenceDomain2.getEndpoints().add(end2_3);
-        end2_4.setTNA(Config.getString(Constants.testProperties,
-        		"test.malleable.domain2.endpoint.border4"));
-        end2_4.setType(EndpointInterfaceType.BORDER.ordinal());
-        	end2_4.setBandwidth(600);
-        TestMalleableReservations.referenceDomain2.getEndpoints().add(end2_4);
-        end2_5.setTNA(Config.getString(Constants.testProperties,
-        		"test.malleable.domain2.endpoint.border5"));
-        end2_5.setType(EndpointInterfaceType.BORDER.ordinal());
-        	end2_5.setBandwidth(600);
-        TestMalleableReservations.referenceDomain2.getEndpoints().add(end2_5);
-        end2_6.setTNA(Config.getString(Constants.testProperties,
-        		"test.malleable.domain2.endpoint.border6"));
-        end2_6.setType(EndpointInterfaceType.BORDER.ordinal());
-        end2_6.setBandwidth(600);
-        TestMalleableReservations.referenceDomain2.getEndpoints().add(end2_6);
+		// create reference domain2
+		TestMalleableReservations.referenceDomain2 = new Domain(
+				Config.getString(Constants.testProperties,
+						"test.malleable.domain2.name"),
+				Config.getString(Constants.testProperties,
+						"test.malleable.domain2.epr"), Config.getString(
+						Constants.testProperties, "test.malleable.domain2.epr"));
+		TestMalleableReservations.referenceDomain2.addPrefix(Config.getString(
+				Constants.testProperties, "test.malleable.domain2.prefix"));
+		Endpoint end2_1 = TopologyHelpers
+				.getTestEndpointForDomain(TestMalleableReservations.referenceDomain2);
+		Endpoint end2_2 = TopologyHelpers
+				.getTestEndpointForDomain(TestMalleableReservations.referenceDomain2);
+		Endpoint end2_3 = TopologyHelpers
+				.getTestEndpointForDomain(TestMalleableReservations.referenceDomain2);
+		Endpoint end2_4 = TopologyHelpers
+				.getTestEndpointForDomain(TestMalleableReservations.referenceDomain2);
+		Endpoint end2_5 = TopologyHelpers
+				.getTestEndpointForDomain(TestMalleableReservations.referenceDomain2);
+		Endpoint end2_6 = TopologyHelpers
+				.getTestEndpointForDomain(TestMalleableReservations.referenceDomain2);
+		end2_1.setTNA(Config.getString(Constants.testProperties,
+				"test.malleable.domain2.endpoint.border1"));
+		end2_1.setType(EndpointInterfaceType.BORDER.ordinal());
+		end2_1.setBandwidth(600);
+		TestMalleableReservations.referenceDomain2.getEndpoints().add(end2_1);
+		end2_2.setTNA(Config.getString(Constants.testProperties,
+				"test.malleable.domain2.endpoint.border2"));
+		end2_2.setType(EndpointInterfaceType.BORDER.ordinal());
+		end2_2.setBandwidth(600);
+		TestMalleableReservations.referenceDomain2.getEndpoints().add(end2_2);
+		end2_3.setTNA(Config.getString(Constants.testProperties,
+				"test.malleable.domain2.endpoint.border3"));
+		end2_3.setType(EndpointInterfaceType.BORDER.ordinal());
+		end2_3.setBandwidth(600);
+		TestMalleableReservations.referenceDomain2.getEndpoints().add(end2_3);
+		end2_4.setTNA(Config.getString(Constants.testProperties,
+				"test.malleable.domain2.endpoint.border4"));
+		end2_4.setType(EndpointInterfaceType.BORDER.ordinal());
+		end2_4.setBandwidth(600);
+		TestMalleableReservations.referenceDomain2.getEndpoints().add(end2_4);
+		end2_5.setTNA(Config.getString(Constants.testProperties,
+				"test.malleable.domain2.endpoint.border5"));
+		end2_5.setType(EndpointInterfaceType.BORDER.ordinal());
+		end2_5.setBandwidth(600);
+		TestMalleableReservations.referenceDomain2.getEndpoints().add(end2_5);
+		end2_6.setTNA(Config.getString(Constants.testProperties,
+				"test.malleable.domain2.endpoint.border6"));
+		end2_6.setType(EndpointInterfaceType.BORDER.ordinal());
+		end2_6.setBandwidth(600);
+		TestMalleableReservations.referenceDomain2.getEndpoints().add(end2_6);
 
-        AddOrEditDomainType aedt2 = new AddOrEditDomainType();
-        aedt2.setDomain(TestMalleableReservations.referenceDomain2.toJaxb());
-        // add it to the topology-client
-        TestMalleableReservations.topologyClient.addOrEditDomain(aedt2);
-        TestMalleableReservations.topologyClient.addEndpoint(end2_1.toJaxb());
-        TestMalleableReservations.topologyClient.addEndpoint(end2_2.toJaxb());
-        TestMalleableReservations.topologyClient.addEndpoint(end2_3.toJaxb());
-        TestMalleableReservations.topologyClient.addEndpoint(end2_4.toJaxb());
-        TestMalleableReservations.topologyClient.addEndpoint(end2_5.toJaxb());
-        TestMalleableReservations.topologyClient.addEndpoint(end2_6.toJaxb());
+		AddOrEditDomainType aedt2 = new AddOrEditDomainType();
+		aedt2.setDomain(TestMalleableReservations.referenceDomain2.toJaxb());
+		// add it to the topology-client
+		TestMalleableReservations.topologyClient.addOrEditDomain(aedt2);
+		TestMalleableReservations.topologyClient.addEndpoint(end2_1.toJaxb());
+		TestMalleableReservations.topologyClient.addEndpoint(end2_2.toJaxb());
+		TestMalleableReservations.topologyClient.addEndpoint(end2_3.toJaxb());
+		TestMalleableReservations.topologyClient.addEndpoint(end2_4.toJaxb());
+		TestMalleableReservations.topologyClient.addEndpoint(end2_5.toJaxb());
+		TestMalleableReservations.topologyClient.addEndpoint(end2_6.toJaxb());
 
-        // create reference domain3
-        TestMalleableReservations.referenceDomain3 = new Domain(Config.getString(Constants.testProperties,
-                "test.malleable.domain3.name"), Config.getString(Constants.testProperties,
-                "test.malleable.domain3.epr"), Config.getString(Constants.testProperties,
-                "test.malleable.domain3.epr"));
-        TestMalleableReservations.referenceDomain3.addPrefix(Config.getString(Constants.testProperties,
-                "test.malleable.domain3.prefix"));
-        Endpoint end3_1 = TopologyHelpers
-                .getTestEndpointForDomain(TestMalleableReservations.referenceDomain3);
-        Endpoint end3_2 = TopologyHelpers
-                .getTestEndpointForDomain(TestMalleableReservations.referenceDomain3);
-        Endpoint end3_3 = TopologyHelpers
-                .getTestEndpointForDomain(TestMalleableReservations.referenceDomain3);
-        end3_1.setTNA(Config.getString(Constants.testProperties,
-                "test.malleable.domain3.endpoint.border1"));
-        end3_1.setType(EndpointInterfaceType.BORDER.ordinal());
-        	end3_1.setBandwidth(600);
-        TestMalleableReservations.referenceDomain3.getEndpoints().add(end3_1);
-        end3_2.setTNA(Config.getString(Constants.testProperties,
-                "test.malleable.domain3.endpoint.border2"));
-        end3_2.setType(EndpointInterfaceType.BORDER.ordinal());
-        	end3_2.setBandwidth(600);
-        TestMalleableReservations.referenceDomain3.getEndpoints().add(end3_2);
-        end3_3.setTNA(Config.getString(Constants.testProperties,
-                "test.malleable.domain3.endpoint.border3"));
-        end3_3.setType(EndpointInterfaceType.BORDER.ordinal());
-        	end3_3.setBandwidth(600);
-        TestMalleableReservations.referenceDomain3.getEndpoints().add(end3_3);
+		// create reference domain3
+		TestMalleableReservations.referenceDomain3 = new Domain(
+				Config.getString(Constants.testProperties,
+						"test.malleable.domain3.name"),
+				Config.getString(Constants.testProperties,
+						"test.malleable.domain3.epr"), Config.getString(
+						Constants.testProperties, "test.malleable.domain3.epr"));
+		TestMalleableReservations.referenceDomain3.addPrefix(Config.getString(
+				Constants.testProperties, "test.malleable.domain3.prefix"));
+		Endpoint end3_1 = TopologyHelpers
+				.getTestEndpointForDomain(TestMalleableReservations.referenceDomain3);
+		Endpoint end3_2 = TopologyHelpers
+				.getTestEndpointForDomain(TestMalleableReservations.referenceDomain3);
+		Endpoint end3_3 = TopologyHelpers
+				.getTestEndpointForDomain(TestMalleableReservations.referenceDomain3);
+		end3_1.setTNA(Config.getString(Constants.testProperties,
+				"test.malleable.domain3.endpoint.border1"));
+		end3_1.setType(EndpointInterfaceType.BORDER.ordinal());
+		end3_1.setBandwidth(600);
+		TestMalleableReservations.referenceDomain3.getEndpoints().add(end3_1);
+		end3_2.setTNA(Config.getString(Constants.testProperties,
+				"test.malleable.domain3.endpoint.border2"));
+		end3_2.setType(EndpointInterfaceType.BORDER.ordinal());
+		end3_2.setBandwidth(600);
+		TestMalleableReservations.referenceDomain3.getEndpoints().add(end3_2);
+		end3_3.setTNA(Config.getString(Constants.testProperties,
+				"test.malleable.domain3.endpoint.border3"));
+		end3_3.setType(EndpointInterfaceType.BORDER.ordinal());
+		end3_3.setBandwidth(600);
+		TestMalleableReservations.referenceDomain3.getEndpoints().add(end3_3);
 
-        AddOrEditDomainType aedt3 = new AddOrEditDomainType();
-        aedt3.setDomain(TestMalleableReservations.referenceDomain3.toJaxb());
-        // add it to the topology-client
-        TestMalleableReservations.topologyClient.addOrEditDomain(aedt3);
-        TestMalleableReservations.topologyClient.addEndpoint(end3_1.toJaxb());
-        TestMalleableReservations.topologyClient.addEndpoint(end3_2.toJaxb());
-        TestMalleableReservations.topologyClient.addEndpoint(end3_3.toJaxb());
+		AddOrEditDomainType aedt3 = new AddOrEditDomainType();
+		aedt3.setDomain(TestMalleableReservations.referenceDomain3.toJaxb());
+		// add it to the topology-client
+		TestMalleableReservations.topologyClient.addOrEditDomain(aedt3);
+		TestMalleableReservations.topologyClient.addEndpoint(end3_1.toJaxb());
+		TestMalleableReservations.topologyClient.addEndpoint(end3_2.toJaxb());
+		TestMalleableReservations.topologyClient.addEndpoint(end3_3.toJaxb());
 
-        // increment sequence-number or domain-changes will not be handled
-        auxSequenceNr++;
+		// increment sequence-number or domain-changes will not be handled
+		auxSequenceNr++;
 
-        // InterdomainLink Domain1.endpoint1 -> Domain2.endpoint2
-        InterdomainLinkType idlt = new InterdomainLinkType();
-        idlt.setCosts(Helpers.getPositiveRandomInt());
-        idlt.setDestinationDomain(TestMalleableReservations.referenceDomain2.getName());
-        idlt.setLinkID(Helpers.getRandomString());
-        idlt.setSourceEndpoint(end1_1.toJaxb());
-        aedt.getDomain().getInterdomainLink().add(idlt);
-        aedt.getDomain().setSequenceNumber(auxSequenceNr);
-        TestMalleableReservations.topologyClient.addOrEditDomain(aedt);
+		// InterdomainLink Domain1.endpoint1 -> Domain2.endpoint2
+		InterdomainLinkType idlt = new InterdomainLinkType();
+		idlt.setCosts(Helpers.getPositiveRandomInt());
+		idlt.setDestinationDomain(TestMalleableReservations.referenceDomain2
+				.getName());
+		idlt.setLinkID(Helpers.getRandomString());
+		idlt.setSourceEndpoint(end1_1.toJaxb());
+		aedt.getDomain().getInterdomainLink().add(idlt);
+		aedt.getDomain().setSequenceNumber(auxSequenceNr);
+		TestMalleableReservations.topologyClient.addOrEditDomain(aedt);
 
-        // InterdomainLink Domain2.endpoint2 -> Domain1.endpoint1
-        InterdomainLinkType idlt2 = new InterdomainLinkType();
-        idlt2.setCosts(Helpers.getPositiveRandomInt());
-        idlt2.setDestinationDomain(TestMalleableReservations.referenceDomain.getName());
-        idlt2.setLinkID(idlt.getLinkID());
-        idlt2.setSourceEndpoint(end2_2.toJaxb());
-        aedt2.getDomain().getInterdomainLink().add(idlt2);
-        aedt2.getDomain().setSequenceNumber(auxSequenceNr);
-        TestMalleableReservations.topologyClient.addOrEditDomain(aedt2);
+		// InterdomainLink Domain2.endpoint2 -> Domain1.endpoint1
+		InterdomainLinkType idlt2 = new InterdomainLinkType();
+		idlt2.setCosts(Helpers.getPositiveRandomInt());
+		idlt2.setDestinationDomain(TestMalleableReservations.referenceDomain
+				.getName());
+		idlt2.setLinkID(idlt.getLinkID());
+		idlt2.setSourceEndpoint(end2_2.toJaxb());
+		aedt2.getDomain().getInterdomainLink().add(idlt2);
+		aedt2.getDomain().setSequenceNumber(auxSequenceNr);
+		TestMalleableReservations.topologyClient.addOrEditDomain(aedt2);
 
-        // increment sequence-number or domain-changes will not be handled
-        auxSequenceNr++;
+		// increment sequence-number or domain-changes will not be handled
+		auxSequenceNr++;
 
-        // InterdomainLink Domain1.endpoint2 -> Domain2.endpoint1
-        idlt = new InterdomainLinkType();
-        idlt.setCosts(Helpers.getPositiveRandomInt());
-        idlt.setDestinationDomain(TestMalleableReservations.referenceDomain2.getName());
-        idlt.setLinkID(Helpers.getRandomString());
-        idlt.setSourceEndpoint(end1_2.toJaxb());
-        aedt.getDomain().getInterdomainLink().add(idlt);
-        aedt.getDomain().setSequenceNumber(auxSequenceNr);
-        TestMalleableReservations.topologyClient.addOrEditDomain(aedt);
+		// InterdomainLink Domain1.endpoint2 -> Domain2.endpoint1
+		idlt = new InterdomainLinkType();
+		idlt.setCosts(Helpers.getPositiveRandomInt());
+		idlt.setDestinationDomain(TestMalleableReservations.referenceDomain2
+				.getName());
+		idlt.setLinkID(Helpers.getRandomString());
+		idlt.setSourceEndpoint(end1_2.toJaxb());
+		aedt.getDomain().getInterdomainLink().add(idlt);
+		aedt.getDomain().setSequenceNumber(auxSequenceNr);
+		TestMalleableReservations.topologyClient.addOrEditDomain(aedt);
 
-        // InterdomainLink Domain2.endpoint1 -> Domain1.endpoint2
-        idlt2 = new InterdomainLinkType();
-        idlt2.setCosts(Helpers.getPositiveRandomInt());
-        idlt2.setDestinationDomain(TestMalleableReservations.referenceDomain.getName());
-        idlt2.setLinkID(idlt.getLinkID());
-        idlt2.setSourceEndpoint(end2_1.toJaxb());
-        aedt2.getDomain().getInterdomainLink().add(idlt2);
-        aedt2.getDomain().setSequenceNumber(auxSequenceNr);
-        TestMalleableReservations.topologyClient.addOrEditDomain(aedt2);
+		// InterdomainLink Domain2.endpoint1 -> Domain1.endpoint2
+		idlt2 = new InterdomainLinkType();
+		idlt2.setCosts(Helpers.getPositiveRandomInt());
+		idlt2.setDestinationDomain(TestMalleableReservations.referenceDomain
+				.getName());
+		idlt2.setLinkID(idlt.getLinkID());
+		idlt2.setSourceEndpoint(end2_1.toJaxb());
+		aedt2.getDomain().getInterdomainLink().add(idlt2);
+		aedt2.getDomain().setSequenceNumber(auxSequenceNr);
+		TestMalleableReservations.topologyClient.addOrEditDomain(aedt2);
 
-        // increment sequence-number or domain-changes will not be handled
-        auxSequenceNr++;
+		// increment sequence-number or domain-changes will not be handled
+		auxSequenceNr++;
 
-        // InterdomainLink Domain1.endpoint3 -> Domain2.endpoint3
-        idlt = new InterdomainLinkType();
-        idlt.setCosts(Helpers.getPositiveRandomInt());
-        idlt.setDestinationDomain(TestMalleableReservations.referenceDomain2.getName());
-        idlt.setLinkID(Helpers.getRandomString());
-        idlt.setSourceEndpoint(end1_3.toJaxb());
-        aedt.getDomain().getInterdomainLink().add(idlt);
-        aedt.getDomain().setSequenceNumber(auxSequenceNr);
-        TestMalleableReservations.topologyClient.addOrEditDomain(aedt);
+		// InterdomainLink Domain1.endpoint3 -> Domain2.endpoint3
+		idlt = new InterdomainLinkType();
+		idlt.setCosts(Helpers.getPositiveRandomInt());
+		idlt.setDestinationDomain(TestMalleableReservations.referenceDomain2
+				.getName());
+		idlt.setLinkID(Helpers.getRandomString());
+		idlt.setSourceEndpoint(end1_3.toJaxb());
+		aedt.getDomain().getInterdomainLink().add(idlt);
+		aedt.getDomain().setSequenceNumber(auxSequenceNr);
+		TestMalleableReservations.topologyClient.addOrEditDomain(aedt);
 
-        // InterdomainLink Domain2.endpoint3 -> Domain1.endpoint3
-        idlt2 = new InterdomainLinkType();
-        idlt2.setCosts(Helpers.getPositiveRandomInt());
-        idlt2.setDestinationDomain(TestMalleableReservations.referenceDomain.getName());
-        idlt2.setLinkID(idlt.getLinkID());
-        idlt2.setSourceEndpoint(end2_3.toJaxb());
-        aedt2.getDomain().getInterdomainLink().add(idlt2);
-        aedt2.getDomain().setSequenceNumber(auxSequenceNr);
-        TestMalleableReservations.topologyClient.addOrEditDomain(aedt2);
+		// InterdomainLink Domain2.endpoint3 -> Domain1.endpoint3
+		idlt2 = new InterdomainLinkType();
+		idlt2.setCosts(Helpers.getPositiveRandomInt());
+		idlt2.setDestinationDomain(TestMalleableReservations.referenceDomain
+				.getName());
+		idlt2.setLinkID(idlt.getLinkID());
+		idlt2.setSourceEndpoint(end2_3.toJaxb());
+		aedt2.getDomain().getInterdomainLink().add(idlt2);
+		aedt2.getDomain().setSequenceNumber(auxSequenceNr);
+		TestMalleableReservations.topologyClient.addOrEditDomain(aedt2);
 
-        // increment sequence-number or domain-changes will not be handled
-        auxSequenceNr++;
+		// increment sequence-number or domain-changes will not be handled
+		auxSequenceNr++;
 
-        // InterdomainLink Domain2.endpoint4-> Domain3.endpoint1
-        idlt = new InterdomainLinkType();
-        idlt.setCosts(Helpers.getPositiveRandomInt());
-        idlt.setDestinationDomain(TestMalleableReservations.referenceDomain3.getName());
-        idlt.setLinkID(Helpers.getRandomString());
-        idlt.setSourceEndpoint(end2_4.toJaxb());
-        aedt2.getDomain().getInterdomainLink().add(idlt);
-        aedt2.getDomain().setSequenceNumber(auxSequenceNr);
-        TestMalleableReservations.topologyClient.addOrEditDomain(aedt2);
+		// InterdomainLink Domain2.endpoint4-> Domain3.endpoint1
+		idlt = new InterdomainLinkType();
+		idlt.setCosts(Helpers.getPositiveRandomInt());
+		idlt.setDestinationDomain(TestMalleableReservations.referenceDomain3
+				.getName());
+		idlt.setLinkID(Helpers.getRandomString());
+		idlt.setSourceEndpoint(end2_4.toJaxb());
+		aedt2.getDomain().getInterdomainLink().add(idlt);
+		aedt2.getDomain().setSequenceNumber(auxSequenceNr);
+		TestMalleableReservations.topologyClient.addOrEditDomain(aedt2);
 
-        // InterdomainLink Domain3.endpoint1 -> Domain2.endpoint4
-        idlt2 = new InterdomainLinkType();
-        idlt2.setCosts(Helpers.getPositiveRandomInt());
-        idlt2.setDestinationDomain(TestMalleableReservations.referenceDomain2.getName());
-        idlt2.setLinkID(idlt.getLinkID());
-        idlt2.setSourceEndpoint(end3_1.toJaxb());
-        aedt3.getDomain().getInterdomainLink().add(idlt2);
-        aedt3.getDomain().setSequenceNumber(auxSequenceNr);
-        TestMalleableReservations.topologyClient.addOrEditDomain(aedt3);
+		// InterdomainLink Domain3.endpoint1 -> Domain2.endpoint4
+		idlt2 = new InterdomainLinkType();
+		idlt2.setCosts(Helpers.getPositiveRandomInt());
+		idlt2.setDestinationDomain(TestMalleableReservations.referenceDomain2
+				.getName());
+		idlt2.setLinkID(idlt.getLinkID());
+		idlt2.setSourceEndpoint(end3_1.toJaxb());
+		aedt3.getDomain().getInterdomainLink().add(idlt2);
+		aedt3.getDomain().setSequenceNumber(auxSequenceNr);
+		TestMalleableReservations.topologyClient.addOrEditDomain(aedt3);
 
-        // increment sequence-number or domain-changes will not be handled
-        auxSequenceNr++;
+		// increment sequence-number or domain-changes will not be handled
+		auxSequenceNr++;
 
-        // InterdomainLink Domain2.endpoint5-> Domain3.endpoint2
-        idlt = new InterdomainLinkType();
-        idlt.setCosts(Helpers.getPositiveRandomInt());
-        idlt.setDestinationDomain(TestMalleableReservations.referenceDomain3.getName());
-        idlt.setLinkID(Helpers.getRandomString());
-        idlt.setSourceEndpoint(end2_5.toJaxb());
-        aedt2.getDomain().getInterdomainLink().add(idlt);
-        aedt2.getDomain().setSequenceNumber(auxSequenceNr);
-        TestMalleableReservations.topologyClient.addOrEditDomain(aedt2);
+		// InterdomainLink Domain2.endpoint5-> Domain3.endpoint2
+		idlt = new InterdomainLinkType();
+		idlt.setCosts(Helpers.getPositiveRandomInt());
+		idlt.setDestinationDomain(TestMalleableReservations.referenceDomain3
+				.getName());
+		idlt.setLinkID(Helpers.getRandomString());
+		idlt.setSourceEndpoint(end2_5.toJaxb());
+		aedt2.getDomain().getInterdomainLink().add(idlt);
+		aedt2.getDomain().setSequenceNumber(auxSequenceNr);
+		TestMalleableReservations.topologyClient.addOrEditDomain(aedt2);
 
-        // InterdomainLink Domain3.endpoint2 -> Domain2.endpoint5
-        idlt2 = new InterdomainLinkType();
-        idlt2.setCosts(Helpers.getPositiveRandomInt());
-        idlt2.setDestinationDomain(TestMalleableReservations.referenceDomain2.getName());
-        idlt2.setLinkID(idlt.getLinkID());
-        idlt2.setSourceEndpoint(end3_2.toJaxb());
-        aedt3.getDomain().getInterdomainLink().add(idlt2);
-        aedt3.getDomain().setSequenceNumber(auxSequenceNr);
-        TestMalleableReservations.topologyClient.addOrEditDomain(aedt3);
+		// InterdomainLink Domain3.endpoint2 -> Domain2.endpoint5
+		idlt2 = new InterdomainLinkType();
+		idlt2.setCosts(Helpers.getPositiveRandomInt());
+		idlt2.setDestinationDomain(TestMalleableReservations.referenceDomain2
+				.getName());
+		idlt2.setLinkID(idlt.getLinkID());
+		idlt2.setSourceEndpoint(end3_2.toJaxb());
+		aedt3.getDomain().getInterdomainLink().add(idlt2);
+		aedt3.getDomain().setSequenceNumber(auxSequenceNr);
+		TestMalleableReservations.topologyClient.addOrEditDomain(aedt3);
 
-        // increment sequence-number or domain-changes will not be handled
-        auxSequenceNr++;
+		// increment sequence-number or domain-changes will not be handled
+		auxSequenceNr++;
 
-        // InterdomainLink Domain2.endpoint6-> Domain3.endpoint3
-        idlt = new InterdomainLinkType();
-        idlt.setCosts(Helpers.getPositiveRandomInt());
-        idlt.setDestinationDomain(TestMalleableReservations.referenceDomain3.getName());
-        idlt.setLinkID(Helpers.getRandomString());
-        idlt.setSourceEndpoint(end2_6.toJaxb());
-        aedt2.getDomain().getInterdomainLink().add(idlt);
-        aedt2.getDomain().setSequenceNumber(auxSequenceNr);
-        TestMalleableReservations.topologyClient.addOrEditDomain(aedt2);
+		// InterdomainLink Domain2.endpoint6-> Domain3.endpoint3
+		idlt = new InterdomainLinkType();
+		idlt.setCosts(Helpers.getPositiveRandomInt());
+		idlt.setDestinationDomain(TestMalleableReservations.referenceDomain3
+				.getName());
+		idlt.setLinkID(Helpers.getRandomString());
+		idlt.setSourceEndpoint(end2_6.toJaxb());
+		aedt2.getDomain().getInterdomainLink().add(idlt);
+		aedt2.getDomain().setSequenceNumber(auxSequenceNr);
+		TestMalleableReservations.topologyClient.addOrEditDomain(aedt2);
 
-        // InterdomainLink Domain3.endpoint3 -> Domain2.endpoint6
-        idlt2 = new InterdomainLinkType();
-        idlt2.setCosts(Helpers.getPositiveRandomInt());
-        idlt2.setDestinationDomain(TestMalleableReservations.referenceDomain2.getName());
-        idlt2.setLinkID(idlt.getLinkID());
-        idlt2.setSourceEndpoint(end3_3.toJaxb());
-        aedt3.getDomain().getInterdomainLink().add(idlt2);
-        aedt3.getDomain().setSequenceNumber(auxSequenceNr);
-        TestMalleableReservations.topologyClient.addOrEditDomain(aedt3);
+		// InterdomainLink Domain3.endpoint3 -> Domain2.endpoint6
+		idlt2 = new InterdomainLinkType();
+		idlt2.setCosts(Helpers.getPositiveRandomInt());
+		idlt2.setDestinationDomain(TestMalleableReservations.referenceDomain2
+				.getName());
+		idlt2.setLinkID(idlt.getLinkID());
+		idlt2.setSourceEndpoint(end3_3.toJaxb());
+		aedt3.getDomain().getInterdomainLink().add(idlt2);
+		aedt3.getDomain().setSequenceNumber(auxSequenceNr);
+		TestMalleableReservations.topologyClient.addOrEditDomain(aedt3);
 
-        // get two random endpoints in the domains for malleable reservation
-        TestMalleableReservations.sourceTNA1 = Config.getString(Constants.testProperties,
-                "test.malleable.domain1.endpoint.user1");
-        TestMalleableReservations.destinationTNA1 = Config.getString(Constants.testProperties,
-                "test.malleable.domain3.endpoint.user1");
-        TestMalleableReservations.sourceTNA2 = Config.getString(Constants.testProperties,
-        		"test.malleable.domain1.endpoint.user2");
-        TestMalleableReservations.destinationTNA2 = Config.getString(Constants.testProperties,
-        		"test.malleable.domain3.endpoint.user2");
-    }
+		// get two random endpoints in the domains for malleable reservation
+		TestMalleableReservations.sourceTNA1 = Config.getString(
+				Constants.testProperties,
+				"test.malleable.domain1.endpoint.user1");
+		TestMalleableReservations.destinationTNA1 = Config.getString(
+				Constants.testProperties,
+				"test.malleable.domain3.endpoint.user1");
+		TestMalleableReservations.sourceTNA2 = Config.getString(
+				Constants.testProperties,
+				"test.malleable.domain1.endpoint.user2");
+		TestMalleableReservations.destinationTNA2 = Config.getString(
+				Constants.testProperties,
+				"test.malleable.domain3.endpoint.user2");
+	}
 
-    /**
-     * @throws java.lang.Exception
-     */
-    @AfterClass
-    public static void tearDownAfterClass() throws Exception {
-        // delete reservation if necessary
-        if (!TestMalleableReservations.reservationId.equals("")) {
-            Reservation res = Reservation.load(TestMalleableReservations.reservationId);
-            if(res != null) res.delete();
-        }
-        // delete reference domain from topology client
-        if (TestMalleableReservations.referenceDomain != null)
-            TestMalleableReservations.topologyClient.deleteDomain(TestMalleableReservations.referenceDomain.getName());
-        if (TestMalleableReservations.referenceDomain2 != null)
-            TestMalleableReservations.topologyClient.deleteDomain(TestMalleableReservations.referenceDomain2.getName());
-        if (TestMalleableReservations.referenceDomain3 != null)
-            TestMalleableReservations.topologyClient.deleteDomain(TestMalleableReservations.referenceDomain3.getName());
-    }
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
+		// delete reservation if necessary
+		if (!TestMalleableReservations.reservationId.equals("")) {
+			Reservation res = Reservation
+					.load(TestMalleableReservations.reservationId);
+			if (res != null)
+				res.delete();
+		}
+		// delete reference domain from topology client
+		if (TestMalleableReservations.referenceDomain != null)
+			TestMalleableReservations.topologyClient
+					.deleteDomain(TestMalleableReservations.referenceDomain
+							.getName());
+		if (TestMalleableReservations.referenceDomain2 != null)
+			TestMalleableReservations.topologyClient
+					.deleteDomain(TestMalleableReservations.referenceDomain2
+							.getName());
+		if (TestMalleableReservations.referenceDomain3 != null)
+			TestMalleableReservations.topologyClient
+					.deleteDomain(TestMalleableReservations.referenceDomain3
+							.getName());
+	}
 
-    /**
-     * Test method for creating a malleable reservation.
-     * 
-     * @throws Exception
-     */
-    @Test
-    public final void testMalleable() throws Exception {
-        CreateReservationResponseType responseType = this.reservationClient
-                .createMalleableReservation(TestMalleableReservations.sourceTNA1,
-                        					TestMalleableReservations.destinationTNA1,
-                        					TestMalleableReservations.dataAmount,
-                        					Helpers.generateXMLCalendar(60, 0),
-                        					Helpers.generateXMLCalendar(180, 0),
-                        					100, 500, 50);
+	/**
+	 * Test method for creating a malleable reservation.
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public final void testMalleable() throws Exception {
+		CreateReservationResponseType responseType = this.reservationClient
+				.createMalleableReservation(
+						TestMalleableReservations.sourceTNA1,
+						TestMalleableReservations.destinationTNA1,
+						TestMalleableReservations.dataAmount,
+						Helpers.generateXMLCalendar(60, 0),
+						Helpers.generateXMLCalendar(180, 0), 100, 500, 50);
 
-        // check response
-        Assert.assertTrue("reservation-ID should be set", responseType
-                .isSetReservationID());
-        TestMalleableReservations.reservationId = responseType.getReservationID();
-    }
-    
-    /**
-     * Test method for creating a wrong malleable reservation (timeslot too short)
-     * 
-     * @throws Exception
-     */
-    @Test(expected = PathNotFoundFaultException.class)
-    public final void testWrongMalleable() throws Exception {
-    	this.reservationClient.createMalleableReservation(
-    								TestMalleableReservations.sourceTNA1,
-                					TestMalleableReservations.destinationTNA1,
-                					TestMalleableReservations.dataAmount,
-                					Helpers.generateXMLCalendar(60, 0),
-                					Helpers.generateXMLCalendar(61, 0),
-                					100, 500, 50);
-    }
+		// check response
+		Assert.assertTrue("reservation-ID should be set",
+				responseType.isSetReservationID());
+		TestMalleableReservations.reservationId = responseType
+				.getReservationID();
+	}
 
-    //@Test
-    public final void testMultipleService() throws Exception {
-        final CreateReservationType resReq = new CreateReservationType();
+	/**
+	 * Test method for creating a wrong malleable reservation (timeslot too
+	 * short)
+	 * 
+	 * @throws Exception
+	 */
+	@Test(expected = PathNotFoundFaultException.class)
+	public final void testWrongMalleable() throws Exception {
+		this.reservationClient.createMalleableReservation(
+				TestMalleableReservations.sourceTNA1,
+				TestMalleableReservations.destinationTNA1,
+				TestMalleableReservations.dataAmount,
+				Helpers.generateXMLCalendar(60, 0),
+				Helpers.generateXMLCalendar(61, 0), 100, 500, 50);
+	}
 
-        // service 1
-        final ServiceConstraintType service1 = new ServiceConstraintType();
-        final MalleableReservationConstraintType constraints1 =
-                new MalleableReservationConstraintType();
-        final ConnectionConstraintType connection1 =
-                new ConnectionConstraintType();
+	// @Test
+	public final void testMultipleService() throws Exception {
+		final CreateReservationType resReq = new CreateReservationType();
 
-        constraints1.setStartTime(Helpers.generateXMLCalendar(60, 0));
-        constraints1.setDeadline(Helpers.generateXMLCalendar(120, 0));
+		// service 1
+		final ServiceConstraintType service1 = new ServiceConstraintType();
+		final MalleableReservationConstraintType constraints1 = new MalleableReservationConstraintType();
+		final ConnectionConstraintType connection1 = new ConnectionConstraintType();
 
-        final EndpointType src1 = new EndpointType();
-        src1.setEndpointId(TestMalleableReservations.sourceTNA1);
-        final EndpointType dst1 = new EndpointType();
-        dst1.setEndpointId(TestMalleableReservations.destinationTNA1);
+		constraints1.setStartTime(Helpers.generateXMLCalendar(60, 0));
+		constraints1.setDeadline(Helpers.generateXMLCalendar(120, 0));
 
-        connection1.setDataAmount(TestMalleableReservations.dataAmount);
-        connection1.setDirectionality(1);
-        connection1.setMinBW(100);
-        connection1.setMaxBW(500);
-        connection1.setMaxDelay(50);
-        connection1.setSource(src1);
-        connection1.getTarget().add(dst1);
-        connection1.setConnectionID(1); // Fix for ARGIA system
+		final EndpointType src1 = new EndpointType();
+		src1.setEndpointId(TestMalleableReservations.sourceTNA1);
+		final EndpointType dst1 = new EndpointType();
+		dst1.setEndpointId(TestMalleableReservations.destinationTNA1);
 
-        service1.setTypeOfReservation(ReservationType.MALLEABLE);
-        service1.setMalleableReservationConstraints(constraints1);
-        service1.setAutomaticActivation(true);
-        service1.setServiceID(1); // Fix for ARGIA system
+		connection1.setDataAmount(TestMalleableReservations.dataAmount);
+		connection1.setDirectionality(1);
+		connection1.setMinBW(100);
+		connection1.setMaxBW(500);
+		connection1.setMaxDelay(50);
+		connection1.setSource(src1);
+		connection1.getTarget().add(dst1);
+		connection1.setConnectionID(1); // Fix for ARGIA system
 
-        service1.getConnections().add(connection1);
+		service1.setTypeOfReservation(ReservationType.MALLEABLE);
+		service1.setMalleableReservationConstraints(constraints1);
+		service1.setAutomaticActivation(true);
+		service1.setServiceID(1); // Fix for ARGIA system
 
-        // service 2
-        final ServiceConstraintType service2 = new ServiceConstraintType();
-        final MalleableReservationConstraintType constraints2 =
-            new MalleableReservationConstraintType();
-        final ConnectionConstraintType connection2 =
-            new ConnectionConstraintType();
+		service1.getConnections().add(connection1);
 
-        constraints2.setStartTime(Helpers.generateXMLCalendar(121, 0));
-        constraints2.setDeadline(Helpers.generateXMLCalendar(180, 0));
+		// service 2
+		final ServiceConstraintType service2 = new ServiceConstraintType();
+		final MalleableReservationConstraintType constraints2 = new MalleableReservationConstraintType();
+		final ConnectionConstraintType connection2 = new ConnectionConstraintType();
 
-        service2.setTypeOfReservation(ReservationType.MALLEABLE);
-        service2.setMalleableReservationConstraints(constraints2);
-        service2.setAutomaticActivation(true);
-        service2.setServiceID(2); // Fix for ARGIA system
+		constraints2.setStartTime(Helpers.generateXMLCalendar(121, 0));
+		constraints2.setDeadline(Helpers.generateXMLCalendar(180, 0));
 
-        final EndpointType src2 = new EndpointType();
-        src2.setEndpointId(TestMalleableReservations.sourceTNA2);
-        final EndpointType dst2 = new EndpointType();
-        dst2.setEndpointId(TestMalleableReservations.destinationTNA2);
+		service2.setTypeOfReservation(ReservationType.MALLEABLE);
+		service2.setMalleableReservationConstraints(constraints2);
+		service2.setAutomaticActivation(true);
+		service2.setServiceID(2); // Fix for ARGIA system
 
-        connection2.setDataAmount(TestMalleableReservations.dataAmount);
-        connection2.setDirectionality(1);
-        connection2.setMinBW(100);
-        connection2.setMaxBW(500);
-        connection2.setMaxDelay(50);
-        connection2.setSource(src2);
-        connection2.getTarget().add(dst2);
-        connection2.setConnectionID(1); // Fix for ARGIA system
+		final EndpointType src2 = new EndpointType();
+		src2.setEndpointId(TestMalleableReservations.sourceTNA2);
+		final EndpointType dst2 = new EndpointType();
+		dst2.setEndpointId(TestMalleableReservations.destinationTNA2);
 
-        service2.getConnections().add(connection2);
+		connection2.setDataAmount(TestMalleableReservations.dataAmount);
+		connection2.setDirectionality(1);
+		connection2.setMinBW(100);
+		connection2.setMaxBW(500);
+		connection2.setMaxDelay(50);
+		connection2.setSource(src2);
+		connection2.getTarget().add(dst2);
+		connection2.setConnectionID(1); // Fix for ARGIA system
 
-        resReq.setJobID(Helpers.getPositiveRandomLong());
-        resReq.getService().add(service1);
-        resReq.getService().add(service2);
+		service2.getConnections().add(connection2);
 
-    	this.reservationClient.createMalleableReservation(resReq);
-    }
+		resReq.setJobID(Helpers.getPositiveRandomLong());
+		resReq.getService().add(service1);
+		resReq.getService().add(service2);
 
-    //@Test // not testable with dummy-adapter, because of too few configurations
-    // but manually this test can be run for checking with real adapters
-    public final void testMultipleConnections() throws Exception {
-        final CreateReservationType resReq = new CreateReservationType();
-        final ServiceConstraintType service = new ServiceConstraintType();
-        final MalleableReservationConstraintType constraints =
-            new MalleableReservationConstraintType();
+		this.reservationClient.createMalleableReservation(resReq);
+	}
 
-        constraints.setStartTime(Helpers.generateXMLCalendar(60, 0));
-        constraints.setDeadline(Helpers.generateXMLCalendar(180, 0));
+	// @Test // not testable with dummy-adapter, because of too few
+	// configurations
+	// but manually this test can be run for checking with real adapters
+	public final void testMultipleConnections() throws Exception {
+		final CreateReservationType resReq = new CreateReservationType();
+		final ServiceConstraintType service = new ServiceConstraintType();
+		final MalleableReservationConstraintType constraints = new MalleableReservationConstraintType();
 
-        service.setTypeOfReservation(ReservationType.MALLEABLE);
-        service.setMalleableReservationConstraints(constraints);
-        service.setAutomaticActivation(true);
-        service.setServiceID(1); // Fix for ARGIA system
+		constraints.setStartTime(Helpers.generateXMLCalendar(60, 0));
+		constraints.setDeadline(Helpers.generateXMLCalendar(180, 0));
 
-        // connection 1
-        final ConnectionConstraintType connection1 =
-                new ConnectionConstraintType();
+		service.setTypeOfReservation(ReservationType.MALLEABLE);
+		service.setMalleableReservationConstraints(constraints);
+		service.setAutomaticActivation(true);
+		service.setServiceID(1); // Fix for ARGIA system
 
-        final EndpointType src1 = new EndpointType();
-        src1.setEndpointId(TestMalleableReservations.sourceTNA1);
-        final EndpointType dst1 = new EndpointType();
-        dst1.setEndpointId(TestMalleableReservations.destinationTNA1);
+		// connection 1
+		final ConnectionConstraintType connection1 = new ConnectionConstraintType();
 
-        connection1.setDataAmount(TestMalleableReservations.dataAmount);
-        connection1.setDirectionality(1);
-        connection1.setMinBW(100);
-        connection1.setMaxBW(500);
-        connection1.setMaxDelay(50);
-        connection1.setSource(src1);
-        connection1.getTarget().add(dst1);
-        connection1.setConnectionID(1); // Fix for ARGIA system
+		final EndpointType src1 = new EndpointType();
+		src1.setEndpointId(TestMalleableReservations.sourceTNA1);
+		final EndpointType dst1 = new EndpointType();
+		dst1.setEndpointId(TestMalleableReservations.destinationTNA1);
 
-        service.getConnections().add(connection1);
+		connection1.setDataAmount(TestMalleableReservations.dataAmount);
+		connection1.setDirectionality(1);
+		connection1.setMinBW(100);
+		connection1.setMaxBW(500);
+		connection1.setMaxDelay(50);
+		connection1.setSource(src1);
+		connection1.getTarget().add(dst1);
+		connection1.setConnectionID(1); // Fix for ARGIA system
 
-        // connection 2
-        final ConnectionConstraintType connection2 =
-            new ConnectionConstraintType();
+		service.getConnections().add(connection1);
 
-        final EndpointType src2 = new EndpointType();
-        src2.setEndpointId(TestMalleableReservations.sourceTNA2);
-        final EndpointType dst2 = new EndpointType();
-        dst2.setEndpointId(TestMalleableReservations.destinationTNA2);
+		// connection 2
+		final ConnectionConstraintType connection2 = new ConnectionConstraintType();
 
-        connection2.setDataAmount(TestMalleableReservations.dataAmount);
-        connection2.setDirectionality(1);
-        connection2.setMinBW(100);
-        connection2.setMaxBW(500);
-        connection2.setMaxDelay(50);
-        connection2.setSource(src2);
-        connection2.getTarget().add(dst2);
-        connection2.setConnectionID(2); // Fix for ARGIA system
+		final EndpointType src2 = new EndpointType();
+		src2.setEndpointId(TestMalleableReservations.sourceTNA2);
+		final EndpointType dst2 = new EndpointType();
+		dst2.setEndpointId(TestMalleableReservations.destinationTNA2);
 
-        service.getConnections().add(connection2);
+		connection2.setDataAmount(TestMalleableReservations.dataAmount);
+		connection2.setDirectionality(1);
+		connection2.setMinBW(100);
+		connection2.setMaxBW(500);
+		connection2.setMaxDelay(50);
+		connection2.setSource(src2);
+		connection2.getTarget().add(dst2);
+		connection2.setConnectionID(2); // Fix for ARGIA system
 
-        resReq.setJobID(Helpers.getPositiveRandomLong());
-        resReq.getService().add(service);
+		service.getConnections().add(connection2);
 
-    	this.reservationClient.createMalleableReservation(resReq);
-    }
+		resReq.setJobID(Helpers.getPositiveRandomLong());
+		resReq.getService().add(service);
+
+		this.reservationClient.createMalleableReservation(resReq);
+	}
 }

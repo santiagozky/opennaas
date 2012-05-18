@@ -39,10 +39,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Query;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import com.mysema.query.jpa.impl.JPAQuery;
+//import com.mysema.query.jpa.impl.JPAQuery;
 
 import org.opennaas.extensions.idb.database.TransactionManager;
 import org.opennaas.extensions.idb.database.TransactionManagerLoad;
@@ -103,6 +104,7 @@ public class DomSupportedAdaption implements java.io.Serializable,
 	 * @return the pkAdaption
 	 */
 	@Id
+	@Column(name = "PK_Adaption")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public long getPK_Adaption() {
 		return this.PK_Adaption;
@@ -136,7 +138,7 @@ public class DomSupportedAdaption implements java.io.Serializable,
 	/**
 	 * @return technology adaption of the domain
 	 */
-	@Column(length = 40, nullable = false)
+	@Column(length = 40, nullable = false, name = "Adaption")
 	public String getAdaption() {
 		if (this.adaption == null) {
 			this.adaption = "";
@@ -158,6 +160,7 @@ public class DomSupportedAdaption implements java.io.Serializable,
 	 * @return -1 0 1
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
+	@Override
 	public int compareTo(DomSupportedAdaption domainAdaptionParam) {
 		if (this.getAdaption().length() < domainAdaptionParam.getAdaption()
 				.length()) {
@@ -251,11 +254,15 @@ public class DomSupportedAdaption implements java.io.Serializable,
 			@Override
 			protected void dbOperation() {
 				Domain d = (Domain) this.arg;
-				QDomSupportedAdaption domAdaption = QDomSupportedAdaption.domSupportedAdaption;
-				JPAQuery query = new JPAQuery(this.session);
-				List<DomSupportedAdaption> aList = query.from(domAdaption)
-						.where(domAdaption.domain.eq(d)).list(domAdaption);
-
+				// QDomSupportedAdaption domAdaption =
+				// QDomSupportedAdaption.domSupportedAdaption;
+				// JPAQuery query = new JPAQuery(this.session);
+				// List<DomSupportedAdaption> aList = query.from(domAdaption)
+				// .where(domAdaption.domain.eq(d)).list(domAdaption);
+				Query query = this.session
+						.createQuery("select d from DomSupportedAdaption d where d.domain=:arg");
+				query.setParameter("arg", d);
+				List<DomSupportedAdaption> aList = query.getResultList();
 				Set<DomSupportedAdaption> adaptions = new HashSet<DomSupportedAdaption>();
 				for (DomSupportedAdaption adaption : aList) {
 					adaptions.add(adaption);
