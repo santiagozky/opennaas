@@ -124,16 +124,6 @@
 			<version>${project.version}</version>
 		</dependency>
 
-
-
-		<dependency>
-			<groupId>org.opennaas</groupId>
-			<artifactId>org.opennaas.extensions.idb.utils</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-
-
-
 		<dependency>
 			<groupId>org.opennaas</groupId>
 			<artifactId>org.opennaas.extensions.idb.da.dummy</artifactId>
@@ -141,7 +131,7 @@
 			
 		</dependency>
 
-
+<!-- 
 		<dependency>
 			<groupId>com.mysema.querydsl</groupId>
 			<artifactId>querydsl-apt</artifactId>
@@ -153,7 +143,14 @@
 			<groupId>com.mysema.querydsl</groupId>
 			<artifactId>querydsl-jpa</artifactId>
 			<version>2.5.0</version>
+			<exclusions>
+			<exclusion>
+			<groupId>org.hibernate.javax.persistence</groupId>
+	  <artifactId>hibernate-jpa-2.0-api</artifactId>
+			</exclusion>
+			</exclusions>
 		</dependency>
+		 -->
 
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -212,7 +209,7 @@
 	</dependencies>
 	<build>
 		<plugins>
-			<plugin>
+			<!-- <plugin>
 				<groupId>com.mysema.maven</groupId>
 				<artifactId>maven-apt-plugin</artifactId>
 				<version>0.3.2</version>
@@ -227,7 +224,7 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin> -->
 			<plugin>
 				<groupId>org.apache.openjpa</groupId>
 				<artifactId>openjpa-maven-plugin</artifactId>
@@ -275,8 +272,9 @@
 					classes into an OSGi bundle -->
 				<configuration>
 					<instructions>
-						<Import-Package>com.mysema.query.*,*</Import-Package>
+						<Import-Package>*</Import-Package>
 						<Export-Package>org.opennaas.extensions.idb.*;version="${project.version}"</Export-Package>
+						<Meta-Persistence>META-INF/persistence.xml</Meta-Persistence>
 					</instructions>
 				</configuration>
 			</plugin>

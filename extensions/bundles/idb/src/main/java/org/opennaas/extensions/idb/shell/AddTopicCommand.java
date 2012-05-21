@@ -2,27 +2,19 @@ package org.opennaas.extensions.idb.shell;
 
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
-
-import org.opennaas.core.resources.IResource;
 import org.opennaas.core.resources.shell.GenericKarafCommand;
-
 import org.opennaas.extensions.idb.notification.handler.NotificationRequestHandler;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AddTopicResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AddTopicType;
-import org.opennaas.extensions.network.model.NetworkModel;
-import org.opennaas.extensions.network.model.topology.Interface;
-import org.opennaas.extensions.network.model.topology.Link;
 
-import static com.google.common.collect.Iterables.filter;
-
-@Command(scope = "IDB", name = "addTopic", description = "Add topic")
+@Command(scope = "idb", name = "addTopic", description = "Add topic")
 public class AddTopicCommand extends GenericKarafCommand {
 	@Argument(index = 0, name = "resourceType:resourceName", description = "The topic name", required = true, multiValued = false)
 	private String topicName;
 
 	@Override
 	protected Object doExecute() throws Exception {
-		printInitCommand("l2bod:links");
+		printInitCommand("IDB addTopic");
 
 		try {
 			AddTopicType type = new AddTopicType();
