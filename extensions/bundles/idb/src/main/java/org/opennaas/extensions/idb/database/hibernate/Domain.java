@@ -67,9 +67,6 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DomainTechn
  */
 @Entity
 @Table(name = "Domain")
-@NamedNativeQueries({ @NamedNativeQuery(name = "getMappings", query = "SELECT DISTINCT Endpoint.fkDomainName as domainName, Service.FK_ReservationID as reservationID FROM Endpoint join (Connections, MAP_ConnEndpoint, Service) on (Endpoint.TNA = Connections.FK_StartpointTNA OR Endpoint.TNA = MAP_ConnEndpoint.FK_DestEndpointTNA AND Connections.PK_Connections = MAP_ConnEndpoint.FK_Connection AND Connections.FK_Service = Service.PK_service) where Endpoint.fkDomainName=? ", resultClass = VIEW_DomainReservationMapping.class)
-
-})
 public class Domain implements java.io.Serializable, Comparable<Domain> {
 
 	// Fields

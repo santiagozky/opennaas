@@ -17,7 +17,6 @@
 		<class>org.opennaas.extensions.idb.database.hibernate.VIEW_InterDomainLink</class>        
 		<class>org.opennaas.extensions.idb.database.hibernate.VIEW_ReservationMapping</class>        
 		<class>org.opennaas.extensions.idb.database.hibernate.VIEW_ReservationPeriod</class>        
-		<class>org.opennaas.extensions.idb.database.hibernate.VIEW_DomainReservationMapping</class>        
 		<class>org.opennaas.extensions.idb.database.hibernate.MAPNRPSResvID</class>        
 		<class>org.opennaas.extensions.idb.database.hibernate.Domain</class>        
 		<class>org.opennaas.extensions.idb.database.hibernate.InterDomainLink</class>        
