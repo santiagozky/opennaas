@@ -39,12 +39,16 @@ import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.MapKey;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Query;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.opennaas.core.resources.helpers.Helpers;
+import org.opennaas.extensions.idb.database.DbConnectionManager;
 import org.opennaas.extensions.idb.database.TransactionManager;
 import org.opennaas.extensions.idb.database.TransactionManagerLoad;
 import org.opennaas.extensions.idb.exception.database.DatabaseException;
@@ -63,6 +67,9 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DomainTechn
  */
 @Entity
 @Table(name = "Domain")
+@NamedNativeQueries({ @NamedNativeQuery(name = "getMappings", query = "SELECT DISTINCT Endpoint.fkDomainName as domainName, Service.FK_ReservationID as reservationID FROM Endpoint join (Connections, MAP_ConnEndpoint, Service) on (Endpoint.TNA = Connections.FK_StartpointTNA OR Endpoint.TNA = MAP_ConnEndpoint.FK_DestEndpointTNA AND Connections.PK_Connections = MAP_ConnEndpoint.FK_Connection AND Connections.FK_Service = Service.PK_service) where Endpoint.fkDomainName=? ", resultClass = VIEW_DomainReservationMapping.class)
+
+})
 public class Domain implements java.io.Serializable, Comparable<Domain> {
 
 	// Fields
@@ -132,7 +139,7 @@ public class Domain implements java.io.Serializable, Comparable<Domain> {
 		this.seqNo = seqNo;
 	}
 
-	@Basic(optional = true)
+	@Column(length = 20, nullable = true)
 	public String getRelationship() {
 		return this.relationship;
 	}
@@ -349,7 +356,8 @@ public class Domain implements java.io.Serializable, Comparable<Domain> {
 	/**
 	 * @return description of the Domain
 	 */
-	@Basic(optional = true)
+
+	@Column(length = 100)
 	public String getDescription() {
 		if (null == this.description) {
 			this.description = "";
@@ -934,28 +942,33 @@ public class Domain implements java.io.Serializable, Comparable<Domain> {
 		session.remove(this);
 	}
 
-	public void delete() throws DatabaseException {
-		/*
-		 * If a domain is deleted, it is useful to delete all topology and
-		 * reservation components related with this domain. Endpoints, Links and
-		 * Connections are automatically deleted by foreign-key-relation in the
-		 * DB. Since the relations between reservations and services and a
-		 * domain are not represented in the DB-schema we have to do this
-		 * manually. Therefore...
-		 */
+	public void deleteReservations(EntityManager session)
+			throws DatabaseException {
 
-		List<VIEW_DomainReservationMapping> mappings = VIEW_DomainReservationMapping
-				.getMappingsForDomain(this.getName());
+		List<VIEW_DomainReservationMapping> mappings = session
+				.createNamedQuery("getMappings")
+				.setParameter(1, this.getName()).getResultList();
 		for (VIEW_DomainReservationMapping mapping : mappings) {
-			Reservation.load(mapping.getReservationId()).delete();
+			Reservation res = Reservation.load(mapping.getReservationId());
+			res.delete();
 		}
+	}
+
+	public void delete() throws DatabaseException {
 
 		new TransactionManager(this) {
 			@Override
 			protected void dbOperation() throws Exception {
+
 				// delete the domain itself
+				// deleteReservations(this.session);
 				delete(this.session);
 			}
 		};
+	}
+
+	@Transient
+	public void getMappingsForDomain() {
+
 	}
 }

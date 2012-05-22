@@ -238,7 +238,7 @@ public class Service implements java.io.Serializable {
 	/**
 	 * @return the corresponding reservation
 	 */
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = { javax.persistence.CascadeType.ALL })
 	@JoinColumn(name = "FK_ReservationID")
 	public Reservation getReservation() {
 		return this.reservation;
@@ -638,6 +638,10 @@ public class Service implements java.io.Serializable {
 	}
 
 	public void delete(EntityManager session) {
+		// since Reservation is the owner of the relationship we must
+		// delete the relationship
+		this.getReservation().getServices().remove(this);
+		this.setReservation(null);
 		session.remove(this);
 	}
 

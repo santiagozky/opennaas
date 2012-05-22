@@ -216,7 +216,7 @@ public class Connections implements java.io.Serializable {
 	 * 
 	 * @return service
 	 */
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = { javax.persistence.CascadeType.ALL })
 	@JoinColumn(name = "FK_Service", nullable = false)
 	public Service getService() {
 		return this.service;
@@ -627,7 +627,8 @@ public class Connections implements java.io.Serializable {
 	}
 
 	public void delete(EntityManager session) {
-		this.service = null;
+		this.getService().getConnections().remove(this);
+		this.setService(null);
 		session.remove(this);
 	}
 
