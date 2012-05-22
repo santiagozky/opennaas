@@ -942,18 +942,6 @@ public class Domain implements java.io.Serializable, Comparable<Domain> {
 		session.remove(this);
 	}
 
-	public void deleteReservations(EntityManager session)
-			throws DatabaseException {
-
-		List<VIEW_DomainReservationMapping> mappings = session
-				.createNamedQuery("getMappings")
-				.setParameter(1, this.getName()).getResultList();
-		for (VIEW_DomainReservationMapping mapping : mappings) {
-			Reservation res = Reservation.load(mapping.getReservationId());
-			res.delete();
-		}
-	}
-
 	public void delete() throws DatabaseException {
 
 		new TransactionManager(this) {
