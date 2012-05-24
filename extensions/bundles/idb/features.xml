@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <features>
+<repository>mvn:org.apache.karaf.assemblies.features/standard/${karaf.version}/xml/features</repository>
+	<repository>mvn:org.apache.servicemix.nmr/apache-servicemix-nmr/${nmr.version}/xml/features</repository>
+	<repository>mvn:org.apache.camel.karaf/apache-camel/${camel.version}/xml/features</repository>
 <feature name='opennaas-idb' version='0.10-SNAPSHOT'>
 <feature version='2.1.1'>dnsjava</feature>
 <feature version='1.4.4'>mail</feature>
@@ -33,6 +36,7 @@
 <feature version='0.10-SNAPSHOT'>database</feature>
 <feature version='0.10-SNAPSHOT'>adapter-dummy</feature>
 <feature version='2.2.2'>cglib</feature>
+<feature version='0.10-SNAPSHOT'>org.opennaas.extensions.ws</feature>
 <bundle>mvn:org.opennaas/org.opennaas.extensions.idb</bundle>
 </feature>
 
@@ -140,6 +144,14 @@
     <bundle>mvn:org.opennaas/org.opennaas.core.persistence/0.10-SNAPSHOT</bundle>
     <bundle>mvn:org.hsqldb/com.springsource.org.hsqldb/1.8.0.10</bundle> -->
     <bundle>mvn:org.opennaas/org.opennaas.core.resources/0.10-SNAPSHOT</bundle>
+  </feature>
+  <feature name='org.opennaas.extensions.ws' version='0.10-SNAPSHOT'>
+  <feature>cxf</feature>
+  <feature>http</feature>
+  <bundle>mvn:org.opennaas/org.opennaas.extensions.ws/0.10-SNAPSHOT</bundle>
+  <bundle dependency="true">mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.javax-inject/${servicemix.javax-inject.version}</bundle>
+  <bundle>mvn:org.opennaas/org.opennaas.extensions.ws/0.10-SNAPSHOT</bundle>
+  <bundle>mvn:org.opennaas/org.opennaas.extensions.ws.proxy/0.10-SNAPSHOT</bundle>	
   </feature>
   <feature name='org.opennaas.extensions.queuemanager' version='0.10-SNAPSHOT'>
     <feature version='0.10-SNAPSHOT'>org.opennaas.core.resources</feature>
