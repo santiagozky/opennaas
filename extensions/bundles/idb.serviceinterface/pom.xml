@@ -40,6 +40,19 @@
 					<target>1.5</target>
 				</configuration>
 			</plugin>
+			<plugin>
+        <artifactId>maven-clean-plugin</artifactId>
+        <version>2.4.1</version>
+        <executions>
+          <execution>
+            <id>auto-clean</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>clean</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
 			<!-- <plugin> <groupId>org.apache.cxf</groupId> <artifactId>cxf-codegen-plugin</artifactId> 
 				<version>2.6.0</version> <executions> <execution> <id>generate-sources</id> 
 				<phase>generate-sources</phase> <configuration> <sourceRoot>${project.build.directory}/generated-sources/xsdClasses</sourceRoot> 
