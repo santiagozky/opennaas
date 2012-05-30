@@ -1,7 +1,11 @@
 package org.opennaas.extensions.idb;
 
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.Properties;
 
+import org.opennaas.extensions.idb.notification.handler.INotification;
+import org.opennaas.extensions.idb.notification.handler.NotificationRequestHandler;
 import org.opennaas.extensions.queuemanager.IQueueManagerCapability;
 
 import org.apache.commons.logging.Log;
@@ -14,12 +18,14 @@ import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.Filter;
 import org.osgi.framework.InvalidSyntaxException;
+import org.osgi.framework.ServiceRegistration;
 
 public class Activator extends AbstractActivator implements BundleActivator {
 
 	private static BundleContext context;
 
 	static Log log = LogFactory.getLog(Activator.class);
+	private ServiceRegistration registration;
 
 	/**
 	 * Get the Bunble Context
@@ -36,6 +42,14 @@ public class Activator extends AbstractActivator implements BundleActivator {
 	@Override
 	public void start(BundleContext context) throws Exception {
 		Activator.context = context;
+		Dictionary<String, String> props = new Hashtable<String, String>();
+		// props.put("osgi.remote.interfaces", "*");
+		// props.put("osgi.remote.configuration.type", "pojo");
+		// props.put("osgi.remote.configuration.pojo.address",
+		// "http://localhost:8181/Notifications");
+
+		// registration = context.registerService(INotification.class.getName(),
+		// NotificationRequestHandler.getInstance(), props);
 	}
 
 	/**
@@ -43,7 +57,7 @@ public class Activator extends AbstractActivator implements BundleActivator {
 	 */
 	@Override
 	public void stop(BundleContext context) throws Exception {
-
+		// registration.unregister();
 	}
 
 	/**

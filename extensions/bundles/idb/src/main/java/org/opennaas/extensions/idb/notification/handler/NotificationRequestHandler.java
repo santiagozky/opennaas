@@ -44,7 +44,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.Unsubscribe
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.TopicNotFoundFaultException;
 
 /** Provision Request Handler. */
-@WebService(portName = "NotificationCapabilityPort", serviceName = "NotificationCapabilityService", targetNamespace = "http:/www.opennaas.org/ws")
+@WebService(name = "Notification", targetNamespace = "http://opennaas.org/nsp/webservice/notification")
 public final class NotificationRequestHandler implements INotification {
 
 	/** Singleton Instance. */

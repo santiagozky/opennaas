@@ -1,5 +1,7 @@
 package org.opennaas.extensions.idb.notification.handler;
 
+import javax.jws.WebService;
+
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AddTopicResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AddTopicType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetTopicsResponseType;
@@ -14,6 +16,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.Unsubscribe
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.UnsubscribeType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.TopicNotFoundFaultException;
 
+@WebService(name = "Notification", targetNamespace = "http://opennaas.org/nsp/webservice/notification")
 public interface INotification {
 
 	/**
