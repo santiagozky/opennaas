@@ -122,4 +122,12 @@ the License. -->
 	</bean>
     <jaxws:endpoint  implementor="#netQueueCapabilityServiceImpl" address="http://localhost:8182/cxf/netQueueCapabilityService"  />
 	
+		<!--idb notifications-->
+    <cxf:bus id="idbNotificationCapabilityServiceBus"></cxf:bus>
+	<bean id="idbNotificationCapabilityServiceImpl" class="org.opennaas.extensions.idb.notification.handler.NotificationRequestHandler">
+		
+	</bean>
+    <jaxws:endpoint  implementor="#idbNotificationCapabilityServiceImpl" address="http://localhost:8182/cxf/NotificationCapabilityService"  />
+	
+	
 </blueprint>
