@@ -44,44 +44,11 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.Unsubscribe
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.TopicNotFoundFaultException;
 
 /** Provision Request Handler. */
-@WebService(name = "Notification", targetNamespace = "http://opennaas.org/nsp/webservice/notification")
+@WebService
+// (portName = "idbNotificationCapabilityPort", serviceName =
+// "idbNotificationCapabilityService", targetNamespace =
+// "http://opennaas.org/ws")
 public final class NotificationRequestHandler implements INotification {
-
-	/** Singleton Instance. */
-	private static NotificationRequestHandler selfInstance = null;
-
-	/**
-	 * Instance getter.
-	 * 
-	 * @return Singleton Instance
-	 */
-	public static NotificationRequestHandler getInstance() {
-		if (NotificationRequestHandler.selfInstance == null) {
-			NotificationRequestHandler.selfInstance = new NotificationRequestHandler();
-		}
-		return NotificationRequestHandler.selfInstance;
-	}
-
-	/** Private constructor: Singleton. */
-	private NotificationRequestHandler() {
-	}
-
-	/**
-	 * Singleton - Cloning _not_ supported!
-	 * 
-	 * @return Should never return anything...
-	 * @throws CloneNotSupportedException
-	 *             Singleton hates to be cloned!
-	 */
-	@Override
-	public Object clone() throws CloneNotSupportedException {
-		throw new CloneNotSupportedException();
-	}
-
-	/*
-	 * Handler
-	 * =========================================================================
-	 */
 
 	/*
 	 * (non-Javadoc)

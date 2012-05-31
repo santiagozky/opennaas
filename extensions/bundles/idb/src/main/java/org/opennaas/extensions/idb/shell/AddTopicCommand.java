@@ -20,8 +20,7 @@ public class AddTopicCommand extends GenericKarafCommand {
 		try {
 			AddTopicType type = new AddTopicType();
 			type.setTopic(topicName);
-			INotification handler = NotificationRequestHandler
-					.getInstance();
+			INotification handler = new NotificationRequestHandler();
 			AddTopicResponseType response = handler.addTopic(type);
 			if (response.isResult()) {
 				printInfo("topic added");
