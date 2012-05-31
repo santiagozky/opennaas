@@ -11,7 +11,7 @@ import org.opennaas.core.resources.descriptor.ResourceDescriptor;
 /**
  * @author Isart Canyameres
  */
-@WebService
+@WebService(portName = "ResourceManagerPort", serviceName = "ResourceManagerService", targetNamespace = "http:/www.opennaas.org/ws")
 public interface IResourceManagerService {
 
 	/**
@@ -41,6 +41,14 @@ public interface IResourceManagerService {
 	 * @throws ResourceException
 	 */
 	public void removeResource(ResourceIdentifier resourceIdentifier) throws ResourceException;
+
+	/**
+	 * Remove the existing resource that matches the id
+	 * 
+	 * @param resourceId
+	 * @throws ResourceException
+	 */
+	public void removeResourceById(String resourceId) throws ResourceException;
 
 	/**
 	 * List all the existing resources of a given type. If type is null, list all resources whatever its type is.
