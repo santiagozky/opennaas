@@ -274,18 +274,7 @@
 							<goal>java2ws</goal>
 						</goals>
 					</execution>
-					<execution>
-						<id>generate-wsdl-idb-notification</id>
-						<phase>process-classes</phase>
-						<configuration>
-							<className>org.opennaas.extensions.idb.notification.handler.INotification</className>
-							<genWsdl>true</genWsdl>
-							<verbose>true</verbose>
-						</configuration>
-						<goals>
-							<goal>java2ws</goal>
-						</goals>
-					</execution>
+					
 				</executions>
 			</plugin>
 		</plugins>
