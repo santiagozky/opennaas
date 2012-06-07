@@ -53,7 +53,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.PathNotFoundFaultException;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.ReservationFaultException;
 import org.opennaas.extensions.idb.serviceinterface.databinding.utils.WebserviceUtils;
-import org.opennaas.core.resources.helpers.Config;
+import org.opennaas.extensions.idb.serviceinterface.utils.Config;
 
 import org.opennaas.extensions.idb.Constants;
 import org.opennaas.extensions.idb.database.hibernate.Connections;
@@ -79,8 +79,6 @@ public final class ReservationSetupHandler {
 	private static IManager nrpsManager;
 	/** standard Log instance. */
 	private final Log logger = LogFactory.getLog(this.getClass());
-
-	private Log performanceLogger = null;
 
 	/** extra logger instance for the malleable reservations. */
 	private final Log malleableLogger = LogFactory.getLog("malleable");
@@ -131,19 +129,6 @@ public final class ReservationSetupHandler {
 	@Override
 	public Object clone() throws CloneNotSupportedException {
 		throw new CloneNotSupportedException();
-	}
-
-	private Log getPerformanceLogger() {
-		if (this.performanceLogger == null) {
-			try {
-				this.performanceLogger = ReservationRequestHandler
-						.getInstance().getPerformanceLogger();
-			} catch (SoapFault e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		return this.performanceLogger;
 	}
 
 	/**
@@ -217,32 +202,28 @@ public final class ReservationSetupHandler {
 		}
 
 		final long timePrePathFinder = System.currentTimeMillis();
-		getPerformanceLogger().info(
-				"duration_prePathFinder " + (timePrePathFinder - timeStart)
-						+ "ms");
+		logger.info("duration_prePathFinder " + (timePrePathFinder - timeStart)
+				+ "ms");
 		final PathFinderNG pathFinder = new PathFinderNG(resv,
 				ReservationSetupHandler.nrpsManager,
 				element.isSetSubdomainRestriction()
 						&& element.isSubdomainRestriction(), true);
 		final long timePathFinderInit = System.currentTimeMillis();
-		getPerformanceLogger().info(
-				"duration_initPathFinder "
-						+ (timePathFinderInit - timePrePathFinder) + "ms");
+		logger.info("duration_initPathFinder "
+				+ (timePathFinderInit - timePrePathFinder) + "ms");
 		if ((!pathFinder.isAvailable()) && pathFinder.isMultidomain()) {
 			throw pathFinder.getPathNotFound();
 		}
 
 		final long timeAvailability = System.currentTimeMillis();
-		getPerformanceLogger().info(
-				"duration_availability "
-						+ (timeAvailability - timePathFinderInit) + "ms");
+		logger.info("duration_availability "
+				+ (timeAvailability - timePathFinderInit) + "ms");
 
 		final HashMap<Domain, Reservation> nrpsReservations = pathFinder
 				.getReservations();
 		final long timePostPathFinder = System.currentTimeMillis();
-		getPerformanceLogger().info(
-				"duration_PathFinderGetResv "
-						+ (timePostPathFinder - timeAvailability) + "ms");
+		logger.info("duration_PathFinderGetResv "
+				+ (timePostPathFinder - timeAvailability) + "ms");
 
 		if (null == nrpsReservations) {
 			throw new ReservationFaultException(
@@ -262,15 +243,12 @@ public final class ReservationSetupHandler {
 		}
 
 		final long timePreNRPSController = System.currentTimeMillis();
-		getPerformanceLogger().info(
-				"duration_postPathFinder_preNRPSController "
-						+ (timePreNRPSController - timePostPathFinder) + "ms");
+		logger.info("duration_postPathFinder_preNRPSController "
+				+ (timePreNRPSController - timePostPathFinder) + "ms");
 		final Hashtable<Domain, CreateReservationResponseType> nrpsResponses = createResInNRPS(nrpsRequests);
 		final long timePostNRPSController = System.currentTimeMillis();
-		getPerformanceLogger().info(
-				"duration_NRPSController "
-						+ (timePostNRPSController - timePreNRPSController)
-						+ "ms");
+		logger.info("duration_NRPSController "
+				+ (timePostNRPSController - timePreNRPSController) + "ms");
 
 		// save reservation data to DB and create response
 		for (Entry<Domain, Reservation> entry : nrpsReservations.entrySet()) {
@@ -296,9 +274,8 @@ public final class ReservationSetupHandler {
 				nrpsResponses, resv);
 
 		final long timeStop = System.currentTimeMillis();
-		getPerformanceLogger().info(
-				"duration_postNRPSController "
-						+ (timeStop - timePostNRPSController) + "ms");
+		logger.info("duration_postNRPSController "
+				+ (timeStop - timePostNRPSController) + "ms");
 		return response;
 	}
 
@@ -326,32 +303,28 @@ public final class ReservationSetupHandler {
 		final Reservation resv = Reservation.fromJaxb(element);
 
 		final long timePrePathFinder = System.currentTimeMillis();
-		getPerformanceLogger().info(
-				"duration_prePathFinder " + (timePrePathFinder - timeStart)
-						+ "ms");
+		logger.info("duration_prePathFinder " + (timePrePathFinder - timeStart)
+				+ "ms");
 		final PathFinderNG pathFinder = new PathFinderNG(resv,
 				ReservationSetupHandler.nrpsManager,
 				element.isSetSubdomainRestriction()
 						&& element.isSubdomainRestriction(), false);
 		final long timePathFinderInit = System.currentTimeMillis();
-		getPerformanceLogger().info(
-				"duration_initPathFinder "
-						+ (timePathFinderInit - timePrePathFinder) + "ms");
+		logger.info("duration_initPathFinder "
+				+ (timePathFinderInit - timePrePathFinder) + "ms");
 		if (pathFinder.isMultidomain() && (!pathFinder.isAvailable())) {
 			throw pathFinder.getPathNotFound();
 		}
 
 		final long timeAvailability = System.currentTimeMillis();
-		getPerformanceLogger().info(
-				"duration_availability "
-						+ (timeAvailability - timePathFinderInit) + "ms");
+		logger.info("duration_availability "
+				+ (timeAvailability - timePathFinderInit) + "ms");
 
 		final HashMap<Domain, Reservation> nrpsReservations = pathFinder
 				.getReservations();
 		final long timePostPathFinder = System.currentTimeMillis();
-		getPerformanceLogger().info(
-				"duration_PathFinderGetResv "
-						+ (timePostPathFinder - timeAvailability) + "ms");
+		logger.info("duration_PathFinderGetResv "
+				+ (timePostPathFinder - timeAvailability) + "ms");
 
 		// compose createReservation requests
 		final Hashtable<Domain, CreateReservationType> nrpsRequests = new Hashtable<Domain, CreateReservationType>();
@@ -366,24 +339,20 @@ public final class ReservationSetupHandler {
 		}
 
 		final long timePreNRPSController = System.currentTimeMillis();
-		getPerformanceLogger().info(
-				"duration_postPathFinder_preNRPSController "
-						+ (timePreNRPSController - timePostPathFinder) + "ms");
+		logger.info("duration_postPathFinder_preNRPSController "
+				+ (timePreNRPSController - timePostPathFinder) + "ms");
 		final Hashtable<Domain, CreateReservationResponseType> nrpsResponses = createResInNRPS(nrpsRequests);
 		final long timePostNRPSController = System.currentTimeMillis();
-		getPerformanceLogger().info(
-				"duration_NRPSController "
-						+ (timePostNRPSController - timePreNRPSController)
-						+ "ms");
+		logger.info("duration_NRPSController "
+				+ (timePostNRPSController - timePreNRPSController) + "ms");
 
 		// save reservation data to DB and create response
 		final CreateReservationResponseType response = saveResInDbAndCreateResponse(
 				nrpsResponses, resv);
 
 		final long timeStop = System.currentTimeMillis();
-		getPerformanceLogger().info(
-				"duration_postNRPSController "
-						+ (timeStop - timePostNRPSController) + "ms");
+		logger.info("duration_postNRPSController "
+				+ (timeStop - timePostNRPSController) + "ms");
 		return response;
 	}
 

@@ -159,6 +159,7 @@
 		<feature version="${project.version}">opennaas-luminis</feature>
 		<feature version="${project.version}">opennaas-platformmanager</feature>
 		<feature version="${project.version}">opennaas-autobahn</feature>
+		
 	
 	</feature>
 
@@ -172,5 +173,202 @@
 		<bundle>mvn:org.opennaas/org.opennaas.core.tests-mockprofile/${project.version}</bundle>
 	</feature>
 	
+	
+	
+	<feature name='opennaas-idb' version='${project.version}'>
+
+<feature version='${javamail.version}'>mail</feature>
+<feature version='1.0'>stax-api</feature>
+<feature version='1.6.2'>wsdl4j</feature>
+<feature version='5.1.18'>mysql-connector-java</feature>
+<feature version='1.6.1'>slf4j-api</feature>
+<feature version='1.6.1'>slf4j-log4j12</feature>
+<feature version='${openjpa.version}'>openjpa</feature>
+<feature version='${project.version}'>org.opennaas.core.resources</feature>
+<feature version='${project.version}'>org.opennaas.extensions.queuemanager</feature>
+<feature version='12'>guava</feature>
+<feature version='2.2.2-fuse-04-06'>org.apache.karaf.shell.console</feature>
+<feature version='${jodatime.version}'>joda-time</feature>
+<feature version='${osgi.version}'>org.osgi.core</feature>
+<feature version='${osgi.version}'>org.osgi.compendium</feature>
+<feature version='1.6.1'>log4j-over-slf4j</feature>
+<feature version='1.6.5'>pax-logging-api</feature>
+<feature version='1.6.5'>pax-logging-service</feature>
+<feature version='${project.version}'>org.opennaas.extensions.idb.serviceinterface</feature>
+<feature version='2.2.0'>muse-complete</feature>
+<feature version='140'>bcprov-jdk16</feature>
+<feature version='1.1'>jta</feature>
+<feature version='2.2.0'>muse-platform-mini</feature>
+<feature version='2.2.0'>muse-tools</feature>
+<feature version='2.0'>sun-xacml</feature>
+<feature version='${project.version}'>database</feature>
+<feature version='${project.version}'>adapter-dummy</feature>
+<feature version='2.2.2'>cglib</feature>
+<feature>jetty</feature>
+		<feature>cxf</feature>
+<bundle>mvn:org.opennaas/org.opennaas.extensions.idb/${project.version}</bundle>
+</feature>
+
+  <feature name='xalan' version='2.7.0'>
+    <bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.xalan/2.7.1_1</bundle>
+  </feature>
+  <feature name='mail' version='${javamail.version}'>
+    <bundle>mvn:org.apache.geronimo.specs/geronimo-activation_1.1_spec/1.0.2</bundle>
+    <bundle>mvn:javax.mail/mail/${javamail.version}</bundle>
+  </feature>
+  <feature name='stax-api' version='1.0'>
+    <bundle>mvn:org.apache.servicemix.specs/org.apache.servicemix.specs.stax-api-1.0/1.8.0</bundle>
+  </feature>
+  <feature name='wsdl4j' version='1.6.2'>
+    <bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.wsdl4j/1.6.2_6</bundle>
+  </feature>
+
+  <feature name='muse-platform-mini' version='2.2.0'>
+    <bundle>mvn:muse/muse-platform-mini/2.2.0</bundle>
+  </feature>
+  <feature name='mysql-connector-java' version='5.1.18'>
+    <bundle>mvn:org.apache.geronimo.specs/geronimo-jta_1.1_spec/1.1.1</bundle>
+    <bundle>mvn:org.apache.servicemix.specs/org.apache.servicemix.specs.stax-api-1.0/1.8.0</bundle>
+    <bundle>mvn:mysql/mysql-connector-java/5.1.18</bundle>
+  </feature>
+  <feature name='hsqldb' version='2.2.8'>
+    <bundle>mvn:org.apache.servicemix.specs/org.apache.servicemix.specs.stax-api-1.0/1.8.0</bundle>
+    <bundle>mvn:org.apache.geronimo.specs/geronimo-activation_1.1_spec/1.0.2</bundle>
+    <feature version='2.2'>jaxb-api</feature>
+    <bundle>mvn:org.apache.geronimo.specs/geronimo-jta_1.1_spec/1.1.1</bundle>
+    <bundle>mvn:org.apache.felix/javax.servlet/1.0.0</bundle>
+    <bundle>mvn:org.hsqldb/hsqldb/2.2.8</bundle>
+  </feature>
+  <feature name='muse-tools' version='2.2.0'>
+    <bundle>mvn:muse/muse-tools/2.2.0</bundle>
+  </feature>
+  <feature name='bcprov-jdk16' version='140'>
+    <bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.bcprov-jdk16/1.46_3</bundle>
+  </feature>
+  <feature name='muse-complete' version='2.2.0'>
+    <bundle>mvn:muse.osgi-bundles/muse-complete/2.2.0</bundle>
+  </feature>
+ 
+  <feature name='sun-xacml' version='2.0'>
+    <bundle>mvn:sun-xacml/sun-xacml-bundle/2.0</bundle>
+  </feature>
+  <feature name='jta' version='1.1'>
+    <bundle>mvn:org.apache.geronimo.specs/geronimo-jta_1.1_spec/1.1.1</bundle>
+  </feature>
+  <feature name='database' version='${project.version}'>
+    <feature version='${osgi.version}'>org.osgi.compendium</feature>
+    <bundle>mvn:org.apache.geronimo.specs/geronimo-jpa_2.0_spec/1.1</bundle>
+    <bundle>mvn:org.opennaas/org.opennaas.extensions.idb.database/${project.version}</bundle>
+  </feature>
+   <feature name='org.opennaas.extensions.idb.serviceinterface' version='${project.version}'>
+    <bundle>mvn:org.apache.servicemix.specs/org.apache.servicemix.specs.stax-api-1.0/1.8.0</bundle>
+    <bundle>mvn:org.apache.geronimo.specs/geronimo-activation_1.1_spec/1.0.2</bundle>
+     <feature version='2.2'>jaxb-api</feature>
+    <bundle>mvn:org.apache.felix/javax.servlet/1.0.0</bundle>
+    <bundle>mvn:org.opennaas/org.opennaas.extensions.idb.serviceinterface/${project.version}</bundle>
+  </feature>
+  <feature name='adapter-dummy' version='${project.version}'>
+    <bundle>mvn:org.opennaas/org.opennaas.extensions.idb.da.dummy/${project.version}</bundle>
+  </feature>
+ 
+  <feature name='slf4j-log4j12' version='1.6.1'>
+    <bundle>mvn:org.slf4j/slf4j-log4j12/1.6.1</bundle>
+  </feature>
+  <feature name='openjpa' version='2.2.0'>
+   <bundle>mvn:commons-pool/commons-pool/1.5.4</bundle>
+    <bundle>mvn:commons-lang/commons-lang/2.5</bundle>
+	<bundle dependency="true">mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.commons-dbcp/${commons.dbcp.version}</bundle>
+    <bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.commons-collections/${commons.collections.version}</bundle>
+    <bundle>mvn:org.apache.servicemix.specs/org.apache.servicemix.specs.stax-api-1.0/1.8.0</bundle>
+    <bundle>mvn:org.apache.geronimo.specs/geronimo-activation_1.1_spec/1.0.2</bundle>
+     <feature version='2.2'>jaxb-api</feature>
+    <bundle>mvn:org.apache.geronimo.specs/geronimo-jta_1.1_spec/1.1.1</bundle>
+    <bundle>mvn:org.apache.felix/javax.servlet/1.0.0</bundle>
+    <feature version='${osgi.version}'>org.osgi.compendium</feature>
+    <bundle>mvn:org.apache.geronimo.specs/geronimo-jpa_2.0_spec/1.1</bundle>
+    <bundle>mvn:org.apache.geronimo.specs/geronimo-jms_1.1_spec/1.1.1</bundle> 
+    <bundle>mvn:org.apache.openjpa/openjpa/${openjpa.version}</bundle>
+        <bundle>mvn:org.hsqldb/hsqldb/2.2.8</bundle>
+  </feature>
+  <feature name='org.opennaas.core.resources' version='${project.version}'>
+   <bundle>mvn:org.springframework/spring-core/3.0.5.RELEASE</bundle>
+    <bundle>mvn:org.springframework/spring-expression/3.0.5.RELEASE</bundle>
+    <bundle>mvn:org.springframework/spring-beans/3.0.5.RELEASE</bundle>
+    <bundle>mvn:org.springframework/spring-aop/3.0.5.RELEASE</bundle>
+    <bundle>mvn:org.springframework/spring-context/3.0.5.RELEASE</bundle>
+    <bundle>mvn:org.apache.aries/org.apache.aries.util/0.3</bundle>
+    <bundle>mvn:org.apache.aries.proxy/org.apache.aries.proxy.api/0.3</bundle>
+    <bundle>mvn:org.apache.aries.blueprint/org.apache.aries.blueprint/0.3.1</bundle>
+    <bundle>mvn:org.springframework/spring-asm/3.0.5.RELEASE</bundle>
+    <feature version='${openjpa.version}'>openjpa</feature>
+    <bundle>mvn:org.opennaas/org.opennaas.core.persistence/${project.version}</bundle>
+    <bundle>mvn:org.hsqldb/com.springsource.org.hsqldb/1.8.0.10</bundle> 
+    <bundle>mvn:org.opennaas/org.opennaas.core.resources/${project.version}</bundle>
+  </feature>
+ 
+  <feature name='org.opennaas.extensions.queuemanager' version='${project.version}'>
+    <feature version='${project.version}'>org.opennaas.core.resources</feature>
+    <bundle>mvn:org.apache.felix/org.apache.felix.gogo.runtime/0.10.0</bundle>
+    <bundle>mvn:org.opennaas/org.opennaas.extensions.queuemanager/${project.version}</bundle>
+  </feature>
+   <feature name='guava' version='12.0'>
+    <bundle>mvn:com.google.guava/guava/12.0</bundle>
+  </feature>
+  <feature name='org.apache.karaf.shell.console' version='2.2.2-fuse-04-06'>
+    <feature version='${osgi.version}'>org.osgi.compendium</feature>
+<feature version='${osgi.version}'>org.osgi.core</feature>
+    <bundle>mvn:org.apache.aries.blueprint/org.apache.aries.blueprint/0.3.1</bundle>
+    <bundle>mvn:org.apache.karaf.jaas/org.apache.karaf.jaas.boot/2.2.2-fuse-04-06</bundle>
+    <bundle>mvn:org.apache.karaf.jaas/org.apache.karaf.jaas.config/2.2.2-fuse-04-06</bundle>
+    <bundle>mvn:org.apache.karaf.jaas/org.apache.karaf.jaas.modules/2.2.2-fuse-04-06</bundle>
+    <bundle>mvn:org.apache.aries/org.apache.aries.util/0.3</bundle>
+    <bundle>mvn:org.apache.aries.proxy/org.apache.aries.proxy.api/0.3</bundle>
+    <bundle>mvn:org.apache.karaf.shell/org.apache.karaf.shell.console/2.2.2-fuse-04-06</bundle>
+  </feature>
+    <feature name='joda-time' version='${jodatime.version}'>
+    <bundle>mvn:joda-time/joda-time/${jodatime.version}</bundle>
+  </feature>
+  <feature name='easymock' version='3.1'>
+    <bundle>mvn:org.easymock/easymock/3.1</bundle>
+  </feature>
+  <feature name='easymockclassextension' version='3.1'>
+    <feature version='3.1'>easymock</feature>
+    <bundle>mvn:org.easymock/easymockclassextension/3.1</bundle>
+  </feature>
+  <feature name='org.osgi.core' version='${osgi.version}'>
+    <bundle>mvn:org.osgi/org.osgi.core/${osgi.version}</bundle>
+  </feature>
+  <feature name='org.osgi.compendium' version='${osgi.version}'>
+    <feature version='${osgi.version}'>org.osgi.core</feature>
+    <bundle>mvn:org.apache.felix/javax.servlet/1.0.0</bundle>
+    <bundle>mvn:org.osgi/org.osgi.compendium/${osgi.version}</bundle>
+  </feature>
+  <feature name='slf4j-api' version='1.6.1'>
+    <feature version='1.6.1'>slf4j-log4j12</feature>
+    <bundle>mvn:org.slf4j/slf4j-api/1.6.1</bundle>
+  </feature>
+  
+  <feature name='log4j-over-slf4j' version='1.6.1'>
+    <feature version='1.6.1'>slf4j-api</feature>
+    <bundle>mvn:org.slf4j/log4j-over-slf4j/1.6.1</bundle>
+  </feature>
+  <feature name='pax-logging-api' version='1.6.5'>
+    <feature version='${osgi.version}'>org.osgi.compendium</feature>
+    <bundle>mvn:org.ops4j.pax.logging/pax-logging-api/1.6.5</bundle>
+  </feature>
+  <feature name='pax-logging-service' version='1.6.5'>
+    <feature version='1.6.5'>pax-logging-api</feature>
+    <feature version='1.4.4'>mail</feature>
+    <bundle>mvn:org.apache.geronimo.specs/geronimo-jta_1.1_spec/1.1.1</bundle>
+    <bundle>mvn:org.apache.geronimo.specs/geronimo-jms_1.1_spec/1.1.1</bundle>
+    <bundle>mvn:org.ops4j.pax.logging/pax-logging-service/1.6.5</bundle>
+  </feature>
+  <feature name='cglib' version='2.2.2'>
+  <bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.cglib/${servicemix.cglib.version}</bundle>
+  </feature>
+  <feature name='jaxb-api' version='2.2'>
+    <bundle>mvn:org.apache.servicemix.specs/org.apache.servicemix.specs.jaxb-api-2.2/1.8.0</bundle>
+    <bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.xerces/2.10.0_1</bundle>
+  </feature>
 	
 </features>

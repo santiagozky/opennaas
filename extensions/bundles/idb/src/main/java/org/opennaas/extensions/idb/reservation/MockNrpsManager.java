@@ -59,7 +59,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.StatusType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetStatusResponseType.ServiceStatus;
 import org.opennaas.extensions.idb.serviceinterface.databinding.utils.WebserviceUtils;
 import org.opennaas.extensions.idb.serviceinterface.reservation.SimpleReservationClient;
-import org.opennaas.core.resources.helpers.Config;
+import org.opennaas.extensions.idb.serviceinterface.utils.Config;
 import org.opennaas.core.resources.helpers.Helpers;
 
 import org.opennaas.extensions.idb.Constants;
@@ -163,6 +163,7 @@ public final class MockNrpsManager implements IManager {
 	 *            Hashtable < Domain, ActivateType >
 	 * @return Hashtable < Domain, ActivateResponseType >
 	 */
+	@Override
 	public Hashtable<Domain, ActivateResponseType> activateReservation(
 			final Hashtable<Domain, ActivateType> element) throws SoapFault,
 			DatabaseException {
@@ -206,6 +207,7 @@ public final class MockNrpsManager implements IManager {
 	 *            Hashtable < Domain, CancelReservationType >
 	 * @return Hashtable < Domain, CancelreservatioNResponseType >
 	 */
+	@Override
 	public Hashtable<Domain, CancelReservationResponseType> cancelReservation(
 			final Hashtable<Domain, CancelReservationType> element)
 			throws SoapFault, DatabaseException {
@@ -326,6 +328,7 @@ public final class MockNrpsManager implements IManager {
 	 *            Hashtable < Domain, CreatReservationtype >
 	 * @return Hashtable < Domain, CreateReservationResponseType >
 	 */
+	@Override
 	public Hashtable<Domain, CreateReservationResponseType> createReservation(
 			final Hashtable<Domain, CreateReservationType> element)
 			throws SoapFault, DatabaseException {
@@ -426,6 +429,7 @@ public final class MockNrpsManager implements IManager {
 	 *            Hashtable < Domain, GetStatusType >
 	 * @return Hashtable < Domain, GetStatusResponseType >
 	 */
+	@Override
 	public Hashtable<Domain, GetStatusResponseType> getStatus(
 			final Hashtable<Domain, GetStatusType> element) throws SoapFault,
 			DatabaseException {
@@ -549,6 +553,7 @@ public final class MockNrpsManager implements IManager {
 	 *            Hashtable < Domain, IsAvailableType >
 	 * @return Hashtable < Domain, IsAvailableresponseType >
 	 */
+	@Override
 	public Hashtable<Domain, IsAvailableResponseType> isAvailable(
 			final Hashtable<Domain, IsAvailableType> element) throws SoapFault,
 			DatabaseException {

@@ -43,7 +43,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DomainInfor
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DomainRelationshipType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.EndpointType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.InterdomainLinkType;
-import org.opennaas.core.resources.helpers.Config;
+import org.opennaas.extensions.idb.serviceinterface.utils.Config;
 
 /**
  * This class provides base functionality for a domain to exchange topology

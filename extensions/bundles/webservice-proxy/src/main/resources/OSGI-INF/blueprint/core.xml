@@ -78,4 +78,6 @@ the License. -->
     <jaxws:client id="protocolSessionManagerServiceProxy" serviceClass="org.opennaas.extensions.ws.services.IProtocolSessionManagerService" address="http://0.0.0.0:8182/cxf/protocolSessionManagerService" />
     <service ref="protocolSessionManagerServiceProxy" interface="org.opennaas.extensions.ws.services.IProtocolSessionManagerService" />
     
+    
+    
 </blueprint>

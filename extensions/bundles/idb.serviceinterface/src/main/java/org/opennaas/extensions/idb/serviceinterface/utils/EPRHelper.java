@@ -33,7 +33,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.muse.ws.addressing.EndpointReference;
 import org.apache.muse.ws.addressing.WsaConstants;
 
-import org.opennaas.core.resources.helpers.Config;
+import org.opennaas.extensions.idb.serviceinterface.utils.Config;
 import org.opennaas.core.resources.helpers.Helpers;
 
 

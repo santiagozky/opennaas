@@ -1,11 +1,11 @@
 /**
-*  This code is part of the Harmony System implemented in Work Package 1 
-*  of the Phosphorus project. This work is supported by the European 
-*  Comission under the Sixth Framework Programme with contract number 
-*  IST-034115.
-*
-*  Copyright (C) 2006-2009 Phosphorus WP1 partners. Phosphorus Consortium.
-*  http://ist-phosphorus.eu/
+ *  This code is part of the Harmony System implemented in Work Package 1 
+ *  of the Phosphorus project. This work is supported by the European 
+ *  Comission under the Sixth Framework Programme with contract number 
+ *  IST-034115.
+ *
+ *  Copyright (C) 2006-2009 Phosphorus WP1 partners. Phosphorus Consortium.
+ *  http://ist-phosphorus.eu/
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -23,7 +23,6 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 
-
 package org.opennaas.extensions.idb;
 
 /**
@@ -35,12 +34,12 @@ public class Constants {
 	public static final String hibernateProperties = "hibernate";
 
 	/** Name of the HSI properties file. */
-	public static final String hsiProperties = "hsiIDB";
+	public static final String hsiProperties = "resources.hsiIDB";
 
 	/** Name of the IDB properties file. */
-	public static final String idbProperties = "idb";
+	public static final String idbProperties = "resources.idb";
 
 	/** Name of the test properties file. */
-	public static final String testProperties = "test";
+	public static final String testProperties = "resources.test";
 
 }

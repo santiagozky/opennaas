@@ -43,7 +43,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.PublishType
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.RemoveTopicResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.RemoveTopicType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.TopicNotFoundFaultException;
-import org.opennaas.core.resources.helpers.Config;
+import org.opennaas.extensions.idb.serviceinterface.utils.Config;
 
 import org.opennaas.extensions.idb.database.hibernate.Subscription;
 import org.opennaas.extensions.idb.exception.database.DatabaseException;

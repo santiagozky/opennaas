@@ -16,4 +16,27 @@
         </command>
     </command-bundle>
 
+	<!--idb notifications-->
+    <cxf:bus id="idbNotificationCapabilityServiceBus"></cxf:bus>
+	<bean id="idbNotificationCapabilityServiceImpl" class="org.opennaas.extensions.idb.notification.NotificationImpl">
+		
+	</bean>
+    <jaxws:endpoint  implementor="#idbNotificationCapabilityServiceImpl" address="http://0.0.0.0:8182/cxf/NotificationCapabilityService"  />
+	
+	<!--idb reservation-->
+    <cxf:bus id="idbReservationCapabilityServiceBus"></cxf:bus>
+	<bean id="idbReservationCapabilityServiceImpl" class="org.opennaas.extensions.idb.reservation.ReservationImpl">
+		
+	</bean>
+    <jaxws:endpoint  implementor="#idbReservationCapabilityServiceImpl" address="http://0.0.0.0:8182/cxf/ReservationCapabilityService"  />
+	
+	
+	<!--idb notifications-->
+    <cxf:bus id="idbTopologyCapabilityServiceBus"></cxf:bus>
+	<bean id="idbTopologyCapabilityServiceImpl" class="org.opennaas.extensions.idb.topology.TopologyImpl">
+		
+	</bean>
+    <jaxws:endpoint  implementor="#idbTopologyCapabilityServiceImpl" address="http://0.0.0.0:8182/cxf/TopologyCapabilityService"  />
+	
+	
 </blueprint>

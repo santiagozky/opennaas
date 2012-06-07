@@ -4,7 +4,7 @@
 	<parent>
 		<artifactId>org.opennaas.extensions.bundles</artifactId>
 		<groupId>org.opennaas</groupId>
-		<version>0.10-SNAPSHOT</version>
+		<version>0.11-SNAPSHOT</version>
 	</parent>
 	<!-- POM id -->
 	<artifactId>org.opennaas.extensions.idb</artifactId>
@@ -161,16 +161,13 @@
 			<groupId>org.osgi</groupId>
 			<artifactId>org.osgi.core</artifactId>
 		</dependency>
+
 		<dependency>
-			<groupId>org.osgi</groupId>
-			<artifactId>org.osgi.compendium</artifactId>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.18</version>
 		</dependency>
-		<dependency>
-		<groupId>org.apache.cxf.dosgi</groupId>
-<artifactId>cxf-dosgi-ri-multibundle-distribution</artifactId>
-<version>1.3.1</version>
-</dependency>
-</dependencies>
+	</dependencies>
 		<build>
 			<resources>
 				<resource>
@@ -235,6 +232,7 @@
 							<Import-Package>*</Import-Package>
 							<Export-Package>org.opennaas.extensions.idb.*;version="${project.version}"</Export-Package>
 							<Meta-Persistence>META-INF/persistence.xml</Meta-Persistence>
+							<Bundle-ClassPath>.</Bundle-ClassPath>
 						</instructions>
 					</configuration>
 				</plugin>

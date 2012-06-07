@@ -90,8 +90,6 @@ public final class ReservationOperationsHandler {
 	/** Log instance. */
 	private final Log logger = LogFactory.getLog(this.getClass());
 
-	private Log performanceLogger = null;
-
 	/**
 	 * Private constructor: Singleton.
 	 */
@@ -100,16 +98,7 @@ public final class ReservationOperationsHandler {
 	}
 
 	private Log getPerformanceLogger() {
-		if (this.performanceLogger == null) {
-			try {
-				this.performanceLogger = ReservationRequestHandler
-						.getInstance().getPerformanceLogger();
-			} catch (SoapFault e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		return this.performanceLogger;
+		return logger;
 	}
 
 	/**

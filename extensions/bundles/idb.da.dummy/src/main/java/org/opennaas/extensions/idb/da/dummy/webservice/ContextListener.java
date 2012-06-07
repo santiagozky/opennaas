@@ -34,7 +34,7 @@ import org.apache.commons.logging.LogFactory;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DomainInformationType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.EndpointType;
 import org.opennaas.extensions.idb.serviceinterface.topology.registrator.AbstractTopologyRegistrator;
-import org.opennaas.core.resources.helpers.Config;
+import org.opennaas.extensions.idb.serviceinterface.utils.Config;
 
 /**
  * @author Alexander Willner (willner@cs.uni-bonn.de)

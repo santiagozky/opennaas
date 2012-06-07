@@ -59,7 +59,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.
 import org.opennaas.extensions.idb.serviceinterface.databinding.utils.JaxbSerializer;
 import org.opennaas.extensions.idb.serviceinterface.topology.registrator.AbstractTopologyRegistrator;
 import org.opennaas.extensions.idb.serviceinterface.utils.ForwardingHelper;
-import org.opennaas.core.resources.helpers.Config;
+import org.opennaas.extensions.idb.serviceinterface.utils.Config;
 
 /**
  * @author willner

@@ -35,11 +35,11 @@ import javax.servlet.ServletContextListener;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.opennaas.core.resources.helpers.Config;
 
 import org.opennaas.extensions.idb.database.hibernate.Subscription;
 import org.opennaas.extensions.idb.exception.database.DatabaseException;
 import org.opennaas.extensions.idb.notification.producer.NotificationProducerHandler;
+import org.opennaas.extensions.idb.serviceinterface.utils.Config;
 
 public class NotificationInitiator implements ServletContextListener {
 

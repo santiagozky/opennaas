@@ -44,7 +44,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetDomainsR
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetEndpointsResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetLinksResponseType;
 import org.opennaas.extensions.idb.serviceinterface.topology.SimpleTopologyClient;
-import org.opennaas.core.resources.helpers.Config;
+import org.opennaas.extensions.idb.serviceinterface.utils.Config;
 
 /**
  * @author Alexander Willner (willner@cs.uni-bonn.de)

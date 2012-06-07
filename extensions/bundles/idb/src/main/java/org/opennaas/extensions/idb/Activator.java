@@ -4,8 +4,8 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.Properties;
 
-import org.opennaas.extensions.idb.notification.handler.INotification;
-import org.opennaas.extensions.idb.notification.handler.NotificationRequestHandler;
+import org.opennaas.extensions.idb.notification.INotification;
+import org.opennaas.extensions.idb.notification.NotificationImpl;
 import org.opennaas.extensions.queuemanager.IQueueManagerCapability;
 
 import org.apache.commons.logging.Log;
@@ -49,7 +49,7 @@ public class Activator extends AbstractActivator implements BundleActivator {
 		// "http://localhost:8181/Notifications");
 
 		// registration = context.registerService(INotification.class.getName(),
-		// NotificationRequestHandler.getInstance(), props);
+		// NotificationImpl.getInstance(), props);
 	}
 
 	/**

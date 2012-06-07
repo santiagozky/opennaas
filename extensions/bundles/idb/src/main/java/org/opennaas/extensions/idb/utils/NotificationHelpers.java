@@ -42,7 +42,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.UnexpectedFaultException;
 import org.opennaas.extensions.idb.serviceinterface.databinding.utils.WebserviceUtils;
 import org.opennaas.extensions.idb.serviceinterface.notification.SimpleNotificationClient;
-import org.opennaas.core.resources.helpers.Config;
+import org.opennaas.extensions.idb.serviceinterface.utils.Config;
 
 import org.opennaas.extensions.idb.Constants;
 import org.opennaas.extensions.idb.database.hibernate.Domain;

@@ -55,7 +55,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.IsAvailable
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.IsAvailableType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.utils.JaxbSerializer;
 import org.opennaas.extensions.idb.serviceinterface.reservation.SimpleReservationClient;
-import org.opennaas.core.resources.helpers.Config;
+import org.opennaas.extensions.idb.serviceinterface.utils.Config;
 
 import org.opennaas.extensions.idb.Constants;
 import org.opennaas.extensions.idb.database.hibernate.Domain;

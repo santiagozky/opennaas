@@ -51,12 +51,11 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.IsAvailable
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.IsAvailableType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.TimeoutFaultException;
 import org.opennaas.extensions.idb.serviceinterface.databinding.utils.WebserviceUtils;
-import org.opennaas.core.resources.helpers.Config;
+import org.opennaas.extensions.idb.serviceinterface.utils.Config;
 
 import org.opennaas.extensions.idb.Constants;
 import org.opennaas.extensions.idb.database.hibernate.Domain;
 import org.opennaas.extensions.idb.exception.database.DatabaseException;
-import org.opennaas.extensions.idb.reservation.handler.ReservationRequestHandler;
 
 /**
  * This class is intended to manage the requests to the NRPSs. Each operation of
@@ -115,7 +114,6 @@ public final class AdapterManager implements IManager {
 	private final Log logger;
 
 	/** PerformanceLogger. */
-	private final Log performanceLogger;
 
 	/** Timeout for the NRPS responses (in milliseconds) */
 	private final long nrpsTimeout;
@@ -131,14 +129,6 @@ public final class AdapterManager implements IManager {
 		this.malleable = malleable;
 
 		this.logger = LogFactory.getLog(this.getClass());
-
-		try {
-			this.performanceLogger = ReservationRequestHandler.getInstance()
-					.getPerformanceLogger();
-		} catch (SoapFault e) {
-			throw new RuntimeException(
-					"cannot retrieve performance logger instance", e);
-		}
 
 		this.rollbackList = new HashMap<Domain, Long>();
 
@@ -162,6 +152,7 @@ public final class AdapterManager implements IManager {
 	 * @throws JAXBException
 	 * @throws SoapFault
 	 */
+	@Override
 	public Hashtable<Domain, ActivateResponseType> activateReservation(
 			final Hashtable<Domain, ActivateType> requests) throws SoapFault {
 		final long startTime = System.currentTimeMillis();
@@ -180,7 +171,7 @@ public final class AdapterManager implements IManager {
 			final Domain dom = doms.nextElement();
 
 			threads[i] = new NRPSController(dom, "activateReservation",
-					requests.get(dom), this.malleable, this.performanceLogger);
+					requests.get(dom), this.malleable, this.logger);
 
 			threads[i].activateReservation(requests.get(dom));
 
@@ -226,6 +217,7 @@ public final class AdapterManager implements IManager {
 	 * @throws JAXBException
 	 * @throws SoapFault
 	 */
+	@Override
 	public Hashtable<Domain, CancelReservationResponseType> cancelReservation(
 			final Hashtable<Domain, CancelReservationType> requests)
 			throws SoapFault {
@@ -245,7 +237,7 @@ public final class AdapterManager implements IManager {
 			final Domain dom = doms.nextElement();
 
 			threads[i] = new NRPSController(dom, "cancelReservation",
-					requests.get(dom), this.malleable, this.performanceLogger);
+					requests.get(dom), this.malleable, this.logger);
 
 			threads[i].cancelReservation(requests.get(dom));
 
@@ -309,6 +301,7 @@ public final class AdapterManager implements IManager {
 	 * 
 	 * @return Hasthtable with the results for each NRPS
 	 */
+	@Override
 	public Hashtable<Domain, CreateReservationResponseType> createReservation(
 			final Hashtable<Domain, CreateReservationType> requests)
 			throws SoapFault {
@@ -330,7 +323,7 @@ public final class AdapterManager implements IManager {
 			final Domain dom = doms.nextElement();
 
 			threads[i] = new NRPSController(dom, "createReservation",
-					requests.get(dom), this.malleable, this.performanceLogger);
+					requests.get(dom), this.malleable, this.logger);
 
 			threads[i].createReservation(requests.get(dom));
 
@@ -408,7 +401,7 @@ public final class AdapterManager implements IManager {
 			final Domain dom = doms.nextElement();
 
 			threads[i] = new NRPSController(dom, "getReservations",
-					requests.get(dom), this.malleable, this.performanceLogger);
+					requests.get(dom), this.malleable, this.logger);
 
 			threads[i].getReservations(requests.get(dom));
 
@@ -449,6 +442,7 @@ public final class AdapterManager implements IManager {
 	 * @throws JAXBException
 	 * @throws SoapFault
 	 */
+	@Override
 	public Hashtable<Domain, GetStatusResponseType> getStatus(
 			final Hashtable<Domain, GetStatusType> requests) throws SoapFault {
 
@@ -468,7 +462,7 @@ public final class AdapterManager implements IManager {
 			final Domain dom = doms.nextElement();
 
 			threads[i] = new NRPSController(dom, "getStatus",
-					requests.get(dom), this.malleable, this.performanceLogger);
+					requests.get(dom), this.malleable, this.logger);
 
 			threads[i].getStatus(requests.get(dom));
 
@@ -501,6 +495,7 @@ public final class AdapterManager implements IManager {
 		return response;
 	}
 
+	@Override
 	public Hashtable<Domain, IsAvailableResponseType> isAvailable(
 			final Hashtable<Domain, IsAvailableType> requests) throws SoapFault {
 
@@ -554,8 +549,7 @@ public final class AdapterManager implements IManager {
 				final Domain dom = doms.nextElement();
 
 				threads[i] = new NRPSController(dom, "isAvailable",
-						auxRequests.get(dom), this.malleable,
-						this.performanceLogger);
+						auxRequests.get(dom), this.malleable, this.logger);
 
 				threads[i].isAvailable(auxRequests.get(dom));
 
@@ -596,12 +590,12 @@ public final class AdapterManager implements IManager {
 	}
 
 	private void logResponse(final long startTime) {
-		this.performanceLogger.info("NrpsManager_response_time "
+		logger.info("NrpsManager_response_time "
 				+ (System.currentTimeMillis() - startTime) + "ms");
 	}
 
 	private void logTotalDuration(final long startTime) {
-		this.performanceLogger.info("NrpsManager_total_time "
+		logger.info("NrpsManager_total_time "
 				+ (System.currentTimeMillis() - startTime) + "ms");
 	}
 

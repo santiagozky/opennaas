@@ -48,8 +48,8 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.Notificatio
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.NotificationResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.NotificationType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.StatusType;
+import org.opennaas.extensions.idb.serviceinterface.utils.Config;
 import org.opennaas.extensions.idb.utils.NotificationTopic;
-import org.opennaas.core.resources.helpers.Config;
 
 import org.opennaas.extensions.idb.Constants;
 import org.opennaas.extensions.idb.database.hibernate.NrpsConnections;
@@ -129,6 +129,7 @@ public class NotificationConsumerHandler implements INotificationConsumer {
 	/**
 	 * implemented notification method
 	 */
+	@Override
 	public NotificationResponseType notification(final NotificationType message) {
 		this.logger.debug("Got Message from Topic: " + message.getTopic());
 		final NotificationTopic topic = new NotificationTopic(

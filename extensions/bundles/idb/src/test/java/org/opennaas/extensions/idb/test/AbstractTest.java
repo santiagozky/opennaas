@@ -28,7 +28,6 @@ package org.opennaas.extensions.idb.test;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-
 import org.opennaas.extensions.idb.Constants;
 
 /**
@@ -42,7 +41,7 @@ public abstract class AbstractTest {
 	/**
 	 * General timeout for a test.
 	 */
-	protected static final int TIMEOUT = 5 * 60 * 1000;
+	public static final int TIMEOUT = 5 * 60 * 1000;
 
 	protected Log logger = LogFactory.getLog(Constants.testProperties);
 }
