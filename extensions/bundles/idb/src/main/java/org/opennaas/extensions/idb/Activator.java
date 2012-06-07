@@ -4,8 +4,8 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.Properties;
 
-import org.opennaas.extensions.idb.notification.INotification;
-import org.opennaas.extensions.idb.notification.NotificationImpl;
+import org.opennaas.extensions.idb.notification.INotificationCapabilityService;
+import org.opennaas.extensions.idb.notification.NotificationCapabilityServiceImpl;
 import org.opennaas.extensions.queuemanager.IQueueManagerCapability;
 
 import org.apache.commons.logging.Log;
@@ -48,8 +48,8 @@ public class Activator extends AbstractActivator implements BundleActivator {
 		// props.put("osgi.remote.configuration.pojo.address",
 		// "http://localhost:8181/Notifications");
 
-		// registration = context.registerService(INotification.class.getName(),
-		// NotificationImpl.getInstance(), props);
+		// registration = context.registerService(INotificationCapabilityService.class.getName(),
+		// NotificationCapabilityServiceImpl.getInstance(), props);
 	}
 
 	/**

@@ -53,8 +53,8 @@ import org.opennaas.extensions.idb.database.hibernate.Endpoint;
 import org.opennaas.extensions.idb.database.hibernate.Reservation;
 import org.opennaas.extensions.idb.database.hibernate.Service;
 import org.opennaas.extensions.idb.exception.database.DatabaseException;
-import org.opennaas.extensions.idb.reservation.IReservation;
-import org.opennaas.extensions.idb.reservation.ReservationImpl;
+import org.opennaas.extensions.idb.reservation.IReservationCapabilityServicce;
+import org.opennaas.extensions.idb.reservation.ReservationCapabilityServiceImpl;
 import org.opennaas.extensions.idb.utils.ReservationHelpers;
 import org.opennaas.extensions.idb.utils.TopologyHelpers;
 
@@ -66,7 +66,7 @@ public class TestReservationManagementHandler extends TestCase {
 		super();
 	}
 
-	private static IReservation handler;
+	private static IReservationCapabilityServicce handler;
 	private static Domain sourceDomain;
 	private static Domain destinationDomain;
 	private static Reservation testReservation;
@@ -82,7 +82,7 @@ public class TestReservationManagementHandler extends TestCase {
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		TestReservationManagementHandler.handler = new ReservationImpl();
+		TestReservationManagementHandler.handler = new ReservationCapabilityServiceImpl();
 		TestReservationManagementHandler.sourceDomain = TopologyHelpers
 				.getTestDomain("TRMH-SourceDomain");
 		Endpoint end1 = (Endpoint) TestReservationManagementHandler.sourceDomain

@@ -47,7 +47,7 @@ import org.opennaas.extensions.idb.database.hibernate.Endpoint;
 import org.opennaas.extensions.idb.database.hibernate.InterDomainLink;
 import org.opennaas.extensions.idb.database.hibernate.TNAPrefix;
 import org.opennaas.extensions.idb.exception.database.DatabaseException;
-import org.opennaas.extensions.idb.topology.TopologyImpl;
+import org.opennaas.extensions.idb.topology.TopologyCapabilityServiceImpl;
 
 public class ContextListener extends AbstractTopologyRegistrator {
 	public static final String interdomainPropertyFile = Constants.hsiProperties;
@@ -201,7 +201,7 @@ public class ContextListener extends AbstractTopologyRegistrator {
 		try {
 			d = this.domain.clone();
 			d.unsetTNAPrefix();
-			return new TopologyImpl().addOrEditDomain(d, false);
+			return new TopologyCapabilityServiceImpl().addOrEditDomain(d, false);
 		} catch (final CloneNotSupportedException e) {
 			// this is impossible, clone support is automatically added to the
 			// JAXB classes

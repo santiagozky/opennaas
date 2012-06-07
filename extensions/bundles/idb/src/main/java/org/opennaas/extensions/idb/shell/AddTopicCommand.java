@@ -3,8 +3,8 @@ package org.opennaas.extensions.idb.shell;
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
 import org.opennaas.core.resources.shell.GenericKarafCommand;
-import org.opennaas.extensions.idb.notification.INotification;
-import org.opennaas.extensions.idb.notification.NotificationImpl;
+import org.opennaas.extensions.idb.notification.INotificationCapabilityService;
+import org.opennaas.extensions.idb.notification.NotificationCapabilityServiceImpl;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AddTopicResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AddTopicType;
 
@@ -20,7 +20,7 @@ public class AddTopicCommand extends GenericKarafCommand {
 		try {
 			AddTopicType type = new AddTopicType();
 			type.setTopic(topicName);
-			INotification handler = new NotificationImpl();
+			INotificationCapabilityService handler = new NotificationCapabilityServiceImpl();
 			AddTopicResponseType response = handler.addTopic(type);
 			if (response.isResult()) {
 				printInfo("topic added");
