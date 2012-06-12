@@ -10,28 +10,28 @@
 	<packaging>bundle</packaging>
 	<name>IDB service interface</name>
 	<description>IDB service interface bundle</description>
-<properties>
-    <groupId>eu.ist_phosphorus.harmony</groupId>
-    <artifactId>harmony</artifactId>
-    <version>1.0</version>
-    <resources.dir>src/main/resources</resources.dir>
-    <webservices.dir>${resources.dir}/webservices</webservices.dir>
-    <scripts.dir>${resources.dir}/scripts</scripts.dir>
-    <muse.dir>/home/santiago/tools/muse</muse.dir>
-    <src.dir>${basedir}/src</src.dir>
-    <log.dir>${basedir}/log</log.dir>
-    <temp.dir>${basedir}/temp</temp.dir>
-</properties>
+	<properties>
+		<groupId>eu.ist_phosphorus.harmony</groupId>
+		<artifactId>harmony</artifactId>
+		<version>1.0</version>
+		<resources.dir>src/main/resources</resources.dir>
+		<webservices.dir>${resources.dir}/webservices</webservices.dir>
+		<scripts.dir>${resources.dir}/scripts</scripts.dir>
+		<muse.dir>/home/santiago/tools/muse</muse.dir>
+		<src.dir>${basedir}/src</src.dir>
+		<log.dir>${basedir}/log</log.dir>
+		<temp.dir>${basedir}/temp</temp.dir>
+	</properties>
 	<build>
 		<directory>target</directory>
 		<outputDirectory>target/classes</outputDirectory>
 		<finalName>idb</finalName>
 
-		
+
 
 
 		<plugins>
-		
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -41,32 +41,19 @@
 				</configuration>
 			</plugin>
 			<plugin>
-        <artifactId>maven-clean-plugin</artifactId>
-        <version>2.4.1</version>
-        <executions>
-          <execution>
-            <id>auto-clean</id>
-            <phase>initialize</phase>
-            <goals>
-              <goal>clean</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-			<!-- <plugin> <groupId>org.apache.cxf</groupId> <artifactId>cxf-codegen-plugin</artifactId> 
-				<version>2.6.0</version> <executions> <execution> <id>generate-sources</id> 
-				<phase>generate-sources</phase> <configuration> <sourceRoot>${project.build.directory}/generated-sources/xsdClasses</sourceRoot> 
-				<wsdlOptions> <wsdlOption> <wsdl>${webservices.dir}/Topology-WS.wsdl</wsdl> 
-				<extraargs> <extraarg>-client</extraarg> <extraarg>-server</extraarg> <extraarg>-p</extraarg> 
-				<extraarg> org.opennaas.extensions.idb.serviceinterface.topology</extraarg> 
-				</extraargs> </wsdlOption> <wsdlOption> <wsdl>${webservices.dir}/Notification-WS.wsdl</wsdl> 
-				<extraargs> <extraarg>-client</extraarg> <extraarg>-server</extraarg> <extraarg>-p</extraarg> 
-				<extraarg> org.opennaas.extensions.idb.serviceinterface.notification</extraarg> 
-				</extraargs> </wsdlOption> <wsdlOption> <wsdl>${webservices.dir}/Reservation-WS.wsdl</wsdl> 
-				<extraargs> <extraarg>-client</extraarg> <extraarg>-server</extraarg> <extraarg>-p</extraarg> 
-				<extraarg> org.opennaas.extensions.idb.serviceinterface.reservation</extraarg> 
-				</extraargs> </wsdlOption> </wsdlOptions> </configuration> <goals> <goal>wsdl2java</goal> 
-				</goals> </execution> </executions> </plugin> -->
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>2.4.1</version>
+				<executions>
+					<execution>
+						<id>auto-clean</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>clean</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
 			<!-- plugin to generate classes from xsd files, using jaxb2 plugin -->
 			<plugin>
 				<groupId>org.jvnet.jaxb2.maven2</groupId>
@@ -94,38 +81,34 @@
 								<include>bindings.xjb</include>
 							</bindingIncludes>
 							<extension>true</extension>
-							
+
 						</configuration>
 					</execution>
 
 				</executions>
-</plugin>
+			</plugin>  
 			<!-- to execute external perl script -->
 
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
 				<version>1.2</version>
-
-
 				<executions>
-					<execution>
-						<id>make classes clonable</id><!-- using the -Xcopyable seems not to 
-							work ok -->
-						<phase>process-sources</phase>
-						<goals>
-							<goal>exec</goal>
-						</goals>
-						<configuration>
-							<executable>perl</executable>
-							<arguments>
-								<argument>${scripts.dir}/makeJaxbClassesClonable.pl</argument>
-								<argument>${project.build.directory}/generated-sources/xsdClasses/org/opennaas/extensions/idb/serviceinterface/databinding/jaxb </argument>
+<!-- 					<execution> -->
+<!-- 						<id>make classes clonable</id> -->
+<!-- 						<phase>process-sources</phase> -->
+<!-- 						<goals> -->
+<!-- 							<goal>exec</goal> -->
+<!-- 						</goals> -->
+<!-- 						<configuration> -->
+<!-- 							<executable>perl</executable> -->
+<!-- 							<arguments> -->
+<!-- 								<argument>${scripts.dir}/makeJaxbClassesClonable.pl</argument> -->
+<!-- 								<argument>${project.build.directory}/generated-sources/xsdClasses/org/opennaas/extensions/idb/serviceinterface/databinding/jaxb </argument> -->
 
-							</arguments>
-						</configuration>
-					</execution>
-
+<!-- 							</arguments> -->
+<!-- 						</configuration> -->
+<!-- 					</execution> -->
 					<execution>
 						<id>generate exceptions</id>
 						<phase>process-sources</phase>
@@ -141,230 +124,66 @@
 							</arguments>
 						</configuration>
 					</execution>
-
+					
+				</executions>
+			</plugin>
+						<plugin>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-codegen-plugin</artifactId>
+				<version>${cxf.version}</version>
+				<executions>
 					<execution>
-						<id>generate topology server</id>
-						<phase>process-sources</phase>
-						<goals>
-							<goal>exec</goal>
-						</goals>
+						<id>generate-sources</id>
+						<phase>generate-sources</phase>
 						<configuration>
-							<executable>${scripts.dir}/wsdl2java.sh</executable>
-							<arguments>
-								<argument>server</argument>
-								<argument>topology</argument>
-							</arguments>
-							<environmentVariables>
-								<MUSE_HOME>${muse.dir}</MUSE_HOME>
-								<WSDL_HOME>${webservices.dir}</WSDL_HOME>
-								<DIR_SCRIPTS>${scripts.dir}</DIR_SCRIPTS>
-								<DIR_LOG>${log.dir}</DIR_LOG>
-								<DIR_TEMP>${temp.dir}</DIR_TEMP>
-								<DIR_SRC>${project.build.directory}/generated-sources/xsdClasses</DIR_SRC>
-								<DIR_RESOURCES>${resources.dir}</DIR_RESOURCES>
-								<DIR_SERVLET>${temp.dir}/servlets</DIR_SERVLET>
-								<DIR_SERVLET_RESERVATION>${temp.dir}/servlets/reservation</DIR_SERVLET_RESERVATION>
-								<DIR_SERVLET_TOPOLOGY>${temp.dir}/servlets/topology</DIR_SERVLET_TOPOLOGY>
-								<DIR_SERVLET_NOTIFICATION>${temp.dir}/servlets/notification</DIR_SERVLET_NOTIFICATION>
-								<CLASSPATH>${settings.localRepository}/eu/ist_phosphorus/harmony/common-synthesizer/1/common-synthesizer-1.jar</CLASSPATH>
-								<SERVER_FLAGS>-j2ee mini</SERVER_FLAGS>
-								<CLIENT_FLAGS>-synthesizer	org.opennaas.extensions.idb.serviceinterface.synthesizer.ProxySynthesizer -projectizer org.apache.muse.tools.generator.projectizer.ProxyProjectizer</CLIENT_FLAGS>
-								<JAVA_HOME>${env.JAVA_HOME}</JAVA_HOME>
-								<wsdl>Topology-WS.wsdl</wsdl>
-								<ws>${temp.dir}/servlets/topology</ws>
-								<descriptor>Topology-Muse.xml</descriptor>
-								<server>org/opennaas/extensions/idb/serviceinterface/topology</server>
-								<handler>CommonTopologyHandler</handler>
-							</environmentVariables>
+							<sourceRoot>${project.build.directory}/generated-sources/xsdClasses</sourceRoot>
+							<wsdlOptions>
+								<wsdlOption>
+									<wsdl>${webservices.dir}/Topology-WS.wsdl</wsdl>
+									<extraargs>
+										<extraarg>-client</extraarg>
+										<extraarg>-impl</extraarg>
+										<extraarg>-verbose</extraarg>
+										<extraarg>-noTypes</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											org.opennaas.extensions.idb.serviceinterface.databinding.jaxb</extraarg>
+										
+									</extraargs>
+								</wsdlOption>
+								<wsdlOption>
+									<wsdl>${webservices.dir}/Notification-WS.wsdl</wsdl>
+									<extraargs>
+										<extraarg>-client</extraarg>
+										<extraarg>-impl</extraarg>
+										<extraarg>-verbose</extraarg>
+										<extraarg>-noTypes</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											org.opennaas.extensions.idb.serviceinterface.databinding.jaxb</extraarg>
+									</extraargs>
+								</wsdlOption>
+								<wsdlOption>
+									<wsdl>${webservices.dir}/Reservation-WS.wsdl</wsdl>
+									<extraargs>
+										<extraarg>-client</extraarg>
+										<extraarg>-impl</extraarg>
+										<extraarg>-verbose</extraarg>
+										<extraarg>-noTypes</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>
+											org.opennaas.extensions.idb.serviceinterface.databinding.jaxb</extraarg>
+									</extraargs>
+								</wsdlOption>
+							</wsdlOptions>
 						</configuration>
-					</execution>
-					<execution>
-						<id>generate topology client</id>
-						<phase>process-sources</phase>
 						<goals>
-							<goal>exec</goal>
+							<goal>wsdl2java</goal>
 						</goals>
-						<configuration>
-							<executable>${scripts.dir}/wsdl2java.sh</executable>
-							<arguments>
-								<argument>client</argument>
-								<argument>topology</argument>
-							</arguments>
-							<environmentVariables>
-								<MUSE_HOME>${muse.dir}</MUSE_HOME>
-								<WSDL_HOME>${webservices.dir}</WSDL_HOME>
-								<DIR_SCRIPTS>${scripts.dir}</DIR_SCRIPTS>
-								<DIR_LOG>${log.dir}</DIR_LOG>
-								<DIR_TEMP>${temp.dir}</DIR_TEMP>
-								<DIR_SRC>${project.build.directory}/generated-sources/xsdClasses</DIR_SRC>
-								<DIR_RESOURCES>${resources.dir}</DIR_RESOURCES>
-								<DIR_SERVLET>${temp.dir}/servlets</DIR_SERVLET>
-								<DIR_SERVLET_RESERVATION>${temp.dir}/servlets/reservation</DIR_SERVLET_RESERVATION>
-								<DIR_SERVLET_TOPOLOGY>${temp.dir}/servlets/topology</DIR_SERVLET_TOPOLOGY>
-								<DIR_SERVLET_NOTIFICATION>${temp.dir}/servlets/notification</DIR_SERVLET_NOTIFICATION>
-								<CLASSPATH>${settings.localRepository}/eu/ist_phosphorus/harmony/common-synthesizer/1/common-synthesizer-1.jar</CLASSPATH>
-								<SERVER_FLAGS>-j2ee mini</SERVER_FLAGS>
-								<CLIENT_FLAGS>-synthesizer org.opennaas.extensions.idb.serviceinterface.synthesizer.ProxySynthesizer -projectizer org.apache.muse.tools.generator.projectizer.ProxyProjectizer</CLIENT_FLAGS>
-								<JAVA_HOME>${env.JAVA_HOME}</JAVA_HOME>
-								<wsdl>Topology-WS.wsdl</wsdl>
-								<ws>${temp.dir}/servlets/topology</ws>
-								<descriptor>Topology-Muse.xml</descriptor>
-								<server>org/opennaas/extensions/idb/serviceinterface/topology</server>
-								<client>org/opennaas/nsp/webservice/topology</client>
-								<handler>CommonTopologyHandler</handler>
-							</environmentVariables>
-						</configuration>
-					</execution>
-					<execution>
-						<id>generate 
-							reservation server</id>
-						<phase>process-sources</phase>
-						<goals>
-							<goal>exec</goal>
-						</goals>
-						<configuration>
-							<executable>${scripts.dir}/wsdl2java.sh</executable>
-							<arguments>
-								<argument>server</argument>
-								<argument>reservation</argument>
-							</arguments>
-							<environmentVariables>
-								<MUSE_HOME>${muse.dir}</MUSE_HOME>
-								<WSDL_HOME>${webservices.dir}</WSDL_HOME>
-								<DIR_SCRIPTS>${scripts.dir}</DIR_SCRIPTS>
-								<DIR_LOG>${log.dir}</DIR_LOG>
-								<DIR_TEMP>${temp.dir}</DIR_TEMP>
-								<DIR_SRC>${project.build.directory}/generated-sources/xsdClasses</DIR_SRC>
-								<DIR_RESOURCES>${resources.dir}</DIR_RESOURCES>
-								<DIR_SERVLET>${temp.dir}/servlets</DIR_SERVLET>
-								<DIR_SERVLET_RESERVATION>${temp.dir}/servlets/reservation</DIR_SERVLET_RESERVATION>
-								<DIR_SERVLET_TOPOLOGY>${temp.dir}/servlets/topology</DIR_SERVLET_TOPOLOGY>
-								<DIR_SERVLET_NOTIFICATION>${temp.dir}/servlets/notification</DIR_SERVLET_NOTIFICATION>
-								<CLASSPATH>${settings.localRepository}/eu/ist_phosphorus/harmony/common-synthesizer/1/common-synthesizer-1.jar</CLASSPATH>
-								<SERVER_FLAGS>-j2ee mini</SERVER_FLAGS>
-								<CLIENT_FLAGS>-synthesizer 	org.opennaas.extensions.idb.serviceinterface.synthesizer.ProxySynthesizer -projectizer org.apache.muse.tools.generator.projectizer.ProxyProjectizer</CLIENT_FLAGS>
-								<JAVA_HOME>${env.JAVA_HOME}</JAVA_HOME>
-								<wsdl>Reservation-WS.wsdl</wsdl>
-								<ws>${temp.dir}/servlets/reservation</ws>
-								<descriptor>Reservation-Muse.xml</descriptor>
-								<server>org/opennaas/extensions/idb/serviceinterface/reservation</server>
-								<handler>CommonReservationHandler</handler>
-							</environmentVariables>
-						</configuration>
-					</execution>
-					<execution>
-						<id>generate reservation client</id>
-						<phase>process-sources</phase>
-						<goals>
-							<goal>exec</goal>
-						</goals>
-						<configuration>
-							<executable>${scripts.dir}/wsdl2java.sh</executable>
-							<arguments>
-								<argument>client</argument>
-								<argument>reservation</argument>
-							</arguments>
-							<environmentVariables>
-								<MUSE_HOME>${muse.dir}</MUSE_HOME>
-								<WSDL_HOME>${webservices.dir}</WSDL_HOME>
-								<DIR_SCRIPTS>${scripts.dir}</DIR_SCRIPTS>
-								<DIR_LOG>${log.dir}</DIR_LOG>
-								<DIR_TEMP>${temp.dir}</DIR_TEMP>
-								<DIR_SRC>${project.build.directory}/generated-sources/xsdClasses</DIR_SRC>
-								<DIR_RESOURCES>${resources.dir}</DIR_RESOURCES>
-								<DIR_SERVLET>${temp.dir}/servlets</DIR_SERVLET>
-								<DIR_SERVLET_RESERVATION>${temp.dir}/servlets/reservation</DIR_SERVLET_RESERVATION>
-								<DIR_SERVLET_TOPOLOGY>${temp.dir}/servlets/topology</DIR_SERVLET_TOPOLOGY>
-								<DIR_SERVLET_NOTIFICATION>${temp.dir}/servlets/notification</DIR_SERVLET_NOTIFICATION>
-								<CLASSPATH>${settings.localRepository}/eu/ist_phosphorus/harmony/common-synthesizer/1/common-synthesizer-1.jar</CLASSPATH>
-								<SERVER_FLAGS>-j2ee mini</SERVER_FLAGS>
-								<CLIENT_FLAGS>-synthesizer org.opennaas.extensions.idb.serviceinterface.synthesizer.ProxySynthesizer -projectizer org.apache.muse.tools.generator.projectizer.ProxyProjectizer</CLIENT_FLAGS>
-								<JAVA_HOME>${env.JAVA_HOME}</JAVA_HOME>
-								<wsdl>Reservation-WS.wsdl</wsdl>
-								<ws>${temp.dir}/servlets/reservation</ws>
-								<descriptor>Reservation-Muse.xml</descriptor>
-								<server>org/opennaas/extensions/idb/serviceinterface/reservation</server>
-								<client>org/opennaas/nsp/webservice/reservation</client>
-								<handler>CommonReservationHandler</handler>
-							</environmentVariables>
-						</configuration>
-					</execution>
-					<execution>
-						<id>generate 
-							notification server</id>
-						<phase>process-sources</phase>
-						<goals>
-							<goal>exec</goal>
-						</goals>
-						<configuration>
-							<executable>${scripts.dir}/wsdl2java.sh</executable>
-							<arguments>
-								<argument>server</argument>
-								<argument>notification</argument>
-							</arguments>
-							<environmentVariables>
-								<MUSE_HOME>${muse.dir}</MUSE_HOME>
-								<WSDL_HOME>${webservices.dir}</WSDL_HOME>
-								<DIR_SCRIPTS>${scripts.dir}</DIR_SCRIPTS>
-								<DIR_LOG>${log.dir}</DIR_LOG>
-								<DIR_TEMP>${temp.dir}</DIR_TEMP>
-								<DIR_SRC>${project.build.directory}/generated-sources/xsdClasses</DIR_SRC>
-								<DIR_RESOURCES>${resources.dir}</DIR_RESOURCES>
-								<DIR_SERVLET>${temp.dir}/servlets</DIR_SERVLET>
-								<DIR_SERVLET_RESERVATION>${temp.dir}/servlets/reservation</DIR_SERVLET_RESERVATION>
-								<DIR_SERVLET_TOPOLOGY>${temp.dir}/servlets/topology</DIR_SERVLET_TOPOLOGY>
-								<DIR_SERVLET_NOTIFICATION>${temp.dir}/servlets/notification</DIR_SERVLET_NOTIFICATION>
-								<CLASSPATH>${settings.localRepository}/eu/ist_phosphorus/harmony/common-synthesizer/1/common-synthesizer-1.jar</CLASSPATH>
-								<SERVER_FLAGS>-j2ee mini</SERVER_FLAGS>
-								<CLIENT_FLAGS>-synthesizer rg.opennaas.extensions.idb.serviceinterface.synthesizer.ProxySynthesizer -projectizer org.apache.muse.tools.generator.projectizer.ProxyProjectizer</CLIENT_FLAGS>
-								<JAVA_HOME>${env.JAVA_HOME}</JAVA_HOME>
-								<wsdl>Notification-WS.wsdl</wsdl>
-								<ws>${temp.dir}/servlets/notification</ws>
-								<descriptor>Notification-Muse.xml</descriptor>
-								<server>org/opennaas/extensions/idb/serviceinterface/notification</server>
-								<handler>CommonNotificationHandler</handler>
-							</environmentVariables>
-						</configuration>
-					</execution>
-					<execution>
-						<id>generate notification client</id>
-						<phase>process-sources</phase>
-						<goals>
-							<goal>exec</goal>
-						</goals>
-						<configuration>
-							<executable>${scripts.dir}/wsdl2java.sh</executable>
-							<arguments>
-								<argument>client</argument>
-								<argument>notification</argument>
-							</arguments>
-							<environmentVariables>
-								<MUSE_HOME>${muse.dir}</MUSE_HOME>
-								<WSDL_HOME>${webservices.dir}</WSDL_HOME>
-								<DIR_SCRIPTS>${scripts.dir}</DIR_SCRIPTS>
-								<DIR_LOG>${log.dir}</DIR_LOG>
-								<DIR_TEMP>${temp.dir}</DIR_TEMP>
-								<DIR_SRC>${project.build.directory}/generated-sources/xsdClasses</DIR_SRC>
-								<DIR_RESOURCES>${resources.dir}</DIR_RESOURCES>
-								<DIR_SERVLET>${temp.dir}/servlets</DIR_SERVLET>
-								<DIR_SERVLET_RESERVATION>${temp.dir}/servlets/reservation</DIR_SERVLET_RESERVATION>
-								<DIR_SERVLET_TOPOLOGY>${temp.dir}/servlets/topology</DIR_SERVLET_TOPOLOGY>
-								<DIR_SERVLET_NOTIFICATION>${temp.dir}/servlets/notification</DIR_SERVLET_NOTIFICATION>
-								<CLASSPATH>${settings.localRepository}/eu/ist_phosphorus/harmony/common-synthesizer/1/common-synthesizer-1.jar</CLASSPATH>
-								<SERVER_FLAGS>-j2ee mini</SERVER_FLAGS>
-								<CLIENT_FLAGS>-synthesizer org.opennaas.extensions.idb.serviceinterface.synthesizer.ProxySynthesizer -projectizer org.apache.muse.tools.generator.projectizer.ProxyProjectizer</CLIENT_FLAGS>
-								<JAVA_HOME>${env.JAVA_HOME}</JAVA_HOME>
-								<wsdl>Notification-WS.wsdl</wsdl>
-								<ws>${temp.dir}/servlets/notification</ws>
-								<descriptor>Notification-Muse.xml</descriptor>
-								<server>org/opennaas/extensions/idb/serviceinterface/notification</server>
-								<client>org/opennaas/nsp/webservice/notification</client>
-								<handler>CommonNotificationHandler</handler>
-							</environmentVariables>
-						</configuration>
 					</execution>
 				</executions>
 			</plugin>
+			
 			<plugin>
 				<groupId>org.ops4j</groupId>
 				<artifactId>maven-pax-plugin</artifactId>
@@ -378,14 +197,26 @@
 				<configuration>
 					<instructions>
 						<Import-Package>*</Import-Package>
-						<Export-Package>org.opennaas.extensions.idb.*;version="${project.version}"</Export-Package> 
+						<Export-Package>org.opennaas.extensions.idb.*;version="${project.version}"</Export-Package>
 					</instructions>
 				</configuration>
 			</plugin>
 		</plugins>
+
 	</build>
 	<dependencies>
-	<dependency>
+<dependency>
+ <groupId>org.apache.servicemix.specs</groupId>
+    <artifactId>org.apache.servicemix.specs.jaxws-api-2.1</artifactId>
+    <version>1.9.0</version>
+    <type>bundle</type>
+</dependency>
+<dependency>
+    <groupId>org.apache.openejb</groupId>
+    <artifactId>javaee-api</artifactId>
+    <version>6.0-4</version>
+</dependency>
+		<dependency>
 			<groupId>org.opennaas</groupId>
 			<artifactId>org.opennaas.core.resources</artifactId>
 		</dependency>
@@ -418,21 +249,6 @@
 			<scope>test</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>eu.ist_phosphorus.harmony</groupId>
-			<artifactId>common-synthesizer</artifactId>
-			<version>1</version>
-		</dependency>
-		<dependency>
-			<groupId>muse</groupId>
-			<artifactId>muse-platform-mini</artifactId>
-			<version>2.2.0</version>
-		</dependency>
-		<dependency>
-			<groupId>muse</groupId>
-			<artifactId>muse-tools</artifactId>
-			<version>2.2.0</version>
-		</dependency>
 
 		<!-- for jaxb -->
 		<dependency>
@@ -450,17 +266,17 @@
 			<artifactId>jaxb2-basics-runtime</artifactId>
 			<version>0.5.3</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
 			<version>${commons.logging.version}</version>
-			</dependency>
-			<dependency>
+		</dependency>
+		<dependency>
 			<groupId>org.ops4j.pax.logging</groupId>
 			<artifactId>pax-logging-api</artifactId>
 			<version>${pax.logging.version}</version>
-			</dependency>
+		</dependency>
 	</dependencies>
 </project>
 
