@@ -33,113 +33,114 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ConnectionC
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CreateReservationType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.EndpointType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ServiceConstraintType;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.InvalidRequestFaultException;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.InvalidRequestFault_Exception;
 import org.opennaas.core.resources.helpers.Helpers;
 
 public class SemanticValidator {
 
-    /**
-     * @param start
-     * @param stop
-     * @throws InvalidRequestFaultException
-     */
-    private static void checkReservationTime(final Date start, final Date stop)
-            throws InvalidRequestFaultException {
-        final Date now = new Date();
+	/**
+	 * @param start
+	 * @param stop
+	 * @throws InvalidRequestFault_Exception
+	 */
+	private static void checkReservationTime(final Date start, final Date stop)
+			throws InvalidRequestFault_Exception {
+		final Date now = new Date();
 
-        if (!(start.before(stop) && stop.after(now))) {
-            throw new InvalidRequestFaultException("Invalid reservation time! "
-                    + start + " -> " + stop + ". Prozessing time: " + now);
-        }
-    }
+		if (!(start.before(stop) && stop.after(now))) {
+			throw new InvalidRequestFault_Exception(
+					"Invalid reservation time! " + start + " -> " + stop
+							+ ". Prozessing time: " + now);
+		}
+	}
 
-    /**
-     * @param start
-     * @param duration
-     * @throws InvalidRequestFaultException
-     */
-    private static void checkReservationTime(
-            final XMLGregorianCalendar startXML, final long duration)
-            throws InvalidRequestFaultException {
-        final Date start = Helpers.xmlCalendarToDate(startXML);
-        final Date stop = new Date(start.getTime() + duration * 1000);
+	/**
+	 * @param start
+	 * @param duration
+	 * @throws InvalidRequestFault_Exception
+	 */
+	private static void checkReservationTime(
+			final XMLGregorianCalendar startXML, final long duration)
+			throws InvalidRequestFault_Exception {
+		final Date start = Helpers.xmlCalendarToDate(startXML);
+		final Date stop = new Date(start.getTime() + duration * 1000);
 
-        SemanticValidator.checkReservationTime(start, stop);
-    }
+		SemanticValidator.checkReservationTime(start, stop);
+	}
 
-    /**
-     * @param start
-     * @param stop
-     * @throws InvalidRequestFaultException
-     */
-    private static void checkReservationTime(final XMLGregorianCalendar start,
-            final XMLGregorianCalendar stop)
-            throws InvalidRequestFaultException {
-        SemanticValidator.checkReservationTime(
-                Helpers.xmlCalendarToDate(start), Helpers
-                        .xmlCalendarToDate(stop));
-    }
+	/**
+	 * @param start
+	 * @param stop
+	 * @throws InvalidRequestFault_Exception
+	 */
+	private static void checkReservationTime(final XMLGregorianCalendar start,
+			final XMLGregorianCalendar stop)
+			throws InvalidRequestFault_Exception {
+		SemanticValidator.checkReservationTime(
+				Helpers.xmlCalendarToDate(start),
+				Helpers.xmlCalendarToDate(stop));
+	}
 
-    /**
-     * @param input
-     * @throws InvalidRequestFaultException
-     */
-    public static void validateContent(final Object input)
-            throws InvalidRequestFaultException {
-        if (input.getClass() == CreateReservationType.class) {
-            SemanticValidator
-                    .validateCreateReservationType((CreateReservationType) input);
-        }
-    }
+	/**
+	 * @param input
+	 * @throws InvalidRequestFault_Exception
+	 */
+	public static void validateContent(final Object input)
+			throws InvalidRequestFault_Exception {
+		if (input.getClass() == CreateReservationType.class) {
+			SemanticValidator
+					.validateCreateReservationType((CreateReservationType) input);
+		}
+	}
 
-    /**
-     * @param crt
-     * @throws InvalidRequestFaultException
-     */
-    private static void validateCreateReservationType(
-            final CreateReservationType crt)
-            throws InvalidRequestFaultException {
-        for (final ServiceConstraintType service : crt.getService()) {
+	/**
+	 * @param crt
+	 * @throws InvalidRequestFault_Exception
+	 */
+	private static void validateCreateReservationType(
+			final CreateReservationType crt)
+			throws InvalidRequestFault_Exception {
+		for (final ServiceConstraintType service : crt.getService()) {
 
-            // Fixed Reservation
-            if (null != service.getFixedReservationConstraints()) {
-                SemanticValidator.checkReservationTime(service
-                        .getFixedReservationConstraints().getStartTime(),
-                        service.getFixedReservationConstraints().getDuration());
-            }
+			// Fixed Reservation
+			if (null != service.getFixedReservationConstraints()) {
+				SemanticValidator.checkReservationTime(service
+						.getFixedReservationConstraints().getStartTime(),
+						service.getFixedReservationConstraints().getDuration());
+			}
 
-            // Malleable Reservation
-            if (null != service.getMalleableReservationConstraints()) {
-                SemanticValidator.checkReservationTime(service
-                        .getMalleableReservationConstraints().getStartTime(),
-                        service.getMalleableReservationConstraints()
-                                .getDeadline());
+			// Malleable Reservation
+			if (null != service.getMalleableReservationConstraints()) {
+				SemanticValidator.checkReservationTime(service
+						.getMalleableReservationConstraints().getStartTime(),
+						service.getMalleableReservationConstraints()
+								.getDeadline());
 
-                // Check for data amount
-                for (final ConnectionConstraintType connection : service
-                        .getConnections()) {
-                    if (null == connection.getDataAmount()) {
-                        throw new InvalidRequestFaultException(
-                                "DataAmount must be set for Malleable Reservations!");
-                    }
-                }
-            }
+				// Check for data amount
+				for (final ConnectionConstraintType connection : service
+						.getConnections()) {
+					if (null == connection.getDataAmount()) {
+						throw new InvalidRequestFault_Exception(
+								"DataAmount must be set for Malleable Reservations!");
+					}
+				}
+			}
 
-            for (final ConnectionConstraintType conn : service.getConnections()) {
-                for (final EndpointType target : conn.getTarget()) {
-                    if (conn.getSource().getEndpointId().equals(
-                            target.getEndpointId())) {
-                        throw new InvalidRequestFaultException(
-                                "Source and destination may not be the same!");
-                    }
-                }
+			for (final ConnectionConstraintType conn : service.getConnections()) {
+				for (final EndpointType target : conn.getTarget()) {
+					if (conn.getSource().getEndpointId()
+							.equals(target.getEndpointId())) {
+						throw new InvalidRequestFault_Exception(
+								"Source and destination may not be the same!");
+					}
+				}
 
-                final Integer maxBW = conn.getMaxBW();
-                if ((maxBW != null) && (maxBW.intValue() < conn.getMinBW())) {
-                    throw new InvalidRequestFaultException(
-                            "MaxBW may not be less than MinBW!");
-                }
-            }
-        }
-    }
+				final Integer maxBW = conn.getMaxBW();
+				if ((maxBW != null) && (maxBW.intValue() < conn.getMinBW())) {
+					throw new InvalidRequestFault_Exception(
+							"MaxBW may not be less than MinBW!");
+				}
+			}
+		}
+	}
 }

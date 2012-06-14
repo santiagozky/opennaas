@@ -30,12 +30,10 @@ import java.net.URISyntaxException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.muse.ws.addressing.EndpointReference;
-import org.apache.muse.ws.addressing.WsaConstants;
 
+import org.opennaas.extensions.idb.serviceinterface.EndpointReference;
 import org.opennaas.extensions.idb.serviceinterface.utils.Config;
 import org.opennaas.core.resources.helpers.Helpers;
-
 
 /**
  * Class loader for the service interface configuration
@@ -86,13 +84,13 @@ public class EPRHelper {
 			final String epr = EPRHelper.getEPR(option);
 			if ((epr == null) || epr.equalsIgnoreCase("")) {
 				logger.info("Warning, it was impossible to get some EPR.");
-				return WsaConstants.ANONYMOUS_EPR;
+				return convertStringtoEPR(EndpointReference.ANON_URI);
 			}
 			return convertStringtoEPR(epr);
 
 		} catch (final Exception e) {
 			logger.info("Could not get a EPR " + option);
-			return WsaConstants.ANONYMOUS_EPR;
+			return convertStringtoEPR(EndpointReference.ANON_URI);
 		}
 	}
 

@@ -25,11 +25,13 @@
 
 package org.opennaas.extensions.idb.serviceinterface.topology;
 
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.TopologyIFPortTypeImpl;
+
 /**
  * 
  * @author Alexander Willner (willner@cs.uni-bonn.de)
  * 
  */
-public class CommonTopologyWS extends TopologyWS {
-    // Nothing
+public class CommonTopologyWS extends TopologyIFPortTypeImpl {
+	// Nothing
 }

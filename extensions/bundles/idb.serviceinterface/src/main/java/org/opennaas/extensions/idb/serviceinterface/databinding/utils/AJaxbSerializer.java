@@ -29,11 +29,11 @@ import java.io.IOException;
 
 import javax.xml.bind.JAXBException;
 
-import org.apache.muse.util.xml.XmlUtils;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
+import org.apache.muse.util.xml.XmlUtils;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.InvalidRequestFaultException;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.UnexpectedFaultException;
 
@@ -45,77 +45,77 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.
  */
 public abstract class AJaxbSerializer {
 
-    private static AJaxbSerializer selfInstance = null;
+	private static AJaxbSerializer selfInstance = null;
 
-    /**
-     * Very important bugfix. See
-     * http://ws.apache.org/muse/docs/2.2.0/manual/troubleshooting/
-     * default-namespaces-xerces.html
-     * 
-     * @param xml
-     *            xml string
-     * @return xml string with corrected namespace
-     */
-    private static String adjustNamespace(final String xml) {
-        return (xml.replace("xmlns:=", "xmlns="));
-    }
+	/**
+	 * Very important bugfix. See
+	 * http://ws.apache.org/muse/docs/2.2.0/manual/troubleshooting/
+	 * default-namespaces-xerces.html
+	 * 
+	 * @param xml
+	 *            xml string
+	 * @return xml string with corrected namespace
+	 */
+	private static String adjustNamespace(final String xml) {
+		return (xml.replace("xmlns:=", "xmlns="));
+	}
 
-    /**
-     * Convert an Element to XML string.
-     * 
-     * @param element
-     *            Dom Element
-     * @return XML String
-     */
-    public static String elementToXml(final Node element) {
-        String xml = XmlUtils.toString(element);
+	/**
+	 * Convert an Element to XML string.
+	 * 
+	 * @param element
+	 *            Dom Element
+	 * @return XML String
+	 */
+	public static String elementToXml(final Node element) {
+		String xml = XmlUtils.toString(element);
 
-        xml = AJaxbSerializer.adjustNamespace(xml);
+		xml = AJaxbSerializer.adjustNamespace(xml);
 
-        return xml;
-    }
+		return xml;
+	}
 
-    public static synchronized AJaxbSerializer getInstance() {
-        return AJaxbSerializer.selfInstance;
-    }
+	public static synchronized AJaxbSerializer getInstance() {
+		return AJaxbSerializer.selfInstance;
+	}
 
-    /**
-     * Convert XML String to Element.
-     * 
-     * @param xml
-     *            XML-String to be converted to an Element
-     * @return Dom Element Element derived out of XML-String
-     * @throws SAXException
-     *             A SEXException
-     * @throws IOException
-     *             A IOException
-     * @author Alexander Willner (willner@cs.uni-bonn.de)
-     */
-    public static Element xmlToElement(final String xml) throws SAXException,
-            IOException {
-        String result = xml;
+	/**
+	 * Convert XML String to Element.
+	 * 
+	 * @param xml
+	 *            XML-String to be converted to an Element
+	 * @return Dom Element Element derived out of XML-String
+	 * @throws SAXException
+	 *             A SEXException
+	 * @throws IOException
+	 *             A IOException
+	 * @author Alexander Willner (willner@cs.uni-bonn.de)
+	 */
+	public static Element xmlToElement(final String xml) throws SAXException,
+			IOException {
+		String result = xml;
 
-        result = AJaxbSerializer.adjustNamespace(result);
-        final Element el = XmlUtils.createDocument(result).getDocumentElement();
-        return el;
-    }
+		result = AJaxbSerializer.adjustNamespace(result);
+		final Element el = XmlUtils.createDocument(result).getDocumentElement();
+		return el;
+	}
 
-    public abstract Object elementToObject(final Node element)
-            throws InvalidRequestFaultException, UnexpectedFaultException;
+	public abstract Object elementToObject(final Node element)
+			throws InvalidRequestFaultException, UnexpectedFaultException;
 
-    public abstract Object elementToObject(final Node element,
-            final boolean useValidator) throws UnexpectedFaultException,
-            InvalidRequestFaultException;
+	public abstract Object elementToObject(final Node element,
+			final boolean useValidator) throws UnexpectedFaultException,
+			InvalidRequestFaultException;
 
-    public abstract Element objectToElement(final Object obj)
-            throws InvalidRequestFaultException, UnexpectedFaultException;
+	public abstract Element objectToElement(final Object obj)
+			throws InvalidRequestFaultException, UnexpectedFaultException;
 
-    public abstract Element objectToElement(final Object obj,
-            final boolean useValidator) throws InvalidRequestFaultException,
-            UnexpectedFaultException;
+	public abstract Element objectToElement(final Object obj,
+			final boolean useValidator) throws InvalidRequestFaultException,
+			UnexpectedFaultException;
 
-    public abstract String objectToXml(final Object obj) throws JAXBException;
+	public abstract String objectToXml(final Object obj) throws JAXBException;
 
-    public abstract Object xmlToObject(final String xml) throws JAXBException;
+	public abstract Object xmlToObject(final String xml) throws JAXBException;
 
 }

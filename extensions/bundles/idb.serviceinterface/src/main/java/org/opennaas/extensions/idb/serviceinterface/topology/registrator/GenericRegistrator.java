@@ -26,7 +26,12 @@
 package org.opennaas.extensions.idb.serviceinterface.topology.registrator;
 
 import org.apache.commons.logging.Log;
-import org.apache.muse.ws.addressing.soap.SoapFault;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DomainNotFoundFault_Exception;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.EndpointAlreadyExistsFault_Exception;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.InvalidRequestFault_Exception;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.OperationNotAllowedFault_Exception;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.OperationNotSupportedFault_Exception;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.UnexpectedFault_Exception;
 
 /**
  * The GenericRegistrator class implements the generic functionality used for
@@ -107,7 +112,17 @@ public abstract class GenericRegistrator {
 	 * The specific registration attempt, to be implemented by a child class.
 	 * 
 	 * @return Success of registration (true if successful, false otherwise).
+	 * @throws OperationNotAllowedFault_Exception
+	 * @throws OperationNotSupportedFault_Exception
+	 * @throws DomainNotFoundFault_Exception
+	 * @throws UnexpectedFault_Exception
+	 * @throws InvalidRequestFault_Exception
+	 * @throws EndpointAlreadyExistsFault_Exception
 	 * @throws SoapFault
 	 */
-	public abstract boolean register() throws SoapFault;
+	public abstract boolean register() throws InvalidRequestFault_Exception,
+			UnexpectedFault_Exception, DomainNotFoundFault_Exception,
+			OperationNotSupportedFault_Exception,
+			OperationNotAllowedFault_Exception,
+			EndpointAlreadyExistsFault_Exception;
 }

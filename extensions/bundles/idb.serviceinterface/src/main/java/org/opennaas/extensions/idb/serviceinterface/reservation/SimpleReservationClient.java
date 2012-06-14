@@ -25,61 +25,56 @@
 
 package org.opennaas.extensions.idb.serviceinterface.reservation;
 
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.GregorianCalendar;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.Duration;
 import javax.xml.datatype.XMLGregorianCalendar;
+import javax.xml.ws.soap.AddressingFeature;
 
-import org.apache.muse.ws.addressing.EndpointReference;
-import org.apache.muse.ws.addressing.soap.SoapFault;
-import org.w3c.dom.Element;
-
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.Activate;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ActivateResponse;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.opennaas.core.resources.helpers.Helpers;
+import org.opennaas.core.resources.helpers.Tuple;
+import org.opennaas.extensions.idb.serviceinterface.EndpointReference;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ActivateResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ActivateType;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.Bind;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.BindResponse;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.BindResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.BindType;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CancelReservation;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CancelReservationResponse;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CancelReservationResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CancelReservationType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ConnectionConstraintType;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CreateReservation;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CreateReservationResponse;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CreateReservationResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CreateReservationType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.EndpointNotFoundFault_Exception;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.EndpointType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.FixedReservationConstraintType;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetReservations;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetReservationsResponse;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetReservationsResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetReservationsType;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetStatus;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetStatusResponse;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetStatusResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetStatusType;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.IsAvailable;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.IsAvailableResponse;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.InvalidRequestFault_Exception;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.IsAvailableResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.IsAvailableType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.MalleableReservationConstraintType;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.Notification;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.NotificationResponse;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.NetworkReservationPortType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.NetworkReservationService;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.NotificationResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.NotificationType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.OperationNotAllowedFault_Exception;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.OperationNotSupportedFault_Exception;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ReservationType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ServiceConstraintType;
-import org.opennaas.extensions.idb.serviceinterface.databinding.utils.JaxbSerializer;
-import org.opennaas.core.resources.helpers.Helpers;
-import org.opennaas.core.resources.helpers.Tuple;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.TimeoutFault_Exception;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.UnexpectedFault_Exception;
 
-public class SimpleReservationClient extends CommonReservationClient {
+public class SimpleReservationClient {
+
+	private final Log logger;
 
 	public static final CreateReservationType getCreateReservationRequest(
 			final int bandwidth, final int delay, final int duration,
@@ -166,13 +161,27 @@ public class SimpleReservationClient extends CommonReservationClient {
 		return request;
 	}
 
+	private final NetworkReservationPortType client;
+
 	/**
 	 * Constructor from superclass.
 	 * 
 	 * @param endpointReference
 	 */
 	public SimpleReservationClient(final EndpointReference endpointReference) {
-		super(endpointReference);
+		logger = LogFactory.getLog(this.getClass());
+
+		NetworkReservationService service;
+		try {
+			service = new NetworkReservationService(endpointReference.getURI()
+					.toURL());
+		} catch (MalformedURLException e) {
+			service = new NetworkReservationService();
+			logger.error("Could not get convert to URL "
+					+ endpointReference.getURI());
+			e.printStackTrace();
+		}
+		client = service.getNetworkReservationPortType(new AddressingFeature());
 	}
 
 	/**
@@ -182,8 +191,9 @@ public class SimpleReservationClient extends CommonReservationClient {
 	 * @throws URISyntaxException
 	 * @throws URISyntaxException
 	 */
-	public SimpleReservationClient(final IReservationWS webservice) {
-		super(webservice);
+	public SimpleReservationClient(final NetworkReservationPortType webservice) {
+		logger = LogFactory.getLog(this.getClass());
+		client = webservice;
 	}
 
 	/**
@@ -193,29 +203,36 @@ public class SimpleReservationClient extends CommonReservationClient {
 	 * @throws URISyntaxException
 	 */
 	public SimpleReservationClient(final String endpointReference) {
-		super(endpointReference);
+		logger = LogFactory.getLog(this.getClass());
+
+		NetworkReservationService service;
+		try {
+			URL u = new URL(endpointReference + "?wsdl");
+			service = new NetworkReservationService(u);
+		} catch (MalformedURLException e) {
+			service = new NetworkReservationService();
+			logger.error("Could not get convert to URL " + endpointReference);
+			e.printStackTrace();
+		}
+
+		client = service.getNetworkReservationPortType(new AddressingFeature());
 	}
 
 	/**
 	 * @param request
 	 * @return
+	 * @throws UnexpectedFault_Exception
+	 * @throws OperationNotSupportedFault_Exception
+	 * @throws TimeoutFault_Exception
+	 * @throws OperationNotAllowedFault_Exception
+	 * @throws InvalidRequestFault_Exception
 	 * @throws SoapFault
 	 */
-	public ActivateResponseType activate(final ActivateType request)
-			throws SoapFault {
-		final Activate envelope = new Activate();
-
-		envelope.setActivate(request);
-
-		final Element reqElement = JaxbSerializer.getInstance()
-				.objectToElement(envelope);
-
-		final Element resElement = super.activate(reqElement);
-
-		final ActivateResponse response = (ActivateResponse) JaxbSerializer
-				.getInstance().elementToObject(resElement);
-
-		return response.getActivateResponse();
+	public ActivateResponseType activate(final ActivateType activateType)
+			throws InvalidRequestFault_Exception,
+			OperationNotAllowedFault_Exception, TimeoutFault_Exception,
+			OperationNotSupportedFault_Exception, UnexpectedFault_Exception {
+		return client.activate(activateType);
 	}
 
 	/**
@@ -223,120 +240,99 @@ public class SimpleReservationClient extends CommonReservationClient {
 	 * @param reservationID
 	 * @param serviceID
 	 * @return
+	 * @throws UnexpectedFault_Exception
+	 * @throws OperationNotSupportedFault_Exception
+	 * @throws TimeoutFault_Exception
+	 * @throws OperationNotAllowedFault_Exception
+	 * @throws InvalidRequestFault_Exception
 	 * @throws SoapFault
 	 */
 	public ActivateResponseType activate(final String reservationID,
-			final int serviceID) throws SoapFault {
+			final int serviceID) throws InvalidRequestFault_Exception,
+			OperationNotAllowedFault_Exception, TimeoutFault_Exception,
+			OperationNotSupportedFault_Exception, UnexpectedFault_Exception {
 		final ActivateType request = new ActivateType();
 		request.setReservationID(reservationID);
 		request.setServiceID(serviceID);
-		return this.activate(request);
+		return client.activate(request);
 	}
 
 	/**
 	 * @param request
 	 * @return
+	 * @throws UnexpectedFault_Exception
+	 * @throws OperationNotSupportedFault_Exception
+	 * @throws TimeoutFault_Exception
+	 * @throws OperationNotAllowedFault_Exception
+	 * @throws InvalidRequestFault_Exception
 	 * @throws SoapFault
 	 */
-	public BindResponseType bind(final BindType request) throws SoapFault {
-		final Bind envelope = new Bind();
+	public BindResponseType bind(final BindType request)
+			throws InvalidRequestFault_Exception,
+			OperationNotAllowedFault_Exception, TimeoutFault_Exception,
+			OperationNotSupportedFault_Exception, UnexpectedFault_Exception {
 
-		envelope.setBind(request);
-
-		final Element reqElement = JaxbSerializer.getInstance()
-				.objectToElement(envelope);
-
-		final Element resElement = super.bind(reqElement);
-
-		final BindResponse response = (BindResponse) JaxbSerializer
-				.getInstance().elementToObject(resElement);
-
-		return response.getBindResponse();
-	}
-
-	/**
-	 * 
-	 * @param reservationID
-	 * @param TNA
-	 * @param IP
-	 * @return
-	 * @throws SoapFault
-	 */
-	public BindResponseType bind(final String reservationID, final String TNA,
-			final String IP) throws SoapFault {
-		final BindType request = new BindType();
-		request.setReservationID(reservationID);
-		request.setEndpointID(TNA);
-		request.getIPAdress().add(IP);
-
-		final Bind envelope = new Bind();
-
-		envelope.setBind(request);
-
-		final Element reqElement = JaxbSerializer.getInstance()
-				.objectToElement(envelope);
-
-		final Element resElement = super.bind(reqElement);
-
-		final BindResponse response = (BindResponse) JaxbSerializer
-				.getInstance().elementToObject(resElement);
-
-		return response.getBindResponse();
+		return client.bind(request);
 	}
 
 	/**
 	 * @param request
 	 * @return
+	 * @throws UnexpectedFault_Exception
+	 * @throws OperationNotSupportedFault_Exception
+	 * @throws TimeoutFault_Exception
+	 * @throws OperationNotAllowedFault_Exception
+	 * @throws InvalidRequestFault_Exception
 	 * @throws SoapFault
 	 */
 	public CancelReservationResponseType cancelReservation(
-			final CancelReservationType request) throws SoapFault {
-		final CancelReservation envelope = new CancelReservation();
+			final CancelReservationType request)
+			throws InvalidRequestFault_Exception,
+			OperationNotAllowedFault_Exception, TimeoutFault_Exception,
+			OperationNotSupportedFault_Exception, UnexpectedFault_Exception {
 
-		envelope.setCancelReservation(request);
-
-		final Element reqElement = JaxbSerializer.getInstance()
-				.objectToElement(envelope);
-
-		final Element resElement = super.cancelReservation(reqElement);
-
-		final CancelReservationResponse response = (CancelReservationResponse) JaxbSerializer
-				.getInstance().elementToObject(resElement);
-
-		return response.getCancelReservationResponse();
+		return client.cancelReservation(request);
 	}
 
 	public CancelReservationResponseType cancelReservation(
-			final String reservationID) throws SoapFault {
+			final String reservationID) throws InvalidRequestFault_Exception,
+			OperationNotAllowedFault_Exception, TimeoutFault_Exception,
+			OperationNotSupportedFault_Exception, UnexpectedFault_Exception {
 		final CancelReservationType request = new CancelReservationType();
 		request.setReservationID(reservationID);
-		return this.cancelReservation(request);
+
+		return client.cancelReservation(request);
 	}
 
 	/**
 	 * @param request
 	 * @return
+	 * @throws EndpointNotFoundFault_Exception
+	 * @throws UnexpectedFault_Exception
+	 * @throws OperationNotSupportedFault_Exception
+	 * @throws TimeoutFault_Exception
+	 * @throws OperationNotAllowedFault_Exception
+	 * @throws InvalidRequestFault_Exception
 	 * @throws SoapFault
 	 */
 	public CreateReservationResponseType createMalleableReservation(
-			final CreateReservationType request) throws SoapFault {
-		final CreateReservation envelope = new CreateReservation();
+			final CreateReservationType request)
+			throws InvalidRequestFault_Exception,
+			OperationNotAllowedFault_Exception, TimeoutFault_Exception,
+			OperationNotSupportedFault_Exception, UnexpectedFault_Exception,
+			EndpointNotFoundFault_Exception {
 
-		envelope.setCreateReservation(request);
-
-		final Element reqElement = JaxbSerializer.getInstance()
-				.objectToElement(envelope);
-
-		final Element resElement = super.createReservation(reqElement);
-
-		final CreateReservationResponse response = (CreateReservationResponse) JaxbSerializer
-				.getInstance().elementToObject(resElement);
-
-		return response.getCreateReservationResponse();
+		return client.createReservation(request);
 	}
 
 	/**
 	 * @return
+	 * @throws EndpointNotFoundFault_Exception
+	 * @throws UnexpectedFault_Exception
+	 * @throws OperationNotSupportedFault_Exception
+	 * @throws TimeoutFault_Exception
+	 * @throws OperationNotAllowedFault_Exception
+	 * @throws InvalidRequestFault_Exception
 	 * @throws DatatypeConfigurationException
 	 * @throws SoapFault
 	 * @throws DatatypeConfigurationException
@@ -345,7 +341,11 @@ public class SimpleReservationClient extends CommonReservationClient {
 			final String source, final String target, final long dataAmount,
 			final XMLGregorianCalendar startTime,
 			final XMLGregorianCalendar deadline, final int minBW,
-			final int maxBW, final int delay) throws SoapFault {
+			final int maxBW, final int delay)
+			throws InvalidRequestFault_Exception,
+			OperationNotAllowedFault_Exception, TimeoutFault_Exception,
+			OperationNotSupportedFault_Exception, UnexpectedFault_Exception,
+			EndpointNotFoundFault_Exception {
 		final CreateReservationType resReq = new CreateReservationType();
 
 		final ServiceConstraintType service = new ServiceConstraintType();
@@ -378,57 +378,69 @@ public class SimpleReservationClient extends CommonReservationClient {
 		resReq.setJobID(Helpers.getPositiveRandomLong());
 		resReq.getService().add(service);
 
-		return this.createReservation(resReq);
+		return client.createReservation(resReq);
 	}
 
 	/**
 	 * @param request
 	 * @return
+	 * @throws EndpointNotFoundFault_Exception
+	 * @throws UnexpectedFault_Exception
+	 * @throws OperationNotSupportedFault_Exception
+	 * @throws TimeoutFault_Exception
+	 * @throws OperationNotAllowedFault_Exception
+	 * @throws InvalidRequestFault_Exception
 	 * @throws SoapFault
 	 */
 	public CreateReservationResponseType createReservation(
-			final CreateReservationType request) throws SoapFault {
-		final CreateReservation envelope = new CreateReservation();
+			final CreateReservationType request)
+			throws InvalidRequestFault_Exception,
+			OperationNotAllowedFault_Exception, TimeoutFault_Exception,
+			OperationNotSupportedFault_Exception, UnexpectedFault_Exception,
+			EndpointNotFoundFault_Exception {
 
-		envelope.setCreateReservation(request);
-
-		final Element reqElement = JaxbSerializer.getInstance()
-				.objectToElement(envelope);
-
-		final Element resElement = super.createReservation(reqElement);
-
-		final CreateReservationResponse response = (CreateReservationResponse) JaxbSerializer
-				.getInstance().elementToObject(resElement);
-
-		return response.getCreateReservationResponse();
+		return client.createReservation(request);
 	}
 
 	public CreateReservationResponseType createReservation(final int bandwidth,
 			final int delay, final int duration,
 			final XMLGregorianCalendar startTime,
-			final Tuple<String, String>... ep) throws SoapFault {
+			final Tuple<String, String>... ep)
+			throws InvalidRequestFault_Exception,
+			OperationNotAllowedFault_Exception, TimeoutFault_Exception,
+			OperationNotSupportedFault_Exception, UnexpectedFault_Exception,
+			EndpointNotFoundFault_Exception {
 
 		final CreateReservationType resReq = SimpleReservationClient
 				.getCreateReservationRequest(bandwidth, delay, duration,
 						startTime, ep);
 
-		return this.createReservation(resReq);
+		return client.createReservation(resReq);
 	}
 
 	public CreateReservationResponseType createReservation(final int bandwidth,
 			final int delay, final int duration,
 			final XMLGregorianCalendar startTime,
 			final Tuple<String, String> tuple, final String samlAssertion)
-			throws SoapFault {
+			throws InvalidRequestFault_Exception,
+			OperationNotAllowedFault_Exception, TimeoutFault_Exception,
+			OperationNotSupportedFault_Exception, UnexpectedFault_Exception,
+			EndpointNotFoundFault_Exception {
 
 		final CreateReservationType resReq = this.getCreateReservationRequest(
 				bandwidth, delay, duration, startTime, tuple, samlAssertion);
 
-		return this.createReservation(resReq);
+		return client.createReservation(resReq);
 	}
 
 	/**
 	 * @return
+	 * @throws EndpointNotFoundFault_Exception
+	 * @throws UnexpectedFault_Exception
+	 * @throws OperationNotSupportedFault_Exception
+	 * @throws TimeoutFault_Exception
+	 * @throws OperationNotAllowedFault_Exception
+	 * @throws InvalidRequestFault_Exception
 	 * @throws DatatypeConfigurationException
 	 * @throws SoapFault
 	 * @throws DatatypeConfigurationException
@@ -436,7 +448,10 @@ public class SimpleReservationClient extends CommonReservationClient {
 	@SuppressWarnings("unchecked")
 	public CreateReservationResponseType createReservation(final String source,
 			final String target, final int bandwidth, final int delay,
-			final int duration) throws SoapFault {
+			final int duration) throws InvalidRequestFault_Exception,
+			OperationNotAllowedFault_Exception, TimeoutFault_Exception,
+			OperationNotSupportedFault_Exception, UnexpectedFault_Exception,
+			EndpointNotFoundFault_Exception {
 		XMLGregorianCalendar startTime;
 		try {
 			startTime = DatatypeFactory.newInstance().newXMLGregorianCalendar(
@@ -450,9 +465,29 @@ public class SimpleReservationClient extends CommonReservationClient {
 				new Tuple<String, String>(source, target));
 	}
 
+	/**
+	 * 
+	 * @param source
+	 * @param target
+	 * @param bandwidth
+	 * @param delay
+	 * @param duration
+	 * @param samlAssertion
+	 * @return
+	 * @throws InvalidRequestFault_Exception
+	 * @throws OperationNotAllowedFault_Exception
+	 * @throws TimeoutFault_Exception
+	 * @throws OperationNotSupportedFault_Exception
+	 * @throws UnexpectedFault_Exception
+	 * @throws EndpointNotFoundFault_Exception
+	 */
 	public CreateReservationResponseType createReservation(final String source,
 			final String target, final int bandwidth, final int delay,
-			final int duration, final String samlAssertion) throws SoapFault {
+			final int duration, final String samlAssertion)
+			throws InvalidRequestFault_Exception,
+			OperationNotAllowedFault_Exception, TimeoutFault_Exception,
+			OperationNotSupportedFault_Exception, UnexpectedFault_Exception,
+			EndpointNotFoundFault_Exception {
 		XMLGregorianCalendar startTime;
 		try {
 			startTime = DatatypeFactory.newInstance().newXMLGregorianCalendar(
@@ -482,14 +517,25 @@ public class SimpleReservationClient extends CommonReservationClient {
 	 * @param duration
 	 *            The duration of the reservation.
 	 * @return The according reservation IDs.
+	 * @throws EndpointNotFoundFault_Exception
+	 * @throws UnexpectedFault_Exception
+	 * @throws OperationNotSupportedFault_Exception
+	 * @throws TimeoutFault_Exception
+	 * @throws OperationNotAllowedFault_Exception
+	 * @throws InvalidRequestFault_Exception
 	 * @throws SoapFault
 	 *             If an error occurs.
 	 */
 	@SuppressWarnings("unchecked")
+	// supresswarnings because of JVM not liking arrays of generic types. only
+	// fixable in Java7
 	public CreateReservationResponseType createReservation(final String source,
 			final String target, final XMLGregorianCalendar startTime,
 			final int bandwidth, final int delay, final int duration)
-			throws SoapFault {
+			throws InvalidRequestFault_Exception,
+			OperationNotAllowedFault_Exception, TimeoutFault_Exception,
+			OperationNotSupportedFault_Exception, UnexpectedFault_Exception,
+			EndpointNotFoundFault_Exception {
 		return this.createReservation(bandwidth, delay, duration, startTime,
 				new Tuple<String, String>(source, target));
 	}
@@ -509,23 +555,20 @@ public class SimpleReservationClient extends CommonReservationClient {
 	/**
 	 * @param request
 	 * @return
+	 * @throws UnexpectedFault_Exception
+	 * @throws OperationNotSupportedFault_Exception
+	 * @throws TimeoutFault_Exception
+	 * @throws OperationNotAllowedFault_Exception
+	 * @throws InvalidRequestFault_Exception
 	 * @throws SoapFault
 	 */
 	public GetReservationsResponseType getReservations(
-			final GetReservationsType request) throws SoapFault {
-		final GetReservations envelope = new GetReservations();
+			final GetReservationsType request)
+			throws InvalidRequestFault_Exception,
+			OperationNotAllowedFault_Exception, TimeoutFault_Exception,
+			OperationNotSupportedFault_Exception, UnexpectedFault_Exception {
 
-		envelope.setGetReservations(request);
-
-		final Element reqElement = JaxbSerializer.getInstance()
-				.objectToElement(envelope);
-
-		final Element resElement = super.getReservations(reqElement);
-
-		final GetReservationsResponse response = (GetReservationsResponse) JaxbSerializer
-				.getInstance().elementToObject(resElement);
-
-		return response.getGetReservationsResponse();
+		return client.getReservations(request);
 	}
 
 	/**
@@ -535,10 +578,18 @@ public class SimpleReservationClient extends CommonReservationClient {
 	 * @return
 	 * @throws SoapFault
 	 * @throws DatatypeConfigurationException
+	 * @throws UnexpectedFault_Exception
+	 * @throws OperationNotSupportedFault_Exception
+	 * @throws TimeoutFault_Exception
+	 * @throws OperationNotAllowedFault_Exception
+	 * @throws InvalidRequestFault_Exception
 	 */
 	public GetReservationsResponseType getReservations(
-			final long timeframeInSeconds) throws SoapFault,
-			DatatypeConfigurationException {
+			final long timeframeInSeconds)
+			throws DatatypeConfigurationException,
+			InvalidRequestFault_Exception, OperationNotAllowedFault_Exception,
+			TimeoutFault_Exception, OperationNotSupportedFault_Exception,
+			UnexpectedFault_Exception {
 		final XMLGregorianCalendar startTime = DatatypeFactory.newInstance()
 				.newXMLGregorianCalendar(new GregorianCalendar());
 		final XMLGregorianCalendar endTime = DatatypeFactory.newInstance()
@@ -553,58 +604,54 @@ public class SimpleReservationClient extends CommonReservationClient {
 		request.setPeriodStartTime(startTime);
 		request.setPeriodEndTime(endTime);
 
-		return this.getReservations(request);
+		return client.getReservations(request);
 	}
 
 	/**
 	 * @param request
 	 * @return
+	 * @throws UnexpectedFault_Exception
+	 * @throws OperationNotSupportedFault_Exception
+	 * @throws TimeoutFault_Exception
+	 * @throws OperationNotAllowedFault_Exception
+	 * @throws InvalidRequestFault_Exception
 	 * @throws SoapFault
 	 */
 	public GetStatusResponseType getStatus(final GetStatusType request)
-			throws SoapFault {
-		final GetStatus envelope = new GetStatus();
+			throws InvalidRequestFault_Exception,
+			OperationNotAllowedFault_Exception, TimeoutFault_Exception,
+			OperationNotSupportedFault_Exception, UnexpectedFault_Exception {
 
-		envelope.setGetStatus(request);
-
-		final Element reqElement = JaxbSerializer.getInstance()
-				.objectToElement(envelope);
-
-		final Element resElement = super.getStatus(reqElement);
-
-		final GetStatusResponse response = (GetStatusResponse) JaxbSerializer
-				.getInstance().elementToObject(resElement);
-
-		return response.getGetStatusResponse();
+		return client.getStatus(request);
 	}
 
 	public GetStatusResponseType getStatus(final String reservationID)
-			throws SoapFault {
-		final GetStatusType request = new GetStatusType();
-		request.setReservationID(reservationID);
-		return this.getStatus(request);
+			throws InvalidRequestFault_Exception,
+			OperationNotAllowedFault_Exception, TimeoutFault_Exception,
+			OperationNotSupportedFault_Exception, UnexpectedFault_Exception {
+		final GetStatusType getStatus = new GetStatusType();
+
+		return client.getStatus(getStatus);
 	}
 
 	/**
 	 * @param request
 	 * @return
+	 * @throws EndpointNotFoundFault_Exception
+	 * @throws UnexpectedFault_Exception
+	 * @throws OperationNotSupportedFault_Exception
+	 * @throws TimeoutFault_Exception
+	 * @throws OperationNotAllowedFault_Exception
+	 * @throws InvalidRequestFault_Exception
 	 * @throws SoapFault
 	 */
-	public IsAvailableResponseType isAvailable(final IsAvailableType request)
-			throws SoapFault {
-		final IsAvailable envelope = new IsAvailable();
+	public IsAvailableResponseType isAvailable(final IsAvailableType isAvailable)
+			throws InvalidRequestFault_Exception,
+			OperationNotAllowedFault_Exception, TimeoutFault_Exception,
+			OperationNotSupportedFault_Exception, UnexpectedFault_Exception,
+			EndpointNotFoundFault_Exception {
 
-		envelope.setIsAvailable(request);
-
-		final Element reqElement = JaxbSerializer.getInstance()
-				.objectToElement(envelope);
-
-		final Element resElement = super.isAvailable(reqElement);
-
-		final IsAvailableResponse response = (IsAvailableResponse) JaxbSerializer
-				.getInstance().elementToObject(resElement);
-
-		return response.getIsAvailableResponse();
+		return client.isAvailable(isAvailable);
 	}
 
 	/**
@@ -614,38 +661,36 @@ public class SimpleReservationClient extends CommonReservationClient {
 	 * @return
 	 * @throws SoapFault
 	 * @throws DatatypeConfigurationException
+	 * @throws EndpointNotFoundFault_Exception
+	 * @throws UnexpectedFault_Exception
+	 * @throws OperationNotSupportedFault_Exception
+	 * @throws TimeoutFault_Exception
+	 * @throws OperationNotAllowedFault_Exception
+	 * @throws InvalidRequestFault_Exception
 	 */
 	public IsAvailableResponseType isAvailable(final String source,
 			final String target, final int bandwidth, final int delay,
-			final int duration) throws SoapFault,
-			DatatypeConfigurationException {
+			final int duration) throws DatatypeConfigurationException,
+			InvalidRequestFault_Exception, OperationNotAllowedFault_Exception,
+			TimeoutFault_Exception, OperationNotSupportedFault_Exception,
+			UnexpectedFault_Exception, EndpointNotFoundFault_Exception {
 
 		final IsAvailableType request = SimpleReservationClient
 				.getIsAvailableRequest(source, target, bandwidth, delay,
 						duration);
 
-		return this.isAvailable(request);
+		return client.isAvailable(request);
 	}
 
 	/**
 	 * @param request
 	 * @return
+	 * @throws OperationNotSupportedFault_Exception
 	 * @throws SoapFault
 	 */
 	public NotificationResponseType notification(final NotificationType request)
-			throws SoapFault {
-		final Notification envelope = new Notification();
+			throws OperationNotSupportedFault_Exception {
 
-		envelope.setNotification(request);
-
-		final Element reqElement = JaxbSerializer.getInstance()
-				.objectToElement(envelope);
-
-		final Element resElement = super.notification(reqElement);
-
-		final NotificationResponse response = (NotificationResponse) JaxbSerializer
-				.getInstance().elementToObject(resElement);
-
-		return response.getNotificationResponse();
+		return client.notification(request);
 	}
 }

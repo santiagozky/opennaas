@@ -55,45 +55,45 @@
 			</plugin>
 
 			<!-- plugin to generate classes from xsd files, using jaxb2 plugin -->
-			<plugin>
-				<groupId>org.jvnet.jaxb2.maven2</groupId>
-				<artifactId>maven-jaxb2-plugin</artifactId>
-				<version>0.8.1</version>
-				<executions>
-					<execution>
-						<id>xsd-generate</id>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<generateDirectory>${project.build.directory}/generated-sources/xsdClasses</generateDirectory>
-							<generatePackage>org.opennaas.extensions.idb.serviceinterface.databinding.jaxb</generatePackage>
-							<schemaDirectory>${webservices.dir}</schemaDirectory>
-							<schemaIncludes>
+<!-- 			<plugin> -->
+<!-- 				<groupId>org.jvnet.jaxb2.maven2</groupId> -->
+<!-- 				<artifactId>maven-jaxb2-plugin</artifactId> -->
+<!-- 				<version>0.8.1</version> -->
+<!-- 				<executions> -->
+<!-- 					<execution> -->
+<!-- 						<id>xsd-generate</id> -->
+<!-- 						<goals> -->
+<!-- 							<goal>generate</goal> -->
+<!-- 						</goals> -->
+<!-- 						<configuration> -->
+<!-- 							<generateDirectory>${project.build.directory}/generated-sources/xsdClasses</generateDirectory> -->
+<!-- 							<generatePackage>org.opennaas.extensions.idb.serviceinterface.databinding.jaxb</generatePackage> -->
+<!-- 							<schemaDirectory>${webservices.dir}</schemaDirectory> -->
+<!-- 							<schemaIncludes> -->
 
-								<include>Topology-Types.xsd</include>
-								<include>Reservation-Types.xsd</include>
-								<include>Notification-Types.xsd</include>
+<!-- 								<include>Topology-Types.xsd</include> -->
+<!-- 								<include>Reservation-Types.xsd</include> -->
+<!-- 								<include>Notification-Types.xsd</include> -->
 
-							</schemaIncludes>
-							<bindingDirectory>${webservices.dir}</bindingDirectory>
-							<bindingIncludes>
-								<include>bindings.xjb</include>
-							</bindingIncludes>
-							<extension>true</extension>
+<!-- 							</schemaIncludes> -->
+<!-- 							<bindingDirectory>${webservices.dir}</bindingDirectory> -->
+<!-- 							<bindingIncludes> -->
+<!-- 								<include>bindings.xjb</include> -->
+<!-- 							</bindingIncludes> -->
+<!-- 							<extension>true</extension> -->
 
-						</configuration>
-					</execution>
+<!-- 						</configuration> -->
+<!-- 					</execution> -->
 
-				</executions>
-			</plugin>  
+<!-- 				</executions> -->
+<!-- 			</plugin>   -->
 			<!-- to execute external perl script -->
 
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>1.2</version>
-				<executions>
+<!-- 			<plugin> -->
+<!-- 				<groupId>org.codehaus.mojo</groupId> -->
+<!-- 				<artifactId>exec-maven-plugin</artifactId> -->
+<!-- 				<version>1.2</version> -->
+<!-- 				<executions> -->
 <!-- 					<execution> -->
 <!-- 						<id>make classes clonable</id> -->
 <!-- 						<phase>process-sources</phase> -->
@@ -109,28 +109,35 @@
 <!-- 							</arguments> -->
 <!-- 						</configuration> -->
 <!-- 					</execution> -->
-					<execution>
-						<id>generate exceptions</id>
-						<phase>process-sources</phase>
-						<goals>
-							<goal>exec</goal>
-						</goals>
-						<configuration>
-							<executable>perl</executable>
-							<arguments>
-								<argument>${scripts.dir}/generateFaultExceptions.pl</argument>
-								<argument>${project.build.directory}/generated-sources/xsdClasses/org/opennaas/extensions/idb/serviceinterface/databinding/jaxb</argument>
-								<argument>${project.build.directory}/generated-sources/xsdClasses/org/opennaas/extensions/idb/serviceinterface/databinding/jaxb/exceptions</argument>
-							</arguments>
-						</configuration>
-					</execution>
+<!-- 					<execution> -->
+<!-- 						<id>generate exceptions</id> -->
+<!-- 						<phase>process-sources</phase> -->
+<!-- 						<goals> -->
+<!-- 							<goal>exec</goal> -->
+<!-- 						</goals> -->
+<!-- 						<configuration> -->
+<!-- 							<executable>perl</executable> -->
+<!-- 							<arguments> -->
+<!-- 								<argument>${scripts.dir}/generateFaultExceptions.pl</argument> -->
+<!-- 								<argument>${project.build.directory}/generated-sources/xsdClasses/org/opennaas/extensions/idb/serviceinterface/databinding/jaxb</argument> -->
+<!-- 								<argument>${project.build.directory}/generated-sources/xsdClasses/org/opennaas/extensions/idb/serviceinterface/databinding/jaxb/exceptions</argument> -->
+<!-- 							</arguments> -->
+<!-- 						</configuration> -->
+<!-- 					</execution> -->
 					
-				</executions>
-			</plugin>
+<!-- 				</executions> -->
+<!-- 			</plugin> -->
 						<plugin>
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-codegen-plugin</artifactId>
 				<version>${cxf.version}</version>
+				<dependencies>
+    <dependency>
+      <groupId>net.sourceforge.ccxjc</groupId>
+      <artifactId>cc-xjc-plugin</artifactId>
+      <version>2.0</version>
+    </dependency>
+  </dependencies>
 				<executions>
 					<execution>
 						<id>generate-sources</id>
@@ -144,7 +151,9 @@
 										<extraarg>-client</extraarg>
 										<extraarg>-impl</extraarg>
 										<extraarg>-verbose</extraarg>
-										<extraarg>-noTypes</extraarg>
+										<extraarg>-xjc-copy-constructor</extraarg>
+										<extraarg>-xjc-cc-immutable-types,org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.BaseFaultType</extraarg>
+<!-- 										<extraarg>-noTypes</extraarg> -->
 										<extraarg>-p</extraarg>
 										<extraarg>
 											org.opennaas.extensions.idb.serviceinterface.databinding.jaxb</extraarg>
@@ -157,7 +166,10 @@
 										<extraarg>-client</extraarg>
 										<extraarg>-impl</extraarg>
 										<extraarg>-verbose</extraarg>
-										<extraarg>-noTypes</extraarg>
+										<extraarg>-xjc-copy-constructor</extraarg>
+										<extraarg>-xjc-cc-immutable-types,org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.BaseFaultType</extraarg>
+										
+<!-- 										<extraarg>-noTypes</extraarg> -->
 										<extraarg>-p</extraarg>
 										<extraarg>
 											org.opennaas.extensions.idb.serviceinterface.databinding.jaxb</extraarg>
@@ -169,7 +181,9 @@
 										<extraarg>-client</extraarg>
 										<extraarg>-impl</extraarg>
 										<extraarg>-verbose</extraarg>
-										<extraarg>-noTypes</extraarg>
+										<extraarg>-xjc-copy-constructor</extraarg>
+										<extraarg>-xjc-cc-immutable-types,org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.BaseFaultType</extraarg>
+<!-- 										<extraarg>-noTypes</extraarg> -->
 										<extraarg>-p</extraarg>
 										<extraarg>
 											org.opennaas.extensions.idb.serviceinterface.databinding.jaxb</extraarg>
@@ -205,6 +219,12 @@
 
 	</build>
 	<dependencies>
+	
+	<dependency>
+	<groupId>muse</groupId>
+	<artifactId>muse-util-xml</artifactId>
+	<version>2.2.0</version>
+	</dependency>
 <dependency>
  <groupId>org.apache.servicemix.specs</groupId>
     <artifactId>org.apache.servicemix.specs.jaxws-api-2.1</artifactId>

@@ -28,9 +28,6 @@
  */
 package org.opennaas.extensions.idb.serviceinterface.notification;
 
-import org.apache.muse.ws.addressing.soap.SoapFault;
-
-import org.opennaas.extensions.idb.serviceinterface.RequestHandler;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AddTopicResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AddTopicType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetReservationsResponseType;
@@ -41,6 +38,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetTopicsRe
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetTopicsType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.IsAvailableResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.IsAvailableType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.OperationNotSupportedFault_Exception;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.PublishResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.PublishType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.RemoveTopicResponseType;
@@ -49,115 +47,114 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.SubscribeRe
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.SubscribeType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.UnsubscribeResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.UnsubscribeType;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.OperationNotSupportedFaultException;
 
 /**
  * @author willner
  * 
  */
-public class CommonNotificationHandler extends RequestHandler {
+public class CommonNotificationHandler {
 
-    private static CommonNotificationHandler selfInstance;
+	private static CommonNotificationHandler selfInstance;
 
-    /**
-     * Instance getter.
-     * 
-     * @return Singleton Instance
-     */
-    public static CommonNotificationHandler getInstance() {
-        if (CommonNotificationHandler.selfInstance == null) {
-            CommonNotificationHandler.selfInstance = new CommonNotificationHandler();
-        }
-        return CommonNotificationHandler.selfInstance;
-    }
+	/**
+	 * Instance getter.
+	 * 
+	 * @return Singleton Instance
+	 */
+	public static CommonNotificationHandler getInstance() {
+		if (CommonNotificationHandler.selfInstance == null) {
+			CommonNotificationHandler.selfInstance = new CommonNotificationHandler();
+		}
+		return CommonNotificationHandler.selfInstance;
+	}
 
-    /**
-     * @param request
-     * @return
-     * @throws SoapFault
-     */
-    public AddTopicResponseType addTopic(final AddTopicType request)
-            throws SoapFault {
-        throw new OperationNotSupportedFaultException("Not implemented yet.");
-    }
+	/**
+	 * @param request
+	 * @return
+	 * @throws SoapFault
+	 */
+	public AddTopicResponseType addTopic(final AddTopicType request)
+			throws Throwable {
+		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+	}
 
-    /**
-     * @param request
-     * @return
-     * @throws SoapFault
-     */
-    public GetReservationsResponseType getReservations(
-            final GetReservationsType request) throws SoapFault {
-        throw new OperationNotSupportedFaultException("Not implemented yet.");
-    }
+	/**
+	 * @param request
+	 * @return
+	 * @throws SoapFault
+	 */
+	public GetReservationsResponseType getReservations(
+			final GetReservationsType request) throws Throwable {
+		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+	}
 
-    /**
-     * @param request
-     * @return
-     * @throws SoapFault
-     */
-    public GetStatusResponseType getStatus(final GetStatusType request)
-            throws SoapFault {
-        throw new OperationNotSupportedFaultException("Not implemented yet.");
-    }
+	/**
+	 * @param request
+	 * @return
+	 * @throws SoapFault
+	 */
+	public GetStatusResponseType getStatus(final GetStatusType request)
+			throws Throwable {
+		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+	}
 
-    /**
-     * @param request
-     * @return
-     * @throws SoapFault
-     */
-    public GetTopicsResponseType getTopics(final GetTopicsType request)
-            throws SoapFault {
-        throw new OperationNotSupportedFaultException("Not implemented yet.");
-    }
+	/**
+	 * @param request
+	 * @return
+	 * @throws SoapFault
+	 */
+	public GetTopicsResponseType getTopics(final GetTopicsType request)
+			throws Throwable {
+		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+	}
 
-    /**
-     * @param request
-     * @return
-     * @throws SoapFault
-     */
-    public IsAvailableResponseType isAvailable(final IsAvailableType request)
-            throws SoapFault {
-        throw new OperationNotSupportedFaultException("Not implemented yet.");
-    }
+	/**
+	 * @param request
+	 * @return
+	 * @throws SoapFault
+	 */
+	public IsAvailableResponseType isAvailable(final IsAvailableType request)
+			throws Throwable {
+		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+	}
 
-    /**
-     * @param request
-     * @return
-     * @throws SoapFault
-     */
-    public PublishResponseType publish(final PublishType request)
-            throws SoapFault {
-        throw new OperationNotSupportedFaultException("Not implemented yet.");
-    }
+	/**
+	 * @param request
+	 * @return
+	 * @throws SoapFault
+	 */
+	public PublishResponseType publish(final PublishType request)
+			throws Throwable {
+		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+	}
 
-    /**
-     * @param request
-     * @return
-     * @throws SoapFault
-     */
-    public RemoveTopicResponseType removeTopic(final RemoveTopicType request)
-            throws SoapFault {
-        throw new OperationNotSupportedFaultException("Not implemented yet.");
-    }
+	/**
+	 * @param request
+	 * @return
+	 * @throws SoapFault
+	 */
+	public RemoveTopicResponseType removeTopic(final RemoveTopicType request)
+			throws Throwable {
+		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+	}
 
-    /**
-     * @param request
-     * @return
-     * @throws SoapFault
-     */
-    public SubscribeResponseType subscribe(final SubscribeType request)
-            throws SoapFault {
-        throw new OperationNotSupportedFaultException("Not implemented yet.");
-    }
+	/**
+	 * @param request
+	 * @return
+	 * @throws SoapFault
+	 */
+	public SubscribeResponseType subscribe(final SubscribeType request)
+			throws Throwable {
+		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+	}
 
-    /**
-     * @param request
-     * @return
-     * @throws SoapFault
-     */
-    public UnsubscribeResponseType unsubscribe(final UnsubscribeType request)
-            throws SoapFault {
-        throw new OperationNotSupportedFaultException("Not implemented yet.");
-    }
+	/**
+	 * @param request
+	 * @return
+	 * @throws SoapFault
+	 */
+	public UnsubscribeResponseType unsubscribe(final UnsubscribeType request)
+			throws Throwable {
+		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+	}
 }

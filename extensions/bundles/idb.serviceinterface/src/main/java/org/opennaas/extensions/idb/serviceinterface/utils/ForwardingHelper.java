@@ -32,13 +32,13 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.muse.ws.addressing.soap.SoapFault;
 
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ConnectionConstraintType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CreateReservationType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.EndpointType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.IsAvailableType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ServiceConstraintType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.UnexpectedFault_Exception;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.InvalidRequestFaultException;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.OperationNotAllowedFaultException;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.UnexpectedFaultException;
@@ -251,14 +251,15 @@ public class ForwardingHelper {
 	 * 
 	 * @param domainId
 	 * @return
+	 * @throws UnexpectedFault_Exception
 	 * @throws SoapFault
 	 */
 	protected final boolean isForeignDomain(final EndpointType ep)
-			throws SoapFault {
+			throws UnexpectedFault_Exception {
 		final AbstractTopologyRegistrator registrator = AbstractTopologyRegistrator
 				.getLatestInstance();
 		if (null == registrator) {
-			throw new UnexpectedFaultException(
+			throw new UnexpectedFault_Exception(
 					"Topology registrator must be initialized first!");
 		}
 		// if we are already at the top level, we cannot forward anyway
@@ -300,10 +301,11 @@ public class ForwardingHelper {
 	 * 
 	 * @param domainId
 	 * @return
+	 * @throws UnexpectedFaultException
 	 * @throws SoapFault
 	 */
 	protected final boolean isForeignDomain(final String domainId)
-			throws SoapFault {
+			throws UnexpectedFaultException {
 		if (null != domainId) {
 			this.logger.debug("Own: " + this.getLocalDomain() + ", Req: "
 					+ domainId);
@@ -320,10 +322,12 @@ public class ForwardingHelper {
 	 * 
 	 * @param obj
 	 * @return
+	 * @throws UnexpectedFault_Exception
 	 * @throws SoapFault
 	 */
 	protected final boolean isForeignRequest(
-			final List<ServiceConstraintType> obj) throws SoapFault {
+			final List<ServiceConstraintType> obj)
+			throws UnexpectedFault_Exception {
 		boolean isForeign = false;
 
 		for (final ServiceConstraintType service : obj) {
@@ -360,11 +364,16 @@ public class ForwardingHelper {
 	 * @throws InvocationTargetException
 	 * @throws IllegalAccessException
 	 * @throws IllegalArgumentException
+	 * @throws UnexpectedFault_Exception
+	 * @throws UnexpectedFaultException
+	 * @throws InvalidRequestFaultException
 	 * @throws SoapFault
 	 */
 	public final boolean isForeignRequest(final Object obj)
 			throws SecurityException, IllegalArgumentException,
-			IllegalAccessException, InvocationTargetException, SoapFault {
+			IllegalAccessException, InvocationTargetException,
+			UnexpectedFault_Exception, InvalidRequestFaultException,
+			UnexpectedFaultException {
 		boolean isForeign = false;
 
 		this.logger.debug("Checking responsibility for "

@@ -31,9 +31,8 @@ import java.util.List;
 import java.util.Vector;
 
 import org.apache.commons.logging.Log;
-import org.apache.muse.ws.addressing.EndpointReference;
-import org.apache.muse.ws.addressing.soap.SoapFault;
 
+import org.opennaas.extensions.idb.serviceinterface.EndpointReference;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AddEndpointResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AddEndpointType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AddOrEditDomainResponseType;
@@ -43,12 +42,19 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DeleteDomai
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DeleteEndpointResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DeleteEndpointType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DomainInformationType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DomainNotFoundFault_Exception;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.EditEndpointResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.EditEndpointType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.EndpointAlreadyExistsFault_Exception;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.EndpointType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.InvalidRequestFault_Exception;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.OperationNotAllowedFault_Exception;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.OperationNotSupportedFault_Exception;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.UnexpectedFault_Exception;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.DomainNotFoundFaultException;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.EndpointAlreadyExistsFaultException;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.EndpointNotFoundFaultException;
+
 import org.opennaas.extensions.idb.serviceinterface.topology.SimpleTopologyClient;
 
 /**
@@ -119,9 +125,6 @@ public class Distributor implements Runnable {
 		final EndpointReference epr = new EndpointReference(uri);
 		this.topologyClient = new SimpleTopologyClient(epr);
 
-		// optional, but useful
-		this.topologyClient.setTrace(true);
-
 		if (initialDomain != null) {
 			this.domains.add(initialDomain);
 		}
@@ -148,7 +151,10 @@ public class Distributor implements Runnable {
 		final GenericRegistrator r1 = new GenericRegistrator(domainId,
 				Distributor.SLEEP_BETWEEN_ATTEMPTS) {
 			@Override
-			public boolean register() throws SoapFault {
+			public boolean register() throws InvalidRequestFault_Exception,
+					UnexpectedFault_Exception, DomainNotFoundFault_Exception,
+					OperationNotSupportedFault_Exception,
+					OperationNotAllowedFault_Exception {
 				final DeleteDomainType requestType = new DeleteDomainType();
 				requestType.setDomainId((String) this.req);
 				final DeleteDomainResponseType response = Distributor.this.topologyClient
@@ -160,7 +166,7 @@ public class Distributor implements Runnable {
 		final GenericRegistrator dummy = new GenericRegistrator(null,
 				Distributor.SLEEP_BETWEEN_ATTEMPTS) {
 			@Override
-			public boolean register() throws SoapFault {
+			public boolean register() {
 				return true;
 			}
 		};
@@ -174,7 +180,10 @@ public class Distributor implements Runnable {
 		final GenericRegistrator r1 = new GenericRegistrator(
 				ep.getEndpointId(), Distributor.SLEEP_BETWEEN_ATTEMPTS) {
 			@Override
-			public boolean register() throws SoapFault {
+			public boolean register() throws InvalidRequestFault_Exception,
+					UnexpectedFault_Exception,
+					OperationNotSupportedFault_Exception,
+					OperationNotAllowedFault_Exception {
 				final DeleteEndpointType requestType = new DeleteEndpointType();
 				requestType.setEndpoint((String) this.req);
 				final DeleteEndpointResponseType response = Distributor.this.topologyClient
@@ -186,7 +195,7 @@ public class Distributor implements Runnable {
 		final GenericRegistrator dummy = new GenericRegistrator(null,
 				Distributor.SLEEP_BETWEEN_ATTEMPTS) {
 			@Override
-			public boolean register() throws SoapFault {
+			public boolean register() {
 				return true;
 			}
 		};
@@ -199,7 +208,10 @@ public class Distributor implements Runnable {
 		final GenericRegistrator r1 = new GenericRegistrator(domain,
 				Distributor.SLEEP_BETWEEN_ATTEMPTS) {
 			@Override
-			public boolean register() throws SoapFault {
+			public boolean register() throws InvalidRequestFault_Exception,
+					UnexpectedFault_Exception,
+					OperationNotSupportedFault_Exception,
+					OperationNotAllowedFault_Exception {
 				final AddOrEditDomainType addOrEditDomainType = new AddOrEditDomainType();
 				addOrEditDomainType.setDomain((DomainInformationType) this.req);
 				final AddOrEditDomainResponseType response = Distributor.this.topologyClient
@@ -212,7 +224,7 @@ public class Distributor implements Runnable {
 		boolean result = false;
 		try {
 			result = r1.register();
-		} catch (final SoapFault e) {
+		} catch (final Exception e) {
 			this.log.error("Could not register domain: " + e.getMessage(), e);
 		}
 		return result;
@@ -222,7 +234,11 @@ public class Distributor implements Runnable {
 		final GenericRegistrator r1 = new GenericRegistrator(ep,
 				Distributor.SLEEP_BETWEEN_ATTEMPTS) {
 			@Override
-			public boolean register() throws SoapFault {
+			public boolean register() throws InvalidRequestFault_Exception,
+					EndpointAlreadyExistsFault_Exception,
+					UnexpectedFault_Exception, DomainNotFoundFault_Exception,
+					OperationNotSupportedFault_Exception,
+					OperationNotAllowedFault_Exception {
 				final AddEndpointType requestType = new AddEndpointType();
 				requestType.setEndpoint((EndpointType) this.req);
 				final AddEndpointResponseType response = Distributor.this.topologyClient
@@ -234,7 +250,10 @@ public class Distributor implements Runnable {
 		final GenericRegistrator r2 = new GenericRegistrator(ep,
 				Distributor.SLEEP_BETWEEN_ATTEMPTS) {
 			@Override
-			public boolean register() throws SoapFault {
+			public boolean register() throws InvalidRequestFault_Exception,
+					UnexpectedFault_Exception,
+					OperationNotSupportedFault_Exception,
+					OperationNotAllowedFault_Exception {
 				final EditEndpointType requestType = new EditEndpointType();
 				requestType.setEndpoint((EndpointType) this.req);
 				final EditEndpointResponseType response = Distributor.this.topologyClient

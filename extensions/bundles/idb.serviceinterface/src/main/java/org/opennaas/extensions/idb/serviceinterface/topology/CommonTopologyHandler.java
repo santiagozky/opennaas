@@ -25,9 +25,8 @@
 
 package org.opennaas.extensions.idb.serviceinterface.topology;
 
-import org.apache.muse.ws.addressing.soap.SoapFault;
+import javax.xml.ws.soap.SOAPFaultException;
 
-import org.opennaas.extensions.idb.serviceinterface.RequestHandler;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AddDomainResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AddDomainType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AddEndpointResponseType;
@@ -42,6 +41,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DeleteEndpo
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DeleteEndpointType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DeleteLinkResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DeleteLinkType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DomainAlreadyExistsFault_Exception;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.EditDomainResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.EditDomainType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.EditEndpointResponseType;
@@ -54,290 +54,296 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetEndpoint
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetEndpointsType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetLinksResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetLinksType;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.DomainAlreadyExistsFaultException;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.OperationNotSupportedFaultException;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.OperationNotSupportedFault_Exception;
 
 /**
  * Class to handle NSP topology-requests in a predictable manner.
  */
-public class CommonTopologyHandler extends RequestHandler {
-    /** Singleton Instance. */
-    private static CommonTopologyHandler selfInstance;
+public class CommonTopologyHandler {
+	/** Singleton Instance. */
+	private static CommonTopologyHandler selfInstance;
 
-    /**
-     * Instance getter.
-     * 
-     * @return Singleton Instance
-     */
-    public static CommonTopologyHandler getInstance() {
-        if (CommonTopologyHandler.selfInstance == null) {
-            CommonTopologyHandler.selfInstance = new CommonTopologyHandler();
-        }
-        return CommonTopologyHandler.selfInstance;
-    }
+	/**
+	 * Instance getter.
+	 * 
+	 * @return Singleton Instance
+	 */
+	public static CommonTopologyHandler getInstance() {
+		if (CommonTopologyHandler.selfInstance == null) {
+			CommonTopologyHandler.selfInstance = new CommonTopologyHandler();
+		}
+		return CommonTopologyHandler.selfInstance;
+	}
 
-    /**
-     * Private constructor: Singleton.
-     */
-    public CommonTopologyHandler() {
-        super();
-    }
+	/**
+	 * Private constructor: Singleton.
+	 */
+	public CommonTopologyHandler() {
+		super();
+	}
 
-    /**
-     * AddDomain Handler.
-     * <p>
-     * Handler will accept AddDomain-Requests and return a AddDomain-Response
-     * containing the success-parameter set to true.
-     * <p>
-     * 
-     * @param request
-     *            AddDomain Request
-     * @return AddDomain Response
-     */
-    public AddDomainResponseType addDomain(final AddDomainType request)
-            throws Throwable {
-        throw new OperationNotSupportedFaultException("Not implemented yet.");
-    }
+	/**
+	 * AddDomain Handler.
+	 * <p>
+	 * Handler will accept AddDomain-Requests and return a AddDomain-Response
+	 * containing the success-parameter set to true.
+	 * <p>
+	 * 
+	 * @param request
+	 *            AddDomain Request
+	 * @return AddDomain Response
+	 */
+	public AddDomainResponseType addDomain(final AddDomainType request)
+			throws Throwable {
+		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+	}
 
-    /*
-     * Handler
-     * =========================================================================
-     */
+	/*
+	 * Handler
+	 * =========================================================================
+	 */
 
-    /**
-     * AddEndpoint Handler.
-     * <p>
-     * Handler will accept AddEndpoint-Requests and return a
-     * AddEndpoint-Response containing the success-parameter set to true.
-     * <p>
-     * 
-     * @param request
-     *            AddEndpoint Request
-     * @return AddEndpoint Response
-     */
-    public AddEndpointResponseType addEndpoint(final AddEndpointType request)
-            throws SoapFault, Throwable {
-        throw new OperationNotSupportedFaultException("Not implemented yet.");
-    }
+	/**
+	 * AddEndpoint Handler.
+	 * <p>
+	 * Handler will accept AddEndpoint-Requests and return a
+	 * AddEndpoint-Response containing the success-parameter set to true.
+	 * <p>
+	 * 
+	 * @param request
+	 *            AddEndpoint Request
+	 * @return AddEndpoint Response
+	 */
+	public AddEndpointResponseType addEndpoint(final AddEndpointType request)
+			throws Throwable {
+		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+	}
 
-    /**
-     * AddLink Handler.
-     * <p>
-     * Handler will accept AddLink-Requests and return a AddLink-Response
-     * containing a LinkID, which will be set to $(committed LinkID) + 1.
-     * <p>
-     * 
-     * @param request
-     *            AddLink Request
-     * @return AddLink Response
-     * @throws SoapFault
-     */
-    public AddLinkResponseType addLink(final AddLinkType request)
-            throws SoapFault, Throwable {
-        throw new OperationNotSupportedFaultException("Not implemented yet.");
-    }
+	/**
+	 * AddLink Handler.
+	 * <p>
+	 * Handler will accept AddLink-Requests and return a AddLink-Response
+	 * containing a LinkID, which will be set to $(committed LinkID) + 1.
+	 * <p>
+	 * 
+	 * @param request
+	 *            AddLink Request
+	 * @return AddLink Response
+	 * @throws SOAPFaultException
+	 */
+	public AddLinkResponseType addLink(final AddLinkType request)
+			throws Throwable {
+		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+	}
 
-    /**
-     * 
-     * @param request
-     * @return The result.
-     * @throws Throwable
-     */
-    public AddOrEditDomainResponseType addOrEditDomain(
-            final AddOrEditDomainType element) throws Throwable {
+	/**
+	 * this method tries to add a domain. if it fails, it will try to edit it.
+	 * 
+	 * @param request
+	 * @return The result.
+	 * @throws Throwable
+	 */
+	public AddOrEditDomainResponseType addOrEditDomain(
+			final AddOrEditDomainType element) {
 
-        final AddOrEditDomainResponseType response = new AddOrEditDomainResponseType();
-        response.setSuccess(false);
+		final AddOrEditDomainResponseType response = new AddOrEditDomainResponseType();
+		response.setSuccess(false);
 
-        try {
-            final AddDomainType addDomainType = new AddDomainType();
-            addDomainType.setDomain(element.getDomain());
-            final AddDomainResponseType addResponse = this
-                    .addDomain(addDomainType);
-            response.setSuccess(addResponse.isSuccess());
-        } catch (final DomainAlreadyExistsFaultException exception) {
-            final EditDomainType editDomainType = new EditDomainType();
-            editDomainType.setDomain(element.getDomain());
-            final EditDomainResponseType editResponse = this
-                    .editDomain(editDomainType);
-            response.setSuccess(editResponse.isSuccess());
-        }
+		try {
+			try {
+				final AddDomainType addDomainType = new AddDomainType();
+				addDomainType.setDomain(element.getDomain());
+				final AddDomainResponseType addResponse = this
+						.addDomain(addDomainType);
+				response.setSuccess(addResponse.isSuccess());
+			} catch (final DomainAlreadyExistsFault_Exception exception) {
+				final EditDomainType editDomainType = new EditDomainType();
+				editDomainType.setDomain(element.getDomain());
+				final EditDomainResponseType editResponse = this
+						.editDomain(editDomainType);
+				response.setSuccess(editResponse.isSuccess());
+			}
 
-        return response;
-    }
+		} catch (Throwable e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-    /**
-     * Singleton - Cloning _not_ supported!
-     * 
-     * @return Should never return anything...
-     * @throws CloneNotSupportedException
-     *             Singleton hates to be cloned!
-     */
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        throw new CloneNotSupportedException();
-    }
+		return response;
+	}
 
-    /**
-     * DeleteDomain Handler.
-     * <p>
-     * Handler will accept DeleteDomain-Requests and return a
-     * DeleteDomain-Response containing the success-parameter set to true.
-     * <p>
-     * 
-     * @param request
-     *            DeleteDomain Request
-     * @return DeleteDomain Response
-     */
-    public DeleteDomainResponseType deleteDomain(final DeleteDomainType request)
-            throws Throwable {
-        throw new OperationNotSupportedFaultException("Not implemented yet.");
-    }
+	/**
+	 * Singleton - Cloning _not_ supported!
+	 * 
+	 * @return Should never return anything...
+	 * @throws CloneNotSupportedException
+	 *             Singleton hates to be cloned!
+	 */
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		throw new CloneNotSupportedException();
+	}
 
-    /**
-     * DeleteEndpoints Handler.
-     * <p>
-     * Handler will accept DeleteEndpoint-Requests and return a
-     * DeleteEndpoint-Response containing the success-parameter set to true.
-     * <p>
-     * 
-     * @param request
-     *            DeleteEndpoint Request
-     * @return DeleteEndpoint Response
-     */
-    public DeleteEndpointResponseType deleteEndpoint(
-            final DeleteEndpointType request) throws SoapFault, Throwable {
-        throw new OperationNotSupportedFaultException("Not implemented yet.");
-    }
+	/**
+	 * DeleteDomain Handler.
+	 * <p>
+	 * Handler will accept DeleteDomain-Requests and return a
+	 * DeleteDomain-Response containing the success-parameter set to true.
+	 * <p>
+	 * 
+	 * @param request
+	 *            DeleteDomain Request
+	 * @return DeleteDomain Response
+	 */
+	public DeleteDomainResponseType deleteDomain(final DeleteDomainType request)
+			throws Throwable {
+		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+	}
 
-    /**
-     * DeleteLink Handler.
-     * <p>
-     * Handler will accept DeleteLink-Requests and return a DeleteLink-Response
-     * containing the success-parameter set to true.
-     * <p>
-     * 
-     * @param request
-     *            DeleteLink Request
-     * @return DeleteLink Response
-     */
-    public DeleteLinkResponseType deleteLink(final DeleteLinkType request)
-            throws SoapFault, Throwable {
-        throw new OperationNotSupportedFaultException("Not implemented yet.");
-    }
+	/**
+	 * DeleteEndpoints Handler.
+	 * <p>
+	 * Handler will accept DeleteEndpoint-Requests and return a
+	 * DeleteEndpoint-Response containing the success-parameter set to true.
+	 * <p>
+	 * 
+	 * @param request
+	 *            DeleteEndpoint Request
+	 * @return DeleteEndpoint Response
+	 */
+	public DeleteEndpointResponseType deleteEndpoint(
+			final DeleteEndpointType request) throws Throwable {
+		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+	}
 
-    /**
-     * EditDomain Handler.
-     * <p>
-     * Handler will accept EditDomain-Requests and return a EditDomain-Response
-     * containing the success-parameter set to true.
-     * <p>
-     * 
-     * @param request
-     *            EditDomain Request
-     * @return EditDomain Response
-     */
-    public EditDomainResponseType editDomain(final EditDomainType request)
-            throws SoapFault, Throwable {
-        throw new OperationNotSupportedFaultException("Not implemented yet.");
-    }
+	/**
+	 * DeleteLink Handler.
+	 * <p>
+	 * Handler will accept DeleteLink-Requests and return a DeleteLink-Response
+	 * containing the success-parameter set to true.
+	 * <p>
+	 * 
+	 * @param request
+	 *            DeleteLink Request
+	 * @return DeleteLink Response
+	 */
+	public DeleteLinkResponseType deleteLink(final DeleteLinkType request)
+			throws Throwable {
+		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+	}
 
-    /**
-     * EditEndpoint Handler.
-     * <p>
-     * Handler will accept EditEndpoint-Requests and return a
-     * EditEndpoint-Response containing the success-parameter set to true.
-     * <p>
-     * 
-     * @param request
-     *            EditEndpoint Request
-     * @return EditEndpoint Response
-     */
-    public EditEndpointResponseType editEndpoint(final EditEndpointType request)
-            throws SoapFault, Throwable {
-        throw new OperationNotSupportedFaultException("Not implemented yet.");
-    }
+	/**
+	 * EditDomain Handler.
+	 * <p>
+	 * Handler will accept EditDomain-Requests and return a EditDomain-Response
+	 * containing the success-parameter set to true.
+	 * <p>
+	 * 
+	 * @param request
+	 *            EditDomain Request
+	 * @return EditDomain Response
+	 */
+	public EditDomainResponseType editDomain(final EditDomainType request)
+			throws Throwable {
+		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+	}
 
-    /**
-     * EditLink Handler.
-     * <p>
-     * Handler will accept EditLink-Requests and return a EditLink-Response
-     * containing the success-parameter set to true.
-     * <p>
-     * 
-     * @param request
-     *            EditLink Request
-     * @return EditLink Response
-     */
-    public EditLinkResponseType editLink(final EditLinkType request)
-            throws SoapFault, Throwable {
-        throw new OperationNotSupportedFaultException("Not implemented yet.");
-    }
+	/**
+	 * EditEndpoint Handler.
+	 * <p>
+	 * Handler will accept EditEndpoint-Requests and return a
+	 * EditEndpoint-Response containing the success-parameter set to true.
+	 * <p>
+	 * 
+	 * @param request
+	 *            EditEndpoint Request
+	 * @return EditEndpoint Response
+	 */
+	public EditEndpointResponseType editEndpoint(final EditEndpointType request)
+			throws Throwable {
+		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+	}
 
-    /**
-     * GetDomains Handler.
-     * <p>
-     * Handler will accept GetDomains-Requests and return a GetDomain-Response
-     * containing a list of DomainInformationTypes with only one request built
-     * as follows: <br>
-     * DomainID -> DummyDomain <br>
-     * Description -> DummyDomain <br>
-     * ReservationEPR -> dummy.reservation.epr <br>
-     * TopologyEPR -> dummy.topology.epr <br>
-     * TNAPrefixList = List with one TNAPrefix: <br>
-     * -> 0.0.0.0/32 <br>
-     * <p>
-     * 
-     * @param request
-     *            GetDomains Request
-     * @return GetDomains Response
-     */
-    public GetDomainsResponseType getDomains(final GetDomainsType request)
-            throws SoapFault, Throwable {
-        throw new OperationNotSupportedFaultException("Not implemented yet.");
-    }
+	/**
+	 * EditLink Handler.
+	 * <p>
+	 * Handler will accept EditLink-Requests and return a EditLink-Response
+	 * containing the success-parameter set to true.
+	 * <p>
+	 * 
+	 * @param request
+	 *            EditLink Request
+	 * @return EditLink Response
+	 */
+	public EditLinkResponseType editLink(final EditLinkType request)
+			throws Throwable {
+		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+	}
 
-    /**
-     * GetEndpoints Handler.
-     * <p>
-     * Handler will accept GetEndpoints-Requests and return a
-     * GetEndpoints-Response containing a list of EndpointTypes with only one
-     * request built as follows: <br>
-     * EndpointID -> 0.0.0.0 <br>
-     * Name -> DummyEndpoint <br>
-     * Description -> DummyEndpoint <br>
-     * DomainID -> committed DomainID <br>
-     * Interface -> EndpointInterfaceType.BORDER <br>
-     * Bandwidth -> 1 <br>
-     * <p>
-     * 
-     * @param request
-     *            GetEndpoints Request
-     * @return GetEndpoints Response
-     */
-    public GetEndpointsResponseType getEndpoints(final GetEndpointsType request)
-            throws SoapFault, Throwable {
-        throw new OperationNotSupportedFaultException("Not implemented yet.");
-    }
+	/**
+	 * GetDomains Handler.
+	 * <p>
+	 * Handler will accept GetDomains-Requests and return a GetDomain-Response
+	 * containing a list of DomainInformationTypes with only one request built
+	 * as follows: <br>
+	 * DomainID -> DummyDomain <br>
+	 * Description -> DummyDomain <br>
+	 * ReservationEPR -> dummy.reservation.epr <br>
+	 * TopologyEPR -> dummy.topology.epr <br>
+	 * TNAPrefixList = List with one TNAPrefix: <br>
+	 * -> 0.0.0.0/32 <br>
+	 * <p>
+	 * 
+	 * @param request
+	 *            GetDomains Request
+	 * @return GetDomains Response
+	 */
+	public GetDomainsResponseType getDomains(final GetDomainsType request)
+			throws Throwable {
+		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+	}
 
-    /**
-     * GetLinks Handler.
-     * <p>
-     * Handler will accept GetLinks-Requests and return a GetLinks-Response
-     * containing a list of Links with only one request built as follows: <br>
-     * LinkID -> 1 <br>
-     * Name -> DummyLink <br>
-     * Description -> DummyLink <br>
-     * SourceEndpoint -> 0.0.0.1 <br>
-     * DestinationEndpoint -> 0.0.0.2 <br>
-     * <p>
-     * 
-     * @param request
-     *            GetLinks Request
-     * @return GetLinks Response
-     */
-    public GetLinksResponseType getLinks(final GetLinksType request)
-            throws SoapFault, Throwable {
-        throw new OperationNotSupportedFaultException("Not implemented yet.");
-    }
+	/**
+	 * GetEndpoints Handler.
+	 * <p>
+	 * Handler will accept GetEndpoints-Requests and return a
+	 * GetEndpoints-Response containing a list of EndpointTypes with only one
+	 * request built as follows: <br>
+	 * EndpointID -> 0.0.0.0 <br>
+	 * Name -> DummyEndpoint <br>
+	 * Description -> DummyEndpoint <br>
+	 * DomainID -> committed DomainID <br>
+	 * Interface -> EndpointInterfaceType.BORDER <br>
+	 * Bandwidth -> 1 <br>
+	 * <p>
+	 * 
+	 * @param request
+	 *            GetEndpoints Request
+	 * @return GetEndpoints Response
+	 */
+	public GetEndpointsResponseType getEndpoints(final GetEndpointsType request)
+			throws Throwable {
+		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+	}
+
+	/**
+	 * GetLinks Handler.
+	 * <p>
+	 * Handler will accept GetLinks-Requests and return a GetLinks-Response
+	 * containing a list of Links with only one request built as follows: <br>
+	 * LinkID -> 1 <br>
+	 * Name -> DummyLink <br>
+	 * Description -> DummyLink <br>
+	 * SourceEndpoint -> 0.0.0.1 <br>
+	 * DestinationEndpoint -> 0.0.0.2 <br>
+	 * <p>
+	 * 
+	 * @param request
+	 *            GetLinks Request
+	 * @return GetLinks Response
+	 */
+	public GetLinksResponseType getLinks(final GetLinksType request)
+			throws Throwable {
+		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+	}
 }

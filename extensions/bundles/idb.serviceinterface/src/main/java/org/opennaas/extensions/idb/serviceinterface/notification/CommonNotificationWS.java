@@ -25,11 +25,13 @@
 
 package org.opennaas.extensions.idb.serviceinterface.notification;
 
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.NetworkNotificationPortTypeImpl;
+
 /**
  * 
  * @author Alexander Willner (willner@cs.uni-bonn.de)
  * 
  */
-public class CommonNotificationWS extends NotificationWS {
-    // Nothing yet
+public class CommonNotificationWS extends NetworkNotificationPortTypeImpl {
+	// Nothing yet
 }

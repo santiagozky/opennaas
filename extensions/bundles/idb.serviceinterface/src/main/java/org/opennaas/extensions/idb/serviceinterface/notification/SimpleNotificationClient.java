@@ -25,197 +25,154 @@
 
 package org.opennaas.extensions.idb.serviceinterface.notification;
 
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.net.URL;
 
-import org.apache.muse.ws.addressing.EndpointReference;
-import org.apache.muse.ws.addressing.soap.SoapFault;
-import org.w3c.dom.Element;
+import javax.xml.ws.soap.AddressingFeature;
 
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AddTopic;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AddTopicResponse;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.opennaas.extensions.idb.serviceinterface.EndpointReference;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AddTopicResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AddTopicType;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetTopics;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetTopicsResponse;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetTopicsResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetTopicsType;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.Publish;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.PublishResponse;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.NetworkNotificationPortType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.NetworkNotificationService;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.PublishResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.PublishType;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.RemoveTopic;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.RemoveTopicResponse;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.RemoveTopicResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.RemoveTopicType;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.Subscribe;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.SubscribeResponse;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.SubscribeResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.SubscribeType;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.Unsubscribe;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.UnsubscribeResponse;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.TopicNotFoundFault_Exception;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.UnsubscribeResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.UnsubscribeType;
-import org.opennaas.extensions.idb.serviceinterface.databinding.utils.JaxbSerializer;
 
-public class SimpleNotificationClient extends CommonNotificationClient {
+public class SimpleNotificationClient {
 
-    /**
-     * Constructor from superclass.
-     * 
-     * @param endpointReference
-     */
-    public SimpleNotificationClient(final EndpointReference endpointReference) {
-        super(endpointReference);
-        // TODO Auto-generated constructor stub
-    }
+	NetworkNotificationPortType client;
+	private final Log logger;
 
-    /**
-     * @param webservice
-     */
-    public SimpleNotificationClient(final INotificationWS webservice) {
-        super(webservice);
-    }
+	/**
+	 * Constructor from superclass.
+	 * 
+	 * @param endpointReference
+	 */
+	public SimpleNotificationClient(final EndpointReference endpointReference) {
+		logger = LogFactory.getLog(this.getClass());
 
-    /**
-     * Constructor from Superclass.
-     * 
-     * @param endpointReference
-     * @throws URISyntaxException
-     */
-    public SimpleNotificationClient(final String endpointReference) {
-        super(endpointReference);
-        // TODO Auto-generated constructor stub
-    }
+		NetworkNotificationService s;
+		try {
+			s = new NetworkNotificationService(endpointReference.getURI()
+					.toURL());
+		} catch (MalformedURLException e) {
+			s = new NetworkNotificationService();
+			logger.error("Could not get convert to URL "
+					+ endpointReference.getURI());
+			e.printStackTrace();
+		}
+		client = s.getNetworkNotificationPortType(new AddressingFeature());
+	}
 
-    /**
-     * @param request
-     * @return
-     * @throws SoapFault
-     */
-    public AddTopicResponseType addTopic(final AddTopicType request)
-            throws SoapFault {
-        final AddTopic envelope = new AddTopic();
+	/**
+	 * @param webservice
+	 */
+	public SimpleNotificationClient(final NetworkNotificationPortType webservice) {
+		logger = LogFactory.getLog(this.getClass());
 
-        envelope.setAddTopic(request);
+		this.client = webservice;
+	}
 
-        final Element reqElement = JaxbSerializer.getInstance()
-                .objectToElement(envelope);
+	/**
+	 * Constructor from Superclass.
+	 * 
+	 * @param endpointReference
+	 * @throws MalformedURLException
+	 * @throws URISyntaxException
+	 */
+	public SimpleNotificationClient(final String endpointReference) {
+		logger = LogFactory.getLog(this.getClass());
 
-        final Element resElement = super.addTopic(reqElement);
+		NetworkNotificationService s;
+		try {
+			s = new NetworkNotificationService(new URL(endpointReference
+					+ "?wsdl"));
 
-        final AddTopicResponse response = (AddTopicResponse) JaxbSerializer
-                .getInstance().elementToObject(resElement);
+		} catch (MalformedURLException e) {
+			s = new NetworkNotificationService();
+			e.printStackTrace();
+			logger.error("Could not get convert to URL " + endpointReference);
+		}
+		client = s.getNetworkNotificationPortType(new AddressingFeature());
 
-        return response.getAddTopicResponse();
-    }
+	}
 
-    /**
-     * @param request
-     * @return
-     * @throws SoapFault
-     */
-    public GetTopicsResponseType getTopics(final GetTopicsType request)
-            throws SoapFault {
-        final GetTopics envelope = new GetTopics();
+	/**
+	 * @param request
+	 * @return
+	 * @throws SoapFault
+	 */
+	public AddTopicResponseType addTopic(final AddTopicType request) {
 
-        envelope.setGetTopics(request);
+		return client.addTopic(request);
+	}
 
-        final Element reqElement = JaxbSerializer.getInstance()
-                .objectToElement(envelope);
+	/**
+	 * @param request
+	 * @return
+	 * @throws SoapFault
+	 */
+	public GetTopicsResponseType getTopics(final GetTopicsType request) {
 
-        final Element resElement = super.getTopics(reqElement);
+		return client.getTopics(request);
+	}
 
-        final GetTopicsResponse response = (GetTopicsResponse) JaxbSerializer
-                .getInstance().elementToObject(resElement);
+	/**
+	 * @param request
+	 * @return
+	 * @throws TopicNotFoundFault_Exception
+	 * @throws SoapFault
+	 */
+	public PublishResponseType publish(final PublishType request)
+			throws TopicNotFoundFault_Exception {
 
-        return response.getGetTopicsResponse();
-    }
+		return client.publish(request);
+	}
 
-    /**
-     * @param request
-     * @return
-     * @throws SoapFault
-     */
-    public PublishResponseType publish(final PublishType request)
-            throws SoapFault {
-        final Publish envelope = new Publish();
+	/**
+	 * @param request
+	 * @return
+	 * @throws SoapFault
+	 */
+	public RemoveTopicResponseType removeTopic(final RemoveTopicType request) {
 
-        envelope.setPublish(request);
+		return client.removeTopic(request);
 
-        final Element reqElement = JaxbSerializer.getInstance()
-                .objectToElement(envelope);
+	}
 
-        final Element resElement = super.publish(reqElement);
+	/**
+	 * @param request
+	 * @return
+	 * @throws TopicNotFoundFault_Exception
+	 * @throws SoapFault
+	 */
+	public SubscribeResponseType subscribe(final SubscribeType request)
+			throws TopicNotFoundFault_Exception {
 
-        final PublishResponse response = (PublishResponse) JaxbSerializer
-                .getInstance().elementToObject(resElement);
+		return client.subscribe(request);
+	}
 
-        return response.getPublishResponse();
-    }
+	/**
+	 * @param request
+	 * @return
+	 * @throws TopicNotFoundFault_Exception
+	 * @throws SoapFault
+	 */
+	public UnsubscribeResponseType unsubscribe(final UnsubscribeType request)
+			throws TopicNotFoundFault_Exception {
 
-    /**
-     * @param request
-     * @return
-     * @throws SoapFault
-     */
-    public RemoveTopicResponseType removeTopic(final RemoveTopicType request)
-            throws SoapFault {
-        final RemoveTopic envelope = new RemoveTopic();
-
-        envelope.setRemoveTopic(request);
-
-        final Element reqElement = JaxbSerializer.getInstance()
-                .objectToElement(envelope);
-
-        final Element resElement = super.removeTopic(reqElement);
-
-        final RemoveTopicResponse response = (RemoveTopicResponse) JaxbSerializer
-                .getInstance().elementToObject(resElement);
-
-        return response.getRemoveTopicResponse();
-    }
-
-    /**
-     * @param request
-     * @return
-     * @throws SoapFault
-     */
-    public SubscribeResponseType subscribe(final SubscribeType request)
-            throws SoapFault {
-        final Subscribe envelope = new Subscribe();
-
-        envelope.setSubscribe(request);
-
-        final Element reqElement = JaxbSerializer.getInstance()
-                .objectToElement(envelope);
-
-        final Element resElement = super.subscribe(reqElement);
-
-        final SubscribeResponse response = (SubscribeResponse) JaxbSerializer
-                .getInstance().elementToObject(resElement);
-
-        return response.getSubscribeResponse();
-    }
-
-    /**
-     * @param request
-     * @return
-     * @throws SoapFault
-     */
-    public UnsubscribeResponseType unsubscribe(final UnsubscribeType request)
-            throws SoapFault {
-        final Unsubscribe envelope = new Unsubscribe();
-
-        envelope.setUnsubscribe(request);
-
-        final Element reqElement = JaxbSerializer.getInstance()
-                .objectToElement(envelope);
-
-        final Element resElement = super.unsubscribe(reqElement);
-
-        final UnsubscribeResponse response = (UnsubscribeResponse) JaxbSerializer
-                .getInstance().elementToObject(resElement);
-
-        return response.getUnsubscribeResponse();
-    }
+		return client.unsubscribe(request);
+	}
 }

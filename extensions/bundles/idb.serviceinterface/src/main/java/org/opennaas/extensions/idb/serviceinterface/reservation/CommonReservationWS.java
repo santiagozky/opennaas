@@ -25,6 +25,7 @@
 
 package org.opennaas.extensions.idb.serviceinterface.reservation;
 
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.NetworkReservationPortTypeImpl;
 import org.opennaas.extensions.idb.serviceinterface.topology.registrator.AbstractTopologyRegistrator;
 import org.opennaas.extensions.idb.serviceinterface.topology.registrator.CommonTopologyRegistrator;
 
@@ -33,14 +34,14 @@ import org.opennaas.extensions.idb.serviceinterface.topology.registrator.CommonT
  * @author Alexander Willner (willner@cs.uni-bonn.de)
  * 
  */
-public class CommonReservationWS extends ReservationWS {
+public class CommonReservationWS extends NetworkReservationPortTypeImpl {
 
-    /**
-     * Default constructor that initializes the Topology Registrator.
-     */
-    public CommonReservationWS() {
-        if (null == AbstractTopologyRegistrator.getLatestInstance()) {
-            new CommonTopologyRegistrator();
-        }
-    }
+	/**
+	 * Default constructor that initializes the Topology Registrator.
+	 */
+	public CommonReservationWS() {
+		if (null == AbstractTopologyRegistrator.getLatestInstance()) {
+			new CommonTopologyRegistrator();
+		}
+	}
 }
