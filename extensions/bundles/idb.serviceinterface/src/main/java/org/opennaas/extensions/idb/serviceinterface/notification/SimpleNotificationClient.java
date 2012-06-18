@@ -62,7 +62,6 @@ public class SimpleNotificationClient {
 	 */
 	public SimpleNotificationClient(final EndpointReference endpointReference) {
 		logger = LogFactory.getLog(this.getClass());
-
 		NetworkNotificationService s;
 		try {
 			s = new NetworkNotificationService(endpointReference.getURI()
@@ -74,6 +73,7 @@ public class SimpleNotificationClient {
 			e.printStackTrace();
 		}
 		client = s.getNetworkNotificationPortType(new AddressingFeature());
+
 	}
 
 	/**

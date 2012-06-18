@@ -54,27 +54,9 @@
 
 
 		<dependency>
-			<groupId>muse</groupId>
-			<artifactId>muse-platform-mini </artifactId>
-			<version>2.2.0</version>
-		</dependency>
-
-		<dependency>
-			<groupId>muse</groupId>
-			<artifactId>muse-tools </artifactId>
-			<version>2.2.0</version>
-		</dependency>
-
-		<dependency>
 			<groupId>org.bouncycastle</groupId>
 			<artifactId>bcprov-jdk15</artifactId>
 			<version>1.46</version>
-		</dependency>
-
-		<dependency>
-			<groupId>muse.osgi-bundles</groupId>
-			<artifactId>muse-complete</artifactId>
-			<version>2.2.0</version>
 		</dependency>
 
 
@@ -133,7 +115,7 @@
 			<artifactId>org.opennaas.extensions.queuemanager</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-				<dependency>
+		<dependency>
 			<groupId>org.opennaas</groupId>
 			<artifactId>org.opennaas.extensions.ws</artifactId>
 			<version>${project.version}</version>
@@ -157,6 +139,11 @@
 			<version>${commons.logging.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>org.apache.servicemix.bundles</groupId>
+			<artifactId>org.apache.servicemix.bundles.commons-lang</artifactId>
+			<version>${commons.lang.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>org.ops4j.pax.logging</groupId>
 			<artifactId>pax-logging-api</artifactId>
 			<version>${pax.logging.version}</version>
@@ -173,103 +160,103 @@
 			<version>5.1.18</version>
 		</dependency>
 	</dependencies>
-		<build>
-			<resources>
-				<resource>
-					<directory>src/main/resources</directory>
-					<filtering>true</filtering>
-				</resource>
-			</resources>
-			<testResources>
-				<testResource>
-					<directory>src/test/resources</directory>
-					<filtering>true</filtering>
-				</testResource>
-			</testResources>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.openjpa</groupId>
-					<artifactId>openjpa-maven-plugin</artifactId>
-					<version>2.2.0</version>
-					<configuration>
-						<includes>**/database/hibernate/*.class</includes>
-						<excludes>**/hibernate/XML*.class</excludes>
-						<addDefaultConstructor>true</addDefaultConstructor>
-						<enforcePropertyRestrictions>true</enforcePropertyRestrictions>
-					</configuration>
-					<executions>
-						<execution>
-							<id>enhancer</id>
-							<phase>process-classes</phase>
-							<goals>
-								<goal>enhance</goal>
-							</goals>
-						</execution>
-					</executions>
-					<dependencies>
-						<dependency>
-							<groupId>org.apache.openjpa</groupId>
-							<artifactId>openjpa</artifactId>
-							<!-- set the version to be the same as the level in your runtime -->
-							<version>2.2.0</version>
-						</dependency>
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<directory>src/test/resources</directory>
+				<filtering>true</filtering>
+			</testResource>
+		</testResources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.openjpa</groupId>
+				<artifactId>openjpa-maven-plugin</artifactId>
+				<version>2.2.0</version>
+				<configuration>
+					<includes>**/database/hibernate/*.class</includes>
+					<excludes>**/hibernate/XML*.class</excludes>
+					<addDefaultConstructor>true</addDefaultConstructor>
+					<enforcePropertyRestrictions>true</enforcePropertyRestrictions>
+				</configuration>
+				<executions>
+					<execution>
+						<id>enhancer</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>enhance</goal>
+						</goals>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.openjpa</groupId>
+						<artifactId>openjpa</artifactId>
+						<!-- set the version to be the same as the level in your runtime -->
+						<version>2.2.0</version>
+					</dependency>
 
-						<dependency>
-							<groupId>xerces</groupId>
-							<artifactId>xercesImpl</artifactId>
-							<version>2.9.1</version>
-						</dependency>
+					<dependency>
+						<groupId>xerces</groupId>
+						<artifactId>xercesImpl</artifactId>
+						<version>2.9.1</version>
+					</dependency>
 
-					</dependencies>
-				</plugin>
-				<plugin>
-					<groupId>org.ops4j</groupId>
-					<artifactId>maven-pax-plugin</artifactId>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.felix</groupId>
-					<artifactId>maven-bundle-plugin</artifactId>
-					<extensions>true</extensions>
-					<!-- | the following instructions build a simple set of public/private 
-						classes into an OSGi bundle -->
-					<configuration>
-						<instructions>
-							<Import-Package>*</Import-Package>
-							<Export-Package>org.opennaas.extensions.idb.*;version="${project.version}"</Export-Package>
-							<Meta-Persistence>META-INF/persistence.xml</Meta-Persistence>
-							<Bundle-ClassPath>.</Bundle-ClassPath>
-						</instructions>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.karaf.tooling</groupId>
-					<artifactId>features-maven-plugin</artifactId>
-					<version>2.2.7</version>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>org.ops4j</groupId>
+				<artifactId>maven-pax-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<extensions>true</extensions>
+				<!-- | the following instructions build a simple set of public/private 
+					classes into an OSGi bundle -->
+				<configuration>
+					<instructions>
+						<Import-Package>*</Import-Package>
+						<Export-Package>org.opennaas.extensions.idb.*;version="${project.version}"</Export-Package>
+						<Meta-Persistence>META-INF/persistence.xml</Meta-Persistence>
+						<Bundle-ClassPath>.</Bundle-ClassPath>
+					</instructions>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.karaf.tooling</groupId>
+				<artifactId>features-maven-plugin</artifactId>
+				<version>2.2.7</version>
 
-					<executions>
-						<!-- add execution definitions here -->
-					</executions>
-				</plugin>
-			</plugins>
-		</build>
-		<repositories>
+				<executions>
+					<!-- add execution definitions here -->
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	<repositories>
 
 
-			<repository>
-				<releases>
-					<enabled>true</enabled>
-					<updatePolicy>always</updatePolicy>
-					<checksumPolicy>warn</checksumPolicy>
-				</releases>
-				<snapshots>
-					<enabled>true</enabled>
-					<updatePolicy>never</updatePolicy>
-					<checksumPolicy>warn</checksumPolicy>
-				</snapshots>
-				<id>myproxy</id>
-				<name>MyProxy API and Client</name>
-				<url>https://cilogon.svn.sourceforge.net/svnroot/cilogon/m2-repo/</url>
-				<layout>default</layout>
-			</repository>
-		</repositories>
+		<repository>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+				<checksumPolicy>warn</checksumPolicy>
+			</snapshots>
+			<id>myproxy</id>
+			<name>MyProxy API and Client</name>
+			<url>https://cilogon.svn.sourceforge.net/svnroot/cilogon/m2-repo/</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
 </project>

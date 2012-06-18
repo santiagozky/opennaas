@@ -47,6 +47,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetStatusTy
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.IsAvailableResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.IsAvailableType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.OperationNotSupportedFault_Exception;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.OperationNotSupportedFaultException;
 import org.opennaas.extensions.idb.serviceinterface.utils.ForwardingHelper;
 
 /**
@@ -77,28 +78,28 @@ public class CommonReservationHandler {
 	 * @return
 	 * @throws
 	 */
-	public ActivateResponseType activate(final ActivateType request)
-			throws Throwable {
-		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+	public ActivateResponseType activate(final ActivateType request) {
+		throw new OperationNotSupportedFaultException("Not implemented yet.");
 	}
 
 	/**
+	 * @throws OperationNotSupportedFault_Exception
 	 * @param request
 	 * @return
 	 * @throws
 	 */
-	public BindResponseType bind(final BindType request) throws Throwable {
-		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+	public BindResponseType bind(final BindType request) {
+		throw new OperationNotSupportedFaultException("Not implemented yet.");
 	}
 
 	/**
+	 * @throws OperationNotSupportedFault_Exception
 	 * @param request
 	 * @return
 	 * @throws
 	 */
-	public CancelJobResponseType cancelJob(final CancelJobType request)
-			throws Throwable {
-		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+	public CancelJobResponseType cancelJob(final CancelJobType request) {
+		throw new OperationNotSupportedFaultException("Not implemented yet.");
 	}
 
 	/**
@@ -107,18 +108,18 @@ public class CommonReservationHandler {
 	 * @throws
 	 */
 	public CancelReservationResponseType cancelReservation(
-			final CancelReservationType request) throws Throwable {
-		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+			final CancelReservationType request) {
+		throw new OperationNotSupportedFaultException("Not implemented yet.");
 	}
 
 	/**
+	 * @throws OperationNotSupportedFault_Exception
 	 * @param request
 	 * @return
 	 * @throws
 	 */
-	public CompleteJobResponseType completeJob(final CompleteJobType request)
-			throws Throwable {
-		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+	public CompleteJobResponseType completeJob(final CompleteJobType request) {
+		throw new OperationNotSupportedFaultException("Not implemented yet.");
 	}
 
 	/**
@@ -127,8 +128,8 @@ public class CommonReservationHandler {
 	 * @throws
 	 */
 	public CreateReservationResponseType createReservation(
-			final CreateReservationType request) throws Throwable {
-		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+			final CreateReservationType request) {
+		throw new OperationNotSupportedFaultException("Not implemented yet.");
 	}
 
 	/**
@@ -137,8 +138,8 @@ public class CommonReservationHandler {
 	 * @throws
 	 */
 	public GetReservationsResponseType getReservations(
-			final GetReservationsType request) throws Throwable {
-		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+			final GetReservationsType request) {
+		throw new OperationNotSupportedFaultException("Not implemented yet.");
 	}
 
 	/**
@@ -146,9 +147,8 @@ public class CommonReservationHandler {
 	 * @return
 	 * @throws
 	 */
-	public GetStatusResponseType getStatus(final GetStatusType request)
-			throws Throwable {
-		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+	public GetStatusResponseType getStatus(final GetStatusType request) {
+		throw new OperationNotSupportedFaultException("Not implemented yet.");
 	}
 
 	/**
@@ -157,8 +157,7 @@ public class CommonReservationHandler {
 	 * @throws
 	 * @throws RuntimeException
 	 */
-	public IsAvailableResponseType isAvailable(final IsAvailableType request)
-			throws Throwable {
-		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+	public IsAvailableResponseType isAvailable(final IsAvailableType request) {
+		throw new OperationNotSupportedFaultException("Not implemented yet.");
 	}
 }

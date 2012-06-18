@@ -38,6 +38,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.RemoveTopic
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.RemoveTopicType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.SubscribeResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.SubscribeType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.TopicNotFoundFault_Exception;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.InvalidRequestFaultException;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.UnexpectedFaultException;
 import org.opennaas.extensions.idb.serviceinterface.databinding.utils.WebserviceUtils;
@@ -79,20 +80,13 @@ public class NotificationHelpers {
 		final AddTopicType requestType = new AddTopicType();
 		requestType.setTopic(notificationTopic.toString());
 
-		Element addTopicElement;
 		try {
-			addTopicElement = WebserviceUtils
-					.createAddTopicRequest(requestType);
-			// create NotificationClient to add the topic
+
 			final SimpleNotificationClient notificationClient = new SimpleNotificationClient(
 					Config.getString(Constants.hsiProperties,
 							"domain.notificationEPR"));
-			final Element responseElement = notificationClient
-					.addTopic(addTopicElement);
-
-			// check addTopic-result
-			final AddTopicResponseType responseType = WebserviceUtils
-					.createAddTopicResponse(responseElement);
+			final AddTopicResponseType responseType = notificationClient
+					.addTopic(requestType);
 
 			if (responseType.isResult()) {
 				NotificationHelpers.logger.debug("added topic "
@@ -102,22 +96,12 @@ public class NotificationHelpers {
 						+ requestType.getTopic()
 						+ " not successful, it is already present!");
 			}
-		} catch (final InvalidRequestFaultException e) {
-			// Failure from WebserviceUtils
-			e.printStackTrace();
-		} catch (final UnexpectedFaultException e) {
-			// Failure from WebserviceUtils
-			e.printStackTrace();
+
 		} catch (final MissingResourceException e) {
 			// Failure from getting Config-String -> not notification-WS
 			// declared
 			NotificationHelpers.logger
 					.error("no notification-EPR declared to add Topic!");
-		} catch (final SoapFault e) {
-			// Failure from addition-process
-			NotificationHelpers.logger
-					.error("accessing notification-WS for addTopic not successful!");
-			e.printStackTrace();
 		}
 	}
 
@@ -136,20 +120,13 @@ public class NotificationHelpers {
 		final RemoveTopicType requestType = new RemoveTopicType();
 		requestType.setTopic(notificationTopic.toString());
 
-		Element removeTopicElement;
 		try {
-			removeTopicElement = WebserviceUtils
-					.createRemoveTopicRequest(requestType);
-			// create NotificationClient to remove the topic
+
 			final SimpleNotificationClient notificationClient = new SimpleNotificationClient(
 					Config.getString(Constants.hsiProperties,
 							"domain.notificationEPR"));
-			final Element responseElement = notificationClient
-					.removeTopic(removeTopicElement);
-
-			// check removeTopic-result
-			final RemoveTopicResponseType responseType = WebserviceUtils
-					.createRemoveTopicResponse(responseElement);
+			final RemoveTopicResponseType responseType = notificationClient
+					.removeTopic(requestType);
 
 			if (responseType.isResult()) {
 				NotificationHelpers.logger.debug("removed topic "
@@ -158,22 +135,12 @@ public class NotificationHelpers {
 				NotificationHelpers.logger.debug("removal of topic "
 						+ requestType.getTopic() + " not successful!");
 			}
-		} catch (final InvalidRequestFaultException e) {
-			// Failure from WebserviceUtils
-			e.printStackTrace();
-		} catch (final UnexpectedFaultException e) {
-			// Failure from WebserviceUtils
-			e.printStackTrace();
+
 		} catch (final MissingResourceException e) {
 			// Failure from getting Config-String -> not notification-WS
 			// declared
 			NotificationHelpers.logger
 					.error("no notification-EPR declared to remove Topic!");
-		} catch (final SoapFault e) {
-			// Failure from removing-process
-			NotificationHelpers.logger
-					.error("accessing notification-WS for removeTopic not successful!");
-			e.printStackTrace();
 		}
 	}
 
@@ -213,19 +180,13 @@ public class NotificationHelpers {
 		subscribeType.setConsumerReference(Config.getString(
 				Constants.hsiProperties, "domain.reservationEPR"));
 
-		Element subscribeElement;
 		try {
-			subscribeElement = WebserviceUtils
-					.createSubscribeRequest(subscribeType);
-			// create NotificationClient to subscribe
+
 			final SimpleNotificationClient notificationClient = new SimpleNotificationClient(
 					notificationEPR);
-			final Element responseElement = notificationClient
-					.subscribe(subscribeElement);
+			final SubscribeResponseType responseType = notificationClient
+					.subscribe(subscribeType);
 
-			// check subscribe-result
-			final SubscribeResponseType responseType = WebserviceUtils
-					.createSubscribeResponse(responseElement);
 			if (responseType.isResult()) {
 				NotificationHelpers.logger.debug("subscribed on topic "
 						+ subscribeType.getTopic() + "!");
@@ -233,16 +194,9 @@ public class NotificationHelpers {
 				NotificationHelpers.logger.debug("subscription on topic "
 						+ subscribeType.getTopic() + " not successful!");
 			}
-		} catch (final InvalidRequestFaultException e) {
-			// Failure from WebserviceUtils
-			e.printStackTrace();
-		} catch (final UnexpectedFaultException e) {
-			// Failure from WebserviceUtils
-			e.printStackTrace();
-		} catch (final SoapFault e) {
-			// Failure from subscription-process
-			NotificationHelpers.logger
-					.error("accessing notification-WS for subscribe not successful!");
+
+		} catch (TopicNotFoundFault_Exception e) {
+			logger.error("the topic was not found");
 			e.printStackTrace();
 		}
 	}

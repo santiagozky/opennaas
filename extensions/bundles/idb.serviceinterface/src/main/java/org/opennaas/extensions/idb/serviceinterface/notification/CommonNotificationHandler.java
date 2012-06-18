@@ -47,6 +47,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.SubscribeRe
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.SubscribeType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.UnsubscribeResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.UnsubscribeType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.OperationNotSupportedFaultException;
 
 /**
  * @author willner
@@ -71,11 +72,11 @@ public class CommonNotificationHandler {
 	/**
 	 * @param request
 	 * @return
+	 * @throws OperationNotSupportedFault_Exception
 	 * @throws SoapFault
 	 */
-	public AddTopicResponseType addTopic(final AddTopicType request)
-			throws Throwable {
-		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+	public AddTopicResponseType addTopic(final AddTopicType request) {
+		throw new OperationNotSupportedFaultException("Not implemented yet.");
 	}
 
 	/**
@@ -84,8 +85,8 @@ public class CommonNotificationHandler {
 	 * @throws SoapFault
 	 */
 	public GetReservationsResponseType getReservations(
-			final GetReservationsType request) throws Throwable {
-		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+			final GetReservationsType request) {
+		throw new OperationNotSupportedFaultException("Not implemented yet.");
 	}
 
 	/**
@@ -93,9 +94,8 @@ public class CommonNotificationHandler {
 	 * @return
 	 * @throws SoapFault
 	 */
-	public GetStatusResponseType getStatus(final GetStatusType request)
-			throws Throwable {
-		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+	public GetStatusResponseType getStatus(final GetStatusType request) {
+		throw new OperationNotSupportedFaultException("Not implemented yet.");
 	}
 
 	/**
@@ -103,9 +103,8 @@ public class CommonNotificationHandler {
 	 * @return
 	 * @throws SoapFault
 	 */
-	public GetTopicsResponseType getTopics(final GetTopicsType request)
-			throws Throwable {
-		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+	public GetTopicsResponseType getTopics(final GetTopicsType request) {
+		throw new OperationNotSupportedFaultException("Not implemented yet.");
 	}
 
 	/**
@@ -113,9 +112,8 @@ public class CommonNotificationHandler {
 	 * @return
 	 * @throws SoapFault
 	 */
-	public IsAvailableResponseType isAvailable(final IsAvailableType request)
-			throws Throwable {
-		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+	public IsAvailableResponseType isAvailable(final IsAvailableType request) {
+		throw new OperationNotSupportedFaultException("Not implemented yet.");
 	}
 
 	/**
@@ -123,9 +121,8 @@ public class CommonNotificationHandler {
 	 * @return
 	 * @throws SoapFault
 	 */
-	public PublishResponseType publish(final PublishType request)
-			throws Throwable {
-		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+	public PublishResponseType publish(final PublishType request) {
+		throw new OperationNotSupportedFaultException("Not implemented yet.");
 	}
 
 	/**
@@ -133,9 +130,8 @@ public class CommonNotificationHandler {
 	 * @return
 	 * @throws SoapFault
 	 */
-	public RemoveTopicResponseType removeTopic(final RemoveTopicType request)
-			throws Throwable {
-		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+	public RemoveTopicResponseType removeTopic(final RemoveTopicType request) {
+		throw new OperationNotSupportedFaultException("Not implemented yet.");
 	}
 
 	/**
@@ -143,9 +139,8 @@ public class CommonNotificationHandler {
 	 * @return
 	 * @throws SoapFault
 	 */
-	public SubscribeResponseType subscribe(final SubscribeType request)
-			throws Throwable {
-		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+	public SubscribeResponseType subscribe(final SubscribeType request) {
+		throw new OperationNotSupportedFaultException("Not implemented yet.");
 	}
 
 	/**
@@ -153,8 +148,7 @@ public class CommonNotificationHandler {
 	 * @return
 	 * @throws SoapFault
 	 */
-	public UnsubscribeResponseType unsubscribe(final UnsubscribeType request)
-			throws Throwable {
-		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+	public UnsubscribeResponseType unsubscribe(final UnsubscribeType request) {
+		throw new OperationNotSupportedFaultException("Not implemented yet.");
 	}
 }

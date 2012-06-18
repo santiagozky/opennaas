@@ -276,6 +276,33 @@ public class SimpleReservationClient {
 	}
 
 	/**
+	 * 
+	 * @param reservationID
+	 * @param TNA
+	 * @param IP
+	 * @return
+	 * @throws UnexpectedFault_Exception
+	 * @throws OperationNotSupportedFault_Exception
+	 * @throws TimeoutFault_Exception
+	 * @throws OperationNotAllowedFault_Exception
+	 * @throws InvalidRequestFault_Exception
+	 * @throws SoapFault
+	 */
+	public BindResponseType bind(final String reservationID, final String TNA,
+			final String IP) throws InvalidRequestFault_Exception,
+			OperationNotAllowedFault_Exception, TimeoutFault_Exception,
+			OperationNotSupportedFault_Exception, UnexpectedFault_Exception {
+		final BindType request = new BindType();
+		request.setReservationID(reservationID);
+		request.setEndpointID(TNA);
+		request.getIPAdress().add(IP);
+
+		BindResponseType res = this.bind(request);
+
+		return res;
+	}
+
+	/**
 	 * @param request
 	 * @return
 	 * @throws UnexpectedFault_Exception

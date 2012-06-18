@@ -34,10 +34,8 @@ import java.util.Map.Entry;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.muse.ws.addressing.EndpointReference;
-import org.apache.muse.ws.addressing.soap.SoapFault;
-import org.w3c.dom.Element;
 
+import org.opennaas.extensions.idb.serviceinterface.EndpointReference;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ActivateResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ActivateType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AvailabilityCodeType;
@@ -128,23 +126,19 @@ public final class MockNrpsManager implements IManager {
 	 *            ActivateType
 	 * @return ActivateResponseType
 	 */
-	private ActivateResponseType activateOverWS(final ActivateType activateType)
-			throws SoapFault {
-		final Element request = WebserviceUtils
-				.createActivateRequest(activateType);
-		Element response = null;
+	private ActivateResponseType activateOverWS(final ActivateType activateType) {
+
+		ActivateResponseType response = null;
 
 		// call WS if designated
 		if (this.passTo()) {
 			final SimpleReservationClient proxy = this.services
 					.get(MockNrpsManager.usedWS);
 			this.log.info("Calling WS: " + proxy.getDestination().getAddress());
-			this.performanceLogger.debug("Calling "
-					+ proxy.getDestination().getAddress());
-			response = proxy.activate(request);
-			this.performanceLogger.debug("Response from "
-					+ proxy.getDestination().getAddress());
-			return WebserviceUtils.createActivateResponse(response);
+
+			response = proxy.activate(activateType);
+
+			return response;
 		}
 		/* else return mock-response */
 		final ActivateResponseType responseType = new ActivateResponseType();
@@ -165,8 +159,7 @@ public final class MockNrpsManager implements IManager {
 	 */
 	@Override
 	public Hashtable<Domain, ActivateResponseType> activateReservation(
-			final Hashtable<Domain, ActivateType> element) throws SoapFault,
-			DatabaseException {
+			final Hashtable<Domain, ActivateType> element) {
 		final Date startTime = new Date();
 		this.performanceLogger.debug("MockNrpsManager_input on: " + startTime
 				+ " -> activateReservation");
@@ -210,7 +203,7 @@ public final class MockNrpsManager implements IManager {
 	@Override
 	public Hashtable<Domain, CancelReservationResponseType> cancelReservation(
 			final Hashtable<Domain, CancelReservationType> element)
-			throws SoapFault, DatabaseException {
+			throws DatabaseException {
 		final Date startTime = new Date();
 		this.performanceLogger.debug("MockNrpsManager_input on: " + startTime
 				+ " -> cancelReservation");
@@ -248,10 +241,9 @@ public final class MockNrpsManager implements IManager {
 	 * @return CancelReservationResponseType
 	 */
 	private CancelReservationResponseType cancelReservationOverWS(
-			final CancelReservationType cancelReservationType) throws SoapFault {
-		final Element request = WebserviceUtils
-				.createCancelReservationRequest(cancelReservationType);
-		Element response = null;
+			final CancelReservationType cancelReservationType) {
+
+		CancelReservationResponseType response = null;
 
 		// call WS if designated
 		if (this.passTo()) {
@@ -260,10 +252,10 @@ public final class MockNrpsManager implements IManager {
 			this.log.info("Calling WS: " + proxy.getDestination().getAddress());
 			this.performanceLogger.debug("Calling "
 					+ proxy.getDestination().getAddress());
-			response = proxy.cancelReservation(request);
+			response = proxy.cancelReservation(cancelReservationType);
 			this.performanceLogger.debug("Response from "
 					+ proxy.getDestination().getAddress());
-			return WebserviceUtils.createCancelReservationResponse(response);
+			return response;
 		}
 		/* else return mock-response */
 		final CancelReservationResponseType responseType = new CancelReservationResponseType();
@@ -330,8 +322,7 @@ public final class MockNrpsManager implements IManager {
 	 */
 	@Override
 	public Hashtable<Domain, CreateReservationResponseType> createReservation(
-			final Hashtable<Domain, CreateReservationType> element)
-			throws SoapFault, DatabaseException {
+			final Hashtable<Domain, CreateReservationType> element) {
 		final Date startTime = new Date();
 		this.performanceLogger.debug("MockNrpsManager_input on: " + startTime
 				+ " -> createReservation");
@@ -386,10 +377,9 @@ public final class MockNrpsManager implements IManager {
 	 * @return CreateReservationResponseType
 	 */
 	private CreateReservationResponseType createReservationOverWS(
-			final CreateReservationType createReservationType) throws SoapFault {
-		final Element request = WebserviceUtils
-				.createReservationRequest(createReservationType);
-		Element response = null;
+			final CreateReservationType createReservationType) {
+
+		CreateReservationResponseType response = null;
 
 		// call WS if designated
 		if (this.passTo()) {
@@ -400,12 +390,12 @@ public final class MockNrpsManager implements IManager {
 			this.performanceLogger.debug("Calling "
 					+ proxy.getDestination().getAddress());
 
-			response = proxy.createReservation(request);
+			response = proxy.createReservation(createReservationType);
 
 			this.performanceLogger.debug("Response from "
 					+ proxy.getDestination().getAddress());
 
-			return WebserviceUtils.createReservationResponse(response);
+			return response;
 		}
 		/* else return mock-response */
 		final CreateReservationResponseType responseType = new CreateReservationResponseType();
@@ -431,8 +421,8 @@ public final class MockNrpsManager implements IManager {
 	 */
 	@Override
 	public Hashtable<Domain, GetStatusResponseType> getStatus(
-			final Hashtable<Domain, GetStatusType> element) throws SoapFault,
-			DatabaseException {
+			final Hashtable<Domain, GetStatusType> element)
+			throws DatabaseException {
 		final Date startTime = new Date();
 		this.performanceLogger.debug("MockNrpsManager_input on: " + startTime
 				+ " -> getStatus");
@@ -467,10 +457,9 @@ public final class MockNrpsManager implements IManager {
 	 * @return getStatusResponseType
 	 */
 	private GetStatusResponseType getStatusOverWS(
-			final GetStatusType getStatusType) throws SoapFault {
-		final Element request = WebserviceUtils
-				.createGetStatusRequest(getStatusType);
-		Element response = null;
+			final GetStatusType getStatusType) {
+
+		GetStatusResponseType response = null;
 
 		// call WS if designated
 		if (this.passTo()) {
@@ -479,10 +468,10 @@ public final class MockNrpsManager implements IManager {
 			this.log.info("Calling WS: " + proxy.getDestination().getAddress());
 			this.performanceLogger.debug("Calling "
 					+ proxy.getDestination().getAddress());
-			response = proxy.getStatus(request);
+			response = proxy.getStatus(getStatusType);
 			this.performanceLogger.debug("Response from "
 					+ proxy.getDestination().getAddress());
-			return WebserviceUtils.createGetStatusResponse(response);
+			return response;
 		}
 		/* else return mock-response */
 		final GetStatusResponseType responseType = new GetStatusResponseType();
@@ -555,8 +544,8 @@ public final class MockNrpsManager implements IManager {
 	 */
 	@Override
 	public Hashtable<Domain, IsAvailableResponseType> isAvailable(
-			final Hashtable<Domain, IsAvailableType> element) throws SoapFault,
-			DatabaseException {
+			final Hashtable<Domain, IsAvailableType> element)
+			throws DatabaseException {
 		final Date startTime = new Date();
 		this.performanceLogger.debug("MockNrpsManager_input on: " + startTime
 				+ " -> isAvailable");
@@ -592,22 +581,19 @@ public final class MockNrpsManager implements IManager {
 	 * @return IsAvailableResponseType
 	 */
 	private IsAvailableResponseType isAvailableOverWS(
-			final IsAvailableType isAvailableType) throws SoapFault {
-		final Element request = WebserviceUtils
-				.createIsAvailableRequest(isAvailableType);
-		Element response = null;
+			final IsAvailableType isAvailableType) {
+
+		IsAvailableResponseType response = null;
 
 		// call WS if designated
 		if (this.passTo()) {
 			final SimpleReservationClient proxy = this.services
 					.get(MockNrpsManager.usedWS);
 			this.log.info("Calling WS: " + proxy.getDestination().getAddress());
-			this.performanceLogger.debug("Calling "
-					+ proxy.getDestination().getAddress());
-			response = proxy.isAvailable(request);
-			this.performanceLogger.debug("Response from "
-					+ proxy.getDestination().getAddress());
-			return WebserviceUtils.createIsAvailableResponse(response);
+
+			response = proxy.isAvailable(isAvailableType);
+
+			return response;
 		}
 		/* else return mock-response */
 		final IsAvailableResponseType responseType = new IsAvailableResponseType();
@@ -696,8 +682,7 @@ public final class MockNrpsManager implements IManager {
 	 * @throws SoapFault
 	 *             Soap-Fault
 	 */
-	private void rollback(final HashMap<SimpleReservationClient, Long> calledWS)
-			throws SoapFault {
+	private void rollback(final HashMap<SimpleReservationClient, Long> calledWS) {
 
 		for (final SimpleReservationClient proxy : calledWS.keySet()) {
 			final CancelReservationType crType = new CancelReservationType();
@@ -706,12 +691,9 @@ public final class MockNrpsManager implements IManager {
 			// get data from List
 			crType.setReservationID(WebserviceUtils
 					.convertReservationID(calledWS.get(proxy).longValue()));
-			final Element request = WebserviceUtils
-					.createCancelReservationRequest(crType);
+
 			// call CancelReservation
-			final Element response = proxy.cancelReservation(request);
-			crResponseType = WebserviceUtils
-					.createCancelReservationResponse(response);
+			crResponseType = proxy.cancelReservation(crType);
 			// if CancelReservation went wrong, only log this info
 			if (!crResponseType.isSuccess()) {
 				this.log.info("rollback for WS: "

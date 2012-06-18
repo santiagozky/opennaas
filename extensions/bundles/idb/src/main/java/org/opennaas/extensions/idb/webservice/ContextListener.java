@@ -31,6 +31,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.lang.SerializationUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -199,13 +200,10 @@ public class ContextListener extends AbstractTopologyRegistrator {
 	private boolean saveDomain() {
 		DomainInformationType d = null;
 		try {
-			d = this.domain.clone();
+			d = (DomainInformationType) SerializationUtils.clone(this.domain);
 			d.unsetTNAPrefix();
-			return new TopologyCapabilityServiceImpl().addOrEditDomain(d, false);
-		} catch (final CloneNotSupportedException e) {
-			// this is impossible, clone support is automatically added to the
-			// JAXB classes
-			e.printStackTrace();
+			return new TopologyCapabilityServiceImpl()
+					.addOrEditDomain(d, false);
 		} catch (final DatabaseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

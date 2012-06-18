@@ -31,7 +31,6 @@
  */
 package org.opennaas.extensions.idb.da.dummy.webservice.test;
 
-import org.apache.muse.ws.addressing.soap.SoapFault;
 import org.junit.Test;
 
 import org.opennaas.extensions.idb.da.dummy.webservice.NotificationWS;
@@ -69,7 +68,7 @@ public class TestNotificationWS {
 	 * @throws SoapFault
 	 */
 	@Test(expected = OperationNotSupportedFaultException.class)
-	public final void testUnsopportedOperation() throws SoapFault {
+	public final void testUnsopportedOperation() {
 		final AddTopicType addTopicType = new AddTopicType();
 		addTopicType.setTopic("Test");
 		this.client.addTopic(addTopicType);

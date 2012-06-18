@@ -33,7 +33,6 @@ package org.opennaas.extensions.idb.da.dummy.webservice.test;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 
-import org.apache.muse.ws.addressing.soap.SoapFault;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -42,11 +41,17 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.Availabilit
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CancelReservationResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ConnectionAvailabilityType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CreateReservationResponseType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.EndpointNotFoundFault_Exception;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetReservationsResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetStatusResponseType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.InvalidRequestFault_Exception;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.IsAvailableResponseType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.OperationNotAllowedFault_Exception;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.OperationNotSupportedFault_Exception;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ServiceStatusType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.StatusType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.TimeoutFault_Exception;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.UnexpectedFault_Exception;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.OperationNotSupportedFaultException;
 import org.opennaas.extensions.idb.serviceinterface.reservation.SimpleReservationClient;
 import org.opennaas.extensions.idb.serviceinterface.utils.Config;
@@ -81,10 +86,19 @@ public class TestReservationWS {
 	 *             If an error occurs within the Webservice.
 	 * @throws DatatypeConfigurationException
 	 *             Unknown.
+	 * @throws EndpointNotFoundFault_Exception
+	 * @throws UnexpectedFault_Exception
+	 * @throws OperationNotSupportedFault_Exception
+	 * @throws TimeoutFault_Exception
+	 * @throws OperationNotAllowedFault_Exception
+	 * @throws InvalidRequestFault_Exception
 	 */
 	@Test
-	public final void testCreateReservationWorkflow() throws SoapFault,
-			DatatypeConfigurationException {
+	public final void testCreateReservationWorkflow()
+			throws DatatypeConfigurationException,
+			InvalidRequestFault_Exception, OperationNotAllowedFault_Exception,
+			TimeoutFault_Exception, OperationNotSupportedFault_Exception,
+			UnexpectedFault_Exception, EndpointNotFoundFault_Exception {
 
 		/* Test the availability -------------------------------------------- */
 		final IsAvailableResponseType availResult = this.client.isAvailable(
@@ -139,10 +153,19 @@ public class TestReservationWS {
 	 * 
 	 * @throws SoapFault
 	 * @throws DatatypeConfigurationException
+	 * @throws UnexpectedFault_Exception
+	 * @throws OperationNotSupportedFault_Exception
+	 * @throws TimeoutFault_Exception
+	 * @throws OperationNotAllowedFault_Exception
+	 * @throws InvalidRequestFault_Exception
+	 * @throws EndpointNotFoundFault_Exception
 	 */
 	@Test
-	public final void testGetReservations() throws SoapFault,
-			DatatypeConfigurationException {
+	public final void testGetReservations()
+			throws DatatypeConfigurationException,
+			InvalidRequestFault_Exception, OperationNotAllowedFault_Exception,
+			TimeoutFault_Exception, OperationNotSupportedFault_Exception,
+			UnexpectedFault_Exception, EndpointNotFoundFault_Exception {
 		this.testCreateReservationWorkflow();
 		final GetReservationsResponseType rsv = this.client
 				.getReservations(10000);
@@ -153,10 +176,18 @@ public class TestReservationWS {
 	/**
 	 * This method is not supported yet. So it should fail.
 	 * 
+	 * @throws UnexpectedFault_Exception
+	 * @throws OperationNotSupportedFault_Exception
+	 * @throws TimeoutFault_Exception
+	 * @throws OperationNotAllowedFault_Exception
+	 * @throws InvalidRequestFault_Exception
+	 * 
 	 * @throws SoapFault
 	 */
 	@Test(expected = OperationNotSupportedFaultException.class)
-	public final void testBind() throws SoapFault {
+	public final void testBind() throws InvalidRequestFault_Exception,
+			OperationNotAllowedFault_Exception, TimeoutFault_Exception,
+			OperationNotSupportedFault_Exception, UnexpectedFault_Exception {
 		this.client.bind("1@" + Config.getString("hsiDummy", "domain.name"),
 				"10.0.0.1", "192.168.0.1");
 	}

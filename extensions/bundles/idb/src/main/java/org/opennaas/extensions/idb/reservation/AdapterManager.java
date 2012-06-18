@@ -34,7 +34,6 @@ import javax.xml.bind.JAXBException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.muse.ws.addressing.soap.SoapFault;
 import org.xml.sax.SAXException;
 
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ActivateResponseType;
@@ -147,6 +146,7 @@ public final class AdapterManager implements IManager {
 	 * @param requests
 	 *            Set of requests for the NRPSs
 	 * @return Status of the activation
+	 * @throws Exception
 	 * @throws SAXException
 	 * @throws IOException
 	 * @throws JAXBException
@@ -154,7 +154,7 @@ public final class AdapterManager implements IManager {
 	 */
 	@Override
 	public Hashtable<Domain, ActivateResponseType> activateReservation(
-			final Hashtable<Domain, ActivateType> requests) throws SoapFault {
+			final Hashtable<Domain, ActivateType> requests) throws Exception {
 		final long startTime = System.currentTimeMillis();
 
 		final Enumeration<Domain> doms = requests.keys();
@@ -212,6 +212,7 @@ public final class AdapterManager implements IManager {
 	 * 
 	 * @param requests
 	 * @return
+	 * @throws Exception
 	 * @throws SAXException
 	 * @throws IOException
 	 * @throws JAXBException
@@ -220,7 +221,7 @@ public final class AdapterManager implements IManager {
 	@Override
 	public Hashtable<Domain, CancelReservationResponseType> cancelReservation(
 			final Hashtable<Domain, CancelReservationType> requests)
-			throws SoapFault {
+			throws Exception {
 		final long startTime = System.currentTimeMillis();
 
 		final Enumeration<Domain> doms = requests.keys();
@@ -300,11 +301,12 @@ public final class AdapterManager implements IManager {
 	 * domains.
 	 * 
 	 * @return Hasthtable with the results for each NRPS
+	 * @throws Exception
 	 */
 	@Override
 	public Hashtable<Domain, CreateReservationResponseType> createReservation(
 			final Hashtable<Domain, CreateReservationType> requests)
-			throws SoapFault {
+			throws Exception {
 		final long startTime = System.currentTimeMillis();
 
 		this.logger.info("Entered NRPSManager.CreateReservation");
@@ -380,11 +382,12 @@ public final class AdapterManager implements IManager {
 	 * @param requests
 	 *            Requests for domains
 	 * @return Responses of each domain
+	 * @throws Exception
 	 * @throws SoapFault
 	 */
 	public Hashtable<Domain, GetReservationsResponseType> getReservations(
 			final Hashtable<Domain, GetReservationsType> requests)
-			throws SoapFault {
+			throws Exception {
 		final long startTime = System.currentTimeMillis();
 
 		final Enumeration<Domain> doms = requests.keys();
@@ -437,6 +440,7 @@ public final class AdapterManager implements IManager {
 	/**
 	 * @param requests
 	 * @return
+	 * @throws Exception
 	 * @throws SAXException
 	 * @throws IOException
 	 * @throws JAXBException
@@ -444,7 +448,7 @@ public final class AdapterManager implements IManager {
 	 */
 	@Override
 	public Hashtable<Domain, GetStatusResponseType> getStatus(
-			final Hashtable<Domain, GetStatusType> requests) throws SoapFault {
+			final Hashtable<Domain, GetStatusType> requests) throws Exception {
 
 		final long startTime = System.currentTimeMillis();
 
@@ -497,7 +501,8 @@ public final class AdapterManager implements IManager {
 
 	@Override
 	public Hashtable<Domain, IsAvailableResponseType> isAvailable(
-			final Hashtable<Domain, IsAvailableType> requests) throws SoapFault {
+			final Hashtable<Domain, IsAvailableType> requests)
+			throws DatabaseException, Exception {
 
 		final long startTime = System.currentTimeMillis();
 
@@ -602,8 +607,10 @@ public final class AdapterManager implements IManager {
 	/**
 	 * Rollback for the createReservation operation.
 	 * 
+	 * @throws Exception
+	 * 
 	 */
-	private void rollback() throws SoapFault {
+	private void rollback() throws Exception {
 
 		if (!this.rollbackList.isEmpty()) {
 
@@ -643,9 +650,10 @@ public final class AdapterManager implements IManager {
 	 * @param threads
 	 *            Array of threads to wait for
 	 * @return True if all the threads ended on time
+	 * @throws Exception
 	 */
 	private boolean waitForThreads(final NRPSController[] threads)
-			throws TimeoutFaultException, SoapFault {
+			throws Exception {
 
 		boolean alive = true;
 		boolean success = true;
@@ -683,7 +691,7 @@ public final class AdapterManager implements IManager {
 
 					Thread.sleep(50);
 				} catch (final InterruptedException e) {
-					// TODO Auto-generated catch block
+
 					e.printStackTrace();
 				}
 			}

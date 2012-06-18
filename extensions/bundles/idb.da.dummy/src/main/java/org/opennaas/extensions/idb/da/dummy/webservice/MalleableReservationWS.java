@@ -1,11 +1,11 @@
 /**
-*  This code is part of the Harmony System implemented in Work Package 1 
-*  of the Phosphorus project. This work is supported by the European 
-*  Comission under the Sixth Framework Programme with contract number 
-*  IST-034115.
-*
-*  Copyright (C) 2006-2009 Phosphorus WP1 partners. Phosphorus Consortium.
-*  http://ist-phosphorus.eu/
+ *  This code is part of the Harmony System implemented in Work Package 1 
+ *  of the Phosphorus project. This work is supported by the European 
+ *  Comission under the Sixth Framework Programme with contract number 
+ *  IST-034115.
+ *
+ *  Copyright (C) 2006-2009 Phosphorus WP1 partners. Phosphorus Consortium.
+ *  http://ist-phosphorus.eu/
  *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
@@ -23,205 +23,165 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 
-
 package org.opennaas.extensions.idb.da.dummy.webservice;
 
-import org.apache.muse.ws.addressing.soap.SoapFault;
 import org.w3c.dom.Element;
 
 import org.opennaas.extensions.idb.da.dummy.handler.MalleableReservationHandler;
-import org.opennaas.extensions.idb.serviceinterface.reservation.IReservationWS;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ActivateResponseType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ActivateType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.BindResponseType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.BindType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CancelJobResponseType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CancelJobType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CancelReservationResponseType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CancelReservationType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CompleteJobResponseType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CompleteJobType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CreateReservationResponseType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CreateReservationType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.EndpointNotFoundFault_Exception;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetReservationResponseType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetReservationType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetReservationsResponseType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetReservationsType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetStatusResponseType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetStatusType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.InvalidRequestFault_Exception;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.IsAvailableResponseType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.IsAvailableType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.NetworkReservationPortType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.NotificationResponseType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.NotificationType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.OperationNotAllowedFault_Exception;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.OperationNotSupportedFault_Exception;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.TimeoutFault_Exception;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.UnexpectedFault_Exception;
 
 /**
  * Dummy Reservation Webservice for Malleable Reservations.
  * 
  * @author Alexander Zimmermann (zimmerm2@cs.uni-bonn.de)
  */
-public class MalleableReservationWS implements IReservationWS {
+public class MalleableReservationWS implements NetworkReservationPortType {
 
-    /**
-     * Default constructor that initializes the ContextListener.
-     */
-    public MalleableReservationWS() {
-        // no registration needed
-        // if (AbstractTopologyRegistrator.getLatestInstance() == null) {
-        // new ContextListener();
-        // }
-    }
+	/**
+	 * getFeatures Handler.
+	 * 
+	 * @param getFeatures
+	 *            Request
+	 * @return getFeatures Response
+	 * @throws OperationNotSupportedFault_Exception
+	 * @throws SoapFault
+	 *             In case of errors
+	 */
+	public final Element getFeatures(final Element getFeatures)
+			throws OperationNotSupportedFault_Exception {
+		throw new OperationNotSupportedFault_Exception(
+				"operation not supported"); // the method doesnt seems to be
+											// implemented anywhere
+	}
 
-    /**
-     * activate Handler.
-     * 
-     * @param activate
-     *            Request
-     * @return activate Response
-     * @throws SoapFault
-     *             In case of errors
-     */
-    public final Element activate(final Element activate) throws SoapFault {
-        return MalleableReservationHandler.getInstance().handle(activate,
-                "activate");
-    }
+	@Override
+	public GetStatusResponseType getStatus(GetStatusType getStatus)
+			throws InvalidRequestFault_Exception,
+			OperationNotAllowedFault_Exception, TimeoutFault_Exception,
+			OperationNotSupportedFault_Exception, UnexpectedFault_Exception {
+		return MalleableReservationHandler.getInstance().getStatus(getStatus);
+	}
 
-    /**
-     * bind Handler.
-     * 
-     * @param bind
-     *            Request
-     * @return bind Response
-     * @throws SoapFault
-     *             In case of errors
-     */
-    public final Element bind(final Element bind) throws SoapFault {
-        return MalleableReservationHandler.getInstance().handle(bind, "bind");
-    }
+	@Override
+	public GetReservationsResponseType getReservations(
+			GetReservationsType getReservations)
+			throws InvalidRequestFault_Exception,
+			OperationNotAllowedFault_Exception, TimeoutFault_Exception,
+			OperationNotSupportedFault_Exception, UnexpectedFault_Exception {
+		return MalleableReservationHandler.getInstance().getReservations(
+				getReservations);
+	}
 
-    /**
-     * cancelJob Handler.
-     * 
-     * @param cancelJob
-     *            Request
-     * @return cancelJob Response
-     * @throws SoapFault
-     *             In case of errors
-     */
-    public final Element cancelJob(final Element cancelJob) throws SoapFault {
-        return MalleableReservationHandler.getInstance().handle(cancelJob,
-                "cancelJob");
-    }
+	@Override
+	public CreateReservationResponseType createReservation(
+			CreateReservationType createReservation)
+			throws InvalidRequestFault_Exception,
+			OperationNotAllowedFault_Exception, TimeoutFault_Exception,
+			OperationNotSupportedFault_Exception, UnexpectedFault_Exception,
+			EndpointNotFoundFault_Exception {
+		return MalleableReservationHandler.getInstance().createReservation(
+				createReservation);
+	}
 
-    /**
-     * cancelReservation Handler.
-     * 
-     * @param cancelReservation
-     *            Request
-     * @return cancelReservation Response
-     * @throws SoapFault
-     *             In case of errors
-     */
-    public final Element cancelReservation(final Element cancelReservation)
-            throws SoapFault {
-        return MalleableReservationHandler.getInstance().handle(
-                cancelReservation, "cancelReservation");
-    }
+	@Override
+	public ActivateResponseType activate(ActivateType activate)
+			throws InvalidRequestFault_Exception,
+			OperationNotAllowedFault_Exception, TimeoutFault_Exception,
+			OperationNotSupportedFault_Exception, UnexpectedFault_Exception {
+		return MalleableReservationHandler.getInstance().activate(activate);
+	}
 
-    /**
-     * completeJob Handler.
-     * 
-     * @param completeJob
-     *            Request
-     * @return completeJob Response
-     * @throws SoapFault
-     *             In case of errors
-     */
-    public final Element completeJob(final Element completeJob)
-            throws SoapFault {
-        return MalleableReservationHandler.getInstance().handle(completeJob,
-                "completeJob");
-    }
+	@Override
+	public CompleteJobResponseType completeJob(CompleteJobType completeJob)
+			throws InvalidRequestFault_Exception,
+			OperationNotAllowedFault_Exception, TimeoutFault_Exception,
+			OperationNotSupportedFault_Exception, UnexpectedFault_Exception {
+		return MalleableReservationHandler.getInstance().completeJob(
+				completeJob);
+	}
 
-    /**
-     * createReservation Handler.
-     * 
-     * @param createReservation
-     *            Request
-     * @return createReservation Response
-     * @throws SoapFault
-     *             In case of errors
-     */
-    public final Element createReservation(final Element createReservation)
-            throws SoapFault {
-        return MalleableReservationHandler.getInstance().handle(
-                createReservation, "createReservation");
-    }
+	@Override
+	public CancelJobResponseType cancelJob(CancelJobType cancelJob)
+			throws InvalidRequestFault_Exception,
+			OperationNotAllowedFault_Exception, TimeoutFault_Exception,
+			OperationNotSupportedFault_Exception, UnexpectedFault_Exception {
+		return MalleableReservationHandler.getInstance().cancelJob(cancelJob);
+	}
 
-    /**
-     * getFeatures Handler.
-     * 
-     * @param getFeatures
-     *            Request
-     * @return getFeatures Response
-     * @throws SoapFault
-     *             In case of errors
-     */
-    public final Element getFeatures(final Element getFeatures)
-            throws SoapFault {
-        return MalleableReservationHandler.getInstance().handle(getFeatures,
-                "getFeatures");
-    }
+	@Override
+	public BindResponseType bind(BindType bind)
+			throws InvalidRequestFault_Exception,
+			OperationNotAllowedFault_Exception, TimeoutFault_Exception,
+			OperationNotSupportedFault_Exception, UnexpectedFault_Exception {
+		return MalleableReservationHandler.getInstance().bind(bind);
+	}
 
-    /**
-     * getReservation Handler.
-     * 
-     * @param getReservation
-     *            Request
-     * @return getReservation Response
-     * @throws SoapFault
-     *             In case of errors
-     */
-    public final Element getReservation(final Element getReservation)
-            throws SoapFault {
-        return MalleableReservationHandler.getInstance().handle(
-                getReservation, "getReservation");
-    }
+	@Override
+	public GetReservationResponseType getReservation(
+			GetReservationType getReservation)
+			throws InvalidRequestFault_Exception,
+			OperationNotAllowedFault_Exception,
+			OperationNotSupportedFault_Exception, UnexpectedFault_Exception {
+		throw new OperationNotSupportedFault_Exception(
+				"Operation not supported");// the method doesnt seems to be
+											// implemented anywhere
 
-    /**
-     * getReservations Handler.
-     * 
-     * @param getReservations
-     *            Request
-     * @return getReservations Response
-     * @throws SoapFault
-     *             In case of errors
-     */
-    public final Element getReservations(final Element getReservations)
-            throws SoapFault {
-        return MalleableReservationHandler.getInstance().handle(
-                getReservations, "getReservations");
-    }
+	}
 
-    /**
-     * getStatus Handler.
-     * 
-     * @param getStatus
-     *            Request
-     * @return getStatus Response
-     * @throws SoapFault
-     *             In case of errors
-     */
-    public final Element getStatus(final Element getStatus) throws SoapFault {
-        return MalleableReservationHandler.getInstance().handle(getStatus,
-                "getStatus");
-    }
+	@Override
+	public IsAvailableResponseType isAvailable(IsAvailableType isAvailable)
+			throws InvalidRequestFault_Exception,
+			OperationNotAllowedFault_Exception, TimeoutFault_Exception,
+			OperationNotSupportedFault_Exception, UnexpectedFault_Exception,
+			EndpointNotFoundFault_Exception {
+		return MalleableReservationHandler.getInstance().isAvailable(
+				isAvailable);
+	}
 
-    /**
-     * isAvailable Handler.
-     * 
-     * @param isAvailable
-     *            Request
-     * @return isAvailable Response
-     * @throws SoapFault
-     *             In case of errors
-     */
-    public final Element isAvailable(final Element isAvailable)
-            throws SoapFault {
-        return MalleableReservationHandler.getInstance().handle(isAvailable,
-                "isAvailable");
-    }
+	@Override
+	public NotificationResponseType notification(NotificationType notification)
+			throws OperationNotSupportedFault_Exception {
+		throw new OperationNotSupportedFault_Exception(
+				"Operation not supported");// the method doesnt seems to be
+											// implemented anywhere
+	}
 
-    /**
-     * notification Handler.
-     * 
-     * @param notification
-     *            Request
-     * @return notification Response
-     * @throws SoapFault
-     *             In case of errors
-     */
-    public final Element notification(final Element notification)
-            throws SoapFault {
-        return MalleableReservationHandler.getInstance().handle(notification,
-                "notification");
-    }
+	@Override
+	public CancelReservationResponseType cancelReservation(
+			CancelReservationType cancelReservation)
+			throws InvalidRequestFault_Exception,
+			OperationNotAllowedFault_Exception, TimeoutFault_Exception,
+			OperationNotSupportedFault_Exception, UnexpectedFault_Exception {
+		return MalleableReservationHandler.getInstance().cancelReservation(
+				cancelReservation);
+	}
 
 }

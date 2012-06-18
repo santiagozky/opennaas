@@ -29,29 +29,20 @@ import java.io.Serializable;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.muse.ws.addressing.EndpointReference;
-import org.apache.muse.ws.addressing.soap.SoapFault;
-import org.w3c.dom.Element;
 
 import org.opennaas.extensions.idb.da.dummy.webservice.MalleableReservationWS;
 import org.opennaas.extensions.idb.da.dummy.webservice.ReservationWS;
+import org.opennaas.extensions.idb.serviceinterface.EndpointReference;
+
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.Activate;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ActivateResponse;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ActivateResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ActivateType;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CancelReservation;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CancelReservationResponse;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CancelReservationType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CreateReservation;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CreateReservationResponse;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CreateReservationResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CreateReservationType;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetReservations;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetReservationsResponse;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetReservationsType;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetStatus;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetStatusResponse;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetStatusType;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.IsAvailable;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.IsAvailableResponse;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.IsAvailableType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.utils.JaxbSerializer;
 import org.opennaas.extensions.idb.serviceinterface.reservation.SimpleReservationClient;
@@ -59,6 +50,7 @@ import org.opennaas.extensions.idb.serviceinterface.utils.Config;
 
 import org.opennaas.extensions.idb.Constants;
 import org.opennaas.extensions.idb.database.hibernate.Domain;
+import org.w3c.dom.Element;
 
 /**
  * This class implements a NRPS controller. It is used to communicate with an
@@ -71,11 +63,6 @@ public class NRPSController extends Thread {
 	 * Log.
 	 */
 	private final Log logger;
-
-	/**
-	 * Performance Log.
-	 */
-	private final Log performanceLogger;
 
 	/**
 	 * Domain where the NRPS belongs to.
@@ -116,7 +103,7 @@ public class NRPSController extends Thread {
 	private boolean rollback = false;
 
 	/** Stores the Exception (if any) */
-	private SoapFault exception = null;
+	private Exception exception = null;
 
 	/**
 	 * Constructor for the controller of an NRPS.
@@ -134,7 +121,6 @@ public class NRPSController extends Thread {
 		this.op = operation;
 		this.msg = message;
 		this.domain = dom;
-		this.performanceLogger = performanceLogger;
 		this.setDaemon(true);
 		this.setName(Thread.currentThread().getName() + "_NRPSController@"
 				+ dom.getName());
@@ -204,7 +190,7 @@ public class NRPSController extends Thread {
 		return this.domain;
 	}
 
-	public SoapFault getException() {
+	public Exception getException() {
 		return this.exception;
 	}
 
@@ -291,132 +277,66 @@ public class NRPSController extends Thread {
 		this.logger.info("Starting sender thread...");
 
 		if (this.op.equalsIgnoreCase("createReservation")) {
-			Element response;
+			final CreateReservationResponseType res;
 			try {
 
-				// this.logger.info("SENDER: sending CreateReservation
-				// request");
+				res = this.proxyRSV
+						.createReservation((CreateReservationType) this.msg);
+				this.result = res;
 
-				final CreateReservation create = new CreateReservation();
-				create.setCreateReservation((CreateReservationType) this.msg);
-
-				response = this.proxyRSV.createReservation(JaxbSerializer
-						.getInstance().objectToElement(create));
-
-				final CreateReservationResponse res = (CreateReservationResponse) JaxbSerializer
-						.getInstance().elementToObject(response);
-
-				// logger.info("SENDER: received CreateReservation response");
-
-				this.result = res.getCreateReservationResponse();
-
-			} catch (final SoapFault e) {
+			} catch (final Exception e) {
 				this.rollback = true;
 				this.exception = e;
 				e.printStackTrace();
 			}
 		} else if (this.op.equalsIgnoreCase("activateReservation")) {
-			Element response;
+			ActivateResponseType response;
 			try {
-				final Activate act = new Activate();
-				act.setActivate((ActivateType) this.msg);
+				response = this.proxyRSV.activate((ActivateType) this.msg);
+				this.result = response;
 
-				response = this.proxyRSV.activate(JaxbSerializer.getInstance()
-						.objectToElement(act));
-
-				final ActivateResponse res = (ActivateResponse) JaxbSerializer
-						.getInstance().elementToObject(response);
-
-				this.result = res.getActivateResponse();
-
-			} catch (final SoapFault e) {
+			} catch (final Exception e) {
 				this.exception = e;
 				e.printStackTrace();
 			}
 		} else if (this.op.equalsIgnoreCase("cancelReservation")) {
-			Element response;
+
 			try {
-
-				final CancelReservation cancel = new CancelReservation();
-
-				cancel.setCancelReservation((CancelReservationType) this.msg);
-
-				response = this.proxyRSV.cancelReservation(JaxbSerializer
-						.getInstance().objectToElement(cancel));
-
-				final CancelReservationResponse res = (CancelReservationResponse) JaxbSerializer
-						.getInstance().elementToObject(response);
-
-				this.result = res.getCancelReservationResponse();
-
-			} catch (final SoapFault e) {
+				this.result = this.proxyRSV
+						.cancelReservation((CancelReservationType) this.msg);
+			} catch (final Exception e) {
 				this.exception = e;
 				e.printStackTrace();
 			}
 		} else if (this.op.equalsIgnoreCase("getStatus")) {
-			Element response;
 			try {
-				final GetStatus get = new GetStatus();
-				get.setGetStatus((GetStatusType) this.msg);
-
-				response = this.proxyRSV.getStatus(JaxbSerializer.getInstance()
-						.objectToElement(get));
-
-				final GetStatusResponse res = (GetStatusResponse) JaxbSerializer
-						.getInstance().elementToObject(response);
-
-				this.result = res.getGetStatusResponse();
-
-			} catch (final SoapFault e) {
+				this.result = this.proxyRSV.getStatus((GetStatusType) this.msg);
+			} catch (final Exception e) {
 				this.exception = e;
 				e.printStackTrace();
 			}
 		} else if (this.op.equalsIgnoreCase("isAvailable")) {
-			Element response;
+
 			try {
-
-				final IsAvailable avail = new IsAvailable();
-				avail.setIsAvailable((IsAvailableType) this.msg);
-
-				response = this.proxyRSV.isAvailable(JaxbSerializer
-						.getInstance().objectToElement(avail));
-
-				// logger.info("Request Sender: received IsAvailable response");
-
-				final IsAvailableResponse res = (IsAvailableResponse) JaxbSerializer
-						.getInstance().elementToObject(response);
-
-				this.result = res.getIsAvailableResponse();
-
-			} catch (final SoapFault e) {
+				this.result = this.proxyRSV
+						.isAvailable((IsAvailableType) this.msg);
+			} catch (final Exception e) {
 				this.exception = e;
 				e.printStackTrace();
 			}
 		} else if (this.op.equalsIgnoreCase("getReservations")) {
-			Element response;
+
 			try {
-
-				final GetReservations getRsvs = new GetReservations();
-				getRsvs.setGetReservations((GetReservationsType) this.msg);
-
-				response = this.proxyRSV.getReservations(JaxbSerializer
-						.getInstance().objectToElement(getRsvs));
-
-				final GetReservationsResponse res = (GetReservationsResponse) JaxbSerializer
-						.getInstance().elementToObject(response);
-
-				this.result = res.getGetReservationsResponse();
-
-			} catch (final SoapFault e) {
+				this.result = this.proxyRSV
+						.getReservations((GetReservationsType) this.msg);
+			} catch (final Exception e) {
 				this.exception = e;
 				e.printStackTrace();
 			}
 		}
 
 		this.logger.info("finished");
-		this.performanceLogger.debug("NRPS_response_time "
-				+ this.domain.getName() + " "
-				+ this.proxyRSV.getLastCallDuration() + "ms");
+
 	}
 
 	public void setProxyRSV(final SimpleReservationClient proxyRSV) {

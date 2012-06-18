@@ -54,7 +54,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetEndpoint
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetEndpointsType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetLinksResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetLinksType;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.OperationNotSupportedFault_Exception;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.OperationNotSupportedFaultException;
 
 /**
  * Class to handle NSP topology-requests in a predictable manner.
@@ -95,7 +95,7 @@ public class CommonTopologyHandler {
 	 */
 	public AddDomainResponseType addDomain(final AddDomainType request)
 			throws Throwable {
-		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+		throw new OperationNotSupportedFaultException("Not implemented yet.");
 	}
 
 	/*
@@ -116,7 +116,7 @@ public class CommonTopologyHandler {
 	 */
 	public AddEndpointResponseType addEndpoint(final AddEndpointType request)
 			throws Throwable {
-		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+		throw new OperationNotSupportedFaultException("Not implemented yet.");
 	}
 
 	/**
@@ -133,7 +133,7 @@ public class CommonTopologyHandler {
 	 */
 	public AddLinkResponseType addLink(final AddLinkType request)
 			throws Throwable {
-		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+		throw new OperationNotSupportedFaultException("Not implemented yet.");
 	}
 
 	/**
@@ -197,7 +197,7 @@ public class CommonTopologyHandler {
 	 */
 	public DeleteDomainResponseType deleteDomain(final DeleteDomainType request)
 			throws Throwable {
-		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+		throw new OperationNotSupportedFaultException("Not implemented yet.");
 	}
 
 	/**
@@ -213,7 +213,7 @@ public class CommonTopologyHandler {
 	 */
 	public DeleteEndpointResponseType deleteEndpoint(
 			final DeleteEndpointType request) throws Throwable {
-		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+		throw new OperationNotSupportedFaultException("Not implemented yet.");
 	}
 
 	/**
@@ -229,7 +229,7 @@ public class CommonTopologyHandler {
 	 */
 	public DeleteLinkResponseType deleteLink(final DeleteLinkType request)
 			throws Throwable {
-		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+		throw new OperationNotSupportedFaultException("Not implemented yet.");
 	}
 
 	/**
@@ -245,7 +245,7 @@ public class CommonTopologyHandler {
 	 */
 	public EditDomainResponseType editDomain(final EditDomainType request)
 			throws Throwable {
-		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+		throw new OperationNotSupportedFaultException("Not implemented yet.");
 	}
 
 	/**
@@ -261,7 +261,7 @@ public class CommonTopologyHandler {
 	 */
 	public EditEndpointResponseType editEndpoint(final EditEndpointType request)
 			throws Throwable {
-		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+		throw new OperationNotSupportedFaultException("Not implemented yet.");
 	}
 
 	/**
@@ -277,7 +277,7 @@ public class CommonTopologyHandler {
 	 */
 	public EditLinkResponseType editLink(final EditLinkType request)
 			throws Throwable {
-		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+		throw new OperationNotSupportedFaultException("Not implemented yet.");
 	}
 
 	/**
@@ -300,7 +300,7 @@ public class CommonTopologyHandler {
 	 */
 	public GetDomainsResponseType getDomains(final GetDomainsType request)
 			throws Throwable {
-		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+		throw new OperationNotSupportedFaultException("Not implemented yet.");
 	}
 
 	/**
@@ -323,7 +323,7 @@ public class CommonTopologyHandler {
 	 */
 	public GetEndpointsResponseType getEndpoints(final GetEndpointsType request)
 			throws Throwable {
-		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+		throw new OperationNotSupportedFaultException("Not implemented yet.");
 	}
 
 	/**
@@ -344,6 +344,6 @@ public class CommonTopologyHandler {
 	 */
 	public GetLinksResponseType getLinks(final GetLinksType request)
 			throws Throwable {
-		throw new OperationNotSupportedFault_Exception("Not implemented yet.");
+		throw new OperationNotSupportedFaultException("Not implemented yet.");
 	}
 }
