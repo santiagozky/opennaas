@@ -37,6 +37,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import org.apache.commons.lang.SerializationUtils;
 import org.apache.commons.logging.Log;
 
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DomainInformationType;
@@ -316,21 +317,17 @@ public abstract class AbstractTopologyRegistrator implements
 					protected synchronized void update() {
 						AbstractTopologyRegistrator.this.updateDomain();
 						DomainInformationType domain;
-						try {
-							domain = AbstractTopologyRegistrator.this.domain
-									.clone();
-							domain.setRelationship(DomainRelationshipType.SUBDOMAIN);
-							for (final InterdomainLinkType i : domain
-									.getInterdomainLink()) {
-								i.getSourceEndpoint().setDomainId(
-										domain.getDomainId());
-							}
-							this.addDomain(domain);
-						} catch (final CloneNotSupportedException e) {
-							System.err
-									.println("This should not happen: clone support automatically added to JAXB classes!");
-							e.printStackTrace();
+
+						domain = (DomainInformationType) SerializationUtils
+								.clone(AbstractTopologyRegistrator.this.domain);
+						domain.setRelationship(DomainRelationshipType.SUBDOMAIN);
+						for (final InterdomainLinkType i : domain
+								.getInterdomainLink()) {
+							i.getSourceEndpoint().setDomainId(
+									domain.getDomainId());
 						}
+						this.addDomain(domain);
+
 					}
 				};
 				this.superDomainDistributor.start();
@@ -352,7 +349,8 @@ public abstract class AbstractTopologyRegistrator implements
 				AbstractTopologyRegistrator.this.updateDomain();
 				DomainInformationType domain;
 				try {
-					domain = AbstractTopologyRegistrator.this.domain.clone();
+					domain = (DomainInformationType) SerializationUtils
+							.clone(AbstractTopologyRegistrator.this.domain);
 					domain.setRelationship(DomainRelationshipType.PEER);
 					for (final InterdomainLinkType i : domain
 							.getInterdomainLink()) {
@@ -360,7 +358,7 @@ public abstract class AbstractTopologyRegistrator implements
 					}
 					this.addDomain(domain);
 					// other domains are added in the addPeerDomain() method
-				} catch (final CloneNotSupportedException e) {
+				} catch (final Exception e) {
 					System.err
 							.println("This should not happen: clone support automatically added to JAXB classes!");
 					e.printStackTrace();
@@ -528,13 +526,14 @@ public abstract class AbstractTopologyRegistrator implements
 			final EndpointType ep = this.myEndpoints.get(srcTNA);
 			if (ep != null) {
 				try {
-					final InterdomainLinkType i2 = i.clone();
+					final InterdomainLinkType i2 = (InterdomainLinkType) SerializationUtils
+							.clone(i);
 					i2.setSourceEndpoint(ep);
 					this.domain.getInterdomainLink().add(i2);
-				} catch (final CloneNotSupportedException e) {
-					// TODO Auto-generated catch block
+				} catch (final Exception e) {
+
 					e.printStackTrace();
-					// IMPOSSIBLE
+					// IMPOSSIBLE, haha
 				}
 				if (log != null) {
 					log.debug("updateDomain: added interdomain link "
