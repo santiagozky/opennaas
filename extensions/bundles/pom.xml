@@ -56,11 +56,15 @@
            <module>itests.helpers</module>
 		
 		<module>webservice</module>
-		<module>webservice-proxy</module>
+
 	           <module>idb</module>
 		<module>idb.serviceinterface</module>
 		<module>idb.database</module>
 		<module>idb.da.dummy</module>
+
+
+		
+        <module>sampleresource</module>
 
 	</modules>
 </project>
