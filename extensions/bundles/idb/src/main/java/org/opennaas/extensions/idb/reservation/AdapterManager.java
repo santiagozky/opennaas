@@ -501,8 +501,7 @@ public final class AdapterManager implements IManager {
 
 	@Override
 	public Hashtable<Domain, IsAvailableResponseType> isAvailable(
-			final Hashtable<Domain, IsAvailableType> requests)
-			throws DatabaseException, Exception {
+			final Hashtable<Domain, IsAvailableType> requests) throws Exception {
 
 		final long startTime = System.currentTimeMillis();
 

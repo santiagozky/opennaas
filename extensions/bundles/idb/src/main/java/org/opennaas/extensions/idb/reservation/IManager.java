@@ -86,10 +86,11 @@ public interface IManager {
 	 * @return
 	 * @throws SoapFault
 	 * @throws DatabaseException
+	 * @throws Exception
 	 */
 	public abstract Hashtable<Domain, GetStatusResponseType> getStatus(
 			final Hashtable<Domain, GetStatusType> requests)
-			throws DatabaseException;
+			throws DatabaseException, Exception;
 
 	/**
 	 * @param element
@@ -98,8 +99,9 @@ public interface IManager {
 	 * @throws SoapFault
 	 *             A SoapFault
 	 * @throws DatabaseException
+	 * @throws Exception
 	 */
 	public abstract Hashtable<Domain, IsAvailableResponseType> isAvailable(
 			final Hashtable<Domain, IsAvailableType> requests)
-			throws DatabaseException;
+			throws DatabaseException, Exception;
 }

@@ -159,7 +159,8 @@ public final class MockNrpsManager implements IManager {
 	 */
 	@Override
 	public Hashtable<Domain, ActivateResponseType> activateReservation(
-			final Hashtable<Domain, ActivateType> element) {
+			final Hashtable<Domain, ActivateType> element)
+			throws DatabaseException {
 		final Date startTime = new Date();
 		this.performanceLogger.debug("MockNrpsManager_input on: " + startTime
 				+ " -> activateReservation");
@@ -322,7 +323,8 @@ public final class MockNrpsManager implements IManager {
 	 */
 	@Override
 	public Hashtable<Domain, CreateReservationResponseType> createReservation(
-			final Hashtable<Domain, CreateReservationType> element) {
+			final Hashtable<Domain, CreateReservationType> element)
+			throws DatabaseException {
 		final Date startTime = new Date();
 		this.performanceLogger.debug("MockNrpsManager_input on: " + startTime
 				+ " -> createReservation");
@@ -341,7 +343,7 @@ public final class MockNrpsManager implements IManager {
 			try {
 				responses.put(entries.getKey(),
 						this.createReservationOverWS(entries.getValue()));
-			} catch (final SoapFault s) {
+			} catch (final RuntimeException s) {
 				// something went wrong with this CreateReservation-Call in the
 				// NRPS. So execute rollback for previous calls.
 				this.rollback(calledWSForRollback);
