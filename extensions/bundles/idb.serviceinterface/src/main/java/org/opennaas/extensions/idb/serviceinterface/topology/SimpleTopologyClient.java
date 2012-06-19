@@ -121,8 +121,7 @@ public class SimpleTopologyClient {
 		logger = LogFactory.getLog(this.getClass());
 		TopologyIFService topologyService;
 		try {
-			topologyService = new TopologyIFService(new URL(endpointReference
-					+ "?wsdl"));
+			topologyService = new TopologyIFService(new URL(endpointReference));
 
 		} catch (MalformedURLException e) {
 			topologyService = new TopologyIFService();

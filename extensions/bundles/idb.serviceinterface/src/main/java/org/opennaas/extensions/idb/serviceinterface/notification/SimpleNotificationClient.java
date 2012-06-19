@@ -54,6 +54,7 @@ public class SimpleNotificationClient {
 
 	NetworkNotificationPortType client;
 	private final Log logger;
+	private EndpointReference endpoint;
 
 	/**
 	 * Constructor from superclass.
@@ -63,6 +64,7 @@ public class SimpleNotificationClient {
 	public SimpleNotificationClient(final EndpointReference endpointReference) {
 		logger = LogFactory.getLog(this.getClass());
 		NetworkNotificationService s;
+		this.endpoint = endpointReference;
 		try {
 			s = new NetworkNotificationService(endpointReference.getURI()
 					.toURL());
@@ -79,9 +81,11 @@ public class SimpleNotificationClient {
 	/**
 	 * @param webservice
 	 */
-	public SimpleNotificationClient(final NetworkNotificationPortType webservice) {
+	public SimpleNotificationClient(
+			final NetworkNotificationPortType webservice,
+			EndpointReference endpoint) {
 		logger = LogFactory.getLog(this.getClass());
-
+		this.endpoint = endpoint;
 		this.client = webservice;
 	}
 
@@ -97,10 +101,16 @@ public class SimpleNotificationClient {
 
 		NetworkNotificationService s;
 		try {
-			s = new NetworkNotificationService(new URL(endpointReference
-					+ "?wsdl"));
+			EndpointReference endpoint = new EndpointReference(
+					endpointReference);
+			this.endpoint = endpoint;
+			s = new NetworkNotificationService(endpoint.getURI().toURL());
 
 		} catch (MalformedURLException e) {
+			s = new NetworkNotificationService();
+			e.printStackTrace();
+			logger.error("Could not get convert to URL " + endpointReference);
+		} catch (URISyntaxException e) {
 			s = new NetworkNotificationService();
 			e.printStackTrace();
 			logger.error("Could not get convert to URL " + endpointReference);
@@ -174,5 +184,9 @@ public class SimpleNotificationClient {
 			throws TopicNotFoundFault_Exception {
 
 		return client.unsubscribe(request);
+	}
+
+	public EndpointReference getEndpointReference() {
+		return this.endpoint;
 	}
 }

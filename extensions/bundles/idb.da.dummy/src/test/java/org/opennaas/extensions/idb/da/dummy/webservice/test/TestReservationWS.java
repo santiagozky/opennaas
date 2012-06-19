@@ -31,12 +31,16 @@
  */
 package org.opennaas.extensions.idb.da.dummy.webservice.test;
 
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+
 import javax.xml.datatype.DatatypeConfigurationException;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 import org.opennaas.extensions.idb.da.dummy.webservice.ReservationWS;
+import org.opennaas.extensions.idb.serviceinterface.EndpointReference;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AvailabilityCodeType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CancelReservationResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ConnectionAvailabilityType;
@@ -69,13 +73,17 @@ public class TestReservationWS {
 
 	/**
 	 * The public constructor.
+	 * 
+	 * @throws URISyntaxException
+	 * @throws MalformedURLException
 	 */
-	public TestReservationWS() {
+	public TestReservationWS() throws URISyntaxException, MalformedURLException {
 		if (Config.isTrue("test", "test.callWebservice")) {
 			final String epr = Config.getString("test", "test.reservationEPR");
 			this.client = new SimpleReservationClient(epr);
 		} else {
-			this.client = new SimpleReservationClient(new ReservationWS());
+			this.client = new SimpleReservationClient(new ReservationWS(),
+					new EndpointReference(EndpointReference.ANON_URI));
 		}
 	}
 

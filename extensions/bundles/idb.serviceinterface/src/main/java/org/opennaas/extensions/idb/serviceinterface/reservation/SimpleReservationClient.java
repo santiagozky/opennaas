@@ -162,6 +162,7 @@ public class SimpleReservationClient {
 	}
 
 	private final NetworkReservationPortType client;
+	private EndpointReference endpoint;
 
 	/**
 	 * Constructor from superclass.
@@ -173,6 +174,7 @@ public class SimpleReservationClient {
 
 		NetworkReservationService service;
 		try {
+			this.endpoint = endpointReference;
 			service = new NetworkReservationService(endpointReference.getURI()
 					.toURL());
 		} catch (MalformedURLException e) {
@@ -191,8 +193,10 @@ public class SimpleReservationClient {
 	 * @throws URISyntaxException
 	 * @throws URISyntaxException
 	 */
-	public SimpleReservationClient(final NetworkReservationPortType webservice) {
+	public SimpleReservationClient(final NetworkReservationPortType webservice,
+			EndpointReference endpoint) {
 		logger = LogFactory.getLog(this.getClass());
+		this.endpoint = endpoint;
 		client = webservice;
 	}
 
@@ -207,9 +211,15 @@ public class SimpleReservationClient {
 
 		NetworkReservationService service;
 		try {
-			URL u = new URL(endpointReference + "?wsdl");
-			service = new NetworkReservationService(u);
+			EndpointReference endpoint = new EndpointReference(
+					endpointReference);
+			this.endpoint = endpoint;
+			service = new NetworkReservationService(endpoint.getURI().toURL());
 		} catch (MalformedURLException e) {
+			service = new NetworkReservationService();
+			logger.error("Could not get convert to URL " + endpointReference);
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
 			service = new NetworkReservationService();
 			logger.error("Could not get convert to URL " + endpointReference);
 			e.printStackTrace();
@@ -719,5 +729,9 @@ public class SimpleReservationClient {
 			throws OperationNotSupportedFault_Exception {
 
 		return client.notification(request);
+	}
+
+	public EndpointReference getEndpointReference() {
+		return endpoint;
 	}
 }

@@ -35,13 +35,17 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AddEndpoint
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AddEndpointType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AddLinkResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AddLinkType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AddOrEditDomainResponseType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AddOrEditDomainType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DeleteDomainResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DeleteDomainType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DeleteEndpointResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DeleteEndpointType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DeleteLinkResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DeleteLinkType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DomainAlreadyExistsFault_Exception;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DomainInformationType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DomainNotFoundFault_Exception;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DomainRelationshipType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.EditDomainResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.EditDomainType;
@@ -49,6 +53,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.EditEndpoin
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.EditEndpointType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.EditLinkResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.EditLinkType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.EndpointAlreadyExistsFault_Exception;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.EndpointInterfaceType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.EndpointType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetDomainsResponseType;
@@ -58,6 +63,11 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetEndpoint
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetLinksResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetLinksType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.InterdomainLinkType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.InvalidRequestFault_Exception;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.OperationNotAllowedFault_Exception;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.OperationNotSupportedFault_Exception;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.TopologyIFPortType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.UnexpectedFault_Exception;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.DomainAlreadyExistsFaultException;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.DomainNotFoundFaultException;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.EndpointAlreadyExistsFaultException;
@@ -71,27 +81,25 @@ import org.opennaas.extensions.idb.database.hibernate.Domain;
 import org.opennaas.extensions.idb.database.hibernate.Endpoint;
 import org.opennaas.extensions.idb.database.hibernate.InterDomainLink;
 import org.opennaas.extensions.idb.exception.database.DatabaseException;
-import org.opennaas.extensions.ws.impl.GenericCapabilityService;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /** Topology Request Handler. */
 @WebService(portName = "idbTopologyCapabilityPort", serviceName = "idbTopologyCapabilityService", targetNamespace = "http://opennaas.org/ws")
-public final class TopologyCapabilityServiceImpl extends
-		GenericCapabilityService implements ITopologyCapabilityService {
+public final class TopologyWS implements TopologyIFPortType {
 
 	private String myDomainName = null;
 
 	private final Log log = LogFactory
-			.getLog(TopologyCapabilityServiceImpl.class);
+			.getLog(TopologyWS.class);
 
 	/**
 	 * Private constructor: Singleton.
 	 * 
 	 * @throws DatabaseException
 	 */
-	public TopologyCapabilityServiceImpl() {
+	public TopologyWS() {
 		this.myDomainName = Config.getString(Constants.hsiProperties,
 				"domain.name");
 	}
@@ -107,14 +115,24 @@ public final class TopologyCapabilityServiceImpl extends
 	 */
 	@Override
 	public AddDomainResponseType addDomain(final AddDomainType element)
-			throws DatabaseException, DomainAlreadyExistsFaultException {
+			throws DomainAlreadyExistsFault_Exception,
+			InvalidRequestFault_Exception, UnexpectedFault_Exception,
+			OperationNotSupportedFault_Exception,
+			OperationNotAllowedFault_Exception {
 
 		final DomainInformationType domInfo = element.getDomain();
 		if (!domInfo.isSetRelationship()) {
 			domInfo.setRelationship(DomainRelationshipType.SUBDOMAIN);
 		}
 		final String domainName = domInfo.getDomainId();
-		final Domain dom = Domain.load(domainName);
+		Domain dom;
+		try {
+			dom = Domain.load(domainName);
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+			throw new UnexpectedFault_Exception("unexepected databse problem",
+					e);
+		}
 		// play it safe: the get method can either return "null" or "new
 		// Domain()"
 		if ((dom != null) && (domainName.equals(dom.getName()))) {
@@ -122,7 +140,16 @@ public final class TopologyCapabilityServiceImpl extends
 		}
 
 		final AddDomainResponseType responseType = new AddDomainResponseType();
-		responseType.setSuccess(this.addOrEditDomain(domInfo, false));
+		try {
+			responseType.setSuccess(this.addOrEditDomain(domInfo, false));
+		} catch (EndpointAlreadyExistsFault_Exception e) {
+			e.printStackTrace();
+			throw new OperationNotAllowedFault_Exception(
+					"endpoint already exists", e);
+		} catch (DomainNotFoundFault_Exception e) {
+			e.printStackTrace();
+			throw new OperationNotAllowedFault_Exception("domain not found", e);
+		}
 
 		return responseType;
 	}
@@ -145,8 +172,11 @@ public final class TopologyCapabilityServiceImpl extends
 	 */
 	@Override
 	public AddEndpointResponseType addEndpoint(final AddEndpointType element)
-			throws DatabaseException, DomainNotFoundFaultException,
-			InvalidRequestFaultException, EndpointAlreadyExistsFaultException {
+			throws InvalidRequestFault_Exception,
+			EndpointAlreadyExistsFault_Exception, UnexpectedFault_Exception,
+			DomainNotFoundFault_Exception,
+			OperationNotSupportedFault_Exception,
+			OperationNotAllowedFault_Exception {
 
 		final AddEndpointResponseType responseType = new AddEndpointResponseType();
 		responseType.setSuccess(false);
@@ -193,9 +223,9 @@ public final class TopologyCapabilityServiceImpl extends
 
 		} catch (final DatabaseException e) {
 
-			throw new DatabaseException(
-					"Database exception when adding Endpoints: "
-							+ e.getMessage());
+			e.printStackTrace();
+			throw new UnexpectedFault_Exception(
+					"unexepected databse problem when adding endpoints", e);
 
 		}
 		return responseType;
@@ -214,11 +244,21 @@ public final class TopologyCapabilityServiceImpl extends
 		throw new RuntimeException("operation not supported");
 	}
 
-	@Override
 	public boolean addOrEditDomain(final DomainInformationType domInfo,
-			final boolean checkSeq) throws DatabaseException {
+			final boolean checkSeq) throws InvalidRequestFault_Exception,
+			EndpointAlreadyExistsFault_Exception, UnexpectedFault_Exception,
+			DomainNotFoundFault_Exception,
+			OperationNotSupportedFault_Exception,
+			OperationNotAllowedFault_Exception {
 		final String domainName = domInfo.getDomainId();
-		Domain dom = Domain.load(domainName);
+		Domain dom;
+		try {
+			dom = Domain.load(domainName);
+		} catch (DatabaseException e1) {
+			e1.printStackTrace();
+			throw new UnexpectedFault_Exception("unexpected databse problem",
+					e1);
+		}
 
 		if (dom == null) {
 			// the domain is not yet saved in DB, so there is nothing to check
@@ -308,8 +348,8 @@ public final class TopologyCapabilityServiceImpl extends
 				}
 			}
 		} catch (final DatabaseException e) {
-			throw new DatabaseException(
-					"Database exception when editing a domain", e);
+			throw new UnexpectedFault_Exception(
+					"unexpected database problem when adding/editing domain", e);
 		}
 		if (domInfo.isSetRelationship()
 				&& domInfo.getRelationship()
@@ -346,18 +386,27 @@ public final class TopologyCapabilityServiceImpl extends
 	 */
 	@Override
 	public DeleteDomainResponseType deleteDomain(final DeleteDomainType element)
-			throws DatabaseException, DomainNotFoundFaultException {
+			throws InvalidRequestFault_Exception, UnexpectedFault_Exception,
+			DomainNotFoundFault_Exception,
+			OperationNotSupportedFault_Exception,
+			OperationNotAllowedFault_Exception {
 
-		final DeleteDomainResponseType responseType = new DeleteDomainResponseType();
-		responseType.setSuccess(false);
-		final Domain dom = Domain.load(element.getDomainId());
-		if (dom == null) {
-			throw new DomainNotFoundFaultException("Cannot find domain: "
-					+ element.getDomainId());
+		try {
+			final DeleteDomainResponseType responseType = new DeleteDomainResponseType();
+			responseType.setSuccess(false);
+			final Domain dom = Domain.load(element.getDomainId());
+			if (dom == null) {
+				throw new DomainNotFoundFaultException("Cannot find domain: "
+						+ element.getDomainId());
+			}
+			dom.delete();
+			responseType.setSuccess(true);
+			return responseType;
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+			throw new UnexpectedFault_Exception(
+					"unexepected database problem while deleteing domain", e);
 		}
-		dom.delete();
-		responseType.setSuccess(true);
-		return responseType;
 	}
 
 	/**
@@ -370,20 +419,31 @@ public final class TopologyCapabilityServiceImpl extends
 	 */
 	@Override
 	public DeleteEndpointResponseType deleteEndpoint(
-			final DeleteEndpointType element) throws DatabaseException {
+			final DeleteEndpointType element)
+			throws InvalidRequestFault_Exception, UnexpectedFault_Exception,
+			OperationNotSupportedFault_Exception,
+			OperationNotAllowedFault_Exception {
 
 		final String id = element.getEndpoint();
 
 		final DeleteEndpointResponseType responseType = new DeleteEndpointResponseType();
 
-		final Endpoint ep = Endpoint.load(id);
-		if (ep != null) {
-			ep.delete();
+		Endpoint ep;
+		try {
+			ep = Endpoint.load(id);
+			if (ep != null) {
+				ep.delete();
+			}
+
+			responseType.setSuccess(true);
+
+			return responseType;
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+			throw new UnexpectedFault_Exception(
+					"database problem while deleting endpoint", e);
 		}
 
-		responseType.setSuccess(true);
-
-		return responseType;
 	}
 
 	/**
@@ -410,7 +470,10 @@ public final class TopologyCapabilityServiceImpl extends
 	 */
 	@Override
 	public EditDomainResponseType editDomain(final EditDomainType element)
-			throws DatabaseException {
+			throws InvalidRequestFault_Exception, UnexpectedFault_Exception,
+			DomainNotFoundFault_Exception,
+			OperationNotSupportedFault_Exception,
+			OperationNotAllowedFault_Exception {
 
 		final DomainInformationType domInfo = element.getDomain();
 		if (!domInfo.isSetRelationship()) {
@@ -418,7 +481,14 @@ public final class TopologyCapabilityServiceImpl extends
 		}
 
 		final EditDomainResponseType responseType = new EditDomainResponseType();
-		responseType.setSuccess(this.addOrEditDomain(domInfo, true));
+		try {
+			responseType.setSuccess(this.addOrEditDomain(domInfo, true));
+		} catch (EndpointAlreadyExistsFault_Exception e) {
+
+			e.printStackTrace();
+			throw new OperationNotAllowedFault_Exception(
+					"endpoint already exists", e);
+		}
 		return responseType;
 	}
 
@@ -432,30 +502,39 @@ public final class TopologyCapabilityServiceImpl extends
 	 */
 	@Override
 	public EditEndpointResponseType editEndpoint(final EditEndpointType element)
-			throws DatabaseException {
-
-		final EndpointType epType = element.getEndpoint();
-
-		final EditEndpointResponseType responseType = new EditEndpointResponseType();
-
-		Endpoint ep = Endpoint.load(epType.getEndpointId());
-
-		// ep = Endpoint.fromJaxb(epType);
-		ep.mergeFromJaxb(epType);
+			throws InvalidRequestFault_Exception, UnexpectedFault_Exception,
+			OperationNotSupportedFault_Exception,
+			OperationNotAllowedFault_Exception {
 
 		try {
-			ep.save();
+			final EndpointType epType = element.getEndpoint();
 
-			responseType.setSuccess(true);
-		} catch (final DatabaseException e) {
+			final EditEndpointResponseType responseType = new EditEndpointResponseType();
 
-			responseType.setSuccess(false);
-			throw new DatabaseException(
-					"Database exception when adding Endpoints: "
-							+ e.getMessage());
+			Endpoint ep = Endpoint.load(epType.getEndpointId());
+
+			// ep = Endpoint.fromJaxb(epType);
+			ep.mergeFromJaxb(epType);
+
+			try {
+				ep.save();
+
+				responseType.setSuccess(true);
+			} catch (final DatabaseException e) {
+
+				responseType.setSuccess(false);
+				throw new DatabaseException(
+						"Database exception when adding Endpoints: "
+								+ e.getMessage());
+			}
+
+			return responseType;
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+			throw new UnexpectedFault_Exception(
+					"database problem while editing endpoint", e);
 		}
 
-		return responseType;
 	}
 
 	/**
@@ -482,19 +561,27 @@ public final class TopologyCapabilityServiceImpl extends
 	 */
 	@Override
 	public GetDomainsResponseType getDomains(final GetDomainsType element)
-			throws DatabaseException {
+			throws InvalidRequestFault_Exception, UnexpectedFault_Exception,
+			OperationNotSupportedFault_Exception,
+			OperationNotAllowedFault_Exception {
 
-		final GetDomainsResponseType responseType = new GetDomainsResponseType();
-		for (final Domain aux : Domain.loadAll()) {
-			final DomainInformationType dom = aux.toJaxb();
-			final Set<InterDomainLink> ll = InterDomainLink
-					.loadForSourceDomain(dom.getDomainId());
-			for (final InterDomainLink l : ll) {
-				dom.getInterdomainLink().add(l.toJaxb());
+		try {
+			final GetDomainsResponseType responseType = new GetDomainsResponseType();
+			for (final Domain aux : Domain.loadAll()) {
+				final DomainInformationType dom = aux.toJaxb();
+				final Set<InterDomainLink> ll = InterDomainLink
+						.loadForSourceDomain(dom.getDomainId());
+				for (final InterDomainLink l : ll) {
+					dom.getInterdomainLink().add(l.toJaxb());
+				}
+				responseType.getDomains().add(dom);
 			}
-			responseType.getDomains().add(dom);
+			return responseType;
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+			throw new UnexpectedFault_Exception(
+					"database problem while getting domains", e);
 		}
-		return responseType;
 	}
 
 	/**
@@ -503,32 +590,40 @@ public final class TopologyCapabilityServiceImpl extends
 	 * @param element
 	 *            GetEndpoints Request
 	 * @return GetEndpoints Response
-	 * @throws DatabaseException
 	 */
 	@Override
 	public GetEndpointsResponseType getEndpoints(final GetEndpointsType element)
-			throws DatabaseException {
+			throws InvalidRequestFault_Exception, UnexpectedFault_Exception,
+			OperationNotSupportedFault_Exception,
+			OperationNotAllowedFault_Exception {
 
-		final GetEndpointsResponseType responseType = new GetEndpointsResponseType();
-		final String domainName = element.getDomain();
-		final Domain domainList = Domain.load(domainName);
-		if (domainList == null) {
-			throw new DatabaseException("Could not load Domain: " + domainName);
-		}
-		for (final Endpoint aux : domainList.getEndpoints()) {
-			if (EndpointInterfaceType.values()[aux.getType()] == EndpointInterfaceType.BORDER) {
-				final EndpointType epInfo = new EndpointType();
-				epInfo.setEndpointId(aux.getTNA());
-				epInfo.setInterface(EndpointInterfaceType.values()[aux
-						.getType()]);
-				epInfo.setBandwidth(Integer.valueOf(aux.getBandwidth()));
-				epInfo.setDescription(aux.getDescription());
-				epInfo.setName(aux.getName());
-				epInfo.setDomainId(domainName);
-				responseType.getEndpoints().add(epInfo);
+		try {
+			final GetEndpointsResponseType responseType = new GetEndpointsResponseType();
+			final String domainName = element.getDomain();
+			final Domain domainList = Domain.load(domainName);
+			if (domainList == null) {
+				throw new DatabaseException("Could not load Domain: "
+						+ domainName);
 			}
+			for (final Endpoint aux : domainList.getEndpoints()) {
+				if (EndpointInterfaceType.values()[aux.getType()] == EndpointInterfaceType.BORDER) {
+					final EndpointType epInfo = new EndpointType();
+					epInfo.setEndpointId(aux.getTNA());
+					epInfo.setInterface(EndpointInterfaceType.values()[aux
+							.getType()]);
+					epInfo.setBandwidth(Integer.valueOf(aux.getBandwidth()));
+					epInfo.setDescription(aux.getDescription());
+					epInfo.setName(aux.getName());
+					epInfo.setDomainId(domainName);
+					responseType.getEndpoints().add(epInfo);
+				}
+			}
+			return responseType;
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+			throw new OperationNotSupportedFault_Exception(
+					"database problem while getting endpoints", e);
 		}
-		return responseType;
 	}
 
 	/*
@@ -560,5 +655,26 @@ public final class TopologyCapabilityServiceImpl extends
 		return ((dom.getSeqNo() <= oSeq) && (dom.getRegistered().getTime()
 				- oReg < 900000l)); // 15
 		// minutes
+	}
+
+	@Override
+	public AddOrEditDomainResponseType addOrEditDomain(
+			AddOrEditDomainType addOrEditDomain)
+			throws InvalidRequestFault_Exception, UnexpectedFault_Exception,
+			OperationNotSupportedFault_Exception,
+			OperationNotAllowedFault_Exception {
+		AddOrEditDomainResponseType res = new AddOrEditDomainResponseType();
+		try {
+			res.setSuccess(addOrEditDomain(addOrEditDomain.getDomain(), false));
+		} catch (EndpointAlreadyExistsFault_Exception e) {
+			e.printStackTrace();
+			throw new OperationNotAllowedFault_Exception(
+					"endpoint already exists", e);
+		} catch (DomainNotFoundFault_Exception e) {
+			e.printStackTrace();
+			throw new OperationNotAllowedFault_Exception("domain not found", e);
+		}
+		return res;
+
 	}
 }

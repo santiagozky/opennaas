@@ -30,7 +30,6 @@ import java.util.List;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
-import org.apache.muse.ws.addressing.soap.SoapFault;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -59,7 +58,7 @@ import org.opennaas.extensions.idb.test.AbstractTest;
  * @version $Id$
  */
 public class TestJobOperationsHandler extends TestCase {
-	public TestJobOperationsHandler() throws SoapFault {
+	public TestJobOperationsHandler() {
 		super();
 	}
 

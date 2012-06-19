@@ -29,7 +29,6 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.muse.ws.addressing.soap.SoapFault;
 
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.NotificationMessageType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.NotificationType;
@@ -115,10 +114,10 @@ public class NotificationSender extends Thread {
 	 */
 	public String getEpr() {
 		if (this.messageTypeFlag) {
-			return this.consumerClient.getEndpointReference().getAddress()
+			return this.consumerClient.getEndpointReference().getURI()
 					.toString();
 		}
-		return this.notificationClient.getEndpointReference().getAddress()
+		return this.notificationClient.getEndpointReference().getURI()
 				.toString();
 	}
 
@@ -169,18 +168,18 @@ public class NotificationSender extends Thread {
 		if (this.messageTypeFlag) {
 			try {
 				this.consumerClient.notification(this.notificationType);
-			} catch (final SoapFault e) {
+			} catch (final Exception e) {
 				this.logger.warn("sending notification to "
-						+ this.consumerClient.getDestination().getAddress()
+						+ this.consumerClient.getEndpointReference().getURI()
 						+ " failed! " + e.getMessage());
 			}
 		} else {
 			try {
 				this.notificationClient.publish(this.publishType);
-			} catch (final SoapFault e) {
+			} catch (final Exception e) {
 				this.logger.warn("publishing to "
-						+ this.notificationClient.getDestination().getAddress()
-						+ " failed! " + e.getMessage());
+						+ this.notificationClient.getEndpointReference()
+								.getURI() + " failed! " + e.getMessage());
 			}
 		}
 

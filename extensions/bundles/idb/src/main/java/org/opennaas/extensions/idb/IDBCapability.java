@@ -7,11 +7,12 @@ import org.opennaas.core.resources.action.IAction;
 import org.opennaas.core.resources.action.IActionSet;
 import org.opennaas.core.resources.capability.AbstractCapability;
 import org.opennaas.core.resources.capability.CapabilityException;
+import org.opennaas.core.resources.capability.ICapability;
 import org.opennaas.core.resources.descriptor.CapabilityDescriptor;
 import org.opennaas.core.resources.descriptor.ResourceDescriptorConstants;
 import org.opennaas.extensions.queuemanager.IQueueManagerCapability;
 
-public class IDBCapability extends AbstractCapability /* implements IDBCapability */{
+public class IDBCapability extends AbstractCapability implements ICapability {
 
 	public static String CAPABILITY_TYPE = "idb";
 

@@ -42,7 +42,6 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.muse.ws.addressing.soap.SoapFault;
 
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AvailabilityCodeType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ConnectionAvailabilityType;
@@ -292,7 +291,7 @@ public class PathFinderNG {
 	 * @throws SoapFault
 	 */
 	public Long getAlternativeStartTimeOffset() throws DatabaseException,
-			SoapFault {
+			Exception {
 		if (!this.processed) {
 			this.process();
 		}
@@ -308,7 +307,7 @@ public class PathFinderNG {
 	 * @throws SoapFault
 	 */
 	public List<ConnectionAvailabilityType> getDetailedResult()
-			throws DatabaseException, SoapFault {
+			throws DatabaseException, Exception {
 		if (!this.processed) {
 			this.process();
 		}
@@ -336,7 +335,7 @@ public class PathFinderNG {
 	 * @throws SoapFault
 	 */
 	public HashMap<Domain, Reservation> getReservations()
-			throws DatabaseException, SoapFault {
+			throws DatabaseException, Exception {
 		if (!this.processed) {
 			if (isMultidomain()) {
 				this.process();
@@ -466,7 +465,7 @@ public class PathFinderNG {
 	 * @throws DatabaseException
 	 * @throws SoapFault
 	 */
-	public boolean isAvailable() throws DatabaseException, SoapFault {
+	public boolean isAvailable() throws DatabaseException, Exception {
 		if (!this.processed) {
 			if (this.malleable) {
 				this.processMalleable();
@@ -490,7 +489,7 @@ public class PathFinderNG {
 	 * @throws SoapFault
 	 *             SoapFault
 	 */
-	protected void process() throws DatabaseException, SoapFault {
+	protected void process() throws DatabaseException, Exception {
 
 		this.processed = true;
 
@@ -696,7 +695,7 @@ public class PathFinderNG {
 		this.outputReservations = nrpsReservationTable;
 	}
 
-	private void processMalleable() throws SoapFault, DatabaseException {
+	private void processMalleable() throws DatabaseException, Exception {
 
 		this.processed = true;
 

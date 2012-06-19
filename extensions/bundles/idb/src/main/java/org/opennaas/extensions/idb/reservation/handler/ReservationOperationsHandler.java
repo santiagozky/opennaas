@@ -34,7 +34,6 @@ import java.util.Map.Entry;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.muse.ws.addressing.soap.SoapFault;
 
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ActivateResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ActivateType;
@@ -107,13 +106,13 @@ public final class ReservationOperationsHandler {
 	 * @param element
 	 *            CancelReservationType
 	 * @return CancelReservationResponseType
-	 * @throws SoapFault
-	 *             A SoapFault
+	 * 
 	 * @throws DatabaseException
 	 *             DatabaseException
+	 * @throws Exception
 	 */
 	public ActivateResponseType activation(final ActivateType element)
-			throws SoapFault, DatabaseException {
+			throws DatabaseException, Exception {
 		final Reservation resv = Reservation.load(element.getReservationID());
 		if (resv == null) {
 			throw new ReservationIDNotFoundFaultException("Reservation ID "
@@ -161,10 +160,11 @@ public final class ReservationOperationsHandler {
 	 *             A SoapFault
 	 * @throws DatabaseException
 	 *             DatabaseException
+	 * @throws Exception
 	 */
 	public CancelReservationResponseType cancelReservation(
-			final CancelReservationType element) throws SoapFault,
-			DatabaseException {
+			final CancelReservationType element) throws DatabaseException,
+			Exception {
 
 		final Reservation resv = Reservation.load(element.getReservationID());
 
@@ -369,9 +369,10 @@ public final class ReservationOperationsHandler {
 	 * @throws SoapFault
 	 *             Fault
 	 * @throws UnexpectedException
+	 * @throws Exception
 	 */
 	public GetStatusResponseType status(final GetStatusType element)
-			throws DatabaseException, SoapFault, UnexpectedException {
+			throws DatabaseException, UnexpectedException, Exception {
 		final long timeStart = System.currentTimeMillis();
 
 		// final GetStatusResponseType response = new GetStatusResponseType();

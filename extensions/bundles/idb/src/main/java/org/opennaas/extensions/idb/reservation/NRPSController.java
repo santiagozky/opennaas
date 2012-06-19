@@ -29,28 +29,21 @@ import java.io.Serializable;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
+import org.opennaas.extensions.idb.Constants;
 import org.opennaas.extensions.idb.da.dummy.webservice.MalleableReservationWS;
 import org.opennaas.extensions.idb.da.dummy.webservice.ReservationWS;
+import org.opennaas.extensions.idb.database.hibernate.Domain;
 import org.opennaas.extensions.idb.serviceinterface.EndpointReference;
-
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.Activate;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ActivateResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ActivateType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CancelReservationType;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CreateReservation;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CreateReservationResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CreateReservationType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetReservationsType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetStatusType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.IsAvailableType;
-import org.opennaas.extensions.idb.serviceinterface.databinding.utils.JaxbSerializer;
 import org.opennaas.extensions.idb.serviceinterface.reservation.SimpleReservationClient;
 import org.opennaas.extensions.idb.serviceinterface.utils.Config;
-
-import org.opennaas.extensions.idb.Constants;
-import org.opennaas.extensions.idb.database.hibernate.Domain;
-import org.w3c.dom.Element;
 
 /**
  * This class implements a NRPS controller. It is used to communicate with an
@@ -131,9 +124,10 @@ public class NRPSController extends Thread {
 		} else {
 			if (malleable) {
 				this.proxyRSV = new SimpleReservationClient(
-						new MalleableReservationWS());
+						new MalleableReservationWS(), this.wsRsvEpr);
 			} else {
-				this.proxyRSV = new SimpleReservationClient(new ReservationWS());
+				this.proxyRSV = new SimpleReservationClient(
+						new ReservationWS(), this.wsRsvEpr);
 			}
 		}
 

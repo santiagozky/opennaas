@@ -47,14 +47,20 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ConnectionS
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CreateReservationResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CreateReservationType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DomainStatusType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.EndpointNotFoundFault_Exception;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.EndpointType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetStatusResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetStatusType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.InvalidRequestFault_Exception;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.IsAvailableResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.IsAvailableType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.OperationNotAllowedFault_Exception;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.OperationNotSupportedFault_Exception;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ServiceConstraintType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.StatusType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetStatusResponseType.ServiceStatus;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.TimeoutFault_Exception;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.UnexpectedFault_Exception;
 import org.opennaas.extensions.idb.serviceinterface.databinding.utils.WebserviceUtils;
 import org.opennaas.extensions.idb.serviceinterface.reservation.SimpleReservationClient;
 import org.opennaas.extensions.idb.serviceinterface.utils.Config;
@@ -125,8 +131,16 @@ public final class MockNrpsManager implements IManager {
 	 * @param activateType
 	 *            ActivateType
 	 * @return ActivateResponseType
+	 * @throws UnexpectedFault_Exception
+	 * @throws OperationNotSupportedFault_Exception
+	 * @throws TimeoutFault_Exception
+	 * @throws OperationNotAllowedFault_Exception
+	 * @throws InvalidRequestFault_Exception
 	 */
-	private ActivateResponseType activateOverWS(final ActivateType activateType) {
+	private ActivateResponseType activateOverWS(final ActivateType activateType)
+			throws InvalidRequestFault_Exception,
+			OperationNotAllowedFault_Exception, TimeoutFault_Exception,
+			OperationNotSupportedFault_Exception, UnexpectedFault_Exception {
 
 		ActivateResponseType response = null;
 
@@ -134,7 +148,8 @@ public final class MockNrpsManager implements IManager {
 		if (this.passTo()) {
 			final SimpleReservationClient proxy = this.services
 					.get(MockNrpsManager.usedWS);
-			this.log.info("Calling WS: " + proxy.getDestination().getAddress());
+			this.log.info("Calling WS: "
+					+ proxy.getEndpointReference().getURI());
 
 			response = proxy.activate(activateType);
 
@@ -160,7 +175,7 @@ public final class MockNrpsManager implements IManager {
 	@Override
 	public Hashtable<Domain, ActivateResponseType> activateReservation(
 			final Hashtable<Domain, ActivateType> element)
-			throws DatabaseException {
+			throws DatabaseException, Exception {
 		final Date startTime = new Date();
 		this.performanceLogger.debug("MockNrpsManager_input on: " + startTime
 				+ " -> activateReservation");
@@ -204,7 +219,7 @@ public final class MockNrpsManager implements IManager {
 	@Override
 	public Hashtable<Domain, CancelReservationResponseType> cancelReservation(
 			final Hashtable<Domain, CancelReservationType> element)
-			throws DatabaseException {
+			throws DatabaseException, Exception {
 		final Date startTime = new Date();
 		this.performanceLogger.debug("MockNrpsManager_input on: " + startTime
 				+ " -> cancelReservation");
@@ -240,9 +255,17 @@ public final class MockNrpsManager implements IManager {
 	 * @param cancelReservationType
 	 *            CancelReservationType
 	 * @return CancelReservationResponseType
+	 * @throws UnexpectedFault_Exception
+	 * @throws OperationNotSupportedFault_Exception
+	 * @throws TimeoutFault_Exception
+	 * @throws OperationNotAllowedFault_Exception
+	 * @throws InvalidRequestFault_Exception
 	 */
 	private CancelReservationResponseType cancelReservationOverWS(
-			final CancelReservationType cancelReservationType) {
+			final CancelReservationType cancelReservationType)
+			throws InvalidRequestFault_Exception,
+			OperationNotAllowedFault_Exception, TimeoutFault_Exception,
+			OperationNotSupportedFault_Exception, UnexpectedFault_Exception {
 
 		CancelReservationResponseType response = null;
 
@@ -250,12 +273,13 @@ public final class MockNrpsManager implements IManager {
 		if (this.passTo()) {
 			final SimpleReservationClient proxy = this.services
 					.get(MockNrpsManager.usedWS);
-			this.log.info("Calling WS: " + proxy.getDestination().getAddress());
+			this.log.info("Calling WS: "
+					+ proxy.getEndpointReference().getURI());
 			this.performanceLogger.debug("Calling "
-					+ proxy.getDestination().getAddress());
+					+ proxy.getEndpointReference().getURI());
 			response = proxy.cancelReservation(cancelReservationType);
 			this.performanceLogger.debug("Response from "
-					+ proxy.getDestination().getAddress());
+					+ proxy.getEndpointReference().getURI());
 			return response;
 		}
 		/* else return mock-response */
@@ -277,7 +301,7 @@ public final class MockNrpsManager implements IManager {
 		// if data already exists check if up to date and refresh if necessary
 		if (this.services.containsKey(MockNrpsManager.usedWS)
 				&& !this.services.get(MockNrpsManager.usedWS)
-						.getEndpointReference().getAddress()
+						.getEndpointReference().getURI()
 						.equals(dom.getReservationURI())) {
 			this.services.put(
 					MockNrpsManager.usedWS,
@@ -324,7 +348,7 @@ public final class MockNrpsManager implements IManager {
 	@Override
 	public Hashtable<Domain, CreateReservationResponseType> createReservation(
 			final Hashtable<Domain, CreateReservationType> element)
-			throws DatabaseException {
+			throws DatabaseException, Exception {
 		final Date startTime = new Date();
 		this.performanceLogger.debug("MockNrpsManager_input on: " + startTime
 				+ " -> createReservation");
@@ -377,9 +401,19 @@ public final class MockNrpsManager implements IManager {
 	 * @param createReservationType
 	 *            CreateReservationType
 	 * @return CreateReservationResponseType
+	 * @throws EndpointNotFoundFault_Exception
+	 * @throws UnexpectedFault_Exception
+	 * @throws OperationNotSupportedFault_Exception
+	 * @throws TimeoutFault_Exception
+	 * @throws OperationNotAllowedFault_Exception
+	 * @throws InvalidRequestFault_Exception
 	 */
 	private CreateReservationResponseType createReservationOverWS(
-			final CreateReservationType createReservationType) {
+			final CreateReservationType createReservationType)
+			throws InvalidRequestFault_Exception,
+			OperationNotAllowedFault_Exception, TimeoutFault_Exception,
+			OperationNotSupportedFault_Exception, UnexpectedFault_Exception,
+			EndpointNotFoundFault_Exception {
 
 		CreateReservationResponseType response = null;
 
@@ -388,14 +422,15 @@ public final class MockNrpsManager implements IManager {
 			final SimpleReservationClient proxy = this.services
 					.get(MockNrpsManager.usedWS);
 
-			this.log.info("Calling WS: " + proxy.getDestination().getAddress());
+			this.log.info("Calling WS: "
+					+ proxy.getEndpointReference().getURI());
 			this.performanceLogger.debug("Calling "
-					+ proxy.getDestination().getAddress());
+					+ proxy.getEndpointReference().getURI());
 
 			response = proxy.createReservation(createReservationType);
 
 			this.performanceLogger.debug("Response from "
-					+ proxy.getDestination().getAddress());
+					+ proxy.getEndpointReference().getURI());
 
 			return response;
 		}
@@ -424,7 +459,7 @@ public final class MockNrpsManager implements IManager {
 	@Override
 	public Hashtable<Domain, GetStatusResponseType> getStatus(
 			final Hashtable<Domain, GetStatusType> element)
-			throws DatabaseException {
+			throws DatabaseException, Exception {
 		final Date startTime = new Date();
 		this.performanceLogger.debug("MockNrpsManager_input on: " + startTime
 				+ " -> getStatus");
@@ -457,9 +492,17 @@ public final class MockNrpsManager implements IManager {
 	 * @param getStatusType
 	 *            GetStatusType
 	 * @return getStatusResponseType
+	 * @throws UnexpectedFault_Exception
+	 * @throws OperationNotSupportedFault_Exception
+	 * @throws TimeoutFault_Exception
+	 * @throws OperationNotAllowedFault_Exception
+	 * @throws InvalidRequestFault_Exception
 	 */
 	private GetStatusResponseType getStatusOverWS(
-			final GetStatusType getStatusType) {
+			final GetStatusType getStatusType)
+			throws InvalidRequestFault_Exception,
+			OperationNotAllowedFault_Exception, TimeoutFault_Exception,
+			OperationNotSupportedFault_Exception, UnexpectedFault_Exception {
 
 		GetStatusResponseType response = null;
 
@@ -467,12 +510,13 @@ public final class MockNrpsManager implements IManager {
 		if (this.passTo()) {
 			final SimpleReservationClient proxy = this.services
 					.get(MockNrpsManager.usedWS);
-			this.log.info("Calling WS: " + proxy.getDestination().getAddress());
+			this.log.info("Calling WS: "
+					+ proxy.getEndpointReference().getURI());
 			this.performanceLogger.debug("Calling "
-					+ proxy.getDestination().getAddress());
+					+ proxy.getEndpointReference().getURI());
 			response = proxy.getStatus(getStatusType);
 			this.performanceLogger.debug("Response from "
-					+ proxy.getDestination().getAddress());
+					+ proxy.getEndpointReference().getURI());
 			return response;
 		}
 		/* else return mock-response */
@@ -547,7 +591,7 @@ public final class MockNrpsManager implements IManager {
 	@Override
 	public Hashtable<Domain, IsAvailableResponseType> isAvailable(
 			final Hashtable<Domain, IsAvailableType> element)
-			throws DatabaseException {
+			throws DatabaseException, Exception {
 		final Date startTime = new Date();
 		this.performanceLogger.debug("MockNrpsManager_input on: " + startTime
 				+ " -> isAvailable");
@@ -581,9 +625,19 @@ public final class MockNrpsManager implements IManager {
 	 * @param isAvailableType
 	 *            IsAvailableType
 	 * @return IsAvailableResponseType
+	 * @throws EndpointNotFoundFault_Exception
+	 * @throws UnexpectedFault_Exception
+	 * @throws OperationNotSupportedFault_Exception
+	 * @throws TimeoutFault_Exception
+	 * @throws OperationNotAllowedFault_Exception
+	 * @throws InvalidRequestFault_Exception
 	 */
 	private IsAvailableResponseType isAvailableOverWS(
-			final IsAvailableType isAvailableType) {
+			final IsAvailableType isAvailableType)
+			throws InvalidRequestFault_Exception,
+			OperationNotAllowedFault_Exception, TimeoutFault_Exception,
+			OperationNotSupportedFault_Exception, UnexpectedFault_Exception,
+			EndpointNotFoundFault_Exception {
 
 		IsAvailableResponseType response = null;
 
@@ -591,7 +645,8 @@ public final class MockNrpsManager implements IManager {
 		if (this.passTo()) {
 			final SimpleReservationClient proxy = this.services
 					.get(MockNrpsManager.usedWS);
-			this.log.info("Calling WS: " + proxy.getDestination().getAddress());
+			this.log.info("Calling WS: "
+					+ proxy.getEndpointReference().getURI());
 
 			response = proxy.isAvailable(isAvailableType);
 
@@ -681,10 +736,18 @@ public final class MockNrpsManager implements IManager {
 	 * 
 	 * @param calledWS
 	 *            HashMap with called NRPS and corresponding reservation-ID
+	 * @throws UnexpectedFault_Exception
+	 * @throws OperationNotSupportedFault_Exception
+	 * @throws TimeoutFault_Exception
+	 * @throws OperationNotAllowedFault_Exception
+	 * @throws InvalidRequestFault_Exception
 	 * @throws SoapFault
 	 *             Soap-Fault
 	 */
-	private void rollback(final HashMap<SimpleReservationClient, Long> calledWS) {
+	private void rollback(final HashMap<SimpleReservationClient, Long> calledWS)
+			throws InvalidRequestFault_Exception,
+			OperationNotAllowedFault_Exception, TimeoutFault_Exception,
+			OperationNotSupportedFault_Exception, UnexpectedFault_Exception {
 
 		for (final SimpleReservationClient proxy : calledWS.keySet()) {
 			final CancelReservationType crType = new CancelReservationType();
@@ -699,7 +762,7 @@ public final class MockNrpsManager implements IManager {
 			// if CancelReservation went wrong, only log this info
 			if (!crResponseType.isSuccess()) {
 				this.log.info("rollback for WS: "
-						+ proxy.getDestination().getAddress()
+						+ proxy.getEndpointReference().getURI()
 						+ " -> Reservation: " + crType.getReservationID()
 						+ "failed!");
 			}

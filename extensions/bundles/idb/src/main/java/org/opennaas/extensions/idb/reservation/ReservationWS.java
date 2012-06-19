@@ -25,12 +25,10 @@
 
 package org.opennaas.extensions.idb.reservation;
 
-import java.rmi.UnexpectedException;
 import java.util.Random;
 
 import javax.jws.WebService;
 
-import org.apache.muse.ws.addressing.soap.SoapFault;
 import org.opennaas.extensions.idb.exception.database.DatabaseException;
 import org.opennaas.extensions.idb.reservation.handler.JobOperationsHandler;
 import org.opennaas.extensions.idb.reservation.handler.MiscOperationsHandler;
@@ -58,15 +56,14 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetStatusRe
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetStatusType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.IsAvailableResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.IsAvailableType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.NetworkReservationPortType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.NotificationResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.NotificationType;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.InvalidReservationIDFaultException;
-import org.opennaas.extensions.ws.impl.GenericCapabilityService;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.UnexpectedFault_Exception;
 
 /** Provision Request Handler. */
 @WebService(portName = "idbReservationCapabilityPort", serviceName = "idbReservationCapabilityService", targetNamespace = "http://opennaas.org/ws")
-public final class ReservationCapabilityServiceImpl extends
-		GenericCapabilityService implements IReservationCapabilityServicce {
+public final class ReservationWS implements NetworkReservationPortType {
 
 	private final String generateGRI() {
 		byte[] randomBytes = new byte[20];
@@ -102,10 +99,18 @@ public final class ReservationCapabilityServiceImpl extends
 
 	@Override
 	public ActivateResponseType activate(final ActivateType element)
-			throws SoapFault, DatabaseException {
-		final ActivateResponseType response = ReservationOperationsHandler
-				.getInstance().activation(element);
-		return response;
+			throws UnexpectedFault_Exception {
+		ActivateResponseType response;
+		try {
+			response = ReservationOperationsHandler.getInstance().activation(
+					element);
+			return response;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new UnexpectedFault_Exception("unexpected problem ", e);
+		}
+
 	}
 
 	/*
@@ -137,9 +142,14 @@ public final class ReservationCapabilityServiceImpl extends
 	 */
 	@Override
 	public CancelJobResponseType cancelJob(final CancelJobType element)
-			throws DatabaseException {
-		final CancelJobResponseType response = JobOperationsHandler
-				.getInstance().cancelJob(element);
+			throws UnexpectedFault_Exception {
+		CancelJobResponseType response;
+		try {
+			response = JobOperationsHandler.getInstance().cancelJob(element);
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+			throw new UnexpectedFault_Exception("unexpected problem ", e);
+		}
 		return response;
 	}
 
@@ -153,10 +163,20 @@ public final class ReservationCapabilityServiceImpl extends
 	 */
 	@Override
 	public CancelReservationResponseType cancelReservation(
-			final CancelReservationType element) throws SoapFault,
-			DatabaseException {
-		final CancelReservationResponseType response = ReservationOperationsHandler
-				.getInstance().cancelReservation(element);
+			final CancelReservationType element)
+			throws UnexpectedFault_Exception {
+		CancelReservationResponseType response;
+		try {
+			response = ReservationOperationsHandler.getInstance()
+					.cancelReservation(element);
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+			throw new UnexpectedFault_Exception("unexpected database problem ",
+					e);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new UnexpectedFault_Exception("unexpected problem ", e);
+		}
 		return response;
 	}
 
@@ -183,9 +203,18 @@ public final class ReservationCapabilityServiceImpl extends
 	 */
 	@Override
 	public CompleteJobResponseType completeJob(final CompleteJobType element)
-			throws DatabaseException {
-		final CompleteJobResponseType response = JobOperationsHandler
-				.getInstance().completeJob(element);
+			throws UnexpectedFault_Exception {
+		CompleteJobResponseType response;
+		try {
+			response = JobOperationsHandler.getInstance().completeJob(element);
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+			throw new UnexpectedFault_Exception("unexpected database problem ",
+					e);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new UnexpectedFault_Exception("unexpected problem ", e);
+		}
 		return response;
 	}
 
@@ -199,8 +228,8 @@ public final class ReservationCapabilityServiceImpl extends
 	 */
 	@Override
 	public CreateReservationResponseType createReservation(
-			final CreateReservationType element) throws SoapFault,
-			DatabaseException {
+			final CreateReservationType element)
+			throws UnexpectedFault_Exception {
 
 		String token = null;
 		String gri = null;
@@ -223,8 +252,18 @@ public final class ReservationCapabilityServiceImpl extends
 			token = element.getToken();
 		}
 
-		final CreateReservationResponseType response = ReservationSetupHandler
-				.getInstance().createReservation(element);
+		CreateReservationResponseType response;
+		try {
+			response = ReservationSetupHandler.getInstance().createReservation(
+					element);
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+			throw new UnexpectedFault_Exception("unexpected database problem ",
+					e);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new UnexpectedFault_Exception("unexpected problem ", e);
+		}
 
 		// TODO: This case should never happen
 		if (null == response.getGRI()) {
@@ -247,10 +286,19 @@ public final class ReservationCapabilityServiceImpl extends
 	 */
 	@Override
 	public GetReservationResponseType getReservation(
-			final GetReservationType element)
-			throws InvalidReservationIDFaultException, DatabaseException {
-		final GetReservationResponseType responseType = ReservationManagementHandler
-				.getInstance().getReservation(element);
+			final GetReservationType element) throws UnexpectedFault_Exception {
+		GetReservationResponseType responseType;
+		try {
+			responseType = ReservationManagementHandler.getInstance()
+					.getReservation(element);
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+			throw new UnexpectedFault_Exception("unexpected database problem ",
+					e);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new UnexpectedFault_Exception("unexpected problem ", e);
+		}
 
 		return responseType;
 	}
@@ -265,9 +313,19 @@ public final class ReservationCapabilityServiceImpl extends
 	 */
 	@Override
 	public GetReservationsResponseType getReservations(
-			final GetReservationsType element) throws DatabaseException {
-		final GetReservationsResponseType responseType = ReservationManagementHandler
-				.getInstance().getReservations(element);
+			final GetReservationsType element) throws UnexpectedFault_Exception {
+		GetReservationsResponseType responseType;
+		try {
+			responseType = ReservationManagementHandler.getInstance()
+					.getReservations(element);
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+			throw new UnexpectedFault_Exception("unexpected database problem ",
+					e);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new UnexpectedFault_Exception("unexpected problem ", e);
+		}
 
 		return responseType;
 	}
@@ -282,9 +340,19 @@ public final class ReservationCapabilityServiceImpl extends
 	 */
 	@Override
 	public GetStatusResponseType getStatus(final GetStatusType element)
-			throws SoapFault, DatabaseException, UnexpectedException {
-		final GetStatusResponseType response = ReservationOperationsHandler
-				.getInstance().status(element);
+			throws UnexpectedFault_Exception {
+		GetStatusResponseType response;
+		try {
+			response = ReservationOperationsHandler.getInstance().status(
+					element);
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+			throw new UnexpectedFault_Exception("unexpected database problem ",
+					e);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new UnexpectedFault_Exception("unexpected problem ", e);
+		}
 		return response;
 	}
 
@@ -299,9 +367,19 @@ public final class ReservationCapabilityServiceImpl extends
 	 */
 	@Override
 	public IsAvailableResponseType isAvailable(final IsAvailableType element)
-			throws SoapFault, DatabaseException {
-		final IsAvailableResponseType response = ReservationSetupHandler
-				.getInstance().isAvailable(element);
+			throws UnexpectedFault_Exception {
+		IsAvailableResponseType response;
+		try {
+			response = ReservationSetupHandler.getInstance().isAvailable(
+					element);
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+			throw new UnexpectedFault_Exception("unexpected database problem ",
+					e);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new UnexpectedFault_Exception("unexpected problem ", e);
+		}
 		return response;
 	}
 

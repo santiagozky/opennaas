@@ -48,7 +48,7 @@ import org.opennaas.extensions.idb.database.hibernate.Endpoint;
 import org.opennaas.extensions.idb.database.hibernate.InterDomainLink;
 import org.opennaas.extensions.idb.database.hibernate.TNAPrefix;
 import org.opennaas.extensions.idb.exception.database.DatabaseException;
-import org.opennaas.extensions.idb.topology.TopologyCapabilityServiceImpl;
+import org.opennaas.extensions.idb.topology.TopologyWS;
 
 public class ContextListener extends AbstractTopologyRegistrator {
 	public static final String interdomainPropertyFile = Constants.hsiProperties;
@@ -202,13 +202,14 @@ public class ContextListener extends AbstractTopologyRegistrator {
 		try {
 			d = (DomainInformationType) SerializationUtils.clone(this.domain);
 			d.unsetTNAPrefix();
-			return new TopologyCapabilityServiceImpl()
+			return new TopologyWS()
 					.addOrEditDomain(d, false);
-		} catch (final DatabaseException e) {
+		} catch (final Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		}
-		return false;
+
 	}
 
 	@Override

@@ -36,7 +36,6 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.muse.ws.addressing.soap.SoapFault;
 
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AvailabilityCodeType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ConnectionAvailabilityType;
@@ -143,8 +142,8 @@ public final class ReservationSetupHandler {
 	 *             A DatabaseException
 	 */
 	public CreateReservationResponseType createReservation(
-			final CreateReservationType element) throws SoapFault,
-			DatabaseException {
+			final CreateReservationType element) throws DatabaseException,
+			Exception {
 
 		// check if a malleable reservation is requested
 		for (ServiceConstraintType sct : element.getService()) {
@@ -174,7 +173,7 @@ public final class ReservationSetupHandler {
 	 * @throws DatabaseException
 	 */
 	private CreateReservationResponseType createMalleableReservation(
-			CreateReservationType element) throws SoapFault, DatabaseException {
+			CreateReservationType element) throws DatabaseException, Exception {
 		final long timeStart = System.currentTimeMillis();
 		this.logger.debug("-> malleable Reservation call");
 
@@ -293,7 +292,7 @@ public final class ReservationSetupHandler {
 	 * @throws DatabaseException
 	 */
 	private CreateReservationResponseType createFixedReservation(
-			CreateReservationType element) throws SoapFault, DatabaseException {
+			CreateReservationType element) throws DatabaseException, Exception {
 		final long timeStart = System.currentTimeMillis();
 		this.logger.debug("-> fixed Reservation call");
 		// get nrpsManager for fixed reservations
@@ -366,7 +365,7 @@ public final class ReservationSetupHandler {
 	 */
 	private Hashtable<Domain, CreateReservationResponseType> createResInNRPS(
 			Hashtable<Domain, CreateReservationType> nrpsRequests)
-			throws SoapFault, DatabaseException {
+			throws DatabaseException, Exception {
 		final Hashtable<Domain, CreateReservationResponseType> nrpsResponses;
 		// try to create reservation
 		if (this.createLock != null) {
@@ -442,7 +441,7 @@ public final class ReservationSetupHandler {
 	 * @throws DatabaseException
 	 */
 	public IsAvailableResponseType isAvailable(final IsAvailableType element)
-			throws DatabaseException, SoapFault {
+			throws DatabaseException, Exception {
 		// get nrpsManager for fixed reservations
 		ReservationSetupHandler.nrpsManager = AdapterManager.getInstance();
 

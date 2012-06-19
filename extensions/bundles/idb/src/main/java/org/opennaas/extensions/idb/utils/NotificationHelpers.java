@@ -29,9 +29,9 @@ import java.util.MissingResourceException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.muse.ws.addressing.soap.SoapFault;
-import org.w3c.dom.Element;
-
+import org.opennaas.extensions.idb.Constants;
+import org.opennaas.extensions.idb.database.hibernate.Domain;
+import org.opennaas.extensions.idb.exception.database.DatabaseException;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AddTopicResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AddTopicType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.RemoveTopicResponseType;
@@ -39,15 +39,8 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.RemoveTopic
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.SubscribeResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.SubscribeType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.TopicNotFoundFault_Exception;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.InvalidRequestFaultException;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.UnexpectedFaultException;
-import org.opennaas.extensions.idb.serviceinterface.databinding.utils.WebserviceUtils;
 import org.opennaas.extensions.idb.serviceinterface.notification.SimpleNotificationClient;
 import org.opennaas.extensions.idb.serviceinterface.utils.Config;
-
-import org.opennaas.extensions.idb.Constants;
-import org.opennaas.extensions.idb.database.hibernate.Domain;
-import org.opennaas.extensions.idb.exception.database.DatabaseException;
 
 public class NotificationHelpers {
 	/** Logger. */

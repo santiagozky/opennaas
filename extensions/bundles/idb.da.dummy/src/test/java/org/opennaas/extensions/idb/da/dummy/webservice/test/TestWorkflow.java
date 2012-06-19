@@ -25,9 +25,13 @@
 
 package org.opennaas.extensions.idb.da.dummy.webservice.test;
 
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.opennaas.extensions.idb.da.dummy.webservice.ReservationWS;
+import org.opennaas.extensions.idb.serviceinterface.EndpointReference;
 import org.opennaas.extensions.idb.serviceinterface.reservation.SimpleReservationClient;
 import org.opennaas.extensions.idb.serviceinterface.utils.Config;
 
@@ -44,13 +48,17 @@ public final class TestWorkflow {
 
 	/**
 	 * Default constructor.
+	 * 
+	 * @throws URISyntaxException
+	 * @throws MalformedURLException
 	 */
-	public TestWorkflow() {
+	public TestWorkflow() throws URISyntaxException, MalformedURLException {
 		if (Config.isTrue("test", "test.callWebservice")) {
 			final String epr = Config.getString("test", "test.reservationEPR");
 			this.client = new SimpleReservationClient(epr);
 		} else {
-			this.client = new SimpleReservationClient(new ReservationWS());
+			this.client = new SimpleReservationClient(new ReservationWS(),
+					new EndpointReference(""));
 		}
 		this.logger = LogFactory.getLog(TestWorkflow.class);
 	}

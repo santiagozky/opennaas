@@ -18,25 +18,25 @@
 
 	<!--idb notifications-->
     <cxf:bus id="idbNotificationCapabilityServiceBus"></cxf:bus>
-	<bean id="idbNotificationCapabilityServiceImpl" class="org.opennaas.extensions.idb.notification.NotificationCapabilityServiceImpl">
+	<bean id="idbNotificationCapabilityServiceImpl" class="org.opennaas.extensions.idb.notification.NotificationWS">
 		
 	</bean>
-    <jaxws:endpoint  implementor="#idbNotificationCapabilityServiceImpl" address="http://0.0.0.0:8182/cxf/NotificationCapabilityService"  />
+    <jaxws:endpoint  implementor="#idbNotificationCapabilityServiceImpl" address="${ws.url}/Notification"  />
 	
 	<!--idb reservation-->
     <cxf:bus id="idbReservationCapabilityServiceBus"></cxf:bus>
-	<bean id="idbReservationCapabilityServiceImpl" class="org.opennaas.extensions.idb.reservation.ReservationCapabilityServiceImpl">
+	<bean id="idbReservationCapabilityServiceImpl" class="org.opennaas.extensions.idb.reservation.ReservationWS">
 		
 	</bean>
-    <jaxws:endpoint  implementor="#idbReservationCapabilityServiceImpl" address="http://0.0.0.0:8182/cxf/ReservationCapabilityService"  />
+    <jaxws:endpoint  implementor="#idbReservationCapabilityServiceImpl" address="${ws.url}/Reservation"  />
 	
 	
 	<!--idb notifications-->
     <cxf:bus id="idbTopologyCapabilityServiceBus"></cxf:bus>
-	<bean id="idbTopologyCapabilityServiceImpl" class="org.opennaas.extensions.idb.topology.TopologyCapabilityServiceImpl">
+	<bean id="idbTopologyCapabilityServiceImpl" class="org.opennaas.extensions.idb.topology.TopologyWS">
 		
 	</bean>
-    <jaxws:endpoint  implementor="#idbTopologyCapabilityServiceImpl" address="http://0.0.0.0:8182/cxf/TopologyCapabilityService"  />
+    <jaxws:endpoint  implementor="#idbTopologyCapabilityServiceImpl" address="${ws.url}Topology"  />
 	
 	
 </blueprint>

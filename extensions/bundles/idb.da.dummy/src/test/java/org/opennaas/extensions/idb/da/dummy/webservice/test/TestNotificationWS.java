@@ -31,11 +31,16 @@
  */
 package org.opennaas.extensions.idb.da.dummy.webservice.test;
 
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+
 import org.junit.Test;
 
 import org.opennaas.extensions.idb.da.dummy.webservice.NotificationWS;
+import org.opennaas.extensions.idb.serviceinterface.EndpointReference;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AddTopicType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.OperationNotSupportedFaultException;
+
 import org.opennaas.extensions.idb.serviceinterface.notification.SimpleNotificationClient;
 import org.opennaas.extensions.idb.serviceinterface.utils.Config;
 
@@ -48,17 +53,23 @@ public class TestNotificationWS {
 	/**
 	 * A simple reservation client.
 	 */
-	private final SimpleNotificationClient client;
+	private SimpleNotificationClient client;
 
 	/**
 	 * The public constructor.
+	 * 
+	 * @throws URISyntaxException
+	 * @throws MalformedURLException
 	 */
-	public TestNotificationWS() {
+	public TestNotificationWS() throws URISyntaxException,
+			MalformedURLException {
 		if (Config.isTrue("test", "test.callWebservice")) {
+
 			final String epr = Config.getString("test", "test.notificationEPR");
 			this.client = new SimpleNotificationClient(epr);
 		} else {
-			this.client = new SimpleNotificationClient(new NotificationWS());
+			this.client = new SimpleNotificationClient(new NotificationWS(),
+					new EndpointReference(EndpointReference.ANON_URI));
 		}
 	}
 

@@ -30,7 +30,6 @@ import java.util.Hashtable;
 
 import junit.framework.TestCase;
 
-import org.apache.muse.ws.addressing.soap.SoapFault;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -39,10 +38,16 @@ import org.junit.Test;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AddDomainType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ConnectionConstraintType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DeleteDomainType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DomainAlreadyExistsFault_Exception;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DomainNotFoundFault_Exception;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.FixedReservationConstraintType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.InvalidRequestFault_Exception;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.IsAvailableType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.OperationNotAllowedFault_Exception;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.OperationNotSupportedFault_Exception;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ReservationType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ServiceConstraintType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.UnexpectedFault_Exception;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.DomainNotFoundFaultException;
 import org.opennaas.extensions.idb.serviceinterface.topology.SimpleTopologyClient;
 import org.opennaas.extensions.idb.serviceinterface.utils.Config;
@@ -73,7 +78,7 @@ public class TestAdapterHandler extends TestCase {
 	/** test requests. */
 	private Hashtable<Domain, IsAvailableType> requests;
 
-	public TestAdapterHandler() throws SoapFault {
+	public TestAdapterHandler() throws Exception {
 		super();
 		// create topology client instance
 		if (Config.isTrue(Constants.testProperties, "test.callWebservice")) {
@@ -87,7 +92,12 @@ public class TestAdapterHandler extends TestCase {
 	}
 
 	@Before
-	public void setUpBeforeTest() throws SoapFault, URISyntaxException {
+	public void setUpBeforeTest() throws URISyntaxException,
+			InvalidRequestFault_Exception, UnexpectedFault_Exception,
+			DomainNotFoundFault_Exception,
+			OperationNotSupportedFault_Exception,
+			OperationNotAllowedFault_Exception,
+			DomainAlreadyExistsFault_Exception {
 		// create adapterManager instance
 		this.adapterManager = AdapterManager.getInstance();
 
@@ -142,7 +152,10 @@ public class TestAdapterHandler extends TestCase {
 	}
 
 	@After
-	public void tearDownAfterTest() throws SoapFault {
+	public void tearDownAfterTest() throws InvalidRequestFault_Exception,
+			UnexpectedFault_Exception, DomainNotFoundFault_Exception,
+			OperationNotSupportedFault_Exception,
+			OperationNotAllowedFault_Exception {
 		// delete test domain
 		DeleteDomainType deleteDomainType = new DeleteDomainType();
 		deleteDomainType.setDomainId(this.testDomain.getName());

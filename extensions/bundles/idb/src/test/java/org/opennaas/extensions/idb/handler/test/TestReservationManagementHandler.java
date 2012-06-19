@@ -34,27 +34,24 @@ import java.util.Date;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
-import org.apache.muse.ws.addressing.soap.SoapFault;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ConnectionConstraintType;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetReservationResponseType;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetReservationType;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetReservationsComplexType;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetReservationsResponseType;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ServiceConstraintType;
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.InvalidReservationIDFaultException;
-import org.opennaas.extensions.idb.serviceinterface.databinding.utils.WebserviceUtils;
 import org.opennaas.extensions.idb.database.hibernate.Connections;
 import org.opennaas.extensions.idb.database.hibernate.Domain;
 import org.opennaas.extensions.idb.database.hibernate.Endpoint;
 import org.opennaas.extensions.idb.database.hibernate.Reservation;
 import org.opennaas.extensions.idb.database.hibernate.Service;
 import org.opennaas.extensions.idb.exception.database.DatabaseException;
-import org.opennaas.extensions.idb.reservation.IReservationCapabilityServicce;
-import org.opennaas.extensions.idb.reservation.ReservationCapabilityServiceImpl;
+import org.opennaas.extensions.idb.reservation.ReservationWS;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetReservationResponseType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetReservationType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.InvalidRequestFault_Exception;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.NetworkReservationPortType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.OperationNotAllowedFault_Exception;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.OperationNotSupportedFault_Exception;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.UnexpectedFault_Exception;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.InvalidReservationIDFaultException;
 import org.opennaas.extensions.idb.utils.ReservationHelpers;
 import org.opennaas.extensions.idb.utils.TopologyHelpers;
 
@@ -62,11 +59,11 @@ import org.opennaas.extensions.idb.utils.TopologyHelpers;
  * @author zimmerm2
  */
 public class TestReservationManagementHandler extends TestCase {
-	public TestReservationManagementHandler() throws SoapFault {
+	public TestReservationManagementHandler() throws Exception {
 		super();
 	}
 
-	private static IReservationCapabilityServicce handler;
+	private static NetworkReservationPortType handler;
 	private static Domain sourceDomain;
 	private static Domain destinationDomain;
 	private static Reservation testReservation;
@@ -82,7 +79,7 @@ public class TestReservationManagementHandler extends TestCase {
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		TestReservationManagementHandler.handler = new ReservationCapabilityServiceImpl();
+		TestReservationManagementHandler.handler = new ReservationWS();
 		TestReservationManagementHandler.sourceDomain = TopologyHelpers
 				.getTestDomain("TRMH-SourceDomain");
 		Endpoint end1 = (Endpoint) TestReservationManagementHandler.sourceDomain
@@ -162,10 +159,16 @@ public class TestReservationManagementHandler extends TestCase {
 	 * @throws URISyntaxException
 	 * @throws DatabaseException
 	 * @throws InvalidReservationIDFaultException
+	 * @throws UnexpectedFault_Exception
+	 * @throws OperationNotSupportedFault_Exception
+	 * @throws OperationNotAllowedFault_Exception
+	 * @throws InvalidRequestFault_Exception
 	 */
 	@Test
 	public final void testGetReservation() throws DatabaseException,
-			InvalidReservationIDFaultException {
+			InvalidReservationIDFaultException, InvalidRequestFault_Exception,
+			OperationNotAllowedFault_Exception,
+			OperationNotSupportedFault_Exception, UnexpectedFault_Exception {
 		final GetReservationType getType = new GetReservationType();
 		getType.setReservationID(String
 				.valueOf(TestReservationManagementHandler.testReservationID));
