@@ -25,8 +25,6 @@
 
 package org.opennaas.extensions.idb.da.dummy.webservice;
 
-import org.w3c.dom.Element;
-
 import org.opennaas.extensions.idb.da.dummy.handler.ReservationHandler;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ActivateResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ActivateType;

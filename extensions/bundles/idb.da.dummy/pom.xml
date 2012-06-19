@@ -56,6 +56,11 @@
 			<artifactId>org.opennaas.extensions.idb.serviceinterface</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.opennaas</groupId>
+			<artifactId>org.opennaas.extensions.queuemanager</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>commons-logging</groupId>
