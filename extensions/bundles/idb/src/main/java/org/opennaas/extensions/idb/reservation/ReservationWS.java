@@ -27,6 +27,7 @@ package org.opennaas.extensions.idb.reservation;
 
 import java.util.Random;
 
+import javax.jws.WebMethod;
 import javax.jws.WebService;
 
 import org.opennaas.extensions.idb.exception.database.DatabaseException;
@@ -57,13 +58,14 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetStatusTy
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.IsAvailableResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.IsAvailableType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.NetworkReservationPortType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.NetworkReservationPortTypeImpl;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.NotificationResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.NotificationType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.UnexpectedFault_Exception;
 
 /** Provision Request Handler. */
-@WebService(portName = "idbReservationCapabilityPort", serviceName = "idbReservationCapabilityService", targetNamespace = "http://opennaas.org/ws")
-public final class ReservationWS implements NetworkReservationPortType {
+@WebService(serviceName = "networkReservationService", portName = "networkReservationPortType", targetNamespace = "http://opennaas.org/nsp/webservice/reservation")
+public final class ReservationWS extends NetworkReservationPortTypeImpl {
 
 	private final String generateGRI() {
 		byte[] randomBytes = new byte[20];
@@ -188,6 +190,7 @@ public final class ReservationWS implements NetworkReservationPortType {
 	 *             Singleton hates to be cloned!
 	 */
 	@Override
+	@WebMethod(exclude = true)
 	public Object clone() throws CloneNotSupportedException {
 		throw new CloneNotSupportedException();
 	}

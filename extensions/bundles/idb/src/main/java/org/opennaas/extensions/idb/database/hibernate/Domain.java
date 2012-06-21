@@ -39,24 +39,18 @@ import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.MapKey;
-import javax.persistence.NamedNativeQueries;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Query;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.opennaas.core.resources.helpers.Helpers;
-import org.opennaas.extensions.idb.database.DbConnectionManager;
 import org.opennaas.extensions.idb.database.TransactionManager;
 import org.opennaas.extensions.idb.database.TransactionManagerLoad;
 import org.opennaas.extensions.idb.exception.database.DatabaseException;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DomainInformationType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DomainRelationshipType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DomainTechnologyType;
-
-//import com.mysema.query.jpa.impl.JPAQuery;
 
 /**
  * Java representation of of the database entity {@link Domain}. This object

@@ -27,6 +27,7 @@ package org.opennaas.extensions.idb.topology;
 
 import java.util.Set;
 
+import javax.jws.WebMethod;
 import javax.jws.WebService;
 
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AddDomainResponseType;
@@ -67,6 +68,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.InvalidRequ
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.OperationNotAllowedFault_Exception;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.OperationNotSupportedFault_Exception;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.TopologyIFPortType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.TopologyIFPortTypeImpl;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.UnexpectedFault_Exception;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.DomainAlreadyExistsFaultException;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.DomainNotFoundFaultException;
@@ -86,13 +88,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /** Topology Request Handler. */
-@WebService(portName = "idbTopologyCapabilityPort", serviceName = "idbTopologyCapabilityService", targetNamespace = "http://opennaas.org/ws")
-public final class TopologyWS implements TopologyIFPortType {
+@WebService(portName = "topologyIFPort", serviceName = "topologyIFService", targetNamespace = "http://opennaas.org/nsp/webservice/topology")
+public final class TopologyWS extends TopologyIFPortTypeImpl {
 
 	private String myDomainName = null;
 
-	private final Log log = LogFactory
-			.getLog(TopologyWS.class);
+	private final Log log = LogFactory.getLog(TopologyWS.class);
 
 	/**
 	 * Private constructor: Singleton.
@@ -114,7 +115,7 @@ public final class TopologyWS implements TopologyIFPortType {
 	 * @throws DomainAlreadyExistsFaultException
 	 */
 	@Override
-	public AddDomainResponseType addDomain(final AddDomainType element)
+	public AddDomainResponseType addDomain(AddDomainType element)
 			throws DomainAlreadyExistsFault_Exception,
 			InvalidRequestFault_Exception, UnexpectedFault_Exception,
 			OperationNotSupportedFault_Exception,
@@ -171,7 +172,7 @@ public final class TopologyWS implements TopologyIFPortType {
 	 * @throws EndpointAlreadyExistsFaultException
 	 */
 	@Override
-	public AddEndpointResponseType addEndpoint(final AddEndpointType element)
+	public AddEndpointResponseType addEndpoint(AddEndpointType element)
 			throws InvalidRequestFault_Exception,
 			EndpointAlreadyExistsFault_Exception, UnexpectedFault_Exception,
 			DomainNotFoundFault_Exception,
@@ -240,11 +241,12 @@ public final class TopologyWS implements TopologyIFPortType {
 	 * @throws DatabaseException
 	 */
 	@Override
-	public AddLinkResponseType addLink(final AddLinkType element) {
+	public AddLinkResponseType addLink(AddLinkType element) {
 		throw new RuntimeException("operation not supported");
 	}
 
-	public boolean addOrEditDomain(final DomainInformationType domInfo,
+	@WebMethod(exclude = true)
+	public boolean addOrEditDomain(DomainInformationType domInfo,
 			final boolean checkSeq) throws InvalidRequestFault_Exception,
 			EndpointAlreadyExistsFault_Exception, UnexpectedFault_Exception,
 			DomainNotFoundFault_Exception,
@@ -371,6 +373,7 @@ public final class TopologyWS implements TopologyIFPortType {
 	 *             Singleton hates to be cloned!
 	 */
 	@Override
+	@WebMethod(exclude = true)
 	public Object clone() throws CloneNotSupportedException {
 		throw new CloneNotSupportedException();
 	}
@@ -385,7 +388,7 @@ public final class TopologyWS implements TopologyIFPortType {
 	 * @throws DomainNotFoundFaultException
 	 */
 	@Override
-	public DeleteDomainResponseType deleteDomain(final DeleteDomainType element)
+	public DeleteDomainResponseType deleteDomain(DeleteDomainType element)
 			throws InvalidRequestFault_Exception, UnexpectedFault_Exception,
 			DomainNotFoundFault_Exception,
 			OperationNotSupportedFault_Exception,
@@ -455,7 +458,7 @@ public final class TopologyWS implements TopologyIFPortType {
 	 * @throws DatabaseException
 	 */
 	@Override
-	public DeleteLinkResponseType deleteLink(final DeleteLinkType element) {
+	public DeleteLinkResponseType deleteLink(DeleteLinkType element) {
 		throw new RuntimeException("operation not supported");
 	}
 
@@ -469,7 +472,7 @@ public final class TopologyWS implements TopologyIFPortType {
 	 * @throws DomainNotFoundFaultException
 	 */
 	@Override
-	public EditDomainResponseType editDomain(final EditDomainType element)
+	public EditDomainResponseType editDomain(EditDomainType element)
 			throws InvalidRequestFault_Exception, UnexpectedFault_Exception,
 			DomainNotFoundFault_Exception,
 			OperationNotSupportedFault_Exception,
@@ -501,7 +504,7 @@ public final class TopologyWS implements TopologyIFPortType {
 	 * @throws DatabaseException
 	 */
 	@Override
-	public EditEndpointResponseType editEndpoint(final EditEndpointType element)
+	public EditEndpointResponseType editEndpoint(EditEndpointType element)
 			throws InvalidRequestFault_Exception, UnexpectedFault_Exception,
 			OperationNotSupportedFault_Exception,
 			OperationNotAllowedFault_Exception {
@@ -546,7 +549,7 @@ public final class TopologyWS implements TopologyIFPortType {
 	 * @throws DatabaseException
 	 */
 	@Override
-	public EditLinkResponseType editLink(final EditLinkType element) {
+	public EditLinkResponseType editLink(EditLinkType element) {
 		throw new RuntimeException("operation not supported");
 	}
 
@@ -560,7 +563,7 @@ public final class TopologyWS implements TopologyIFPortType {
 	 *             If there was a problem accessing the database.
 	 */
 	@Override
-	public GetDomainsResponseType getDomains(final GetDomainsType element)
+	public GetDomainsResponseType getDomains(GetDomainsType element)
 			throws InvalidRequestFault_Exception, UnexpectedFault_Exception,
 			OperationNotSupportedFault_Exception,
 			OperationNotAllowedFault_Exception {
@@ -592,7 +595,7 @@ public final class TopologyWS implements TopologyIFPortType {
 	 * @return GetEndpoints Response
 	 */
 	@Override
-	public GetEndpointsResponseType getEndpoints(final GetEndpointsType element)
+	public GetEndpointsResponseType getEndpoints(GetEndpointsType element)
 			throws InvalidRequestFault_Exception, UnexpectedFault_Exception,
 			OperationNotSupportedFault_Exception,
 			OperationNotAllowedFault_Exception {
@@ -640,7 +643,7 @@ public final class TopologyWS implements TopologyIFPortType {
 	 * @throws DatabaseException
 	 */
 	@Override
-	public GetLinksResponseType getLinks(final GetLinksType element) {
+	public GetLinksResponseType getLinks(GetLinksType element) {
 		throw new RuntimeException("operation not supported");
 	}
 

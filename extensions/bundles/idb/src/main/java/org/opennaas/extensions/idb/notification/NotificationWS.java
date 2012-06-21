@@ -34,6 +34,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AddTopicTyp
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetTopicsResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetTopicsType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.NetworkNotificationPortType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.NetworkNotificationPortTypeImpl;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.PublishResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.PublishType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.RemoveTopicResponseType;
@@ -45,8 +46,8 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.Unsubscribe
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.TopicNotFoundFaultException;
 
 /** Provision Request Handler. */
-@WebService(portName = "idbNotificationCapabilityPort", serviceName = "idbNotificationCapabilityService", targetNamespace = "http://opennaas.org/ws")
-public final class NotificationWS implements NetworkNotificationPortType {
+@WebService(serviceName = "networkNotificationService", portName = "networkNotificationPortType", targetNamespace = "http://opennaas.org/nsp/webservice/notification")
+public final class NotificationWS extends NetworkNotificationPortTypeImpl {
 
 	/*
 	 * (non-Javadoc)
