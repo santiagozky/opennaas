@@ -80,7 +80,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.utils.Webservice
 /**
  * @author willner
  */
-public class SimpleTopologyClient {
+public class SimpleTopologyClient implements TopologyIFPortType {
 
 	TopologyIFPortType client;
 	Log logger;

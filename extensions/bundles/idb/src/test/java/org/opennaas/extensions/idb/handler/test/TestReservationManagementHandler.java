@@ -28,6 +28,8 @@
  */
 package org.opennaas.extensions.idb.handler.test;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.net.URISyntaxException;
 import java.util.Date;
 
@@ -58,10 +60,7 @@ import org.opennaas.extensions.idb.utils.TopologyHelpers;
 /**
  * @author zimmerm2
  */
-public class TestReservationManagementHandler extends TestCase {
-	public TestReservationManagementHandler() throws Exception {
-		super();
-	}
+public class TestReservationManagementHandler {
 
 	private static NetworkReservationPortType handler;
 	private static Domain sourceDomain;
@@ -79,6 +78,7 @@ public class TestReservationManagementHandler extends TestCase {
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+
 		TestReservationManagementHandler.handler = new ReservationWS();
 		TestReservationManagementHandler.sourceDomain = TopologyHelpers
 				.getTestDomain("TRMH-SourceDomain");
@@ -173,7 +173,10 @@ public class TestReservationManagementHandler extends TestCase {
 		getType.setReservationID(String
 				.valueOf(TestReservationManagementHandler.testReservationID));
 
-		final GetReservationResponseType resultWithoutServiceID = TestReservationManagementHandler.handler
+		TestReservationManagementHandler.handler = new ReservationWS();
+		NetworkReservationPortType hand = TestReservationManagementHandler.handler;
+		assertNotNull("Handler should not be null", hand);
+		final GetReservationResponseType resultWithoutServiceID = hand
 				.getReservation(getType);
 		Assert.assertFalse("Should contain data", resultWithoutServiceID
 				.getService().isEmpty());

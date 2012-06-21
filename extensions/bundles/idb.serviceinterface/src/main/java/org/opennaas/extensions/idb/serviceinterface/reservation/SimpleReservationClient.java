@@ -173,16 +173,10 @@ public class SimpleReservationClient {
 		logger = LogFactory.getLog(this.getClass());
 
 		NetworkReservationService service;
-		try {
-			this.endpoint = endpointReference;
-			service = new NetworkReservationService(endpointReference.getURI()
-					.toURL());
-		} catch (MalformedURLException e) {
-			service = new NetworkReservationService();
-			logger.error("Could not get convert to URL "
-					+ endpointReference.getURI());
-			e.printStackTrace();
-		}
+
+		this.endpoint = endpointReference;
+		service = new NetworkReservationService(endpointReference.getWSDL());
+
 		client = service.getNetworkReservationPortType(new AddressingFeature());
 	}
 
@@ -214,11 +208,8 @@ public class SimpleReservationClient {
 			EndpointReference endpoint = new EndpointReference(
 					endpointReference);
 			this.endpoint = endpoint;
-			service = new NetworkReservationService(endpoint.getURI().toURL());
-		} catch (MalformedURLException e) {
-			service = new NetworkReservationService();
-			logger.error("Could not get convert to URL " + endpointReference);
-			e.printStackTrace();
+			service = new NetworkReservationService(endpoint.getWSDL());
+
 		} catch (URISyntaxException e) {
 			service = new NetworkReservationService();
 			logger.error("Could not get convert to URL " + endpointReference);

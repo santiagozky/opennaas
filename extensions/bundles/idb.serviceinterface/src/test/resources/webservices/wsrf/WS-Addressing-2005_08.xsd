@@ -86,7 +86,6 @@
 	<xs:simpleType name="FaultCodesOpenEnumType">
 		<xs:union memberTypes="tns:FaultCodesType xs:QName" />
 	</xs:simpleType>
-
 	<xs:simpleType name="FaultCodesType">
 		<xs:restriction base="xs:QName">
 			<xs:enumeration value="tns:InvalidAddressingHeader" />

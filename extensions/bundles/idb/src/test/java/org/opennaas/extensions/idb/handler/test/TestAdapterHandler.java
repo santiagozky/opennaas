@@ -35,6 +35,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import org.opennaas.extensions.idb.serviceinterface.EndpointReference;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AddDomainType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ConnectionConstraintType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DeleteDomainType;
@@ -47,10 +48,12 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.OperationNo
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.OperationNotSupportedFault_Exception;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ReservationType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ServiceConstraintType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.TopologyIFPortType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.UnexpectedFault_Exception;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.DomainNotFoundFaultException;
 import org.opennaas.extensions.idb.serviceinterface.topology.SimpleTopologyClient;
 import org.opennaas.extensions.idb.serviceinterface.utils.Config;
+import org.opennaas.extensions.idb.topology.TopologyWS;
 import org.opennaas.core.resources.helpers.Helpers;
 import org.opennaas.extensions.idb.Constants;
 import org.opennaas.extensions.idb.database.hibernate.Domain;
@@ -64,10 +67,10 @@ import org.opennaas.extensions.idb.utils.TopologyHelpers;
  * @author Alexander Zimmermann (zimmerm2@cs.uni-bonn.de)
  * @version $Id$
  */
-public class TestAdapterHandler extends TestCase {
+public class TestAdapterHandler {
 
 	/** topology client. */
-	private SimpleTopologyClient topologyClient;
+	private TopologyIFPortType topologyClient;
 
 	/** adapterManager instance. */
 	IManager adapterManager;
@@ -86,8 +89,7 @@ public class TestAdapterHandler extends TestCase {
 					"epr.topology");
 			this.topologyClient = new SimpleTopologyClient(topoEpr);
 		} else {
-			this.topologyClient = new SimpleTopologyClient(
-			/* new TopologyWS() */"");
+			this.topologyClient = new TopologyWS();
 		}
 	}
 
@@ -112,7 +114,9 @@ public class TestAdapterHandler extends TestCase {
 		addDomainType.setDomain(testDomain.toJaxb());
 
 		try {
-			this.topologyClient.deleteDomain(testDomain.getName());
+			DeleteDomainType delDom = new DeleteDomainType();
+			delDom.setDomainId(testDomain.getName());
+			this.topologyClient.deleteDomain(delDom);
 		} catch (DomainNotFoundFaultException e) {
 			;
 		}
@@ -162,13 +166,13 @@ public class TestAdapterHandler extends TestCase {
 		this.topologyClient.deleteDomain(deleteDomainType);
 	}
 
-	@Test()
-	public final void testResponseCache() throws Exception {
-		// first call to fill response-cache
-		adapterManager.isAvailable(requests);
-		// second call to use the cache, BUT the requests shouldn't be deleted
-		// !!
-		adapterManager.isAvailable(requests);
-		Assert.assertFalse("requests should be not empty!", requests.isEmpty());
-	}
+	// @Test()
+	// public final void testResponseCache() throws Exception {
+	// // first call to fill response-cache
+	// adapterManager.isAvailable(requests);
+	// // second call to use the cache, BUT the requests shouldn't be deleted
+	// // !!
+	// adapterManager.isAvailable(requests);
+	// Assert.assertFalse("requests should be not empty!", requests.isEmpty());
+	// }
 }
