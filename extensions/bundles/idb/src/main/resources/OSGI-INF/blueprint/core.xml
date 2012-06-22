@@ -14,29 +14,15 @@
         <command name="idb/addTopic">
             <action class="org.opennaas.extensions.idb.shell.AddTopicCommand"/>
         </command>
+          <command name="idb/startWebservice">
+            <action class="org.opennaas.extensions.idb.shell.StartWebservices"/>
+        </command>
+        <command name="idb/stopWebservice">
+            <action class="org.opennaas.extensions.idb.shell.StopWebservices"/>
+        </command>
     </command-bundle>
 
-	<!--idb notifications-->
-    <cxf:bus id="idbNotificationCapabilityServiceBus"></cxf:bus>
-	<bean id="idbNotificationCapabilityServiceImpl" class="org.opennaas.extensions.idb.notification.NotificationWS">
-		
-	</bean>
-    <jaxws:endpoint  implementor="#idbNotificationCapabilityServiceImpl" address="${ws.url}/Notification"  />
 	
-	<!--idb reservation-->
-    <cxf:bus id="idbReservationCapabilityServiceBus"></cxf:bus>
-	<bean id="idbReservationCapabilityServiceImpl" class="org.opennaas.extensions.idb.reservation.ReservationWS">
-		
-	</bean>
-    <jaxws:endpoint  implementor="#idbReservationCapabilityServiceImpl" address="${ws.url}/Reservation"  />
-	
-	
-	<!--idb notifications-->
-    <cxf:bus id="idbTopologyCapabilityServiceBus"></cxf:bus>
-	<bean id="idbTopologyCapabilityServiceImpl" class="org.opennaas.extensions.idb.topology.TopologyWS">
-		
-	</bean>
-    <jaxws:endpoint  implementor="#idbTopologyCapabilityServiceImpl" address="${ws.url}Topology"  />
 	
 	
 </blueprint>

@@ -33,12 +33,12 @@ import java.util.List;
 import java.util.MissingResourceException;
 import java.util.Map.Entry;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 import org.apache.commons.lang.SerializationUtils;
 import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DomainInformationType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.DomainRelationshipType;
@@ -55,8 +55,7 @@ import org.opennaas.extensions.idb.serviceinterface.utils.Config;
  * property file.
  */
 
-public abstract class AbstractTopologyRegistrator implements
-		ServletContextListener {
+public abstract class AbstractTopologyRegistrator {
 	/*
 	 * static stuff
 	 */
@@ -126,7 +125,7 @@ public abstract class AbstractTopologyRegistrator implements
 	/** Distributors that send domain information to peer domains. */
 	protected HashMap<String, Distributor> peerDomainDistributors = new HashMap<String, Distributor>();
 
-	protected ServletContext servletContext = null;
+	static Log log = LogFactory.getLog(AbstractTopologyRegistrator.class);
 
 	/*
 	 * abstract methods
@@ -254,7 +253,7 @@ public abstract class AbstractTopologyRegistrator implements
 		return result;
 	}
 
-	public synchronized void contextDestroyed(final ServletContextEvent arg0) {
+	public synchronized void contextDestroyed() {
 		if (this.active) {
 			this.shutdown();
 			this.active = false;
@@ -268,12 +267,12 @@ public abstract class AbstractTopologyRegistrator implements
 			this.peerDomainDistributors = new HashMap<String, Distributor>();
 			this.peerDomains = new HashMap<String, DomainInformationType>();
 		}
-		this.servletContext = null;
+
 	}
 
-	public synchronized void contextInitialized(final ServletContextEvent arg0) {
-		this.servletContext = arg0.getServletContext();
-		this.servletLog("AbstractTopoplogyRegistrator: servlet context initialized.");
+	public synchronized void contextInitialized() {
+
+		log.info("AbstractTopoplogyRegistrator: servlet context initialized.");
 
 		for (final Distributor dist : this.peerDomainDistributors.values()) {
 			dist.start();
@@ -451,10 +450,6 @@ public abstract class AbstractTopologyRegistrator implements
 		return this.getInterdomainPropertyFile();
 	}
 
-	public ServletContext getServletContext() {
-		return this.servletContext;
-	}
-
 	/**
 	 * @return TNA prefixes the own domain is responsible for.
 	 */
@@ -475,12 +470,6 @@ public abstract class AbstractTopologyRegistrator implements
 	public synchronized void removePeerDomain(final String domainName) {
 		this.peerDomains.remove(domainName);
 		this.peerDomainDistributors.remove(domainName);
-	}
-
-	protected void servletLog(final String msg) {
-		if (this.servletContext != null) {
-			this.servletContext.log(msg);
-		}
 	}
 
 	/**
