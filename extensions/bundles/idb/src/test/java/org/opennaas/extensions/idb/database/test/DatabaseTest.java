@@ -34,19 +34,15 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.EndpointInterfaceType;
-import org.opennaas.extensions.idb.serviceinterface.utils.Config;
 import org.opennaas.core.resources.helpers.Helpers;
-import org.opennaas.extensions.idb.Constants;
 import org.opennaas.extensions.idb.database.hibernate.Connections;
 import org.opennaas.extensions.idb.database.hibernate.Domain;
 import org.opennaas.extensions.idb.database.hibernate.Endpoint;
 import org.opennaas.extensions.idb.database.hibernate.Reservation;
 import org.opennaas.extensions.idb.database.hibernate.Service;
 import org.opennaas.extensions.idb.exception.database.DatabaseException;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.EndpointInterfaceType;
 import org.opennaas.extensions.idb.utils.TopologyHelpers;
-import org.opennaas.extensions.idb.test.AbstractTest;
 
 /**
  * abstract test-class for DB-Tests. every test for a relation should contain
@@ -58,7 +54,7 @@ import org.opennaas.extensions.idb.test.AbstractTest;
  * 
  * @author Alexander Zimmermann (zimmerm2@cs.uni-bonn.de)
  */
-public abstract class DatabaseTest extends AbstractTest {
+public abstract class DatabaseTest {
 	/**
 	 * Test to load database properties.
 	 * 

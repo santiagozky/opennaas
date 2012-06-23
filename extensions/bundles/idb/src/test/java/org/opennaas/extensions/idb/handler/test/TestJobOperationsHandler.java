@@ -27,14 +27,16 @@ package org.opennaas.extensions.idb.handler.test;
 
 import java.util.List;
 
-import junit.framework.Assert;
 import junit.framework.TestCase;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.w3c.dom.Element;
-
+import org.opennaas.extensions.idb.database.hibernate.Connections;
+import org.opennaas.extensions.idb.database.hibernate.Domain;
+import org.opennaas.extensions.idb.database.hibernate.Endpoint;
+import org.opennaas.extensions.idb.database.hibernate.Reservation;
+import org.opennaas.extensions.idb.database.hibernate.Service;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CancelJob;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CancelJobResponse;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CancelJobType;
@@ -42,14 +44,9 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CompleteJob
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CompleteJobResponse;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CompleteJobType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.utils.JaxbSerializer;
-import org.opennaas.extensions.idb.database.hibernate.Connections;
-import org.opennaas.extensions.idb.database.hibernate.Domain;
-import org.opennaas.extensions.idb.database.hibernate.Endpoint;
-import org.opennaas.extensions.idb.database.hibernate.Reservation;
-import org.opennaas.extensions.idb.database.hibernate.Service;
 import org.opennaas.extensions.idb.utils.ReservationHelpers;
 import org.opennaas.extensions.idb.utils.TopologyHelpers;
-import org.opennaas.extensions.idb.test.AbstractTest;
+import org.w3c.dom.Element;
 
 /**
  * JUnit test cases for the ReservationSetupHandler.
@@ -58,6 +55,9 @@ import org.opennaas.extensions.idb.test.AbstractTest;
  * @version $Id$
  */
 public class TestJobOperationsHandler extends TestCase {
+
+	public static final int TIMEOUT = 5 * 60 * 1000;
+
 	public TestJobOperationsHandler() {
 		super();
 	}
@@ -180,7 +180,7 @@ public class TestJobOperationsHandler extends TestCase {
 	 * @throws Exception
 	 *             An Exception
 	 */
-	@Test(timeout = AbstractTest.TIMEOUT)
+	@Test(timeout = TIMEOUT)
 	public final void testCancelJob() throws Exception {
 		CancelJobResponse response = new CancelJobResponse();
 		final CancelJob request = new CancelJob();
@@ -208,7 +208,7 @@ public class TestJobOperationsHandler extends TestCase {
 	 * @throws Exception
 	 *             An Exception
 	 */
-	@Test(timeout = AbstractTest.TIMEOUT)
+	@Test(timeout = TIMEOUT)
 	public final void testCompleteJob() throws Exception {
 		CompleteJobResponse response = new CompleteJobResponse();
 		final CompleteJob request = new CompleteJob();
