@@ -26,14 +26,17 @@
 package org.opennaas.extensions.idb.serviceinterface.databinding.utils;
 
 import java.io.IOException;
+import java.io.StringReader;
 
 import javax.xml.bind.JAXBException;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import org.apache.muse.util.xml.XmlUtils;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.InvalidRequestFaultException;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.UnexpectedFaultException;
 
@@ -60,21 +63,6 @@ public abstract class AJaxbSerializer {
 		return (xml.replace("xmlns:=", "xmlns="));
 	}
 
-	/**
-	 * Convert an Element to XML string.
-	 * 
-	 * @param element
-	 *            Dom Element
-	 * @return XML String
-	 */
-	public static String elementToXml(final Node element) {
-		String xml = XmlUtils.toString(element);
-
-		xml = AJaxbSerializer.adjustNamespace(xml);
-
-		return xml;
-	}
-
 	public static synchronized AJaxbSerializer getInstance() {
 		return AJaxbSerializer.selfInstance;
 	}
@@ -96,16 +84,24 @@ public abstract class AJaxbSerializer {
 		String result = xml;
 
 		result = AJaxbSerializer.adjustNamespace(result);
-		final Element el = XmlUtils.createDocument(result).getDocumentElement();
+		InputSource source = new InputSource(new StringReader(result));
+
+		final Element el = getDocumentBuilder().parse(source)
+				.getDocumentElement();
 		return el;
 	}
 
-	public abstract Object elementToObject(final Node element)
-			throws InvalidRequestFaultException, UnexpectedFaultException;
+	private static DocumentBuilder getDocumentBuilder() {
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		factory.setNamespaceAware(true);
+		factory.setIgnoringComments(true);
+		try {
+			return factory.newDocumentBuilder();
+		} catch (ParserConfigurationException error) {
+			throw new RuntimeException(error.getMessage(), error);
+		}
 
-	public abstract Object elementToObject(final Node element,
-			final boolean useValidator) throws UnexpectedFaultException,
-			InvalidRequestFaultException;
+	}
 
 	public abstract Element objectToElement(final Object obj)
 			throws InvalidRequestFaultException, UnexpectedFaultException;

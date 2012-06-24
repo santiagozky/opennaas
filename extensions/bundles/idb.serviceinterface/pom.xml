@@ -16,22 +16,12 @@
 		<version>1.0</version>
 		<resources.dir>src/main/resources</resources.dir>
 		<webservices.dir>${resources.dir}/webservices</webservices.dir>
-		<scripts.dir>${resources.dir}/scripts</scripts.dir>
-		<muse.dir>/home/santiago/tools/muse</muse.dir>
-		<src.dir>${basedir}/src</src.dir>
-		<log.dir>${basedir}/log</log.dir>
-		<temp.dir>${basedir}/temp</temp.dir>
 	</properties>
 	<build>
 		<directory>target</directory>
 		<outputDirectory>target/classes</outputDirectory>
 		<finalName>idb</finalName>
-
-
-
-
 		<plugins>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -134,11 +124,7 @@
 	</build>
 	<dependencies>
 	
-	<dependency>
-	<groupId>muse</groupId>
-	<artifactId>muse-util-xml</artifactId>
-	<version>2.2.0</version>
-	</dependency>
+
 <dependency>
  <groupId>org.apache.servicemix.specs</groupId>
     <artifactId>org.apache.servicemix.specs.jaxws-api-2.1</artifactId>

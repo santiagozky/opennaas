@@ -29,7 +29,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import org.w3c.dom.Element;
-import org.xml.sax.SAXException;
 
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.*;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetStatusResponseType.ServiceStatus;
@@ -96,13 +95,6 @@ public final class WebserviceUtils {
 		return requestElement;
 	}
 
-	public static ActivateResponseType createActivateResponse(
-			final Element responseElement) throws InvalidRequestFaultException,
-			UnexpectedFaultException {
-		return ((ActivateResponse) JaxbSerializer.getInstance()
-				.elementToObject(responseElement)).getActivateResponse();
-	}
-
 	/*
 	 * ------------------------------------------------------------------------
 	 * DOMAIN-UTILS
@@ -136,25 +128,6 @@ public final class WebserviceUtils {
 	}
 
 	/**
-	 * Create an AddDomainResponseType.
-	 * 
-	 * @param responseElement
-	 *            The response element.
-	 * @return The AddDomainResponseType.
-	 * @throws UnexpectedFaultException
-	 * @throws InvalidRequestFaultException
-	 * @throws InvalidRequestFault_Exception
-	 *             If the request does not match the given XSD.
-	 * @throws UnexpectedFault_Exception
-	 */
-	public static AddDomainResponseType createAddDomainResponse(
-			final Element responseElement) throws InvalidRequestFaultException,
-			UnexpectedFaultException {
-		return ((AddDomainResponse) JaxbSerializer.getInstance()
-				.elementToObject(responseElement)).getAddDomainResponse();
-	}
-
-	/**
 	 * Create an AddEndpointRequest.
 	 * 
 	 * @param endpoint
@@ -184,25 +157,6 @@ public final class WebserviceUtils {
 	}
 
 	/**
-	 * Create a AddEndpointResponseType.
-	 * 
-	 * @param responseElement
-	 *            The response element.
-	 * @return The AddEndpointResponseType.
-	 * @throws UnexpectedFaultException
-	 * @throws InvalidRequestFaultException
-	 * @throws InvalidRequestFault_Exception
-	 *             If the request does not match the given XSD.
-	 * @throws UnexpectedFault_Exception
-	 */
-	public static AddEndpointResponseType createAddEndpointResponse(
-			final Element responseElement) throws InvalidRequestFaultException,
-			UnexpectedFaultException {
-		return ((AddEndpointResponse) JaxbSerializer.getInstance()
-				.elementToObject(responseElement)).getAddEndpointResponse();
-	}
-
-	/**
 	 * Create an AddLinkRequest.
 	 * 
 	 * @param link
@@ -227,25 +181,6 @@ public final class WebserviceUtils {
 		/* ----------------------------------------------------------------- */
 
 		return requestElement;
-	}
-
-	/**
-	 * Create a AddLinkResponseType.
-	 * 
-	 * @param responseElement
-	 *            The response element.
-	 * @return The AddLinkResponseType.
-	 * @throws UnexpectedFaultException
-	 * @throws InvalidRequestFaultException
-	 * @throws InvalidRequestFault_Exception
-	 *             If the request does not match the given XSD.
-	 * @throws UnexpectedFault_Exception
-	 */
-	public static AddLinkResponseType createAddLinkResponse(
-			final Element responseElement) throws InvalidRequestFaultException,
-			UnexpectedFaultException {
-		return ((AddLinkResponse) JaxbSerializer.getInstance().elementToObject(
-				responseElement)).getAddLinkResponse();
 	}
 
 	/**
@@ -281,22 +216,6 @@ public final class WebserviceUtils {
 	 */
 
 	/**
-	 * 
-	 * @param responseElement
-	 * @return
-	 * @throws UnexpectedFaultException
-	 * @throws InvalidRequestFaultException
-	 * @throws UnexpectedFault_Exception
-	 * @throws InvalidRequestFault_Exception
-	 */
-	public static AddOrEditDomainResponseType createAddOrEditDomainResponse(
-			final Element responseElement) throws InvalidRequestFaultException,
-			UnexpectedFaultException {
-		return ((AddOrEditDomainResponse) JaxbSerializer.getInstance()
-				.elementToObject(responseElement)).getAddOrEditDomainResponse();
-	}
-
-	/**
 	 * Create a AddTopicRequest.
 	 * 
 	 * @param addTopicType
@@ -323,25 +242,6 @@ public final class WebserviceUtils {
 		return requestElement;
 	}
 
-	/**
-	 * Create a AddTopicResponseType.
-	 * 
-	 * @param responseElement
-	 *            The response element.
-	 * @return The AddTopicResponseType.
-	 * @throws UnexpectedFaultException
-	 * @throws InvalidRequestFaultException
-	 * @throws InvalidRequestFault_Exception
-	 *             If the request does not match the given XSD.
-	 * @throws UnexpectedFault_Exception
-	 */
-	public static AddTopicResponseType createAddTopicResponse(
-			final Element responseElement) throws InvalidRequestFaultException,
-			UnexpectedFaultException {
-		return ((AddTopicResponse) JaxbSerializer.getInstance()
-				.elementToObject(responseElement)).getAddTopicResponse();
-	}
-
 	public static Element createCancelReservationRequest(
 			final CancelReservationType cancelReservationType)
 			throws InvalidRequestFaultException, UnexpectedFaultException {
@@ -356,14 +256,6 @@ public final class WebserviceUtils {
 		/* ----------------------------------------------------------------- */
 
 		return requestElement;
-	}
-
-	public static CancelReservationResponseType createCancelReservationResponse(
-			final Element responseElement) throws InvalidRequestFaultException,
-			UnexpectedFaultException {
-		return ((CancelReservationResponse) JaxbSerializer.getInstance()
-				.elementToObject(responseElement))
-				.getCancelReservationResponse();
 	}
 
 	/**
@@ -393,25 +285,6 @@ public final class WebserviceUtils {
 		/* ----------------------------------------------------------------- */
 
 		return requestElement;
-	}
-
-	/**
-	 * Create a DeleteDomainResponseType.
-	 * 
-	 * @param responseElement
-	 *            The response element.
-	 * @return The DeleteDomainResponseType.
-	 * @throws UnexpectedFaultException
-	 * @throws InvalidRequestFaultException
-	 * @throws InvalidRequestFault_Exception
-	 *             If the request does not match the given XSD.
-	 * @throws UnexpectedFault_Exception
-	 */
-	public static DeleteDomainResponseType createDeleteDomainResponse(
-			final Element responseElement) throws InvalidRequestFaultException,
-			UnexpectedFaultException {
-		return ((DeleteDomainResponse) JaxbSerializer.getInstance()
-				.elementToObject(responseElement)).getDeleteDomainResponse();
 	}
 
 	/**
@@ -449,25 +322,6 @@ public final class WebserviceUtils {
 	 */
 
 	/**
-	 * Create a DeleteEndpointResponseType.
-	 * 
-	 * @param responseElement
-	 *            The response element.
-	 * @return The DeleteEndpointResponseType.
-	 * @throws UnexpectedFaultException
-	 * @throws InvalidRequestFaultException
-	 * @throws InvalidRequestFault_Exception
-	 *             If the request does not match the given XSD.
-	 * @throws UnexpectedFault_Exception
-	 */
-	public static DeleteEndpointResponseType createDeleteEndpointResponse(
-			final Element responseElement) throws InvalidRequestFaultException,
-			UnexpectedFaultException {
-		return ((DeleteEndpointResponse) JaxbSerializer.getInstance()
-				.elementToObject(responseElement)).getDeleteEndpointResponse();
-	}
-
-	/**
 	 * Create a DeleteLinkRequest.
 	 * 
 	 * @param link
@@ -494,25 +348,6 @@ public final class WebserviceUtils {
 		/* ----------------------------------------------------------------- */
 
 		return requestElement;
-	}
-
-	/**
-	 * Create a DeleteLinkResponseType.
-	 * 
-	 * @param responseElement
-	 *            The response element.
-	 * @return The DeleteLinkResponseType.
-	 * @throws UnexpectedFaultException
-	 * @throws InvalidRequestFaultException
-	 * @throws InvalidRequestFault_Exception
-	 *             If the request does not match the given XSD.
-	 * @throws UnexpectedFault_Exception
-	 */
-	public static DeleteLinkResponseType createDeleteLinkResponse(
-			final Element responseElement) throws InvalidRequestFaultException,
-			UnexpectedFaultException {
-		return ((DeleteLinkResponse) JaxbSerializer.getInstance()
-				.elementToObject(responseElement)).getDeleteLinkResponse();
 	}
 
 	/**
@@ -544,25 +379,6 @@ public final class WebserviceUtils {
 	}
 
 	/**
-	 * Create a EditDomainResponseType.
-	 * 
-	 * @param domain
-	 *            The domain informations.
-	 * @return The EditDomainResponseType.
-	 * @throws UnexpectedFaultException
-	 * @throws InvalidRequestFaultException
-	 * @throws InvalidRequestFault_Exception
-	 *             If the request does not match the given XSD.
-	 * @throws UnexpectedFault_Exception
-	 */
-	public static EditDomainResponseType createEditDomainResponse(
-			final Element responseElement) throws InvalidRequestFaultException,
-			UnexpectedFaultException {
-		return ((EditDomainResponse) JaxbSerializer.getInstance()
-				.elementToObject(responseElement)).getEditDomainResponse();
-	}
-
-	/**
 	 * Create an EditEndpointRequest.
 	 * 
 	 * @param endpoint
@@ -591,25 +407,6 @@ public final class WebserviceUtils {
 	}
 
 	/**
-	 * Create a EditEndpointResponseType.
-	 * 
-	 * @param responseElement
-	 *            The response element.
-	 * @return The EditEndpointResponseType.
-	 * @throws UnexpectedFaultException
-	 * @throws InvalidRequestFaultException
-	 * @throws InvalidRequestFault_Exception
-	 *             If the request does not match the given XSD.
-	 * @throws UnexpectedFault_Exception
-	 */
-	public static EditEndpointResponseType createEditEndpointResponse(
-			final Element responseElement) throws InvalidRequestFaultException,
-			UnexpectedFaultException {
-		return ((EditEndpointResponse) JaxbSerializer.getInstance()
-				.elementToObject(responseElement)).getEditEndpointResponse();
-	}
-
-	/**
 	 * Create a EditLinkRequest.
 	 * 
 	 * @param link
@@ -635,25 +432,6 @@ public final class WebserviceUtils {
 		/* ----------------------------------------------------------------- */
 
 		return requestElement;
-	}
-
-	/**
-	 * Create a EditLinkResponseType.
-	 * 
-	 * @param responseElement
-	 *            The response element.
-	 * @return The EditLinkResponseType.
-	 * @throws UnexpectedFaultException
-	 * @throws InvalidRequestFaultException
-	 * @throws InvalidRequestFault_Exception
-	 *             If the request does not match the given XSD.
-	 * @throws UnexpectedFault_Exception
-	 */
-	public static EditLinkResponseType createEditLinkResponse(
-			final Element responseElement) throws InvalidRequestFaultException,
-			UnexpectedFaultException {
-		return ((EditLinkResponse) JaxbSerializer.getInstance()
-				.elementToObject(responseElement)).getEditLinkResponse();
 	}
 
 	/*
@@ -691,27 +469,6 @@ public final class WebserviceUtils {
 	}
 
 	/**
-	 * Create a GetDomainsResponseType.
-	 * 
-	 * @param responseElement
-	 *            The response element.
-	 * @return The GetDomainResponseType.
-	 * @throws UnexpectedFaultException
-	 * @throws InvalidRequestFaultException
-	 * @throws InvalidRequestFault_Exception
-	 *             If the request does not match the given XSD.
-	 * @throws UnexpectedFault_Exception
-	 * @throws SAXException
-	 *             Element is not Valid
-	 */
-	public static GetDomainsResponseType createGetDomainsResponse(
-			final Element responseElement) throws InvalidRequestFaultException,
-			UnexpectedFaultException {
-		return ((GetDomainsResponse) JaxbSerializer.getInstance()
-				.elementToObject(responseElement)).getGetDomainsResponse();
-	}
-
-	/**
 	 * Create an GetEndpointsRequest.
 	 * 
 	 * @param endpoint
@@ -737,25 +494,6 @@ public final class WebserviceUtils {
 		/* ----------------------------------------------------------------- */
 
 		return requestElement;
-	}
-
-	/**
-	 * Create a GetEndpointsResponseType.
-	 * 
-	 * @param responseElement
-	 *            The response element.
-	 * @return The GetEndpointsResponseType.
-	 * @throws UnexpectedFaultException
-	 * @throws InvalidRequestFaultException
-	 * @throws InvalidRequestFault_Exception
-	 *             If the request does not match the given XSD.
-	 * @throws UnexpectedFault_Exception
-	 */
-	public static GetEndpointsResponseType createGetEndpointsResponse(
-			final Element responseElement) throws InvalidRequestFaultException,
-			UnexpectedFaultException {
-		return ((GetEndpointsResponse) JaxbSerializer.getInstance()
-				.elementToObject(responseElement)).getGetEndpointsResponse();
 	}
 
 	/**
@@ -786,25 +524,6 @@ public final class WebserviceUtils {
 		return requestElement;
 	}
 
-	/**
-	 * Create a GetLinksResponseType.
-	 * 
-	 * @param responseElement
-	 *            The response element.
-	 * @return The GetLinksResponseType.
-	 * @throws UnexpectedFaultException
-	 * @throws InvalidRequestFaultException
-	 * @throws InvalidRequestFault_Exception
-	 *             If the request does not match the given XSD.
-	 * @throws UnexpectedFault_Exception
-	 */
-	public static GetLinksResponseType createGetLinksResponse(
-			final Element responseElement) throws InvalidRequestFaultException,
-			UnexpectedFaultException {
-		return ((GetLinksResponse) JaxbSerializer.getInstance()
-				.elementToObject(responseElement)).getGetLinksResponse();
-	}
-
 	public static Element createGetStatusRequest(
 			final GetStatusType getStatusType)
 			throws InvalidRequestFaultException, UnexpectedFaultException {
@@ -819,13 +538,6 @@ public final class WebserviceUtils {
 		/* ----------------------------------------------------------------- */
 
 		return requestElement;
-	}
-
-	public static GetStatusResponseType createGetStatusResponse(
-			final Element responseElement) throws InvalidRequestFaultException,
-			UnexpectedFaultException {
-		return ((GetStatusResponse) JaxbSerializer.getInstance()
-				.elementToObject(responseElement)).getGetStatusResponse();
 	}
 
 	/**
@@ -856,25 +568,6 @@ public final class WebserviceUtils {
 		return requestElement;
 	}
 
-	/**
-	 * Create a GetTopicsResponseType.
-	 * 
-	 * @param responseElement
-	 *            The response element.
-	 * @return The UnsubscribeResponseType.
-	 * @throws UnexpectedFaultException
-	 * @throws InvalidRequestFaultException
-	 * @throws InvalidRequestFault_Exception
-	 *             If the request does not match the given XSD.
-	 * @throws UnexpectedFault_Exception
-	 */
-	public static GetTopicsResponseType createGetTopicsResponse(
-			final Element responseElement) throws InvalidRequestFaultException,
-			UnexpectedFaultException {
-		return ((GetTopicsResponse) JaxbSerializer.getInstance()
-				.elementToObject(responseElement)).getGetTopicsResponse();
-	}
-
 	public static Element createIsAvailableRequest(
 			final IsAvailableType isAvailableType)
 			throws InvalidRequestFaultException, UnexpectedFaultException {
@@ -896,13 +589,6 @@ public final class WebserviceUtils {
 	 * NOTIFICATION-UTILS
 	 * -----------------------------------------------------------------------
 	 */
-
-	public static IsAvailableResponseType createIsAvailableResponse(
-			final Element responseElement) throws InvalidRequestFaultException,
-			UnexpectedFaultException {
-		return ((IsAvailableResponse) JaxbSerializer.getInstance()
-				.elementToObject(responseElement)).getIsAvailableResponse();
-	}
 
 	/**
 	 * Create a NotifyRequest.
@@ -933,25 +619,6 @@ public final class WebserviceUtils {
 	}
 
 	/**
-	 * Create a NotifyResponseType.
-	 * 
-	 * @param responseElement
-	 *            The response element.
-	 * @return The NotifyResponseType.
-	 * @throws UnexpectedFaultException
-	 * @throws InvalidRequestFaultException
-	 * @throws InvalidRequestFault_Exception
-	 *             If the request does not match the given XSD.
-	 * @throws UnexpectedFault_Exception
-	 */
-	public static NotificationResponseType createNotificationResponse(
-			final Element responseElement) throws InvalidRequestFaultException,
-			UnexpectedFaultException {
-		return ((NotificationResponse) JaxbSerializer.getInstance()
-				.elementToObject(responseElement)).getNotificationResponse();
-	}
-
-	/**
 	 * Create a PublishRequest.
 	 * 
 	 * @param publishType
@@ -976,25 +643,6 @@ public final class WebserviceUtils {
 		/* ----------------------------------------------------------------- */
 
 		return requestElement;
-	}
-
-	/**
-	 * Create a PublishResponseType.
-	 * 
-	 * @param responseElement
-	 *            The response element.
-	 * @return The PublishResponseType.
-	 * @throws UnexpectedFaultException
-	 * @throws InvalidRequestFaultException
-	 * @throws InvalidRequestFault_Exception
-	 *             If the request does not match the given XSD.
-	 * @throws UnexpectedFault_Exception
-	 */
-	public static PublishResponseType createPublishResponse(
-			final Element responseElement) throws InvalidRequestFaultException,
-			UnexpectedFaultException {
-		return ((PublishResponse) JaxbSerializer.getInstance().elementToObject(
-				responseElement)).getPublishResponse();
 	}
 
 	/**
@@ -1026,25 +674,6 @@ public final class WebserviceUtils {
 	}
 
 	/**
-	 * Create a RemoveTopicResponseType.
-	 * 
-	 * @param responseElement
-	 *            The response element.
-	 * @return The RemoveTopicResponseType.
-	 * @throws UnexpectedFaultException
-	 * @throws InvalidRequestFaultException
-	 * @throws InvalidRequestFault_Exception
-	 *             If the request does not match the given XSD.
-	 * @throws UnexpectedFault_Exception
-	 */
-	public static RemoveTopicResponseType createRemoveTopicResponse(
-			final Element responseElement) throws InvalidRequestFaultException,
-			UnexpectedFaultException {
-		return ((RemoveTopicResponse) JaxbSerializer.getInstance()
-				.elementToObject(responseElement)).getRemoveTopicResponse();
-	}
-
-	/**
 	 * Create a ReservationRequest.
 	 * 
 	 * @param createReservationType
@@ -1070,26 +699,6 @@ public final class WebserviceUtils {
 		/* ----------------------------------------------------------------- */
 
 		return requestElement;
-	}
-
-	/**
-	 * Create a CreateReservationResponseType.
-	 * 
-	 * @param responseElement
-	 *            The response element.
-	 * @return The CreateReservationResponseType.
-	 * @throws UnexpectedFaultException
-	 * @throws InvalidRequestFaultException
-	 * @throws InvalidRequestFault_Exception
-	 *             If the request does not match the given XSD.
-	 * @throws UnexpectedFault_Exception
-	 */
-	public static CreateReservationResponseType createReservationResponse(
-			final Element responseElement) throws InvalidRequestFaultException,
-			UnexpectedFaultException {
-		return ((CreateReservationResponse) JaxbSerializer.getInstance()
-				.elementToObject(responseElement))
-				.getCreateReservationResponse();
 	}
 
 	/**
@@ -1121,25 +730,6 @@ public final class WebserviceUtils {
 	}
 
 	/**
-	 * Create a SubscribeResponseType.
-	 * 
-	 * @param responseElement
-	 *            The response element.
-	 * @return The SubscribeResponseType.
-	 * @throws UnexpectedFaultException
-	 * @throws InvalidRequestFaultException
-	 * @throws InvalidRequestFault_Exception
-	 *             If the request does not match the given XSD.
-	 * @throws UnexpectedFault_Exception
-	 */
-	public static SubscribeResponseType createSubscribeResponse(
-			final Element responseElement) throws InvalidRequestFaultException,
-			UnexpectedFaultException {
-		return ((SubscribeResponse) JaxbSerializer.getInstance()
-				.elementToObject(responseElement)).getSubscribeResponse();
-	}
-
-	/**
 	 * Create a UnsubscribeRequest.
 	 * 
 	 * @param unsubscribeType
@@ -1165,25 +755,6 @@ public final class WebserviceUtils {
 		/* ----------------------------------------------------------------- */
 
 		return requestElement;
-	}
-
-	/**
-	 * Create a UnsubscribeResponseType.
-	 * 
-	 * @param responseElement
-	 *            The response element.
-	 * @return The UnsubscribeResponseType.
-	 * @throws UnexpectedFaultException
-	 * @throws InvalidRequestFaultException
-	 * @throws InvalidRequestFault_Exception
-	 *             If the request does not match the given XSD.
-	 * @throws UnexpectedFault_Exception
-	 */
-	public static UnsubscribeResponseType createUnsubscribeResponse(
-			final Element responseElement) throws InvalidRequestFaultException,
-			UnexpectedFaultException {
-		return ((UnsubscribeResponse) JaxbSerializer.getInstance()
-				.elementToObject(responseElement)).getUnsubscribeResponse();
 	}
 
 	public static String getDebugMsg(final GetStatusResponseType response) {

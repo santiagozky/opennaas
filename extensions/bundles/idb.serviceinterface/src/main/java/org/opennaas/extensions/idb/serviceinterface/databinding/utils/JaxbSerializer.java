@@ -176,60 +176,6 @@ public final class JaxbSerializer extends AJaxbSerializer {
 	}
 
 	/**
-	 * Convert Element to Object.
-	 * 
-	 * @param element
-	 *            Element to be converted to an Object
-	 * @return Object Object derived out of Element
-	 * @throws InvalidRequestFaultException
-	 * @throws UnexpectedFaultException
-	 */
-	@Override
-	public Object elementToObject(final Node element)
-			throws InvalidRequestFaultException, UnexpectedFaultException {
-		return this.elementToObject(element, true);
-	}
-
-	/**
-	 * Convert Element to Object.
-	 * 
-	 * @param element
-	 *            Element to be converted to an Object
-	 * @param useValidator
-	 *            Use validator true/false
-	 * @return Object Object derived out of Element
-	 * @throws InvalidRequestFaultException
-	 * @throws UnexpectedFaultException
-	 */
-	@Override
-	public synchronized Object elementToObject(final Node element,
-			final boolean useValidator) throws UnexpectedFaultException,
-			InvalidRequestFaultException {
-
-		if (useValidator) {
-			this.typeValidator.validate(element);
-		}
-
-		final String xml = AJaxbSerializer.elementToXml(element);
-
-		if (useValidator) {
-			this.syntaxValidator.validate(xml);
-		}
-
-		Object obj;
-		try {
-			obj = this.xmlToObject(xml);
-		} catch (final JAXBException e) {
-			JaxbSerializer.logger.debug(e.getMessage(), e);
-			final UnexpectedFaultException e2 = new UnexpectedFaultException(
-					"Error during element conversion: " + e.getMessage());
-			e2.setStackTrace(e.getStackTrace());
-			throw e2;
-		}
-		return obj;
-	}
-
-	/**
 	 * Convert Object to Element.
 	 * 
 	 * @param obj
