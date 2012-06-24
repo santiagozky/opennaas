@@ -208,9 +208,7 @@
 <feature version='${project.version}'>org.opennaas.extensions.idb.serviceinterface</feature>
 <feature version='2.2.0'>muse-complete</feature>
 <feature version='140'>bcprov-jdk16</feature>
-<feature version='1.1'>jta</feature>
-<feature version='2.2.0'>muse-platform-mini</feature>
-<feature version='2.2.0'>muse-tools</feature>
+<feature version='1.1'>jta</feature>>
 <feature version='2.0'>sun-xacml</feature>
 <feature version='${project.version}'>database</feature>
 <feature version='${project.version}'>adapter-dummy</feature>
