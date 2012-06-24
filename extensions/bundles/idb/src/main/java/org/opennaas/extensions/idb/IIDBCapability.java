@@ -15,6 +15,6 @@ public interface IIDBCapability extends ICapability {
 	/**
 	 * stop the webservices
 	 */
-	public void StopWebServices();
+	public void StopWebServices(int port);
 
 }

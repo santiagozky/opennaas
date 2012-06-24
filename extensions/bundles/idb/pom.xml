@@ -21,7 +21,6 @@
 	</properties>
 	<dependencies>
 
-
 		<dependency>
 			<groupId>wsdl4j</groupId>
 			<artifactId>wsdl4j</artifactId>
@@ -48,7 +47,6 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.4</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -76,12 +74,11 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.6.1</version>
+
 		</dependency>
 		<dependency>
 			<groupId>org.apache.openjpa</groupId>
 			<artifactId>openjpa</artifactId>
-			<version>2.2.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.openjpa</groupId>
@@ -91,7 +88,6 @@
 		<dependency>
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-bundle</artifactId>
-				<version>${cxf.version}</version>
 				<exclusions>
 					<exclusion>
 						<groupId>bouncycastle</groupId>
@@ -144,7 +140,7 @@
 		<dependency>
 			<groupId>org.opennaas</groupId>
 			<artifactId>org.opennaas.extensions.queuemanager</artifactId>
-			<version>${project.version}</version>
+
 		</dependency>
 		<dependency>
 			<groupId>org.opennaas</groupId>
@@ -154,7 +150,7 @@
 		<dependency>
 			<groupId>com.googlecode.guava-osgi</groupId>
 			<artifactId>guava-osgi</artifactId>
-			<version>${guava.version}</version>
+
 		</dependency>
 		<dependency>
 			<groupId>org.apache.karaf.shell</groupId>
@@ -167,7 +163,7 @@
 		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
-			<version>${commons.logging.version}</version>
+
 		</dependency>
 		<dependency>
 			<groupId>org.apache.servicemix.bundles</groupId>
@@ -177,7 +173,7 @@
 		<dependency>
 			<groupId>org.ops4j.pax.logging</groupId>
 			<artifactId>pax-logging-api</artifactId>
-			<version>${pax.logging.version}</version>
+
 		</dependency>
 
 		<dependency>
@@ -205,10 +201,23 @@
 			</testResource>
 		</testResources>
 		<plugins>
+		<plugin> <!-- to check coverage -->
+  <groupId>org.jacoco</groupId>
+  <artifactId>jacoco-maven-plugin</artifactId>
+<version>0.5.7.201204190339</version>
+</plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.5.1</version>
+        <configuration>
+          <compilerArgument>-g</compilerArgument>
+        </configuration>
+      </plugin>
+
 			<plugin>
 				<groupId>org.apache.openjpa</groupId>
 				<artifactId>openjpa-maven-plugin</artifactId>
-				<version>2.2.0</version>
 				<configuration>
 					<includes>**/database/hibernate/*.class</includes>
 					<excludes>**/hibernate/XML*.class</excludes>
@@ -262,7 +271,6 @@
 			<plugin>
 				<groupId>org.apache.karaf.tooling</groupId>
 				<artifactId>features-maven-plugin</artifactId>
-				<version>2.2.7</version>
 
 				<executions>
 					<!-- add execution definitions here -->

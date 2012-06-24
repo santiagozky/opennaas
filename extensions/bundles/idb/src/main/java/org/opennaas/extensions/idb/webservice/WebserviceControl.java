@@ -1,5 +1,7 @@
 package org.opennaas.extensions.idb.webservice;
 
+import java.util.HashMap;
+
 import javax.xml.ws.Endpoint;
 
 import org.apache.cxf.jaxws.EndpointImpl;
@@ -19,31 +21,51 @@ import org.opennaas.extensions.idb.topology.TopologyWS;
  */
 public class WebserviceControl {
 
-	public static EndpointImpl topologyEndpoint;
-
-	public static EndpointImpl notificationEndpoint;
-
-	public static EndpointImpl reservationEndpoint;
-
-	private static ContextListener contextListener;
+	public static HashMap<Integer, WebServiceHolder> webservices = new HashMap<Integer, WebServiceHolder>();
 
 	public static void startWebservices(int port) {
 
-		contextListener(); // the ex-servletcontext listener
-		startNotification(port);
-		startTopology(port);
-		startReservation(port);
+		WebServiceHolder holder = new WebServiceHolder(port);
+		holder.start();
+		webservices.put(port, holder);
 
 	}
 
-	public static void stopWebServices() {
+	public static void stopWebServices(int port) {
+		WebServiceHolder holder = webservices.get(port);
+		if (holder != null) {
+			holder.stop();
+		}
+	}
 
+}
+
+class WebServiceHolder {
+
+	int port;
+	EndpointImpl topologyEndpoint;
+	EndpointImpl notificationEndpoint;
+	EndpointImpl reservationEndpoint;
+	ContextListener contextListener;
+
+	public WebServiceHolder(int i) {
+		port = i;
+	}
+
+	public void start() {
+		startTopology();
+		startNotification();
+		startReservation();
+
+	}
+
+	public void stop() {
+		topologyEndpoint.stop();
 		notificationEndpoint.stop();
 		reservationEndpoint.stop();
-		topologyEndpoint.stop();
 	}
 
-	private static void startTopology(int port) {
+	private void startTopology() {
 		TopologyIFPortType impl = new TopologyWS();
 		String addressTopology = "http://localhost:" + port
 				+ "/nsp/webservice/topology";
@@ -52,16 +74,17 @@ public class WebserviceControl {
 		topologyEndpoint.publish(addressTopology);
 	}
 
-	private static void startNotification(int port) {
+	private void startNotification() {
 		NetworkNotificationPortType notification = new NotificationWS();
 		String addressNotification = "http://localhost:" + port
 				+ "/nsp/webservice/notification";
 		notificationEndpoint = (EndpointImpl) Endpoint.create(notification);
 		notificationEndpoint.getFeatures().add(new WSAddressingFeature());
 		notificationEndpoint.publish(addressNotification);
+
 	}
 
-	private static void startReservation(int port) {
+	private void startReservation() {
 
 		NetworkReservationPortType reservation = new ReservationWS();
 		String addressReservation = "http://localhost:" + port
@@ -71,12 +94,13 @@ public class WebserviceControl {
 		reservationEndpoint.publish(addressReservation);
 	}
 
-	private static void contextListener() {
+	private void contextListener() {
 		contextListener = new ContextListener();
 		contextListener.contextInitialized(); // this used to be a
-												// servletcontext listener. now
-												// we call before starting the
-												// ws
+		// servletcontext listener. now
+		// we call before starting the
+		// ws
 
 	}
+
 }

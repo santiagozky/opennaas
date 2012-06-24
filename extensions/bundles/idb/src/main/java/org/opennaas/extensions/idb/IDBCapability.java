@@ -76,8 +76,8 @@ public class IDBCapability extends AbstractCapability implements IIDBCapability 
 	}
 
 	@Override
-	public void StopWebServices() {
-		WebserviceControl.stopWebServices();
+	public void StopWebServices(int port) {
+		WebserviceControl.stopWebServices(port);
 
 	}
 }
