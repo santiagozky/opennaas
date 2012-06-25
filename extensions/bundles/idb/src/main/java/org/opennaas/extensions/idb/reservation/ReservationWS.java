@@ -62,10 +62,11 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.NetworkRese
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.NotificationResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.NotificationType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.UnexpectedFault_Exception;
+import org.opennaas.extensions.idb.serviceinterface.reservation.CommonReservationWS;
 
 /** Provision Request Handler. */
 @WebService(serviceName = "networkReservationService", portName = "networkReservationPortType", targetNamespace = "http://opennaas.org/nsp/webservice/reservation")
-public final class ReservationWS extends NetworkReservationPortTypeImpl {
+public final class ReservationWS extends CommonReservationWS {
 
 	private final String generateGRI() {
 		byte[] randomBytes = new byte[20];

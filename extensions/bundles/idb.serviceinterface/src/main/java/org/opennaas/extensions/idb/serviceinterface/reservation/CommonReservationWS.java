@@ -43,5 +43,6 @@ public class CommonReservationWS extends NetworkReservationPortTypeImpl {
 		if (null == AbstractTopologyRegistrator.getLatestInstance()) {
 			new CommonTopologyRegistrator();
 		}
+
 	}
 }
