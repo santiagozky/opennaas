@@ -28,6 +28,7 @@
  */
 package org.opennaas.extensions.idb.serviceinterface.notification;
 
+import org.opennaas.extensions.idb.serviceinterface.RequestHandler;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AddTopicResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AddTopicType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetReservationsResponseType;
@@ -53,7 +54,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.
  * @author willner
  * 
  */
-public class CommonNotificationHandler {
+public class CommonNotificationHandler extends RequestHandler {
 
 	private static CommonNotificationHandler selfInstance;
 

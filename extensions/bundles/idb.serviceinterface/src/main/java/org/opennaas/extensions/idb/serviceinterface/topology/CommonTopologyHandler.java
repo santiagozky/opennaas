@@ -27,6 +27,7 @@ package org.opennaas.extensions.idb.serviceinterface.topology;
 
 import javax.xml.ws.soap.SOAPFaultException;
 
+import org.opennaas.extensions.idb.serviceinterface.RequestHandler;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AddDomainResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AddDomainType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.AddEndpointResponseType;
@@ -59,7 +60,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.
 /**
  * Class to handle NSP topology-requests in a predictable manner.
  */
-public class CommonTopologyHandler {
+public class CommonTopologyHandler extends RequestHandler {
 	/** Singleton Instance. */
 	private static CommonTopologyHandler selfInstance;
 

@@ -75,6 +75,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.EndpointAlreadyExistsFaultException;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.InvalidRequestFaultException;
 
+import org.opennaas.extensions.idb.serviceinterface.topology.CommonTopologyHandler;
 import org.opennaas.extensions.idb.serviceinterface.topology.registrator.AbstractTopologyRegistrator;
 import org.opennaas.extensions.idb.serviceinterface.utils.Config;
 
@@ -89,7 +90,7 @@ import org.apache.commons.logging.LogFactory;
 
 /** Topology Request Handler. */
 @WebService(portName = "topologyIFPort", serviceName = "topologyIFService", targetNamespace = "http://opennaas.org/nsp/webservice/topology")
-public final class TopologyWS extends TopologyIFPortTypeImpl {
+public final class TopologyWS extends CommonTopologyHandler {
 
 	private String myDomainName = null;
 

@@ -28,6 +28,10 @@
  */
 package org.opennaas.extensions.idb.serviceinterface.reservation;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.MissingResourceException;
+
+import org.opennaas.extensions.idb.serviceinterface.RequestHandler;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ActivateResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.ActivateType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.BindResponseType;
@@ -40,6 +44,7 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CompleteJob
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CompleteJobType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CreateReservationResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.CreateReservationType;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetReservationsComplexType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetReservationsResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetReservationsType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetStatusResponseType;
@@ -47,14 +52,19 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetStatusTy
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.IsAvailableResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.IsAvailableType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.OperationNotSupportedFault_Exception;
+import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.OperationNotAllowedFaultException;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.OperationNotSupportedFaultException;
+import org.opennaas.extensions.idb.serviceinterface.databinding.utils.JaxbSerializer;
+import org.opennaas.extensions.idb.serviceinterface.topology.registrator.AbstractTopologyRegistrator;
+import org.opennaas.extensions.idb.serviceinterface.utils.Config;
 import org.opennaas.extensions.idb.serviceinterface.utils.ForwardingHelper;
+import org.w3c.dom.Element;
 
 /**
  * @author willner
  * 
  */
-public class CommonReservationHandler {
+public class CommonReservationHandler extends RequestHandler {
 
 	private static CommonReservationHandler selfInstance;
 
@@ -78,7 +88,8 @@ public class CommonReservationHandler {
 	 * @return
 	 * @throws
 	 */
-	public ActivateResponseType activate(final ActivateType request) {
+	public ActivateResponseType activate(final ActivateType request)
+			throws Throwable {
 		throw new OperationNotSupportedFaultException("Not implemented yet.");
 	}
 
@@ -88,7 +99,7 @@ public class CommonReservationHandler {
 	 * @return
 	 * @throws
 	 */
-	public BindResponseType bind(final BindType request) {
+	public BindResponseType bind(final BindType request) throws Throwable {
 		throw new OperationNotSupportedFaultException("Not implemented yet.");
 	}
 
@@ -98,7 +109,8 @@ public class CommonReservationHandler {
 	 * @return
 	 * @throws
 	 */
-	public CancelJobResponseType cancelJob(final CancelJobType request) {
+	public CancelJobResponseType cancelJob(final CancelJobType request)
+			throws Throwable {
 		throw new OperationNotSupportedFaultException("Not implemented yet.");
 	}
 
@@ -108,7 +120,7 @@ public class CommonReservationHandler {
 	 * @throws
 	 */
 	public CancelReservationResponseType cancelReservation(
-			final CancelReservationType request) {
+			final CancelReservationType request) throws Throwable {
 		throw new OperationNotSupportedFaultException("Not implemented yet.");
 	}
 
@@ -118,7 +130,8 @@ public class CommonReservationHandler {
 	 * @return
 	 * @throws
 	 */
-	public CompleteJobResponseType completeJob(final CompleteJobType request) {
+	public CompleteJobResponseType completeJob(final CompleteJobType request)
+			throws Throwable {
 		throw new OperationNotSupportedFaultException("Not implemented yet.");
 	}
 
@@ -128,7 +141,7 @@ public class CommonReservationHandler {
 	 * @throws
 	 */
 	public CreateReservationResponseType createReservation(
-			final CreateReservationType request) {
+			final CreateReservationType request) throws Throwable {
 		throw new OperationNotSupportedFaultException("Not implemented yet.");
 	}
 
@@ -138,7 +151,7 @@ public class CommonReservationHandler {
 	 * @throws
 	 */
 	public GetReservationsResponseType getReservations(
-			final GetReservationsType request) {
+			final GetReservationsType request) throws Throwable {
 		throw new OperationNotSupportedFaultException("Not implemented yet.");
 	}
 
@@ -147,7 +160,8 @@ public class CommonReservationHandler {
 	 * @return
 	 * @throws
 	 */
-	public GetStatusResponseType getStatus(final GetStatusType request) {
+	public GetStatusResponseType getStatus(final GetStatusType request)
+			throws Throwable {
 		throw new OperationNotSupportedFaultException("Not implemented yet.");
 	}
 
@@ -157,7 +171,98 @@ public class CommonReservationHandler {
 	 * @throws
 	 * @throws RuntimeException
 	 */
-	public IsAvailableResponseType isAvailable(final IsAvailableType request) {
+	public IsAvailableResponseType isAvailable(final IsAvailableType request)
+			throws Throwable {
 		throw new OperationNotSupportedFaultException("Not implemented yet.");
+	}
+
+	@Override
+	protected Object invokeMethod(final Object objRequestType,
+			final String methodName) throws Throwable {
+		Object result;
+
+		// Check if forwarding is enabled
+		final boolean doForward = Config.isTrue("hsiTemplate",
+				"request.forwarding");
+
+		if (doForward && this.forwardingHelper.isForeignRequest(objRequestType)) {
+			this.getLogger().debug(
+					objRequestType.getClass().getSimpleName()
+							+ " is foreign request");
+
+			try {
+				result = this.callRemoteService(objRequestType, methodName); // call
+																				// remote
+			} catch (final MissingResourceException exception) {
+				throw new OperationNotAllowedFaultException(
+						"At least one endpoint of this request ("
+								+ objRequestType.getClass().getSimpleName()
+								+ ") is not part of this domain and since no parent broker is configured the request cannot be forwarded.");
+			}
+		} else {
+			this.getLogger().debug(
+					objRequestType.getClass().getSimpleName()
+							+ " is local request");
+
+			// Remove Suffix
+			if (this.forwardingHelper.hasReservationId(objRequestType)) {
+				this.forwardingHelper.removeSuffix(objRequestType);
+			}
+
+			result = super.invokeMethod(objRequestType, methodName);
+		}
+
+		// Add Suffix
+		if (this.forwardingHelper.hasReservationId(result)) {
+			this.forwardingHelper.addSuffix(result);
+			// Add Suffix to all reservations in ReservationsResponseType
+		} else if (GetReservationsResponseType.class.isInstance(result)) {
+			final GetReservationsResponseType type = (GetReservationsResponseType) result;
+
+			for (final GetReservationsComplexType reservationComplexType : type
+					.getReservation()) {
+				this.forwardingHelper.addSuffix(reservationComplexType);
+			}
+		}
+
+		return result;
+	}
+
+	/**
+	 * @param objRequestType
+	 * @param methodName
+	 * @return
+	 * @throws SoapFault
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws InvocationTargetException
+	 * @throws ClassNotFoundException
+	 * @throws NoSuchMethodException
+	 */
+	private Object callRemoteService(final Object objRequestType,
+			final String methodName) throws InstantiationException,
+			IllegalAccessException, InvocationTargetException,
+			ClassNotFoundException, NoSuchMethodException {
+		final String propertyFile = AbstractTopologyRegistrator
+				.getLatestInstance().getPropertyFile();
+
+		this.getLogger().debug("Using propertyfile: " + propertyFile);
+
+		final SimpleReservationClient client = new SimpleReservationClient(
+				Config.getString(propertyFile, "parent.reservationEPR"));
+
+		final Object objRequest = this.setType(objRequestType);
+
+		final Element elementRequest = JaxbSerializer.getInstance()
+				.objectToElement(objRequest);
+
+		this.getLogger().debug("Forwarding using method: " + methodName);
+
+		final Element result = client.handleByName(elementRequest, methodName);
+
+		final Object objResponse = JaxbSerializer.getInstance()
+				.elementToObject(result);
+
+		return this.getType(objResponse);
 	}
 }

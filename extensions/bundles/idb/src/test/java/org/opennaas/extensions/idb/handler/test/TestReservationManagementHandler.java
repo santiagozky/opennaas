@@ -45,7 +45,7 @@ import org.opennaas.extensions.idb.database.hibernate.Endpoint;
 import org.opennaas.extensions.idb.database.hibernate.Reservation;
 import org.opennaas.extensions.idb.database.hibernate.Service;
 import org.opennaas.extensions.idb.exception.database.DatabaseException;
-import org.opennaas.extensions.idb.reservation.ReservationWS;
+import org.opennaas.extensions.idb.reservation.ReservationRequestHandler;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetReservationResponseType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.GetReservationType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.InvalidRequestFault_Exception;
@@ -79,7 +79,7 @@ public class TestReservationManagementHandler {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 
-		TestReservationManagementHandler.handler = new ReservationWS();
+		TestReservationManagementHandler.handler = new ReservationRequestHandler();
 		TestReservationManagementHandler.sourceDomain = TopologyHelpers
 				.getTestDomain("TRMH-SourceDomain");
 		Endpoint end1 = (Endpoint) TestReservationManagementHandler.sourceDomain
@@ -173,7 +173,7 @@ public class TestReservationManagementHandler {
 		getType.setReservationID(String
 				.valueOf(TestReservationManagementHandler.testReservationID));
 
-		TestReservationManagementHandler.handler = new ReservationWS();
+		TestReservationManagementHandler.handler = new ReservationRequestHandler();
 		NetworkReservationPortType hand = TestReservationManagementHandler.handler;
 		assertNotNull("Handler should not be null", hand);
 		final GetReservationResponseType resultWithoutServiceID = hand

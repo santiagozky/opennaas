@@ -88,6 +88,7 @@
 		<dependency>
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-bundle</artifactId>
+				<version>2.5.0.fuse-7-061</version>
 				<exclusions>
 					<exclusion>
 						<groupId>bouncycastle</groupId>
@@ -261,10 +262,11 @@
 					classes into an OSGi bundle -->
 				<configuration>
 					<instructions>
-						<Import-Package>*</Import-Package>
+						<Import-Package>org.apache.cxf.jaxws.spi,*</Import-Package>
 						<Export-Package>org.opennaas.extensions.idb.*;version="${project.version}"</Export-Package>
 						<Meta-Persistence>META-INF/persistence.xml</Meta-Persistence>
 						<Bundle-ClassPath>.</Bundle-ClassPath>
+						<Require-Bundle>org.apache.cxf.bundle</Require-Bundle>
 					</instructions>
 				</configuration>
 			</plugin>

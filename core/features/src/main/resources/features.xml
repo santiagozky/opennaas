@@ -206,7 +206,7 @@
 <feature version='1.6.5'>pax-logging-api</feature>
 <feature version='1.6.5'>pax-logging-service</feature>
 <feature version='${project.version}'>org.opennaas.extensions.idb.serviceinterface</feature>
-<feature version='2.2.0'>muse-complete</feature>
+
 <feature version='140'>bcprov-jdk16</feature>
 <feature version='1.1'>jta</feature>>
 <feature version='2.0'>sun-xacml</feature>
@@ -214,7 +214,7 @@
 <feature version='${project.version}'>adapter-dummy</feature>
 <feature version='2.2.2'>cglib</feature>
 <feature>jetty</feature>
-		<feature>cxf</feature>
+<bundle>mvn:org.apache.cxf/cxf-bundle/2.5.0.fuse-7-061</bundle>
 <bundle>mvn:org.opennaas/org.opennaas.extensions.idb/${project.version}</bundle>
 </feature>
 

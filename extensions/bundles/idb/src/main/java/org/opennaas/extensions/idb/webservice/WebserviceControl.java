@@ -6,12 +6,15 @@ import javax.xml.ws.Endpoint;
 
 import org.apache.cxf.jaxws.EndpointImpl;
 import org.apache.cxf.ws.addressing.WSAddressingFeature;
-import org.opennaas.extensions.idb.notification.NotificationWS;
-import org.opennaas.extensions.idb.reservation.ReservationWS;
+import org.opennaas.extensions.idb.notification.NotificationRequestHandler;
+import org.opennaas.extensions.idb.reservation.ReservationRequestHandler;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.NetworkNotificationPortType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.NetworkReservationPortType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.TopologyIFPortType;
 import org.opennaas.extensions.idb.topology.TopologyWS;
+import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * this class can start and stop the three IDB webservices.
@@ -47,6 +50,7 @@ class WebServiceHolder {
 	EndpointImpl notificationEndpoint;
 	EndpointImpl reservationEndpoint;
 	ContextListener contextListener;
+	ApplicationContext springContext;
 
 	public WebServiceHolder(int i) {
 		port = i;
@@ -56,6 +60,7 @@ class WebServiceHolder {
 		startTopology();
 		startNotification();
 		startReservation();
+		startContext();
 
 	}
 
@@ -63,6 +68,7 @@ class WebServiceHolder {
 		topologyEndpoint.stop();
 		notificationEndpoint.stop();
 		reservationEndpoint.stop();
+		springContext = null;
 	}
 
 	private void startTopology() {
@@ -75,7 +81,7 @@ class WebServiceHolder {
 	}
 
 	private void startNotification() {
-		NetworkNotificationPortType notification = new NotificationWS();
+		NetworkNotificationPortType notification = new NotificationRequestHandler();
 		String addressNotification = "http://localhost:" + port
 				+ "/nsp/webservice/notification";
 		notificationEndpoint = (EndpointImpl) Endpoint.create(notification);
@@ -86,7 +92,7 @@ class WebServiceHolder {
 
 	private void startReservation() {
 
-		NetworkReservationPortType reservation = new ReservationWS();
+		NetworkReservationPortType reservation = new ReservationRequestHandler();
 		String addressReservation = "http://localhost:" + port
 				+ "/nsp/webservice/reservation";
 		reservationEndpoint = (EndpointImpl) Endpoint.create(reservation);
@@ -101,6 +107,18 @@ class WebServiceHolder {
 		// we call before starting the
 		// ws
 
+	}
+
+	private void startContext() {
+		springContext = new ClassPathXmlApplicationContext("context.xml") {
+			@Override
+			protected void initBeanDefinitionReader(
+					XmlBeanDefinitionReader reader) {
+				super.initBeanDefinitionReader(reader);
+				reader.setValidationMode(XmlBeanDefinitionReader.VALIDATION_NONE);
+				reader.setBeanClassLoader(getClassLoader());
+			}
+		};
 	}
 
 }
