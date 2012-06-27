@@ -23,7 +23,7 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 
-package org.opennaas.extensions.idb.topology;
+package org.opennaas.extensions.idb.webservice;
 
 import java.util.Set;
 
@@ -90,7 +90,7 @@ import org.apache.commons.logging.LogFactory;
 
 /** Topology Request Handler. */
 @WebService(portName = "topologyIFPort", serviceName = "topologyIFService", targetNamespace = "http://opennaas.org/nsp/webservice/topology")
-public final class TopologyWS extends CommonTopologyHandler {
+public final class TopologyWS implements TopologyIFPortType {
 
 	private String myDomainName = null;
 
@@ -259,7 +259,7 @@ public final class TopologyWS extends CommonTopologyHandler {
 			dom = Domain.load(domainName);
 		} catch (DatabaseException e1) {
 			e1.printStackTrace();
-			throw new UnexpectedFault_Exception("unexpected databse problem",
+			throw new UnexpectedFault_Exception("unexpected database problem",
 					e1);
 		}
 
@@ -664,9 +664,9 @@ public final class TopologyWS extends CommonTopologyHandler {
 	@Override
 	public AddOrEditDomainResponseType addOrEditDomain(
 			AddOrEditDomainType addOrEditDomain)
-			throws InvalidRequestFault_Exception, UnexpectedFault_Exception,
-			OperationNotSupportedFault_Exception,
-			OperationNotAllowedFault_Exception {
+			throws OperationNotAllowedFault_Exception,
+			InvalidRequestFault_Exception, UnexpectedFault_Exception,
+			OperationNotSupportedFault_Exception {
 		AddOrEditDomainResponseType res = new AddOrEditDomainResponseType();
 		try {
 			res.setSuccess(addOrEditDomain(addOrEditDomain.getDomain(), false));

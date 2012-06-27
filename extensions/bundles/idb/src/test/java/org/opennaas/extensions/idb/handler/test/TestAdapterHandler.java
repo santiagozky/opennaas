@@ -53,13 +53,13 @@ import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.UnexpectedF
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.exceptions.DomainNotFoundFaultException;
 import org.opennaas.extensions.idb.serviceinterface.topology.SimpleTopologyClient;
 import org.opennaas.extensions.idb.serviceinterface.utils.Config;
-import org.opennaas.extensions.idb.topology.TopologyWS;
 import org.opennaas.core.resources.helpers.Helpers;
 import org.opennaas.extensions.idb.Constants;
 import org.opennaas.extensions.idb.database.hibernate.Domain;
 import org.opennaas.extensions.idb.reservation.AdapterManager;
 import org.opennaas.extensions.idb.reservation.IManager;
 import org.opennaas.extensions.idb.utils.TopologyHelpers;
+import org.opennaas.extensions.idb.webservice.TopologyWS;
 
 /**
  * JUnit test case for the response-cahce of the AdapterManager.

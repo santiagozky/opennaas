@@ -62,7 +62,7 @@ import org.opennaas.extensions.idb.utils.TopologyHelpers;
  */
 public class TestReservationManagementHandler {
 
-	private static NetworkReservationPortType handler;
+	private static ReservationRequestHandler handler;
 	private static Domain sourceDomain;
 	private static Domain destinationDomain;
 	private static Reservation testReservation;
@@ -174,7 +174,7 @@ public class TestReservationManagementHandler {
 				.valueOf(TestReservationManagementHandler.testReservationID));
 
 		TestReservationManagementHandler.handler = new ReservationRequestHandler();
-		NetworkReservationPortType hand = TestReservationManagementHandler.handler;
+		ReservationRequestHandler hand = TestReservationManagementHandler.handler;
 		assertNotNull("Handler should not be null", hand);
 		final GetReservationResponseType resultWithoutServiceID = hand
 				.getReservation(getType);
@@ -190,135 +190,4 @@ public class TestReservationManagementHandler {
 				.getService().isEmpty());
 	}
 
-	/**
-	 * test webservice
-	 * 
-	 * @throws Exception
-	 */
-	// @Test
-	// public final void testGetReservations() throws Exception {
-	// final GetReservationsResponseType responseType = this.reservationClient
-	// .getReservations(10000);
-	//
-	// // CHECK RESULT ========================================================
-	// GetReservationsComplexType checkReservation = null;
-	// ServiceConstraintType checkService = null;
-	// ConnectionConstraintType checkConnection = null;
-	//
-	// // Reservation check
-	// Assert.assertFalse("Should contain data", responseType.getReservation()
-	// .isEmpty());
-	// boolean reservationExists = false;
-	// for (final GetReservationsComplexType reservation : responseType
-	// .getReservation()) {
-	// if (WebserviceUtils.convertReservationID(reservation
-	// .getReservationID()) ==
-	// TestReservationManagementHandler.testReservationID) {
-	// reservationExists = true;
-	// checkReservation = reservation;
-	// }
-	// }
-	// Assert.assertTrue("Should contain original reservation",
-	// reservationExists);
-	//
-	// // Service check
-	// // Endpoint check
-	// if (checkReservation == null) {
-	// throw new DatabaseException("Nobody knows (ID: 23rpgsdf32");
-	// }
-	//
-	// Assert.assertFalse("reservation should contain at least one service",
-	// checkReservation.getReservation().getService().isEmpty());
-	// boolean serviceExists = false;
-	// for (final ServiceConstraintType service : checkReservation
-	// .getReservation().getService()) {
-	// if (service.getServiceID() ==
-	// TestReservationManagementHandler.testServiceUserID) {
-	// serviceExists = true;
-	// checkService = service;
-	// }
-	// }
-	// Assert.assertTrue("Should contain original service", serviceExists);
-	//
-	// // Connection check
-	// if (checkService == null) {
-	// throw new DatabaseException("Nobody knows (ID: 23rfadspgsdf32");
-	// }
-	// Assert.assertFalse("service should contain least one connection",
-	// checkService.getConnections().isEmpty());
-	// boolean connectionExists = false;
-	// for (final ConnectionConstraintType connection : checkService
-	// .getConnections()) {
-	// if (connection.getConnectionID() ==
-	// TestReservationManagementHandler.testConnectionUserID) {
-	// connectionExists = true;
-	// checkConnection = connection;
-	// }
-	// }
-	// Assert.assertTrue("Should contain original connection",
-	// connectionExists);
-	//
-	// // Endpoint check
-	// if (checkConnection == null) {
-	// throw new DatabaseException("Nobody knows (ID: 34223rpasdfgsdf32");
-	// }
-	//
-	// Assert.assertTrue(checkConnection
-	// .getSource()
-	// .getEndpointId()
-	// .equals(TestReservationManagementHandler.testConnection
-	// .getStartpoint().getTNA()));
-	// Assert.assertTrue(checkConnection
-	// .getTarget()
-	// .iterator()
-	// .next()
-	// .getEndpointId()
-	// .equals(TestReservationManagementHandler.testConnection
-	// .getEndpoints().iterator().next().getTNA()));
-	// }
-
-	// @Test
-	// public final void testGetReservations2() throws Exception {
-	// TestReservationManagementHandler.testReservation2 = ReservationHelpers
-	// .getTestReservation();
-	// Service newTestService = ReservationHelpers.getTestService();
-	// newTestService.setStartTime(new Date());
-	// newTestService.setDuration(360);
-	// Connections newTestConn = ReservationHelpers.getTestConnection();
-	// Object[] ends = TestReservationManagementHandler.destinationDomain
-	// .getEndpoints().toArray();
-	// newTestConn.setStartpoint((Endpoint) ends[0]);
-	// newTestConn.addEndpoint((Endpoint) ends[1]);
-	//
-	// newTestService.addConnection(newTestConn);
-	// TestReservationManagementHandler.testReservation2
-	// .addService(newTestService);
-	// TestReservationManagementHandler.testReservation2.setReservationId(0);
-	// TestReservationManagementHandler.testReservation2.save();
-	// // newTestService.save();
-	// // newTestConn.save();
-	//
-	// // try to get the reservation in a one hour window, back and in front of
-	// // now
-	// final GetReservationsResponseType responseType = this.reservationClient
-	// .getReservations(3600);
-	//
-	// boolean firstResReturned = false;
-	// boolean secondResReturned = false;
-	// // check if both reservations are in the response
-	// for (GetReservationsComplexType crct : responseType.getReservation()) {
-	// if (WebserviceUtils.convertReservationID(crct.getReservationID()) ==
-	// TestReservationManagementHandler.testReservation
-	// .getReservationId()) {
-	// firstResReturned = true;
-	// }
-	// if (WebserviceUtils.convertReservationID(crct.getReservationID()) ==
-	// TestReservationManagementHandler.testReservation2
-	// .getReservationId()) {
-	// secondResReturned = true;
-	// }
-	// }
-	// Assert.assertTrue("the two reservations should be returned",
-	// (firstResReturned && secondResReturned));
-	// }
 }

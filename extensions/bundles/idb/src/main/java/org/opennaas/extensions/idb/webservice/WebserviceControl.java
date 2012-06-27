@@ -11,7 +11,6 @@ import org.opennaas.extensions.idb.reservation.ReservationRequestHandler;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.NetworkNotificationPortType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.NetworkReservationPortType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.TopologyIFPortType;
-import org.opennaas.extensions.idb.topology.TopologyWS;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -81,7 +80,7 @@ class WebServiceHolder {
 	}
 
 	private void startNotification() {
-		NetworkNotificationPortType notification = new NotificationRequestHandler();
+		NetworkNotificationPortType notification = new NotificationWS();
 		String addressNotification = "http://localhost:" + port
 				+ "/nsp/webservice/notification";
 		notificationEndpoint = (EndpointImpl) Endpoint.create(notification);
@@ -92,7 +91,7 @@ class WebServiceHolder {
 
 	private void startReservation() {
 
-		NetworkReservationPortType reservation = new ReservationRequestHandler();
+		NetworkReservationPortType reservation = new ReservationWS();
 		String addressReservation = "http://localhost:" + port
 				+ "/nsp/webservice/reservation";
 		reservationEndpoint = (EndpointImpl) Endpoint.create(reservation);

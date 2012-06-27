@@ -27,7 +27,6 @@ package org.opennaas.extensions.idb.serviceinterface.notification;
 
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
-import java.net.URL;
 
 import javax.xml.ws.soap.AddressingFeature;
 

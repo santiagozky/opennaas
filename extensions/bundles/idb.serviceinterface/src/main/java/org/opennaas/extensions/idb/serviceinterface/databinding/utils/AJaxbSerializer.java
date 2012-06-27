@@ -34,6 +34,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
@@ -63,6 +64,21 @@ public abstract class AJaxbSerializer {
 		return (xml.replace("xmlns:=", "xmlns="));
 	}
 
+	/**
+	 * Convert an Element to XML string.
+	 * 
+	 * @param element
+	 *            Dom Element
+	 * @return XML String
+	 */
+	public static String elementToXml(final Node element) {
+		String xml = XmlUtils.toString(element);
+
+		xml = AJaxbSerializer.adjustNamespace(xml);
+
+		return xml;
+	}
+
 	public static synchronized AJaxbSerializer getInstance() {
 		return AJaxbSerializer.selfInstance;
 	}
@@ -84,24 +100,17 @@ public abstract class AJaxbSerializer {
 		String result = xml;
 
 		result = AJaxbSerializer.adjustNamespace(result);
-		InputSource source = new InputSource(new StringReader(result));
 
-		final Element el = getDocumentBuilder().parse(source)
-				.getDocumentElement();
+		Element el = XmlUtils.createDocument(xml).getDocumentElement();
 		return el;
 	}
 
-	private static DocumentBuilder getDocumentBuilder() {
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		factory.setNamespaceAware(true);
-		factory.setIgnoringComments(true);
-		try {
-			return factory.newDocumentBuilder();
-		} catch (ParserConfigurationException error) {
-			throw new RuntimeException(error.getMessage(), error);
-		}
+	public abstract Object elementToObject(final Node element)
+			throws InvalidRequestFaultException, UnexpectedFaultException;
 
-	}
+	public abstract Object elementToObject(final Node element,
+			final boolean useValidator) throws UnexpectedFaultException,
+			InvalidRequestFaultException;
 
 	public abstract Element objectToElement(final Object obj)
 			throws InvalidRequestFaultException, UnexpectedFaultException;

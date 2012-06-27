@@ -25,9 +25,8 @@
 
 package org.opennaas.extensions.idb.serviceinterface.reservation;
 
-import java.net.MalformedURLException;
 import java.net.URISyntaxException;
-import java.net.URL;
+
 import java.util.GregorianCalendar;
 
 import javax.xml.datatype.DatatypeConfigurationException;
@@ -178,6 +177,7 @@ public class SimpleReservationClient {
 		service = new NetworkReservationService(endpointReference.getWSDL());
 
 		client = service.getNetworkReservationPortType(new AddressingFeature());
+
 	}
 
 	/**
@@ -192,6 +192,7 @@ public class SimpleReservationClient {
 		logger = LogFactory.getLog(this.getClass());
 		this.endpoint = endpoint;
 		client = webservice;
+
 	}
 
 	/**
