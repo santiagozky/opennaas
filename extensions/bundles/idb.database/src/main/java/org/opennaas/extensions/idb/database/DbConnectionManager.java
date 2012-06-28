@@ -26,7 +26,6 @@
 package org.opennaas.extensions.idb.database;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.net.URISyntaxException;
 
 import javax.persistence.EntityManager;
@@ -35,13 +34,6 @@ import javax.persistence.Persistence;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-//import org.hibernate.HibernateException;
-//import org.hibernate.Session;
-//import org.hibernate.SessionFactory;
-//import org.hibernate.cfg.AnnotationConfiguration;
-
-import org.opennaas.extensions.idb.serviceinterface.utils.Config;
-
 import org.opennaas.extensions.idb.exception.database.DatabaseException;
 
 /**
