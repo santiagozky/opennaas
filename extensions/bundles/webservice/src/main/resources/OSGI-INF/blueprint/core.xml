@@ -137,4 +137,11 @@ the License. -->
 
 
 	
+	<!-- vlanAwareBridge -->
+    <cxf:bus id="vlanAwareBridgeCapabilityServiceBus"></cxf:bus>
+	<bean id="vlanAwareBridgeCapabilityServiceImpl" class="org.opennaas.extensions.ws.impl.VLANAwareBridgeCapabilityService">
+		<property name="resourceManager" ref="resourceManager" />
+	</bean>
+    <jaxws:endpoint  implementor="#vlanAwareBridgeCapabilityServiceImpl" address="${ws.url}/vlanAwareBridgeCapabilityService"  />
+	
 </blueprint>
