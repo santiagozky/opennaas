@@ -4,8 +4,7 @@ import javax.jws.WebService;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.opennaas.core.resources.IResource;
-import org.opennaas.core.resources.ResourceException;
+
 import org.opennaas.core.resources.capability.CapabilityException;
 
 import org.opennaas.extensions.idb.IIDBCapability;
