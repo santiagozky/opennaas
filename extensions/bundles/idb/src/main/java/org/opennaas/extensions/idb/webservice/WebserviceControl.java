@@ -6,8 +6,7 @@ import javax.xml.ws.Endpoint;
 
 import org.apache.cxf.jaxws.EndpointImpl;
 import org.apache.cxf.ws.addressing.WSAddressingFeature;
-import org.opennaas.extensions.idb.notification.NotificationRequestHandler;
-import org.opennaas.extensions.idb.reservation.ReservationRequestHandler;
+
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.NetworkNotificationPortType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.NetworkReservationPortType;
 import org.opennaas.extensions.idb.serviceinterface.databinding.jaxb.TopologyIFPortType;
@@ -26,6 +25,10 @@ public class WebserviceControl {
 	public static HashMap<Integer, WebServiceHolder> webservices = new HashMap<Integer, WebServiceHolder>();
 
 	public static void startWebservices(int port) {
+		if (port < 1024) {
+			throw new IllegalArgumentException(
+					"the port should be over 1024 or higher");
+		}
 
 		WebServiceHolder holder = new WebServiceHolder(port);
 		holder.start();
