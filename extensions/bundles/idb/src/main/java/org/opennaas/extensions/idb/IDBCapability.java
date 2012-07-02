@@ -70,13 +70,17 @@ public class IDBCapability extends AbstractCapability implements IIDBCapability 
 	}
 
 	@Override
-	public void StartWebServices(int port) {
+	public void StartWebServices() {
+		int port = Integer.parseInt(this.getCapabilityDescriptor()
+				.getProperty("port").toString());
 		WebserviceControl.startWebservices(port);
 
 	}
 
 	@Override
-	public void StopWebServices(int port) {
+	public void StopWebServices() {
+		int port = Integer.parseInt(this.getCapabilityDescriptor()
+				.getProperty("port").toString());
 		WebserviceControl.stopWebServices(port);
 
 	}

@@ -10,11 +10,11 @@ public interface IIDBCapability extends ICapability {
 	 * @param port
 	 *            to start the service
 	 */
-	public void StartWebServices(int port);
+	public void StartWebServices();
 
 	/**
 	 * stop the webservices
 	 */
-	public void StopWebServices(int port);
+	public void StopWebServices();
 
 }
