@@ -72,6 +72,8 @@
 			<artifactId>org.opennaas.extensions.router.model</artifactId>
 		</dependency>
 
+
+
 		<dependency>
 			<groupId>org.apache.servicemix.bundles</groupId>
 			<artifactId>org.apache.servicemix.bundles.javax-inject</artifactId>
@@ -94,6 +96,7 @@
 				<configuration>
 					<instructions>
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+						<Export-Package>org.opennaas.extensions.ws.*;version="${project.version}"</Export-Package>
 					</instructions>
 				</configuration>
 			</plugin>

@@ -22,7 +22,13 @@
         </command>
     </command-bundle>
 
-	
+	<reference id="resourceManager" interface="org.opennaas.core.resources.IResourceManager" />
+	 <cxf:bus id="IDBCapabilityServiceBus"></cxf:bus>
+	<bean id="IDBCapabilityServiceImpl" class="org.opennaas.extensions.idb.webservice.IDBCapabilityServiceImpl">
+		<property name="resourceManager" ref="resourceManager" />
+	</bean>
+
+    <jaxws:endpoint  implementor="#IDBCapabilityServiceImpl" address="${ws.url}/IDBCapabilityService"  />
 	
 	
 </blueprint>

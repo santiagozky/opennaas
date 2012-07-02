@@ -135,5 +135,6 @@ the License. -->
 
     <jaxws:endpoint  implementor="#netQueueCapabilityServiceImpl" address="${ws.url}/netQueueCapabilityService"  />
 
+
 	
 </blueprint>
