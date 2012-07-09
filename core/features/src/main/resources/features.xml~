@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<features>
+	<repository>mvn:org.apache.karaf.assemblies.features/standard/${karaf.version}/xml/features</repository>
+	<repository>mvn:org.apache.servicemix.nmr/apache-servicemix-nmr/${nmr.version}/xml/features</repository>
+	<repository>mvn:org.apache.camel.karaf/apache-camel/${camel.version}/xml/features</repository>
+
+	<feature name="opennaas-persistence" version="${project.version}">
+		<feature>spring</feature>
+		<feature>jndi</feature>
+		<feature>jpa</feature>
+
+		<bundle dependency="true">mvn:org.apache.geronimo.specs/geronimo-servlet_2.5_spec/${geronimo.servlet.version}</bundle>
+		<bundle dependency="true">mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.cglib/${servicemix.cglib.version}</bundle>
+		<bundle dependency="true">mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.serp/${servicemix.serp.version}</bundle>
+		<bundle dependency="true">mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.commons-dbcp/${commons.dbcp.version}</bundle>
+		<bundle dependency="true">mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.commons-lang/${commons.lang.version}</bundle>
+		<bundle dependency="true">mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.commons-collections/${commons.collections.version}</bundle>
+		<bundle dependency="true">mvn:commons-pool/commons-pool/${commons.pool.version}</bundle>
+		<bundle dependency="true">mvn:org.hsqldb/com.springsource.org.hsqldb/${hsqldb.version}</bundle>
+		<bundle dependency="true">mvn:org.apache.openjpa/openjpa/${openjpa.version}</bundle>
+
+		<bundle>mvn:org.opennaas/org.opennaas.core.hsqldb/${project.version}</bundle>
+		<bundle>mvn:org.opennaas/org.opennaas.core.persistence/${project.version}</bundle>
+	</feature>
+
+	<feature name="org.opennaas.core" version="${project.version}">
+		<feature>xml-specs</feature>
+		<feature version="${project.version}">opennaas-persistence</feature>
+
+		<bundle dependency="true">mvn:org.osgi/org.osgi.compendium/${osgi.version}</bundle>
+		<bundle dependency="true">mvn:org.apache.felix/org.apache.felix.eventadmin/1.2.14</bundle>
+
+		<bundle>mvn:org.opennaas/org.opennaas.core.resources/${project.version}</bundle>
+	</feature>
+
+	<feature name="opennaas-cim" version="${project.version}">
+		<feature version="${opennaas.version}">org.opennaas.core</feature>
+
+		<!-- The core model unfortunately depends on the network model
+		     - it should be the other way around. -->
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.network.model/${project.version}</bundle>
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.router.model/${project.version}</bundle>
+
+		<!-- QueueManager should probably be part of org.opennaas.core,
+		     but we have to rename and move the project before we can
+		     make it part of the correct feature. -->
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.queuemanager/${project.version}</bundle>
+	</feature>
+
+	<feature name="opennaas-netconf" version="${project.version}">
+		<feature version="${opennaas.version}">org.opennaas.core</feature>
+
+		<bundle dependency="true">mvn:javax.mail/mail/${javamail.version}</bundle>
+		<bundle dependency="true">mvn:org.apache.commons/com.springsource.org.apache.commons.beanutils/${beanutils.version}</bundle>
+		<bundle dependency="true">mvn:org.apache.geronimo.specs/geronimo-servlet_2.5_spec/${geronimo.servlet.version}</bundle>
+		<bundle dependency="true">mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.commons-collections/${commons.collections.version}</bundle>
+		<bundle dependency="true">mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.commons-jxpath/${commons.jxpath.version}</bundle>
+		<bundle dependency="true">mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.commons-lang/${commons.lang.version}</bundle>
+		<bundle dependency="true">mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.ant/${ant.version}</bundle>
+		<bundle dependency="true">mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.oro/${oro.version}</bundle>
+		<bundle dependency="true">mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.velocity/${servicemix.velocity.version}</bundle>
+		<bundle dependency="true">mvn:commons-configuration/commons-configuration/${commons.configuration.version}</bundle>
+		<bundle dependency="true">mvn:commons-codec/commons-codec/${commons.codec.version}</bundle>
+		<bundle dependency="true">mvn:commons-io/commons-io/${commons.io.version}</bundle>
+		<bundle dependency="true">mvn:commons-digester/commons-digester/${commons.digester.version}</bundle>
+
+		<bundle>mvn:net.i2cat.netconf/netconf4j/${netconf4j.version}</bundle>
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.protocols.netconf/${project.version}</bundle>
+		<!-- fragment, so no autostart -->
+		<bundle start="false">mvn:org.opennaas/org.opennaas.extensions.fragment.velocity/${project.version}</bundle>
+	</feature>
+
+
+	<feature name="opennaas-ws-soap" version="${project.version}">
+		<feature>jetty</feature>
+		<!-- old ws, tnc demo  -->
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.ws/${project.version}</bundle>
+	</feature>
+
+	<feature name="opennaas-ws-rest" version="${project.version}">
+		<feature>jetty</feature>
+		
+		<bundle dependency="true">mvn:org.osgi/org.osgi.enterprise/${osgi.version}</bundle>
+		<bundle dependency="true">mvn:org.apache.cxf/cxf-bundle-minimal/2.5.2</bundle>
+		<bundle dependency="true">mvn:org.apache.cxf.dosgi/cxf-dosgi-ri-discovery-local/${cxf.dosgi.version}</bundle>
+		<bundle dependency="true">mvn:org.apache.cxf.dosgi/cxf-dosgi-ri-dsw-cxf/${cxf.dosgi.version}</bundle>
+		<bundle dependency="true">mvn:org.apache.cxf.dosgi/cxf-dosgi-ri-topology-manager/${cxf.dosgi.version}</bundle>
+		<bundle dependency="true">mvn:org.springframework.osgi/spring-osgi-core/${spring.osgi.version}</bundle>
+		<bundle dependency="true">mvn:org.springframework.osgi/spring-osgi-io/${spring.osgi.version}</bundle>							
+		<bundle dependency="true">mvn:org.springframework.osgi/spring-osgi-extender/${spring.osgi.version}</bundle>		
+		<bundle dependency="true">mvn:org.apache.servicemix.specs/org.apache.servicemix.specs.jsr311-api-1.1/1.8.0</bundle>		
+		<bundle dependency="true">mvn:org.apache.ws.commons.schema/XmlSchema/${xmlschema.version}</bundle>
+
+	</feature>
+
+	<feature name="opennaas-junos" version="${project.version}">
+		<feature version="${project.version}">opennaas-cim</feature>
+		<feature version="${project.version}">opennaas-netconf</feature>
+		<feature version="${project.version}">opennaas-router</feature>
+
+		<bundle dependency="true">mvn:com.googlecode.guava-osgi/guava-osgi/${guava.version}</bundle>
+
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.router.actionsets.junos/${project.version}</bundle>
+	</feature>
+
+	<feature name="opennaas-router" version="${project.version}">
+		<feature version="${project.version}">opennaas-cim</feature>
+
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.router.repository/${project.version}</bundle>
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.router.capability.chassis/${project.version}</bundle>
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.router.capability.ip/${project.version}</bundle>
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.router.capability.gretunnel/${project.version}</bundle>
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.router.capability.ospf/${project.version}</bundle>
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.router.capability.staticroute/${project.version}</bundle>
+	</feature>
+
+	<feature name="opennaas-network" version="${project.version}">
+		<feature version="${project.version}">opennaas-cim</feature>
+
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.network.repository/${project.version}</bundle>
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.network.capability.basic/${project.version}</bundle>
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.network.capability.queue/${project.version}</bundle>
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.network.capability.ospf/${project.version}</bundle>
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.router.capability.ospf/${project.version}</bundle>
+	</feature>
+
+	<feature name="opennaas-bod" version="${project.version}">
+		<feature version="${project.version}">opennaas-cim</feature>
+
+		<bundle dependency="true">mvn:joda-time/joda-time/${jodatime.version}</bundle>
+		<bundle dependency="true">mvn:com.googlecode.guava-osgi/guava-osgi/${guava.version}</bundle>
+
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.bod.repository/${project.version}</bundle>
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.bod.capability.l2bod/${project.version}</bundle>
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.bod.actionsets.dummy/${project.version}</bundle>
+	</feature>
+	
+		<feature name="opennaas-sampleresource" version="${project.version}">
+		<feature version="${project.version}">opennaas-cim</feature>
+
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.sampleresource/${project.version}</bundle>
+		
+	</feature>
+
+	<feature name="opennaas-autobahn" version="${project.version}">
+		<feature>cxf</feature>
+		<feature version="${project.version}">opennaas-bod</feature>
+
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.bod.autobahn/${project.version}</bundle>
+	</feature>
+
+	<feature name="opennaas-luminis" version="${project.version}">
+		<feature version="${project.version}">opennaas-cim</feature>
+
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.roadm.capability.connections/${project.version}</bundle>
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.roadm.capability.monitoring/${project.version}</bundle>
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.roadm.repository/${project.version}</bundle>
+	</feature>
+
+	<feature name="opennaas-roadm-proteus" version="${project.version}">
+		<feature version="${project.version}">opennaas-luminis</feature>
+
+		<bundle dependency="true">mvn:com.wonesys/org.opennaas.extensions.com.wonesys.emsModule/${project.version}</bundle>
+
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.roadm.protocols.wonesys/${project.version}</bundle>
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.roadm.actionsets.wonesys/${project.version}</bundle>
+	</feature>
+
+	<feature name="opennaas-cisco" version="${project.version}">
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.transports.sockets/${project.version}</bundle>
+		<bundle dependency="true">mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.commons-net/${commons.net.version}</bundle>
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.transports.telnet/${project.version}</bundle>
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.transports.virtual/${project.version}</bundle>
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.protocols.cli/${project.version}</bundle>
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.protocols.tl1/${project.version}</bundle>
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.macbridge.model/${project.version}</bundle>
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.macbridge.capability.vlanawarebridge/${project.version}</bundle>
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.macbridge.ios.resource/${project.version}</bundle>
+	</feature>
+
+	<feature name="opennaas" version="${project.version}">
+<!-- 		<feature version="${project.version}">opennaas-ws-rest</feature> -->
+		<feature version="${project.version}">opennaas-router</feature>
+		<feature version="${project.version}">opennaas-network</feature>
+		<feature version="${project.version}">opennaas-bod</feature>
+		<feature version="${project.version}">opennaas-luminis</feature>
+		<feature version="${project.version}">opennaas-autobahn</feature>
+		<feature version="${project.version}">opennaas-junos</feature>
+		<feature version="${project.version}">opennaas-roadm-proteus</feature>
+		<feature version="${project.version}">opennaas-sampleresource</feature>
+		<feature version="${project.version}">opennaas-cisco</feature>
+<<<<<<< HEAD
+		<feature version="${project.version}">opennaas-cisco</feature>
+=======
+		<feature version="${project.version}">opennaas-ws-soap</feature>
+>>>>>>> 2a3dc95c4028282abdc1cebe4bea65630116318f
+	</feature>
+
+	<feature name="itests-helpers" version="${project.version}">
+		<feature version="${opennaas.version}">org.opennaas.core</feature>
+		<bundle>mvn:org.opennaas/org.opennaas.extensions.itests.helpers/${project.version}</bundle>
+	</feature>
+
+	<feature name="nexus-testprofile" version="${project.version}">
+		<feature version="${opennaas.version}">org.opennaas.core</feature>
+		<bundle>mvn:org.opennaas/org.opennaas.core.tests-mockprofile/${project.version}</bundle>
+	</feature>
+
+<feature name='opennaas-idb' version='${project.version}'>
+	<feature version='${javamail.version}'>mail</feature>
+	<feature version='1.0'>stax-api</feature>
+	<feature version='1.6.2'>wsdl4j</feature>
+	<feature version='5.1.18'>mysql-connector-java</feature>
+	<feature version='1.6.1'>slf4j-api</feature>
+	<feature version='1.6.1'>slf4j-log4j12</feature>
+	<feature version='${openjpa.version}'>openjpa</feature>
+	<feature version='12'>guava</feature>
+	<feature version='2.2.2-fuse-04-06'>org.apache.karaf.shell.console</feature>
+	<feature version='${jodatime.version}'>joda-time</feature>
+	<bundle dependency="true">mvn:org.osgi/org.osgi.core/${osgi.version}</bundle>
+	<bundle dependency="true">mvn:org.osgi/org.osgi.compendium/${osgi.version}</bundle>
+	<feature version='1.6.1'>log4j-over-slf4j</feature>
+	<feature version='1.6.5'>pax-logging-api</feature>
+	<feature version='1.6.5'>pax-logging-service</feature>
+	<feature version='140'>bcprov-jdk16</feature>
+	<feature version='1.1'>jta</feature>>
+	<feature version='2.0'>sun-xacml</feature>
+	<bundle dependency="true">mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.cglib/${servicemix.cglib.version}</bundle>
+	<bundle dependency="true">mvn:org.osgi/org.osgi.enterprise/${osgi.version}</bundle>
+	<bundle dependency="true">mvn:org.apache.cxf/cxf-bundle-minimal/${cxf.version}</bundle>
+	<bundle dependency="true">mvn:org.apache.cxf.dosgi/cxf-dosgi-ri-discovery-local/${cxf.dosgi.version}</bundle>
+	<bundle dependency="true">mvn:org.apache.cxf.dosgi/cxf-dosgi-ri-dsw-cxf/${cxf.dosgi.version}</bundle>
+	<bundle dependency="true">mvn:org.apache.cxf.dosgi/cxf-dosgi-ri-topology-manager/${cxf.dosgi.version}</bundle>
+	<feature version='${osgi.version}'>org.osgi.core</feature>
+	<feature version='${project.version}'>org.opennaas.core.resources</feature>
+	<feature version='${project.version}'>org.opennaas.extensions.queuemanager</feature>
+	<feature version='${project.version}'>org.opennaas.extensions.idb.serviceinterface</feature>
+	<feature version='${project.version}'>database</feature>
+	<feature version='${project.version}'>adapter-dummy</feature>
+	<bundle>mvn:org.opennaas/org.opennaas.extensions.idb/${project.version}</bundle>
+</feature>
+  <feature name='mail' version='${javamail.version}'>
+    <bundle dependency="true">mvn:org.apache.geronimo.specs/geronimo-activation_1.1_spec/1.0.2</bundle>
+    <bundle dependency="true">mvn:javax.mail/mail/${javamail.version}</bundle>
+  </feature>
+  <feature name='stax-api' version='1.0'>
+    <bundle dependency="true">mvn:org.apache.servicemix.specs/org.apache.servicemix.specs.stax-api-1.0/1.8.0</bundle>
+  </feature>
+  <feature name='wsdl4j' version='1.6.2'>
+    <bundle dependency="true">mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.wsdl4j/1.6.2_6</bundle>
+  </feature>
+  <feature name='mysql-connector-java' version='5.1.18'>
+    <bundle dependency="true">mvn:org.apache.geronimo.specs/geronimo-jta_1.1_spec/1.1.1</bundle>
+    <bundle dependency="true">mvn:org.apache.servicemix.specs/org.apache.servicemix.specs.stax-api-1.0/1.8.0</bundle>
+    <bundle dependency="true">mvn:mysql/mysql-connector-java/5.1.18</bundle>
+  </feature>
+  <feature name='bcprov-jdk16' version='140'>
+    <bundle dependency="true">mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.bcprov-jdk16/1.46_3</bundle>
+  </feature>
+   <feature name='sun-xacml' version='2.0'>
+    <bundle dependency="true">mvn:sun-xacml/sun-xacml-bundle/2.0</bundle>
+  </feature>
+  <feature name='jta' version='1.1'>
+    <bundle dependency="true">mvn:org.apache.geronimo.specs/geronimo-jta_1.1_spec/1.1.1</bundle>
+  </feature>
+  <feature name='database' version='${project.version}'>
+		<bundle dependency="true">mvn:org.osgi/org.osgi.compendium/${osgi.version}</bundle>
+ 
+    <bundle dependency="true">mvn:org.opennaas/org.opennaas.extensions.idb.database/${project.version}</bundle>
+  </feature>
+   <feature name='org.opennaas.extensions.idb.serviceinterface' version='${project.version}'>
+    <bundle dependency="true">mvn:org.apache.servicemix.specs/org.apache.servicemix.specs.stax-api-1.0/1.8.0</bundle>
+    <bundle dependency="true">mvn:org.apache.geronimo.specs/geronimo-activation_1.1_spec/1.0.2</bundle>
+     <feature version='2.2'>jaxb-api</feature>
+    <bundle dependency="true">mvn:org.apache.felix/javax.servlet/1.0.0</bundle>
+    <bundle>mvn:org.opennaas/org.opennaas.extensions.idb.serviceinterface/${project.version}</bundle>
+  </feature>
+  <feature name='adapter-dummy' version='${project.version}'>
+    <bundle >mvn:org.opennaas/org.opennaas.extensions.idb.da.dummy/${project.version}</bundle>
+  </feature>
+ 
+  <feature name='slf4j-log4j12' version='1.6.1'>
+    <bundle dependency="true">mvn:org.slf4j/slf4j-log4j12/1.6.1</bundle>
+  </feature>
+  <feature name='openjpa' version='2.2.0'>
+  <feature>jpa</feature>
+
+		<bundle dependency="true">mvn:org.apache.geronimo.specs/geronimo-servlet_2.5_spec/${geronimo.servlet.version}</bundle>
+		<bundle dependency="true">mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.cglib/${servicemix.cglib.version}</bundle>
+		<bundle dependency="true">mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.serp/${servicemix.serp.version}</bundle>
+		<bundle dependency="true">mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.commons-dbcp/${commons.dbcp.version}</bundle>
+		<bundle dependency="true">mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.commons-lang/${commons.lang.version}</bundle>
+		<bundle dependency="true">mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.commons-collections/${commons.collections.version}</bundle>
+		<bundle dependency="true">mvn:commons-pool/commons-pool/${commons.pool.version}</bundle>
+		<bundle dependency="true">mvn:org.hsqldb/com.springsource.org.hsqldb/${hsqldb.version}</bundle>
+		<bundle dependency="true">mvn:org.apache.openjpa/openjpa/${openjpa.version}</bundle>
+<!--    <bundle dependency="true">mvn:commons-pool/commons-pool/1.5.4</bundle> -->
+<!--     <bundle dependency="true">mvn:commons-lang/commons-lang/2.5</bundle> -->
+<!-- 	<bundle dependency="true">mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.commons-dbcp/${commons.dbcp.version}</bundle> -->
+<!--     <bundle dependency="true">mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.commons-collections/${commons.collections.version}</bundle> -->
+<!--     <bundle dependency="true">mvn:org.apache.servicemix.specs/org.apache.servicemix.specs.stax-api-1.0/1.8.0</bundle> -->
+<!--     <bundle dependency="true">mvn:org.apache.geronimo.specs/geronimo-activation_1.1_spec/1.0.2</bundle> -->
+<!--      <feature version='2.2'>jaxb-api</feature> -->
+<!--     <bundle dependency="true">mvn:org.apache.geronimo.specs/geronimo-jta_1.1_spec/1.1.1</bundle> -->
+<!--     <bundle dependency="true">mvn:org.apache.felix/javax.servlet/1.0.0</bundle> -->
+<!-- 		<bundle dependency="true">mvn:org.osgi/org.osgi.compendium/${osgi.version}</bundle> -->
+<!--      <bundle dependency="true">mvn:org.apache.geronimo.specs/geronimo-jpa_2.0_spec/1.1</bundle> -->
+<!--     <bundle dependency="true">mvn:org.apache.geronimo.specs/geronimo-jms_1.1_spec/1.1.1</bundle>  -->
+<!--     <bundle dependency="true">mvn:org.apache.openjpa/openjpa/${openjpa.version}</bundle> -->
+<!--         <bundle dependency="true">mvn:org.hsqldb/hsqldb/2.2.8</bundle> -->
+  </feature>
+  <feature name='org.opennaas.core.resources' version='${project.version}'>
+   <bundle dependency="true">mvn:org.springframework/spring-core/3.0.5.RELEASE</bundle>
+    <bundle dependency="true">mvn:org.springframework/spring-expression/3.0.5.RELEASE</bundle>
+    <bundle dependency="true">mvn:org.springframework/spring-beans/3.0.5.RELEASE</bundle>
+    <bundle dependency="true">mvn:org.springframework/spring-aop/3.0.5.RELEASE</bundle>
+    <bundle dependency="true">mvn:org.springframework/spring-context/3.0.5.RELEASE</bundle>
+    <bundle dependency="true">mvn:org.apache.aries/org.apache.aries.util/0.3</bundle>
+    <bundle dependency="true">mvn:org.apache.aries.proxy/org.apache.aries.proxy.api/0.3</bundle>
+    <bundle dependency="true">mvn:org.apache.aries.blueprint/org.apache.aries.blueprint/0.3.1</bundle>
+    <bundle dependency="true">mvn:org.springframework/spring-asm/3.0.5.RELEASE</bundle>
+    <feature version='${openjpa.version}'>openjpa</feature>
+    <bundle dependency="true">mvn:org.opennaas/org.opennaas.core.persistence/${project.version}</bundle>
+    <bundle dependency="true">mvn:org.hsqldb/com.springsource.org.hsqldb/1.8.0.10</bundle> 
+    <bundle>mvn:org.opennaas/org.opennaas.core.resources/${project.version}</bundle>
+  </feature>
+ 
+  <feature name='org.opennaas.extensions.queuemanager' version='${project.version}'>
+    <feature version='${project.version}'>org.opennaas.core.resources</feature>
+    <bundle dependency="true">mvn:org.apache.felix/org.apache.felix.gogo.runtime/0.10.0</bundle>
+    <bundle>mvn:org.opennaas/org.opennaas.extensions.queuemanager/${project.version}</bundle>
+  </feature>
+   <feature name='guava' version='12.0'>
+    <bundle>mvn:com.google.guava/guava/12.0</bundle>
+  </feature>
+  <feature name='org.apache.karaf.shell.console' version='2.2.2-fuse-04-06'>
+		<bundle dependency="true">mvn:org.osgi/org.osgi.compendium/${osgi.version}</bundle>
+<feature version='${osgi.version}'>org.osgi.core</feature>
+    <bundle dependency="true">mvn:org.apache.aries.blueprint/org.apache.aries.blueprint/0.3.1</bundle>
+    <bundle dependency="true">mvn:org.apache.karaf.jaas/org.apache.karaf.jaas.boot/2.2.2-fuse-04-06</bundle>
+    <bundle dependency="true">mvn:org.apache.karaf.jaas/org.apache.karaf.jaas.config/2.2.2-fuse-04-06</bundle>
+    <bundle dependency="true">mvn:org.apache.karaf.jaas/org.apache.karaf.jaas.modules/2.2.2-fuse-04-06</bundle>
+    <bundle dependency="true">mvn:org.apache.aries/org.apache.aries.util/0.3</bundle>
+    <bundle dependency="true">mvn:org.apache.aries.proxy/org.apache.aries.proxy.api/0.3</bundle>
+    <bundle dependency="true">mvn:org.apache.karaf.shell/org.apache.karaf.shell.console/2.2.2-fuse-04-06</bundle>
+    <bundle dependency="true">mvn:org.osgi/org.osgi.core/4.2.0</bundle>
+  </feature>
+    <feature name='joda-time' version='${jodatime.version}'>
+    <bundle>mvn:joda-time/joda-time/${jodatime.version}</bundle>
+  </feature>
+  <feature name='org.osgi.core' version='${osgi.version}'>
+    <bundle>mvn:org.osgi/org.osgi.core/${osgi.version}</bundle>
+  </feature>
+
+  <feature name='slf4j-api' version='1.6.1'>
+    <feature version='1.6.1'>slf4j-log4j12</feature>
+    <bundle>mvn:org.slf4j/slf4j-api/1.6.1</bundle>
+  </feature>
+  
+  <feature name='log4j-over-slf4j' version='1.6.1'>
+    <feature version='1.6.1'>slf4j-api</feature>
+    <bundle>mvn:org.slf4j/log4j-over-slf4j/1.6.1</bundle>
+  </feature>
+  <feature name='pax-logging-api' version='1.6.5'>
+		<bundle dependency="true">mvn:org.osgi/org.osgi.compendium/${osgi.version}</bundle>
+    <bundle>mvn:org.ops4j.pax.logging/pax-logging-api/1.6.5</bundle>
+  </feature>
+  <feature name='pax-logging-service' version='1.6.5'>
+    <feature version='1.6.5'>pax-logging-api</feature>
+    <feature version='1.4.4'>mail</feature>
+    <bundle dependency="true">mvn:org.apache.geronimo.specs/geronimo-jta_1.1_spec/1.1.1</bundle>
+    <bundle dependency="true">mvn:org.apache.geronimo.specs/geronimo-jms_1.1_spec/1.1.1</bundle>
+    <bundle>mvn:org.ops4j.pax.logging/pax-logging-service/1.6.5</bundle>
+  </feature>
+  <feature name='jaxb-api' version='2.2'>
+    <bundle>mvn:org.apache.servicemix.specs/org.apache.servicemix.specs.jaxb-api-2.2/1.8.0</bundle>
+    <bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.xerces/2.10.0_1</bundle>
+  </feature>
+
+
+</features>
