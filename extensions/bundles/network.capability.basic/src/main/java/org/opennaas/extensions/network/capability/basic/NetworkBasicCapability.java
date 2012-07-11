@@ -25,7 +25,7 @@ import org.opennaas.extensions.router.model.mappers.Cim2NdlMapper;
 
 public class NetworkBasicCapability extends AbstractCapability implements INetworkBasicCapability {
 
-	public static final String	CAPABILITY_NAME	= "basicNetwork";
+	public static final String	CAPABILITY_TYPE	= "basicNetwork";
 
 	Log							log				= LogFactory.getLog(NetworkBasicCapability.class);
 
@@ -37,9 +37,15 @@ public class NetworkBasicCapability extends AbstractCapability implements INetwo
 		log.debug("Built new Network Basic Capability");
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.opennaas.extensions.network.capability.basic.INetworkBasicCapability#addResource(org.opennaas.core.resources.IResource)
+	 */
 	@Override
 	public NetworkModel addResource(IResource resourceToAdd) throws CapabilityException {
 
+		log.info("Start of addResource call");
 		if (resourceToAdd == null) {
 			throw new CapabilityException("Invalid null resourceToAdd");
 		}
@@ -81,12 +87,19 @@ public class NetworkBasicCapability extends AbstractCapability implements INetwo
 			}
 		}
 
+		log.info("End of addResource call");
 		return networkModel;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.opennaas.extensions.network.capability.basic.INetworkBasicCapability#removeResource(org.opennaas.core.resources.IResource)
+	 */
 	@Override
 	public NetworkModel removeResource(IResource resourceToRemove) throws CapabilityException {
 
+		log.info("Start of removeResource call");
 		if (resourceToRemove == null) {
 			throw new CapabilityException("Invalid null resourceToRemove");
 		}
@@ -117,12 +130,21 @@ public class NetworkBasicCapability extends AbstractCapability implements INetwo
 		resource.getResourceDescriptor().setNetworkTopology(topology);
 		resource.getResourceDescriptor().setResourceReferences(networkModel.getResourceReferences());
 
+		log.info("End of removeResource call");
 		return networkModel;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.opennaas.extensions.network.capability.basic.INetworkBasicCapability#l2attach(org.opennaas.extensions.network.model.topology.Interface,
+	 * org.opennaas.extensions.network.model.topology.Interface)
+	 */
 	@Override
 	public NetworkConnection l2attach(Interface interface1, Interface interface2) throws CapabilityException {
 
+		log.info("Start of l2attach call");
 		if (interface1 == null || interface2 == null) {
 			throw new CapabilityException("Invalid null interface");
 		}
@@ -173,12 +195,21 @@ public class NetworkBasicCapability extends AbstractCapability implements INetwo
 		// create connection
 		NetworkConnection connection = createConnectionBetweenInterfaces(realInterface1, realInterface2, resource);
 
+		log.info("End of l2attach call");
 		return connection;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.opennaas.extensions.network.capability.basic.INetworkBasicCapability#l2detach(org.opennaas.extensions.network.model.topology.Interface,
+	 * org.opennaas.extensions.network.model.topology.Interface)
+	 */
 	@Override
 	public void l2detach(Interface interface1, Interface interface2) throws CapabilityException {
 
+		log.info("Start of l2detach call");
 		if (interface1 == null || interface2 == null) {
 			throw new CapabilityException("Invalid null interface");
 		}
@@ -204,23 +235,68 @@ public class NetworkBasicCapability extends AbstractCapability implements INetwo
 		} else {
 			log.info("L2detach: Interfaces were not attached.");
 		}
+		log.info("End of l2detach call");
+
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.opennaas.core.resources.capability.AbstractCapability#activate()
+	 */
+	@Override
+	public void activate() throws CapabilityException {
+		// registerService(Activator.getContext(), CAPABILITY_TYPE, getResourceName(), INetworkBasicCapability.class.getName());
+		super.activate();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.opennaas.core.resources.capability.AbstractCapability#deactivate()
+	 */
+	@Override
+	public void deactivate() throws CapabilityException {
+		// registration.unregister();
+		super.deactivate();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.opennaas.core.resources.capability.ICapability#getCapabilityName()
+	 */
 	@Override
 	public String getCapabilityName() {
-		return CAPABILITY_NAME;
+		return CAPABILITY_TYPE;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.opennaas.core.resources.capability.AbstractCapability#getActionSet()
+	 */
 	@Override
 	public IActionSet getActionSet() throws CapabilityException {
 		// FIXME obtain actionSet dynamically
 		return new NetworkBasicActionSetImpl();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.opennaas.core.resources.capability.AbstractCapability#queueAction(org.opennaas.core.resources.action.IAction)
+	 */
 	@Override
 	public void queueAction(IAction action) throws CapabilityException {
 	}
 
+	/**
+	 * @param interface1
+	 * @param interface2
+	 * @param network
+	 * @return
+	 */
 	private NetworkConnection createConnectionBetweenInterfaces(Interface interface1, Interface interface2, IResource network) {
 		log.info("Creating connection in network model");
 
@@ -242,6 +318,11 @@ public class NetworkBasicCapability extends AbstractCapability implements INetwo
 		return connection;
 	}
 
+	/**
+	 * @param interface1
+	 * @param interface2
+	 * @return
+	 */
 	private NetworkConnection getConnectionBetweenInterfaces(Interface interface1, Interface interface2) {
 		NetworkConnection connection = null;
 		if (interface1.getSwitchedTo() != null &&
@@ -257,6 +338,10 @@ public class NetworkBasicCapability extends AbstractCapability implements INetwo
 		return connection;
 	}
 
+	/**
+	 * @param toRemove
+	 * @param network
+	 */
 	private void removeConnection(NetworkConnection toRemove, IResource network) {
 		log.info("Removing connection from network model");
 		// update model

@@ -34,10 +34,33 @@ public class IPCapability extends AbstractCapability implements IIPCapability {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.opennaas.core.resources.capability.AbstractCapability#activate()
+	 */
+	@Override
+	public void activate() throws CapabilityException {
+		// registerService(Activator.getContext(), CAPABILITY_TYPE, getResourceName(), IIPCapability.class.getName());
+		super.activate();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.opennaas.core.resources.capability.AbstractCapability#deactivate()
+	 */
+	@Override
+	public void deactivate() throws CapabilityException {
+		// registration.unregister();
+		super.deactivate();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.opennaas.extensions.router.capability.ip.IIPCapability#setIPv4(org.opennaas.extensions.router.model.LogicalPort)
 	 */
 	@Override
 	public void setIPv4(LogicalDevice iface, IPProtocolEndpoint ipProtocolEndpoint) throws CapabilityException {
+		log.info("Start of setIPv4 call");
 		NetworkPort param = new NetworkPort();
 		param.setName(iface.getName());
 		if (iface instanceof NetworkPort) {
@@ -51,6 +74,7 @@ public class IPCapability extends AbstractCapability implements IIPCapability {
 
 		IAction action = createActionAndCheckParams(IPActionSet.SET_IPv4, param);
 		queueAction(action);
+		log.info("End of setIPv4 call");
 	}
 
 	/*
@@ -60,8 +84,10 @@ public class IPCapability extends AbstractCapability implements IIPCapability {
 	 */
 	@Override
 	public void setInterfaceDescription(LogicalPort iface) throws CapabilityException {
+		log.info("Start of setInterfaceDescription call");
 		IAction action = createActionAndCheckParams(IPActionSet.SET_INTERFACE_DESCRIPTION, iface);
 		queueAction(action);
+		log.info("End of setInterfaceDescription call");
 	}
 
 	/**
@@ -78,6 +104,11 @@ public class IPCapability extends AbstractCapability implements IIPCapability {
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.opennaas.core.resources.capability.AbstractCapability#getActionSet()
+	 */
 	@Override
 	public IActionSet getActionSet() throws CapabilityException {
 		String name = this.descriptor.getPropertyValue(ResourceDescriptorConstants.ACTION_NAME);
@@ -91,11 +122,21 @@ public class IPCapability extends AbstractCapability implements IIPCapability {
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.opennaas.core.resources.capability.ICapability#getCapabilityName()
+	 */
 	@Override
 	public String getCapabilityName() {
 		return CAPABILITY_TYPE;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.opennaas.core.resources.capability.AbstractCapability#queueAction(org.opennaas.core.resources.action.IAction)
+	 */
 	@Override
 	public void queueAction(IAction action) throws CapabilityException {
 		getQueueManager(resourceId).queueAction(action);

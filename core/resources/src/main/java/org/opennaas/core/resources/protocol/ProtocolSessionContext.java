@@ -8,9 +8,9 @@ import java.util.Map.Entry;
 /**
  * Encapsulates the parameters required to create a protocol session, including the data required to connect to the remote device and the parameters
  * that define the behavior of the session (keepAlive, ...)
- *
+ * 
  * @author eduardgrasa
- *
+ * 
  */
 public class ProtocolSessionContext {
 
@@ -18,14 +18,21 @@ public class ProtocolSessionContext {
 	public static final String	PROTOCOL_URI		= "protocol.uri";
 	public static final String	PROTOCOL_VERSION	= "protocol.version";
 	public static final String	KEEP_ALIVE			= "protocol.keepAlive";
-	// user and password are inside PROTOCOL_URI
-	// public static final String USERNAME = "protocol.username";
-	// public static final String PASSWORD = "protocol.password";
+	public static final String USERNAME = "protocol.username";
+	public static final String PASSWORD = "protocol.password";
 
 	private Map<String, Object>	sessionParameters	= null;
 
 	public ProtocolSessionContext() {
 		sessionParameters = new HashMap<String, Object>();
+	}
+
+	/**
+	 * @param sessionParameters
+	 *            the sessionParameters to set
+	 */
+	public void setSessionParameters(Map<String, Object> sessionParameters) {
+		this.sessionParameters = sessionParameters;
 	}
 
 	public void addParameter(String key, String value) {

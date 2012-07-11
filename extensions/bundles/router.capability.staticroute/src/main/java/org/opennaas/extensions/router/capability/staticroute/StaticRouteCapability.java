@@ -34,11 +34,43 @@ public class StaticRouteCapability extends AbstractCapability implements IStatic
 		log.debug("Built new StaticRoute Capability");
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.opennaas.core.resources.capability.AbstractCapability#activate()
+	 */
+	@Override
+	public void activate() throws CapabilityException {
+		registerService(Activator.getContext(), CAPABILITY_TYPE, getResourceType(), getResourceName(), IStaticRouteCapability.class.getName());
+		super.activate();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.opennaas.core.resources.capability.AbstractCapability#deactivate()
+	 */
+	@Override
+	public void deactivate() throws CapabilityException {
+		registration.unregister();
+		super.deactivate();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.opennaas.core.resources.capability.ICapability#getCapabilityName()
+	 */
 	@Override
 	public String getCapabilityName() {
 		return CAPABILITY_TYPE;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.opennaas.core.resources.capability.AbstractCapability#queueAction(org.opennaas.core.resources.action.IAction)
+	 */
 	@Override
 	public void queueAction(IAction action) throws CapabilityException {
 		getQueueManager(resourceId).queueAction(action);
@@ -78,6 +110,7 @@ public class StaticRouteCapability extends AbstractCapability implements IStatic
 
 	@Override
 	public void createStaticRoute(String netIdIpAdress, String maskIpAdress, String nextHopIpAddress) throws CapabilityException {
+		log.info("Start of createStaticRoute call");
 		String[] aParams = new String[3];
 		aParams[0] = netIdIpAdress;
 		aParams[1] = maskIpAdress;
@@ -85,5 +118,6 @@ public class StaticRouteCapability extends AbstractCapability implements IStatic
 
 		IAction action = createActionAndCheckParams(StaticRouteActionSet.STATIC_ROUTE_CREATE, aParams);
 		queueAction(action);
+		log.info("End of createStaticRoute call");
 	}
 }

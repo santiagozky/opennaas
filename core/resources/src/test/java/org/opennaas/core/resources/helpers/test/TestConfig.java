@@ -78,6 +78,18 @@ public class TestConfig {
 	}
 
 	@Test
+	public final void testPropertyCache() {
+		final String propertyFile = "test";
+		final String key = "junit.stringValue";
+		Config.resetCache();
+		Assert.assertFalse("Should not be cached.",
+				Config.isCached(propertyFile + key));
+		Config.getString(propertyFile, key);
+		Assert.assertTrue("Should be cached.",
+				Config.isCached(propertyFile + key));
+	}
+
+	@Test
 	public final void testGetProperties() throws IOException {
 		final String propertyFile = "test";
 		Config.resetCache();
