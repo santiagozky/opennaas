@@ -10,17 +10,7 @@
 	http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd
 	http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0 http://aries.apache.org/schemas/blueprint-cm/blueprint-cm-1.1.0.xsd
 ">
-    <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
-        <command name="idb/addTopic">
-            <action class="org.opennaas.extensions.idb.shell.AddTopicCommand"/>
-        </command>
-          <command name="idb/startWebservice">
-            <action class="org.opennaas.extensions.idb.shell.StartWebservices"/>
-        </command>
-        <command name="idb/stopWebservice">
-            <action class="org.opennaas.extensions.idb.shell.StopWebservices"/>
-        </command>
-    </command-bundle>
+
 
 <!-- 	<reference id="resourceManager" interface="org.opennaas.core.resources.IResourceManager" /> -->
 <!-- 	 <cxf:bus id="IDBCapabilityServiceBus"></cxf:bus> -->

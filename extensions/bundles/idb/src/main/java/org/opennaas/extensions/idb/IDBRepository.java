@@ -7,15 +7,21 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 public class IDBRepository extends ResourceRepository {
-	Log	log	= LogFactory.getLog(IDBRepository.class);
+
+	Log log = LogFactory.getLog(IDBRepository.class);
 
 	public IDBRepository(String resourceType) {
 		super(resourceType);
+		log.info("creating idb repository");
+
 	}
 
 	public void capabilityFactoryAdded(ICapabilityFactory capabilityFactory) {
 		log.info("Adding factory: " + capabilityFactory.getType());
-		this.capabilityFactories.put(capabilityFactory.getType(), capabilityFactory);
+
+		this.capabilityFactories.put(capabilityFactory.getType(),
+				capabilityFactory);
+
 	}
 
 	public void capabilityFactoryDeleted(ICapabilityFactory capabilityFactory) {

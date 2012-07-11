@@ -34,7 +34,11 @@ import java.util.MissingResourceException;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
+
+
 import org.osgi.framework.Bundle;
+
+
 
 /**
  * This class is used to externalize configuration informations in the property
@@ -55,6 +59,13 @@ public final class Config {
 	/** Classloader. */
 	private static final ClassLoader CLASSLOADER = Config.class
 			.getClassLoader();
+
+
+
+	/** Cache to speedup the lookup */
+	private static final HashMap<String, String> cache = new HashMap<String, String>();
+
+
 
 	/**
 	 * Gets the int value for a given key.
@@ -153,6 +164,14 @@ public final class Config {
 		final String localFileName = propertyFile + Config.LOCAL_SUFFIX;
 		String result;
 
+
+
+		if (cache.containsKey(propertyFile + key)) {
+			return cache.get(propertyFile + key);
+		}
+
+
+
 		try {
 			// We try first the local file
 			result = Config.getStringFromBundle(localFileName, key);
@@ -160,6 +179,11 @@ public final class Config {
 			// Use common file else
 			result = Config.getStringFromBundle(propertyFile, key);
 		}
+
+
+
+		cache.put(propertyFile + key, result);
+
 
 		return result;
 	}
@@ -256,13 +280,21 @@ public final class Config {
 	 * @return
 	 */
 	public static boolean isCached(String key) {
-		return false;
+
+
+		return cache.containsKey(key);
+
+
 	}
 
 	/**
      * 
      */
 	public static void resetCache() {
+
+
+		cache.clear();
+
 
 	}
 }
