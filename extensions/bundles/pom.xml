@@ -62,26 +62,13 @@
 		<module>macbridge.capability.vlanawarebridge</module>
 		<module>macbridge.ios.resource</module>
 		
-<<<<<<< HEAD
 
-	           <module>idb</module>
-		<module>idb.serviceinterface</module>
-		<module>idb.database</module>
-		<module>idb.da.dummy</module>
-
-		<module>itests.helpers</module>
-		
-		<module>webservice</module>
-
-		<module>sampleresource</module>
-
-=======
 		<module>webservice</module>
 
 		<module>sampleresource</module>
 		<module>idb.da.dummy</module>
 		<module>idb.database</module>
 		<module>idb</module>
->>>>>>> ws-dosgi
+
 	</modules>
 </project>

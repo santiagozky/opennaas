@@ -11,8 +11,7 @@
 	<name>IDB service interface</name>
 	<description>IDB service interface bundle</description>
 	<properties>
-		<groupId>eu.ist_phosphorus.harmony</groupId>
-		<artifactId>harmony</artifactId>
+		
 		<version>1.0</version>
 		<resources.dir>src/main/resources</resources.dir>
 		<webservices.dir>${resources.dir}/webservices</webservices.dir>
@@ -20,7 +19,7 @@
 	<build>
 		<directory>target</directory>
 		<outputDirectory>target/classes</outputDirectory>
-		<finalName>idb</finalName>
+		<finalName>idb-interface</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -194,11 +193,6 @@
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
 			<version>${commons.logging.version}</version>
-		</dependency>
-		<dependency>
-<groupId>org.apache.servicemix.bundles</groupId>
-    <artifactId>org.apache.servicemix.bundles.commons-lang</artifactId>
-			<version>${commons.lang.version}</version>
 		</dependency>
 		
 		<dependency>

@@ -12,13 +12,39 @@
 ">
 
 
-<!-- 	<reference id="resourceManager" interface="org.opennaas.core.resources.IResourceManager" /> -->
-<!-- 	 <cxf:bus id="IDBCapabilityServiceBus"></cxf:bus> -->
-<!-- 	<bean id="IDBCapabilityServiceImpl" class="org.opennaas.extensions.idb.webservice.IDBCapabilityServiceImpl"> -->
-<!-- 		<property name="resourceManager" ref="resourceManager" /> -->
-<!-- 	</bean> -->
+<bean id="idbBootstrapperFactory" class="org.opennaas.extensions.idb.IDBBootstrapperFactory"/>
+<bean id="resourceDescriptorRepository"
+          class="org.opennaas.core.resources.descriptor.ResourceDescriptorRepository"
+          init-method="initializeEntityManager" destroy-method="close">
+         <property name="persistenceUnit" value="ResourceCore"/>
+</bean>
+<bean id="idbRepository" class="org.opennaas.extensions.idb.IDBRepository" init-method="init">
+		<argument value="idb"/>
+		<property name="resourceDescriptorRepository" ref="resourceDescriptorRepository"/>
+		<property name="resourceBootstrapperFactory" ref="idbBootstrapperFactory"/>
+</bean>
 
-<!--     <jaxws:endpoint  implementor="#IDBCapabilityServiceImpl" address="${ws.url}/IDBCapabilityService"  /> -->
+<bean id="idbCapabilityFactory" class="org.opennaas.extensions.idb.IDBCapabilityFactory">
+		<property name="type" value="idb"/>
+	</bean>
+	<service ref="idbCapabilityFactory" interface="org.opennaas.core.resources.capability.ICapabilityFactory">
+		<service-properties>
+			<!--  TODO it is necessary to use two parameters to get capability -->
+			<entry key="capability" value="idb"/>
+			<entry key="capability.version" value="1.0.0"/>
+		</service-properties>
+	</service>
 	
+	<reference-list id="capabilityFactory" interface="org.opennaas.core.resources.capability.ICapabilityFactory" availability="optional">
+		<reference-listener ref="idbRepository" bind-method="capabilityFactoryAdded" unbind-method="capabilityFactoryDeleted"/>
+	</reference-list>
+
+
+	<service ref="idbRepository" interface="org.opennaas.core.resources.IResourceRepository">
+		<service-properties>
+			<entry key="type" value="idb"/>
+			<entry key="version" value="1.0.0"/>
+		</service-properties>
+	</service>
 	
 </blueprint>

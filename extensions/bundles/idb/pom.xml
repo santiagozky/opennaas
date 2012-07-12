@@ -261,11 +261,9 @@
 					classes into an OSGi bundle -->
 				<configuration>
 					<instructions>
-<<<<<<< HEAD
+
 						<Import-Package>org.apache.cxf.jaxws.spi,org.osgi.framework,*</Import-Package>
-=======
-						<Import-Package>*</Import-Package>
->>>>>>> ws-dosgi
+
 						<Export-Package>org.opennaas.extensions.idb.*;version="${project.version}"</Export-Package>
 						<Meta-Persistence>META-INF/persistence.xml</Meta-Persistence>
 						<Bundle-ClassPath>.</Bundle-ClassPath>

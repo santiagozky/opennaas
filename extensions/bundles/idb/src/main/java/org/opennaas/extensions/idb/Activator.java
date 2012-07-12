@@ -119,7 +119,7 @@ public class Activator extends AbstractActivator implements BundleActivator {
 
 		Properties properties = new Properties();
 		properties.setProperty(ResourceDescriptorConstants.ACTION_CAPABILITY,
-				"l2bod");
+				"idb");
 		properties.setProperty(ResourceDescriptorConstants.ACTION_NAME, name);
 		properties.setProperty(ResourceDescriptorConstants.ACTION_VERSION,
 				version);

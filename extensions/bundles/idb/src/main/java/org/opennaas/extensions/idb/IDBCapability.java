@@ -37,11 +37,11 @@ public class IDBCapability extends AbstractCapability implements IIDBCapability 
 	public IDBCapability(CapabilityDescriptor descriptor, String resourceId) {
 		super(descriptor);
 		port = Integer.parseInt(this.getCapabilityDescriptor()
-				.getProperty("port").toString());
+				.getPropertyValue("port").toString());
 		if (port < 1024) {
 			log.error("an IDB with a wrong port of: " + port
 
-					+ " could not be created");
+			+ " could not be created");
 			throw new IllegalArgumentException(
 					"the descriptor contains an invalid port or under 1024");
 		}
