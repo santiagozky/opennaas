@@ -18,6 +18,11 @@
 		<database.password>toor</database.password>
 		<database.dictionary>mysql(DriverVendor=mysql)</database.dictionary>
 		<database.driver>com.mysql.jdbc.Driver</database.driver>
+<!-- <database.driver>org.hsqldb.jdbcDriver</database.driver> -->
+<!-- <database.url>jdbc:hsqldb:mem:unit-testing-jpa</database.url> -->
+<!-- <database.username>sa</database.username> -->
+<!-- 		<database.password></database.password> -->
+
 	</properties>
 	<dependencies>
 

@@ -8,7 +8,7 @@ public class IDBBootstrapper implements IResourceBootstrapper {
 
 	@Override
 	public void bootstrap(IResource resource) throws ResourceException {
-		// TODO Auto-generated method stub
+		resource.setModel(new IDBModel());
 
 	}
 

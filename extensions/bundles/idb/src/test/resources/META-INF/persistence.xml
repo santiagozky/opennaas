@@ -27,7 +27,7 @@
             <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true, SchemaAction='add,refresh')"/>
             <property name="openjpa.ConnectionURL" value="${database.url}"/>
             <property name="openjpa.ConnectionDriverName" value="${database.driver}"/>
-             <property name="openjpa.jdbc.DBDictionary" value="${database.dictionary}" />
+<!--              <property name="openjpa.jdbc.DBDictionary" value="${database.dictionary}" /> -->
             <property name="openjpa.ConnectionUserName" value="${database.username}"/>
             <property name="openjpa.ConnectionPassword" value="${database.password}"/>
             <property name="openjpa.Log" value=""/><!-- DefaultLevel=WARN, Runtime=INFO, Tool=INFO, -->

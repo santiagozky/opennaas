@@ -6,28 +6,28 @@
     http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
     version="1.0">
     <persistence-unit name="persistence" transaction-type="RESOURCE_LOCAL">
-    <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
+       <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
        <class>org.opennaas.extensions.idb.database.hibernate.Reservation</class>
        <class>org.opennaas.extensions.idb.database.hibernate.Connections</class>
        <class>org.opennaas.extensions.idb.database.hibernate.Service</class>
        <class>org.opennaas.extensions.idb.database.hibernate.Endpoint</class>
        <class>org.opennaas.extensions.idb.database.hibernate.NrpsConnections</class>
-		<class>org.opennaas.extensions.idb.database.hibernate.Subscription</class>
-		<class>org.opennaas.extensions.idb.database.hibernate.TNAPrefix</class>        
-		<class>org.opennaas.extensions.idb.database.hibernate.VIEW_InterDomainLink</class>        
-		<class>org.opennaas.extensions.idb.database.hibernate.VIEW_ReservationMapping</class>        
-		<class>org.opennaas.extensions.idb.database.hibernate.VIEW_ReservationPeriod</class>        
-		<class>org.opennaas.extensions.idb.database.hibernate.MAPNRPSResvID</class>        
-		<class>org.opennaas.extensions.idb.database.hibernate.Domain</class>        
-		<class>org.opennaas.extensions.idb.database.hibernate.InterDomainLink</class>        
-		<class>org.opennaas.extensions.idb.database.hibernate.DomSupportedAdaption</class>        
-		<class>org.opennaas.extensions.idb.database.hibernate.DomSupportedSwitch</class>        
-		<class>org.opennaas.extensions.idb.database.hibernate.DomSupportedBandwidth</class>        
-        <properties>
+       <class>org.opennaas.extensions.idb.database.hibernate.Subscription</class>
+       <class>org.opennaas.extensions.idb.database.hibernate.TNAPrefix</class>        
+       <class>org.opennaas.extensions.idb.database.hibernate.VIEW_InterDomainLink</class>        
+       <class>org.opennaas.extensions.idb.database.hibernate.VIEW_ReservationMapping</class>        
+       <class>org.opennaas.extensions.idb.database.hibernate.VIEW_ReservationPeriod</class>        
+       <class>org.opennaas.extensions.idb.database.hibernate.MAPNRPSResvID</class>        
+       <class>org.opennaas.extensions.idb.database.hibernate.Domain</class>        
+       <class>org.opennaas.extensions.idb.database.hibernate.InterDomainLink</class>        
+       <class>org.opennaas.extensions.idb.database.hibernate.DomSupportedAdaption</class>        
+       <class>org.opennaas.extensions.idb.database.hibernate.DomSupportedSwitch</class>        
+       <class>org.opennaas.extensions.idb.database.hibernate.DomSupportedBandwidth</class>        
+   <properties>
             <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true, SchemaAction='add,refresh')"/>
             <property name="openjpa.ConnectionURL" value="${database.url}"/>
-            <property name="openjpa.ConnectionDriverName" value="${database.driver}"/>
-             <property name="openjpa.jdbc.DBDictionary" value="${database.dictionary}" />
+           <property name="openjpa.ConnectionDriverName" value="${database.driver}"/>
+<!--             <property name="openjpa.jdbc.DBDictionary" value="${database.dictosionary}" /> -->
             <property name="openjpa.ConnectionUserName" value="${database.username}"/>
             <property name="openjpa.ConnectionPassword" value="${database.password}"/>
             <property name="openjpa.Log" value=""/><!-- DefaultLevel=WARN, Runtime=INFO, Tool=INFO, -->

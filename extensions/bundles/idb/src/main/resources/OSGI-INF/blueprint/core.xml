@@ -47,4 +47,12 @@
 		</service-properties>
 	</service>
 	
+	<!-- Forces this bundle to wait for dataSourceResources being published -->
+	<reference id="dataSourceResources" interface="javax.sql.DataSource" filter="(osgi.jndi.service.name=jdbc/opennaas-resources)"/>
+	
+	<command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
+		<command name="idb/controlIDB">
+			<action class="org.opennaas.extensions.idb.shell.ControlIDB"/>
+		</command>
+	</command-bundle>
 </blueprint>
